@@ -1,0 +1,22 @@
+#navbar-component{
+	width: 200px;
+	height: 400px;
+}
+
+hr {
+	padding-left: 0px
+}
+
+ul {
+    list-style-type: none;
+	width: 250px;
+	padding-left: 0px;
+}
+
+li {
+    width: 200px;
+    line-height: 20px;
+    text-align: center;
+	margin-bottom: 10px;
+	margin-left: 0px;
+}

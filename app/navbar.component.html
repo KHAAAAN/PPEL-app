@@ -1,0 +1,12 @@
+<div id="navbar-component">
+    <ul>
+        <li *ngFor="#item of setOne" [value]="item">{{item}}</li>
+		<li><hr size="1px" color="black" width="100px"></li>
+		
+		<li *ngFor="#item of setTwo" [value]="item" >{{item}}</li>
+		<li><hr size="1px" color="black" width="100px"></li>
+
+		<li *ngFor="#item of setThree" [value]="item" >{{item}}</li>
+        
+    </ul>
+</div>
