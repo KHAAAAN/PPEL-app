@@ -4,8 +4,11 @@ import {TabContentService} from './tab-content.service';
 
 @Component({
 	selector: 'tab-content',
-	templateUrl: 'app/front-content.component.html',
-	styleUrls: ['app/front-content.component.css']
+	templateUrl: `
+	<tabs>
+		<tab *ngFor=#file of files> file.content </tab>
+	</tabs>
+	`,
 })
 
 export class TabContentComponent {
@@ -13,6 +16,8 @@ export class TabContentComponent {
 	];
 
 	public errorMessage: string;
+
+	public content: string;
 
 	getContent() {
 		this._tabContentService.getTabContent()
