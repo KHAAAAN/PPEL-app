@@ -10,7 +10,7 @@ import {FrontContentService} from './front-content.service';
 
 })
 
-export class FrontContentComponent{
+export class FrontContentComponent {
 	public images = [
 	];
 
@@ -21,25 +21,25 @@ export class FrontContentComponent{
 
 	public errorMessage: string;
 
-	transition(index: number){
+	transition(index: number) {
 
-			this.images[index].opacity = 100;
-			this.images[this.curIndex].opacity = 0;
+		this.images[index].opacity = 100;
+		this.images[this.curIndex].opacity = 0;
 
-			this.curIndex = index;
+		this.curIndex = index;
 
-			//reset subscription because think about it..
-			//if we were to select a radio button the interval should reset to 2000
-			//not stay at 2000 - x, x >= 0
+		//reset subscription because think about it..
+		//if we were to select a radio button the interval should reset to 2000
+		//not stay at 2000 - x, x >= 0
 
-			this.resetSubscription();
+		this.resetSubscription();
 
 	}
 
 	/*This method subscribes our transition subscription variable (transSub)
 	 *to changing at every interval
 	 */
-	autoSubscribe(){
+	autoSubscribe() {
 		this.transSub = Observable.interval(2000).subscribe(() => {
 			let temp = this.curIndex;
 
@@ -50,18 +50,17 @@ export class FrontContentComponent{
 		});
 	}
 
-	resetSubscription(){
-			this.transSub.unsubscribe();
-			this.autoSubscribe();
+	resetSubscription() {
+		this.transSub.unsubscribe();
+		this.autoSubscribe();
 
 	}
 
-	getImages(){
+	getImages() {
 
 		this._frontContentService.getImages()
-		.subscribe(images => {
-				for(var i = 0; i < images.length; i++)
-				{
+			.subscribe(images => {
+				for (var i = 0; i < images.length; i++) {
 					console.log(images[i]);
 					this.images[i] = {}
 					this.images[i].picture = images[i];
@@ -74,13 +73,13 @@ export class FrontContentComponent{
 			},
 
 			error => this.errorMessage = <any>error
-		);
+			);
 
 	}
 
-	constructor (private _frontContentService: FrontContentService) {}
+	constructor(private _frontContentService: FrontContentService) { }
 
-	ngOnInit(){
+	ngOnInit() {
 		this.getImages();
 
 	}

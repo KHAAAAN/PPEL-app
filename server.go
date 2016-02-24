@@ -23,10 +23,19 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	//fmt.Println("grabbing " + r.URL.Path[1:])
 }
 
+func tabContentHandler(w http.ResponseWriter, r *http.Request){
+	fmt.Println("Request to app/tab_pages acknowledged.")
+
+	//set writer's Content-Type to be json
+	w.Header().Set("Content-Type", "application/json")
+	fmt.Fprint(w, "{\"data\" : [\"app/tab_pages/job_search\", \"app/tab_pages/interviews\"]}")
+}
+
 func main() {
 	http.HandleFunc("/", handler)
 	http.HandleFunc("/app", appHandler)
 	http.HandleFunc("/app/images", imageHandler)
+	http.HandleFunc("/app/tabcontent", tabContentHandler)
 
 	fmt.Println("Listening on 3000")
 	http.ListenAndServe(":3000", nil)

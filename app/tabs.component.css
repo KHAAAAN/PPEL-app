@@ -1,0 +1,6 @@
+ .nav-tabs li {
+	list-style-type: none;   
+	display: inline;     
+	padding-right: 15px;
+	padding-left : 0px;
+}
