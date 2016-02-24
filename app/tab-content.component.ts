@@ -25,8 +25,6 @@ export class TabContentComponent {
 				for (var i = 0; i < files.length; i++) {
 					console.log(files[i]);
 					this.files[i] = {}
-					this.files[i].picture = files[i];
-					this.files[i].opacity = 0;
 				}
 			},
 
