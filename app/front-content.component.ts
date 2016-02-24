@@ -12,9 +12,6 @@ import {FrontContentService} from './front-content.service';
 
 export class FrontContentComponent{
 	public images = [
-		{ picture:"app/images/ppel-image1.png", opacity: 0 },
-		{ picture:"app/images/city.jpg", opacity: 0 },
-		{ picture:"app/images/space.jpeg", opacity: 0}
 	];
 
 	public curIndex: number;
@@ -66,8 +63,14 @@ export class FrontContentComponent{
 				for(var i = 0; i < images.length; i++)
 				{
 					console.log(images[i]);
+					this.images[i] = {}
 					this.images[i].picture = images[i];
+					this.images[i].opacity = 0;
 				}
+				this.images[0].opacity = 100;
+				this.curIndex = 0;
+
+				this.autoSubscribe();
 			},
 
 			error => this.errorMessage = <any>error
@@ -80,10 +83,6 @@ export class FrontContentComponent{
 	ngOnInit(){
 		this.getImages();
 
-		this.images[0].opacity = 100;
-		this.curIndex = 0;
-
-		this.autoSubscribe();
 	}
 
 }
