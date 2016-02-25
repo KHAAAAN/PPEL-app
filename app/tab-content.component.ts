@@ -4,16 +4,7 @@ import {TabContentService} from './tab-content.service';
 
 @Component({
 	selector: 'tab-content',
-	template: `
-	<tabs id="main-tabs">
-		<tab *ngFor=#file of files> file.content </tab>
-	</tabs>
-	`,
-	styles: [`
-	#main-tabs {
-		height: 250px;
-	}
-	`]
+	templateUrl: 'app/tab-content.component.html',
 })
 
 export class TabContent {

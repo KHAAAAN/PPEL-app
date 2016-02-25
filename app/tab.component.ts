@@ -2,15 +2,8 @@ import { Component, Input } from 'angular2/core';
 
 @Component({
   selector: 'tab',
-  styles: [`
-	  	.pane{
-		 	padding: 1em;
-	  	}`],
-  template: `
-  	<div [hidden]="!active" class="pane">
-		<ng-content></ng-content>
-	</div>
-	`
+  styles: ['app/tab.component.css'],
+  templateUrl: 'app/tab.component.html'
 })
 
 export class Tab {

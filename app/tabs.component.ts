@@ -3,41 +3,8 @@ import { Tab } from './tab.component';
 
 @Component({
   selector: 'tabs',
-  styles: [`
-    .nav-tabs{
-      width: 50%;
-      margin-left:auto;
-      margin-right:auto;
-    }
-   .nav-tabs li {
-      list-style-type: none;   
-      display: inline;     
-      padding-right: 15px;
-      padding-left : 0px;
-      text-decoration:underline;
-    }
-
-    .nav-tabs li:hover {
-       cursor:pointer;
-     }
-     
-    .content {
-      margin-left:auto;
-      marign-righ:auto;
-      text-align:center;
-      width:200px;
-    }
-  `],
-  template:`
-  <ul class="nav nav-tabs" >
-    <li *ngFor="#tab of tabs"
-      (click)="selectTab(tab)" 
-      [class.active] = "tab.active" >
-      <a>{{tab.title }}</a>
-    </li>
-  </ul>
-  <ng-content class="content"></ng-content>
-  `
+  styles: ['app/tab.component.css'],
+  templateUrl: 'app/tab.component.html'
 })
 
 export class Tabs implements AfterContentInit {

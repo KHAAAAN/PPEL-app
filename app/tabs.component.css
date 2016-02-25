@@ -1,6 +1,23 @@
- .nav-tabs li {
-	list-style-type: none;   
-	display: inline;     
-	padding-right: 15px;
-	padding-left : 0px;
-}
+    .nav-tabs{
+      width: 50%;
+      margin-left:auto;
+      margin-right:auto;
+    }
+   .nav-tabs li {
+      list-style-type: none;   
+      display: inline;     
+      padding-right: 15px;
+      padding-left : 0px;
+      text-decoration:underline;
+    }
+
+    .nav-tabs li:hover {
+       cursor:pointer;
+     }
+     
+    .content {
+      margin-left:auto;
+      marign-righ:auto;
+      text-align:center;
+      width:200px;
+    }
