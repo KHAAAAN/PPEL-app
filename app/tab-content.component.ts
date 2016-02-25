@@ -11,7 +11,7 @@ import {TabContentService} from './tab-content.service';
 	`,
 })
 
-export class TabContentComponent {
+export class TabContent {
 	public files = [
 	];
 

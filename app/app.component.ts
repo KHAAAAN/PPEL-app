@@ -7,6 +7,7 @@ import {NavbarComponent} from './navbar.component';
 
 import {Tab} from './tab.component'
 import {Tabs} from './tabs.component'
+import {TabContent} from './tab-content.component'
 
 @Component({
 	selector: 'PPEL-app',

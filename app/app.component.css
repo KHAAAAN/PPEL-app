@@ -13,6 +13,12 @@
 	padding-top: 10px;
 }
 
+#tab-content-container{
+	width:990px;
+	margin-left:auto;
+	margin-right: auto;
+}
+
 #voiland{
 	font-weight: bold;
 	font-size: 10px;
