@@ -3,8 +3,8 @@ import { Tab } from './tab.component';
 
 @Component({
   selector: 'tabs',
-  styles: ['app/tab.component.css'],
-  templateUrl: 'app/tab.component.html'
+  styles: ['app/tabs.component.css'],
+  templateUrl: 'app/tabs.component.html'
 })
 
 export class Tabs implements AfterContentInit {
@@ -27,3 +27,4 @@ export class Tabs implements AfterContentInit {
     tab.active = true;
   }
 }
+
