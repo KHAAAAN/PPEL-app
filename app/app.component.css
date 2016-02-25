@@ -17,6 +17,11 @@
 	width:990px;
 	margin-left:auto;
 	margin-right: auto;
+	height: 300px;
+}
+
+#tab-content {
+	height :250px;
 }
 
 #voiland{
@@ -35,7 +40,6 @@
 	background: #203639;
 	padding-top:3px;
 	padding-bottom: 3px;
-
 }
 
 #fc-title a{

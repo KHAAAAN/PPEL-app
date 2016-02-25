@@ -4,11 +4,16 @@ import {TabContentService} from './tab-content.service';
 
 @Component({
 	selector: 'tab-content',
-	templateUrl: `
-	<tabs>
+	template: `
+	<tabs id="main-tabs">
 		<tab *ngFor=#file of files> file.content </tab>
 	</tabs>
 	`,
+	styles: [`
+	#main-tabs {
+		height: 250px;
+	}
+	`]
 })
 
 export class TabContent {
@@ -25,6 +30,7 @@ export class TabContent {
 				for (var i = 0; i < files.length; i++) {
 					console.log(files[i]);
 					this.files[i] = {}
+					this.files[i].content = files[i];
 				}
 			},
 

@@ -8,14 +8,15 @@ import {NavbarComponent} from './navbar.component';
 import {Tab} from './tab.component'
 import {Tabs} from './tabs.component'
 import {TabContent} from './tab-content.component'
+import {TabContentService} from './tab-content.service'
 
 @Component({
 	selector: 'PPEL-app',
 	templateUrl: 'app/app.component.html',
 	styleUrls: ['app/app.component.css'],
 
-	directives: [FrontContentComponent, NavbarComponent, Tab, Tabs],
-	providers: [HTTP_PROVIDERS, FrontContentService]
+	directives: [FrontContentComponent, NavbarComponent, Tab, Tabs, TabContent],
+	providers: [HTTP_PROVIDERS, FrontContentService, TabContentService]
 })
 
 export class AppComponent {

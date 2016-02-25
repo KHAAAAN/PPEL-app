@@ -4,7 +4,7 @@ import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class TabContentService {
-	constructor(private http: Http) { }
+	constructor (private http: Http) {}
 
 	private _locationUrl = 'http://localhost:3000/app/tabcontent';
 

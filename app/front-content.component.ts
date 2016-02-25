@@ -6,8 +6,6 @@ import {FrontContentService} from './front-content.service';
 	selector: 'front-content',
 	templateUrl: 'app/front-content.component.html',
 	styleUrls: ['app/front-content.component.css']
-
-
 })
 
 export class FrontContentComponent {
