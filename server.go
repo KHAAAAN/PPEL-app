@@ -35,7 +35,14 @@ func tabContentHandler(w http.ResponseWriter, r *http.Request) {
 	contactPageData, _ := ioutil.ReadFile("app/tab_pages/Contact_Us")
 	privacyPageData, _ := ioutil.ReadFile("app/tab_pages/Privacy_Policy")
 
-	var toSend = fmt.Sprintf("{\"data\" : [ \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\" ]}", jobSearchData, interviewPageData, COUGLINKPageData, careerPageData, PPELPageData, contactPageData, privacyPageData)
+	var toSend = fmt.Sprintf("{\"data\" : [ \"Job Search\",    \"%s\"," +
+											"\"Interviews\",    \"%s\"," +
+											"\"COUGLINK\",      \"%s\"," +
+											"\"Career Tips\",   \"%s\"," +
+											"\"PPEL Calendar\", \"%s\"," +
+											"\"Contact Us\",    \"%s\"," +
+											"\"Privacy Policy\",\"%s\" ]}",
+	 jobSearchData, interviewPageData, COUGLINKPageData, careerPageData, PPELPageData, contactPageData, privacyPageData)
 
 	//set writer's Content-Type to be json
 	w.Header().Set("Content-Type", "application/json")

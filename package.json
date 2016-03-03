@@ -19,8 +19,10 @@
     "zone.js": "0.5.11"
   },
   "devDependencies": {
+    "angular2": "^2.0.0-beta.3",
     "concurrently": "^1.0.0",
     "lite-server": "^2.0.1",
-    "typescript": "^1.7.5"
+    "typescript": "^1.7.5",
+    "zone.js": "^0.5.11"
   }
 }

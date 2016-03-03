@@ -15,7 +15,7 @@ import {TabContentService} from './tab-content.service'
 	templateUrl: 'app/app.component.html',
 	styleUrls: ['app/app.component.css'],
 
-	directives: [FrontContentComponent, NavbarComponent, Tab, Tabs, TabContent],
+	directives: [FrontContentComponent, NavbarComponent, TabContent],
 	providers: [HTTP_PROVIDERS, FrontContentService, TabContentService]
 })
 

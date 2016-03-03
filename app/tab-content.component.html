@@ -1,5 +1,5 @@
 	<tabs id="main-tabs">
-	 <tab *ngFor="#file of files" tabTitle="test">{{file.content}}</tab>
-	 <tab></tab>
+		<tab *ngFor="#file of files" tabTitle="{{file.title}}"> {{file.content}} </tab>
+	 	<tab></tab>
 	</tabs>
 

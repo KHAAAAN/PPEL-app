@@ -16,16 +16,15 @@ export class TabContent {
 
 	public errorMessage: string;
 
-	public content: string;
-
 	getContent() {
 		this._tabContentService.getTabContent()
 			.subscribe(files => {
-				for (var i = 0; i < files.length; i++) {
+				for (var i = 0; i < files.length/2; i++) {
 					console.log(files[i]);
+
 					this.files[i] = {}
-					this.files[i].content = files[i];
-				}
+					this.files[i].title = files[i*2];
+					this.files[i].content = files[(i*2)+1];
 			},
 
 			error => this.errorMessage = <any>error
