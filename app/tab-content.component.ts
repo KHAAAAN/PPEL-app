@@ -1,10 +1,13 @@
 import {Component, OnInit} from 'angular2/core';
 import {Observable} from 'rxjs/Observable';
 import {TabContentService} from './tab-content.service';
+import { Tab } from './tab.component';
+import { Tabs } from './tabs.component';
 
 @Component({
 	selector: 'tab-content',
 	templateUrl: 'app/tab-content.component.html',
+	directives: [Tab, Tabs]
 })
 
 export class TabContent {
