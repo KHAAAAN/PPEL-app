@@ -3,7 +3,7 @@ import { Tab } from './tab.component';
 
 @Component({
   selector: 'tabs',
-  styles: ['app/tabs.component.css'],
+  styleUrls: ['app/tabs.component.css'],
   templateUrl: 'app/tabs.component.html'
 })
 

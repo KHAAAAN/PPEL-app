@@ -2,7 +2,7 @@ import { Component, Input } from 'angular2/core';
 
 @Component({
   selector: 'tab',
-  styles: ['app/tab.component.css'],
+  styleUrls: ['app/tab.component.css'],
   templateUrl: 'app/tab.component.html'
 })
 
