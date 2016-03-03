@@ -1,16 +1,17 @@
 package main
 
 import (
-	"net/http"
 	"fmt"
+	"io/ioutil"
+	"net/http"
 )
 
 //this stops user client from seeing anything on the server.
-func appHandler(w http.ResponseWriter, r *http.Request){
+func appHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Request to app acknowledged.")
 }
 
-func imageHandler(w http.ResponseWriter, r *http.Request){
+func imageHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Request to app/images acknowledged.")
 
 	//set writer's Content-Type to be json
@@ -23,12 +24,17 @@ func handler(w http.ResponseWriter, r *http.Request) {
 	//fmt.Println("grabbing " + r.URL.Path[1:])
 }
 
-func tabContentHandler(w http.ResponseWriter, r *http.Request){
+func tabContentHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Request to app/tab_pages acknowledged.")
+
+	jobSearchData, _ := ioutil.ReadFile("app/tab_pages/job_search")
+	tabPageData, _ := ioutil.ReadFile("app/tab_pages/interviews")
+
+	var toSend = fmt.Sprintf("{\"data\" : [ \"%s\" , \"%s\" ]}", jobSearchData, tabPageData)
 
 	//set writer's Content-Type to be json
 	w.Header().Set("Content-Type", "application/json")
-	fmt.Fprint(w, "{\"data\" : [\"app/tab_pages/job_search\", \"app/tab_pages/interviews\"]}")
+	fmt.Fprint(w, toSend)
 }
 
 func main() {
