@@ -1,0 +1,32 @@
+{
+	"data": {
+		"homePath" :"https://vcea.wsu.edu/",
+		"mainItems":[
+			{"header": "About the College", "subItems":[{"header": "test"}]},
+			{"header" : "Academics", "subItems":[]},
+			{"header" : "Research", "subItems":[]},
+			{"header" : "Learning Outside the Classroom", "subItems":[]},
+			{"header" : "Student Resources", "subItems":[]},
+			{"header" : "News and Events", "subItems":[]},
+			{"header" : "Contact Us", "href":"https://vcea.wsu.edu/directory/"}
+		],
+
+		"ghostItems":[
+			{"header": "Career Fair", "href": "https://vcea.wsu.edu/careerfair/"},
+			{"header": "For Alumni and Friends", "href": "https://vcea.wsu.edu/alumni/"},
+			{"header": "For Faculty and Staff", "href": "https://vcea.wsu.edu/faculty-staff/"},
+			{"header": "Give to VCEA", "href": "https://vcea.wsu.edu/give-to-wsu/"},
+			{"header": "VCEA Jobs", "href": "https://www.wsujobs.com/postings/search?utf8=✓&query=&query_v0_posted_at_date=&query_organizational_tier_3_id=any&query_organizational_tier_2_id=362&1835=&1836=&commit=Search"}
+		],
+
+		"socialHref":{
+			"facebook" : "http://www.facebook.com/wsu.eng.arch",
+			"twitter" : "https://twitter.com/WSUVoiland",
+			"linkedin" : "https://www.linkedin.com/grp/home?gid=1900440",
+			"youtube" : "https://www.youtube.com/channel/UCLeDIyeODI3cRWaflr3zDaA"
+				
+		}
+		
+		
+	}
+}
