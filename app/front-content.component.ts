@@ -21,6 +21,8 @@ export class FrontContentComponent{
 
 	public errorMessage: string;
 
+	private _totalPics: number;
+
 	transition(index: number){
 
 			this.images[index].opacity = 100;
@@ -43,7 +45,7 @@ export class FrontContentComponent{
 		this.transSub = Observable.interval(2000).subscribe(() => {
 			let temp = this.curIndex;
 
-			this.curIndex = (this.curIndex + 1) % 3;
+			this.curIndex = (this.curIndex + 1) % this._totalPics; //switch to this.images.length
 
 			this.images[this.curIndex].opacity = 100;
 			this.images[temp].opacity = 0;
@@ -59,8 +61,10 @@ export class FrontContentComponent{
 	getImages(){
 
 		this._frontContentService.getImages()
+
 		.subscribe(images => {
-				for(var i = 0; i < images.length; i++)
+				this._totalPics = images.length;
+				for(var i = 0; i < this._totalPics; i++)
 				{
 					console.log(images[i]);
 					this.images[i] = {}

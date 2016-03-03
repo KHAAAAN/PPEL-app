@@ -102,17 +102,16 @@ hr {
 
 #circle-list{
     list-style-type: none;
-	width: 150px;
-	padding-left: 20px;
+	padding-left: 19px;
 	margin: 0;
 	margin-top: 27px;
-	margin-left: 15px;
+	margin-left: 24px;
 	padding-bottom: 10px;
 	letter-spacing: -10px;
 
 	border-width: thin;
 	border-style: solid;
-	width: 136px;
+	width: 130px;
 	border-width: 0 0 1px 0;
 	border-color: #e4e6e7;
 
@@ -154,3 +153,27 @@ hr {
 #circle-list .fa-youtube{
 	margin-left: 1px;
 }
+
+
+#access-list {
+    list-style-type: none;
+	width: 157px;
+	padding-left: 25px;
+	margin: 0;
+}
+
+#access-list li a{
+	color: #B5BABE;
+	font-size: 8.63px;
+	text-decoration: none;
+	padding-right: 6px;
+}
+
+#acc-list li{
+	text-align: left;
+}
+
+#access-list li a:hover{
+	color: #5E6A71;
+}
+

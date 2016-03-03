@@ -1,7 +1,7 @@
 import {Component, OnInit} from 'angular2/core';
 import {NavbarService} from './navbar.service';
 import {NavbarItem} from './navbar/navbar-item';
-import {GhostItem} from './navbar/ghost-item';
+import {LinkItem} from './navbar/link-item';
 
 @Component({
     selector: 'navbar',
@@ -12,10 +12,17 @@ import {GhostItem} from './navbar/ghost-item';
 export class NavbarComponent {
 	//public hrefLinks: string[];
 	public itemList: NavbarItem[];
-	public ghostList: GhostItem[];
-	public socialHref: Object{};
+	public ghostList: LinkItem[];
+	public socialHref = {
+			facebook: null as string,
+		   	twitter: null as string,
+		   	linkedin: null as string, 
+			youtube: null as string
+	};
+	public accessList: LinkItem[];
 
 	public homePath: string;
+	public captionPath: string;
 	public errorMessage: string;
 
 	getItems(){
@@ -26,6 +33,8 @@ export class NavbarComponent {
 				this.itemList = data.mainItems;
 				this.ghostList = data.ghostItems;
 				this.socialHref = data.socialHref;
+				this.accessList = data.accessItems;
+				this.captionPath = data.captionPath;
 			},
 			error => this.errorMessage = <any>error
 		);
@@ -51,7 +60,6 @@ export class NavbarComponent {
 			return item.href;
 		}
 	}
-
 
 	constructor (private _navbarService: NavbarService) {}
 
