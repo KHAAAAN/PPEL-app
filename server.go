@@ -27,10 +27,15 @@ func handler(w http.ResponseWriter, r *http.Request) {
 func tabContentHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Request to app/tab_pages acknowledged.")
 
-	jobSearchData, _ := ioutil.ReadFile("app/tab_pages/job_search")
-	tabPageData, _ := ioutil.ReadFile("app/tab_pages/interviews")
+	jobSearchData, _ := ioutil.ReadFile("app/tab_pages/Job_Search")
+	interviewPageData, _ := ioutil.ReadFile("app/tab_pages/Interviews")
+	COUGLINKPageData, _ := ioutil.ReadFile("app/tab_pages/COUGLINK")
+	careerPageData, _ := ioutil.ReadFile("app/tab_pages/Career_Tips")
+	PPELPageData, _ := ioutil.ReadFile("app/tab_pages/PPEL_Calendar")
+	contactPageData, _ := ioutil.ReadFile("app/tab_pages/Contact_Us")
+	privacyPageData, _ := ioutil.ReadFile("app/tab_pages/Privacy_Policy")
 
-	var toSend = fmt.Sprintf("{\"data\" : [ \"%s\" , \"%s\" ]}", jobSearchData, tabPageData)
+	var toSend = fmt.Sprintf("{\"data\" : [ \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\", \"%s\" ]}", jobSearchData, interviewPageData, COUGLINKPageData, careerPageData, PPELPageData, contactPageData, privacyPageData)
 
 	//set writer's Content-Type to be json
 	w.Header().Set("Content-Type", "application/json")
