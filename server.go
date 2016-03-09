@@ -1,26 +1,25 @@
 package main
 
 import (
-	"net/http"
 	"fmt"
 	"io/ioutil"
 	"net/http"
 )
 
 //this stops user client from seeing anything on the server.
-func appHandler(w http.ResponseWriter, r *http.Request){
+func appHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Request to app acknowledged.")
 }
 
-func imageHandler(w http.ResponseWriter, r *http.Request){
+func imageHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Request to app/images acknowledged.")
 
 	//set writer's Content-Type to be json
 	w.Header().Set("Content-Type", "application/json")
-	http.ServeFile(w, r, r.URL.Path[1:]);
+	http.ServeFile(w, r, r.URL.Path[1:])
 }
 
-func navHandler(w http.ResponseWriter, r *http.Request){	
+func navHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Request to app/navbar/items.json acknowledged.")
 	w.Header().Set("Content-Type", "application/json")
 	http.ServeFile(w, r, r.URL.Path[1:])
@@ -42,14 +41,14 @@ func tabContentHandler(w http.ResponseWriter, r *http.Request) {
 	contactPageData, _ := ioutil.ReadFile("app/tab_pages/Contact_Us")
 	privacyPageData, _ := ioutil.ReadFile("app/tab_pages/Privacy_Policy")
 
-	var toSend = fmt.Sprintf("{\"data\" : [ \"Job Search\",    \"%s\"," +
-											"\"Interviews\",    \"%s\"," +
-											"\"COUGLINK\",      \"%s\"," +
-											"\"Career Tips\",   \"%s\"," +
-											"\"PPEL Calendar\", \"%s\"," +
-											"\"Contact Us\",    \"%s\"," +
-											"\"Privacy Policy\",\"%s\" ]}",
-	 jobSearchData, interviewPageData, COUGLINKPageData, careerPageData, PPELPageData, contactPageData, privacyPageData)
+	var toSend = fmt.Sprintf("{\"data\" : [ \"Job Search\",    \"%s\","+
+		"\"Interviews\",    \"%s\","+
+		"\"COUGLINK\",      \"%s\","+
+		"\"Career Tips\",   \"%s\","+
+		"\"PPEL Calendar\", \"%s\","+
+		"\"Contact Us\",    \"%s\","+
+		"\"Privacy Policy\",\"%s\" ]}",
+		jobSearchData, interviewPageData, COUGLINKPageData, careerPageData, PPELPageData, contactPageData, privacyPageData)
 
 	//set writer's Content-Type to be json
 	w.Header().Set("Content-Type", "application/json")
