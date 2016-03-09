@@ -1,12 +1,87 @@
 <div id="navbar-component">
-    <ul>
-        <li *ngFor="#item of setOne" [value]="item">{{item}}</li>
-		<li><hr size="1px" color="black" width="100px"></li>
-		
-		<li *ngFor="#item of setTwo" [value]="item" >{{item}}</li>
-		<li><hr size="1px" color="black" width="100px"></li>
+    <img src="app/images/wsu.svg" style="margin-left:25px;">
 
-		<li *ngFor="#item of setThree" [value]="item" >{{item}}</li>
-        
+	<ul id="ul1">
+		<li id="first">  
+			<a><i class="fa fa-search"></i></a>
+			<a><i class="fa fa-envelope-o" style="font-size: 14px; margin-left: 34px;"></i></a>
+			<a><i class="fa fa-share-alt" style="margin-left: 34px;"></i></a>		
+		</li>
+
+	</ul>
+
+    <ul id="ul2">
+
+		<li id="home">
+			<a [href]="homePath">
+				<i class="fa fa-home" style=" padding-right: 4px; font-size: 14px;"></i>Home
+			</a>
+		
+		</li>
+
+		<li *ngFor="#item of itemList; #i=index">
+		   	<a (mouseover)="hoverOn(item)" (mouseleave)="hoverOff(item)" [href]="checkForHref(item)">
+				{{item.header}} 
+				<i style="font-size:18px; float:right;" class="fa fa-angle-down" *ngIf="item.isHover" ></i>
+			</a>
+
+		</li>
+
     </ul>
+
+	<ul id="ghost-list">
+		<li *ngFor="#item of ghostList">
+			<a [href]="item.href">{{item.header}}</a>
+		</li>
+
+	</ul>
+
+	<ul id="circle-list">
+
+		<li>  
+			<a class="facebook" [href]="socialHref.facebook">
+				<span class="fa-stack">
+				  <i class="fa fa-circle-thin fa-stack-2x"></i>
+				  <i class="fa fa-facebook fa-stack-1x"></i>
+				</span>
+			</a>
+
+			<a class="twitter" [href]="socialHref.twitter">
+				<span class="fa-stack" >
+				  <i class="fa fa-circle-thin fa-stack-2x"></i>
+				  <i class="fa fa-twitter fa-stack-1x"></i>
+				</span>
+			</a>
+
+			<a class="linkedin" [href]="socialHref.linkedin">
+				<span class="fa-stack">
+				  <i class="fa fa-circle-thin fa-stack-2x"></i>
+				  <i class="fa fa-linkedin fa-stack-1x"></i>
+				</span>
+			</a>
+
+			<a class="youtube" [href]="socialHref.youtube">
+				<span class="fa-stack">
+				  <i class="fa fa-circle-thin fa-stack-2x"></i>
+				  <i class="fa fa-youtube fa-stack-1x"></i>
+				</span>
+			</a>
+
+		</li>
+	</ul>
+
+	<ul id="access-list">
+		<li>
+				<a *ngFor="#item of accessList" [href]=item.href>{{item.header}}</a>
+				<a [href]="captionPath" style="padding: 0">
+				<span class="fa-stack">
+				  <i class="fa fa-circle-thin fa-stack-2x" style="margin-top: 1.5px; 
+						  font-size: 11px;"></i>
+				  <i class="fa fa-stack-1x caption" style="margin-top: -1px">c</i>
+				</span>
+				</a>
+		</li>
+		
+	</ul>
+
 </div>

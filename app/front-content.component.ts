@@ -6,9 +6,11 @@ import {FrontContentService} from './front-content.service';
 	selector: 'front-content',
 	templateUrl: 'app/front-content.component.html',
 	styleUrls: ['app/front-content.component.css']
+
+
 })
 
-export class FrontContentComponent {
+export class FrontContentComponent{
 	public images = [
 	];
 
@@ -19,46 +21,50 @@ export class FrontContentComponent {
 
 	public errorMessage: string;
 
-	transition(index: number) {
+	private _totalPics: number;
 
-		this.images[index].opacity = 100;
-		this.images[this.curIndex].opacity = 0;
+	transition(index: number){
 
-		this.curIndex = index;
+			this.images[index].opacity = 100;
+			this.images[this.curIndex].opacity = 0;
 
-		//reset subscription because think about it..
-		//if we were to select a radio button the interval should reset to 2000
-		//not stay at 2000 - x, x >= 0
+			this.curIndex = index;
 
-		this.resetSubscription();
+			//reset subscription because think about it..
+			//if we were to select a radio button the interval should reset to 2000
+			//not stay at 2000 - x, x >= 0
+
+			this.resetSubscription();
 
 	}
 
 	/*This method subscribes our transition subscription variable (transSub)
 	 *to changing at every interval
 	 */
-	autoSubscribe() {
+	autoSubscribe(){
 		this.transSub = Observable.interval(2000).subscribe(() => {
 			let temp = this.curIndex;
 
-			this.curIndex = (this.curIndex + 1) % 3;
+			this.curIndex = (this.curIndex + 1) % this._totalPics; //switch to this.images.length
 
 			this.images[this.curIndex].opacity = 100;
 			this.images[temp].opacity = 0;
 		});
 	}
 
-	resetSubscription() {
-		this.transSub.unsubscribe();
-		this.autoSubscribe();
+	resetSubscription(){
+			this.transSub.unsubscribe();
+			this.autoSubscribe();
 
 	}
 
-	getImages() {
+	getImages(){
 
 		this._frontContentService.getImages()
-			.subscribe(images => {
-				for (var i = 0; i < images.length; i++) {
+		.subscribe(images => {
+				this._totalPics = images.length;
+				for(var i = 0; i < this._totalPics; i++)
+				{
 					console.log(images[i]);
 					this.images[i] = {}
 					this.images[i].picture = images[i];
@@ -71,13 +77,13 @@ export class FrontContentComponent {
 			},
 
 			error => this.errorMessage = <any>error
-			);
+		);
 
 	}
 
-	constructor(private _frontContentService: FrontContentService) { }
+	constructor (private _frontContentService: FrontContentService) {}
 
-	ngOnInit() {
+	ngOnInit(){
 		this.getImages();
 
 	}

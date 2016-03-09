@@ -3,6 +3,8 @@ import {HTTP_PROVIDERS, Http} from 'angular2/http';
 
 import {FrontContentComponent} from './front-content.component';
 import {FrontContentService} from './front-content.service';
+
+import {NavbarService} from './navbar.service';
 import {NavbarComponent} from './navbar.component';
 
 import {Tab} from './tab.component'
@@ -16,7 +18,7 @@ import {TabContentService} from './tab-content.service'
 	styleUrls: ['app/app.component.css'],
 
 	directives: [FrontContentComponent, NavbarComponent, TabContent],
-	providers: [HTTP_PROVIDERS, FrontContentService, TabContentService]
+	providers: [HTTP_PROVIDERS, FrontContentService, TabContentService, NavbarService]
 })
 
 export class AppComponent {

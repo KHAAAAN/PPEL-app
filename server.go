@@ -1,22 +1,29 @@
 package main
 
 import (
+	"net/http"
 	"fmt"
 	"io/ioutil"
 	"net/http"
 )
 
 //this stops user client from seeing anything on the server.
-func appHandler(w http.ResponseWriter, r *http.Request) {
+func appHandler(w http.ResponseWriter, r *http.Request){
 	fmt.Println("Request to app acknowledged.")
 }
 
-func imageHandler(w http.ResponseWriter, r *http.Request) {
+func imageHandler(w http.ResponseWriter, r *http.Request){
 	fmt.Println("Request to app/images acknowledged.")
 
 	//set writer's Content-Type to be json
 	w.Header().Set("Content-Type", "application/json")
-	fmt.Fprint(w, "{\"data\" : [\"app/images/ppel-image1.png\", \"app/images/city.jpg\", \"app/images/space.jpeg\"]}")
+	http.ServeFile(w, r, r.URL.Path[1:]);
+}
+
+func navHandler(w http.ResponseWriter, r *http.Request){	
+	fmt.Println("Request to app/navbar/items.json acknowledged.")
+	w.Header().Set("Content-Type", "application/json")
+	http.ServeFile(w, r, r.URL.Path[1:])
 }
 
 func handler(w http.ResponseWriter, r *http.Request) {
@@ -53,6 +60,7 @@ func main() {
 	http.HandleFunc("/", handler)
 	http.HandleFunc("/app", appHandler)
 	http.HandleFunc("/app/images", imageHandler)
+	http.HandleFunc("/app/navbar/items.json", navHandler)
 	http.HandleFunc("/app/tabcontent", tabContentHandler)
 
 	fmt.Println("Listening on 3000")
