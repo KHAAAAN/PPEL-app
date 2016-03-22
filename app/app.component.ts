@@ -12,12 +12,14 @@ import {Tabs} from './tabs.component'
 import {TabContent} from './tab-content.component'
 import {TabContentService} from './tab-content.service'
 
+import {Vid} from './vid';
+
 @Component({
 	selector: 'PPEL-app',
 	templateUrl: 'app/app.component.html',
 	styleUrls: ['app/app.component.css'],
 
-	directives: [FrontContentComponent, NavbarComponent, TabContent],
+	directives: [FrontContentComponent, NavbarComponent, TabContent, Vid],
 	providers: [HTTP_PROVIDERS, FrontContentService, TabContentService, NavbarService]
 })
 

@@ -7,11 +7,11 @@ export class TabContentService {
 	constructor (private http: Http) {}
 
 	private _locationUrl = 'http://localhost:3000/app/tabcontent';
+	private _index = 0;
 
 	getTabContent() {
 		return this.http.get(this._locationUrl)
-			.map(res => <string[]>res.json().data)
-			.do(data => console.log(data))
+			.map(res => res.json().Pages)
 			.catch(this.handleError);
 	}
 

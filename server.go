@@ -4,6 +4,8 @@ import (
 	"fmt"
 	"io/ioutil"
 	"net/http"
+	"encoding/json"
+	//"os"
 )
 
 //this stops user client from seeing anything on the server.
@@ -33,27 +35,45 @@ func handler(w http.ResponseWriter, r *http.Request) {
 func tabContentHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Println("Request to app/tab_pages acknowledged.")
 
-	jobSearchData, _ := ioutil.ReadFile("app/tab_pages/Job_Search")
-	interviewPageData, _ := ioutil.ReadFile("app/tab_pages/Interviews")
-	COUGLINKPageData, _ := ioutil.ReadFile("app/tab_pages/COUGLINK")
-	careerPageData, _ := ioutil.ReadFile("app/tab_pages/Career_Tips")
-	PPELPageData, _ := ioutil.ReadFile("app/tab_pages/PPEL_Calendar")
-	contactPageData, _ := ioutil.ReadFile("app/tab_pages/Contact_Us")
-	privacyPageData, _ := ioutil.ReadFile("app/tab_pages/Privacy_Policy")
+	jobSearchData, _ := ioutil.ReadFile("app/tab_content/JobSearch.html")
+	careerTips, _ := ioutil.ReadFile("app/tab_content/CareerTips.html")
+	interviews, _ := ioutil.ReadFile("app/tab_content/Interviews.html")
+	yourVideos, _ := ioutil.ReadFile("app/tab_content/YourVideos.html")
 
-	var toSend = fmt.Sprintf("{\"data\" : [ \"Job Search\",    \"%s\","+
-		"\"Interviews\",    \"%s\","+
-		"\"COUGLINK\",      \"%s\","+
-		"\"Career Tips\",   \"%s\","+
-		"\"PPEL Calendar\", \"%s\","+
-		"\"Contact Us\",    \"%s\","+
-		"\"Privacy Policy\",\"%s\" ]}",
-		jobSearchData, interviewPageData, COUGLINKPageData, careerPageData, PPELPageData, contactPageData, privacyPageData)
+	type Page struct {
+			Title string
+			Content string
+		}
 
-	//set writer's Content-Type to be json
+	type Book struct {
+			Pages []Page
+		}
+
+	var s1 = fmt.Sprintf("%s", jobSearchData)
+	var s2 = fmt.Sprintf("%s", careerTips)
+	var s3 = fmt.Sprintf("%s", interviews)
+	var s4 = fmt.Sprintf("%s", yourVideos)
+
+	var book = Book {
+		[]Page{
+			{"Job Search", s1},
+			{"Career Tips", s2},
+			{"Interviews", s3},
+			{"Your Videos", s4},
+		},
+	}
+
+	b, err := json.Marshal(book)	
+	if err != nil {
+		fmt.Println("error:", err)
+	}
+	//os.Stdout.Write(b)
+	toSend := string(b[:]) 
+
 	w.Header().Set("Content-Type", "application/json")
 	fmt.Fprint(w, toSend)
 }
+
 
 func main() {
 	http.HandleFunc("/", handler)

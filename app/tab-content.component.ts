@@ -10,30 +10,42 @@ import { Tabs } from './tabs.component';
 	directives: [Tab, Tabs]
 })
 
-export class TabContent {
+export class TabContent implements OnInit {
 	public files = [
 	];
 
 	public errorMessage: string;
 
+	constructor(private _tabContentService: TabContentService){
+
+	}
+
 	getContent() {
 		this._tabContentService.getTabContent()
-			.subscribe(files => {
-				for (var i = 0; i < files.length/2; i++) {
-					console.log(files[i]);
+			.subscribe( pages => {
+			
 
+				console.log(pages);
+			for(var i = 0; i < pages.length; ++i){
 					this.files[i] = {}
-					this.files[i].title = files[i*2];
-					this.files[i].content = files[(i*2)+1];
+					this.files[i].title = pages[i].Title;
+					this.files[i].content = pages[i].Content;
+
+					//defaults to the first one
+					if(i == 0){
+						this.files[i].active = true;
+					}
+				}	
+
 			},
 
 			error => this.errorMessage = <any>error
 			);
+
+				   
 	}
 
-	constructor(private _tabContentService: TabContentService) { }
-
-	ngOnInit() {
+	ngOnInit(){
 		this.getContent();
 	}
 }
