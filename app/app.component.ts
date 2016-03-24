@@ -1,4 +1,4 @@
-import {Component} from 'angular2/core';
+import {Component, OnInit} from 'angular2/core';
 import {HTTP_PROVIDERS, Http} from 'angular2/http';
 
 import {FrontContentComponent} from './front-content.component';
@@ -12,17 +12,19 @@ import {Tabs} from './tabs.component'
 import {TabContent} from './tab-content.component'
 import {TabContentService} from './tab-content.service'
 
-import {Vid} from './vid';
 
 @Component({
 	selector: 'PPEL-app',
 	templateUrl: 'app/app.component.html',
 	styleUrls: ['app/app.component.css'],
 
-	directives: [FrontContentComponent, NavbarComponent, TabContent, Vid],
+	directives: [FrontContentComponent, NavbarComponent, TabContent],
 	providers: [HTTP_PROVIDERS, FrontContentService, TabContentService, NavbarService]
 })
 
-export class AppComponent {
+export class AppComponent implements OnInit {
 	public title = 'PPEL';
+
+	ngOnInit(){
+	}
 }

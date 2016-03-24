@@ -1,6 +1,7 @@
 import {Component, OnInit} from 'angular2/core';
 import {Observable} from 'rxjs/Observable';
 import {TabContentService} from './tab-content.service';
+
 import { Tab } from './tab.component';
 import { Tabs } from './tabs.component';
 
@@ -25,11 +26,12 @@ export class TabContent implements OnInit {
 			.subscribe( pages => {
 			
 
-				console.log(pages);
+				//console.log(pages);
 			for(var i = 0; i < pages.length; ++i){
-					this.files[i] = {}
-					this.files[i].title = pages[i].Title;
-					this.files[i].content = pages[i].Content;
+					this.files[i] = { 
+						title: pages[i].Title, 
+						content: pages[i].Content
+					}
 
 					//defaults to the first one
 					if(i == 0){

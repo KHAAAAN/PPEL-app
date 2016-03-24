@@ -1,15 +1,22 @@
-import {Component, OnInit} from 'angular2/core';
+import {Component, Input} from 'angular2/core';
+//import {ViewChildren, ViewChild} from 'angular2/core';
+import {AfterViewInit} from 'angular2/core';
 
 @Component({
-	selector: "vid",
-	templateUrl: "app/vid.html",
-	styleUrls: ["app/vid.css"]
+  selector: 'video-tab',
+  styleUrls: ['app/tab.component.css'],
+  templateUrl: 'app/video-tab.component.html'
 })
 
-export class Vid implements OnInit {
+export class VideoTab implements AfterViewInit{
+	@Input() active = false;
+	public title: string = "Your Videos";
 
-	ngOnInit(){
-		var player = videojs("myVideo",
+	//@ViewChild('article') input;
+
+	ngAfterViewInit(){
+		
+		var player = videojs("record",
 		{
 			controls: true,
 			width: 320,
@@ -40,5 +47,6 @@ export class Vid implements OnInit {
 			// can be downloaded by the user, stored on server etc.
 			console.log('finished recording: ', player.recordedData);
 		});
-	}		
+
+	}
 }

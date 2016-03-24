@@ -1,11 +1,16 @@
 <tabs id="main-tabs">
 	<!--TODO pass in a model instead of properties-->
 
+
 	<tab *ngFor="#file of files"
 	active="{{file.active}}"
    	tabTitle="{{file.title}}" 
 	content="{{file.content}}">
 	</tab>
 
-	<tab></tab>
+
+	<!-- idk why this has to be here to work, will fix in future -->
+	<tab>	
+	</tab>
+
 </tabs>
