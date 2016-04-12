@@ -3,20 +3,20 @@ import {Http, Response, URLSearchParams} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
 
 @Injectable()
-export class TabContentService {
+export class NavbarService {
 	constructor (private http: Http) {}
 
-	private _locationUrl = 'http://localhost:3000/app/tabcontent';
-	private _index = 0;
+	private _locationUrl = 'http://localhost:3000/app/navbar/items.json';
 
-	getTabContent() {
+	getItems () {
 		return this.http.get(this._locationUrl)
-			.map(res => res.json().Pages)
-			.catch(this.handleError);
+		.map(res => res.json().data)
+		.do(homePath => console.log(homePath))
+		.catch(NavbarService.handleError);
 	}
 
-	private handleError(error: Response) {
-		console.log("errors4days")
+	private static handleError (error: Response) {
+		console.log("errors4days");
 		console.error(error);
 		return Observable.throw(error.json().error || 'Server error');
 	}

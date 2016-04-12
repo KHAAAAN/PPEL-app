@@ -7,7 +7,7 @@
 }
 
 #cf {
-	position relative;
+	position: relative;
 	width:990px;
 	height:400px;
 
@@ -23,3 +23,9 @@
 	transition: opacity 0.5s ease-in-out;
 }
 
+#frontContentMedia {
+	display: block;
+    width: 100%;
+    height: 100%;
+    border: none;
+}

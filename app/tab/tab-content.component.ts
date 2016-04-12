@@ -3,11 +3,11 @@ import {Observable} from 'rxjs/Observable';
 import {TabContentService} from './tab-content.service';
 
 import { Tab } from './tab.component';
-import { Tabs } from './tabs.component';
+import { Tabs } from '../tabs/tabs.component';
 
 @Component({
 	selector: 'tab-content',
-	templateUrl: 'app/tab-content.component.html',
+	templateUrl: 'app/tab/tab-content.component.html',
 	directives: [Tab, Tabs]
 })
 

@@ -1,16 +1,16 @@
 import {Component, OnInit} from 'angular2/core';
 import {HTTP_PROVIDERS, Http} from 'angular2/http';
 
-import {FrontContentComponent} from './front-content.component';
-import {FrontContentService} from './front-content.service';
+import {FrontContentComponent} from './front-content/front-content.component';
+import {FrontContentService} from './front-content/front-content.service';
 
-import {NavbarService} from './navbar.service';
-import {NavbarComponent} from './navbar.component';
+import {NavbarService} from './navbar/navbar.service';
+import {NavbarComponent} from './navbar/navbar.component';
 
-import {Tab} from './tab.component'
-import {Tabs} from './tabs.component'
-import {TabContent} from './tab-content.component'
-import {TabContentService} from './tab-content.service'
+import {Tab} from './tab/tab.component'
+import {Tabs} from './tabs/tabs.component'
+import {TabContent} from './tab/tab-content.component'
+import {TabContentService} from './tab/tab-content.service'
 
 
 @Component({
