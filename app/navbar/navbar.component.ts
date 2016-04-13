@@ -61,15 +61,9 @@ export class NavbarComponent {
 		}
 	}
 
-	expand(item){
-		if(item.subItems !== undefined){
-			item.expanded = true;
-		}
-	}
-
-	impolode(item){
-		if(item.subItems !== undefined){
-			item.expanded = false;
+	flip(item){
+		if(item.subItems !== undefined && item.subItems.length > 0){
+			item.expanded = !item.expanded;
 		}
 	}
 
