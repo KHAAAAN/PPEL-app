@@ -8,7 +8,7 @@
 			{"header" : "Learning Outside the Classroom", "subItems":[]},
 			{"header" : "Student Resources", "subItems":[]},
 			{"header" : "News and Events", "subItems":[]},
-			{"header" : "Contact Us", "href":"https://vcea.wsu.edu/directory/"}
+			{"header" : "Contact Us", "href":"https://vcea.wsu.edu/directory/", "subItems":[]}
 		],
 
 		"ghostItems":[

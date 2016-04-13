@@ -29,8 +29,9 @@ export class NavbarComponent {
 		this._navbarService.getItems ()
 		.subscribe(
 			data => {
-				this.homePath = data.homePath
+				this.homePath = data.homePath;
 				this.itemList = data.mainItems;
+				console.log(this.itemList);
 				this.ghostList = data.ghostItems;
 				this.socialHref = data.socialHref;
 				this.accessList = data.accessItems;
@@ -41,13 +42,13 @@ export class NavbarComponent {
 	}
 
 	hoverOn(item){
-		if(item.subItems !== undefined){
+		if(item.subItems !== undefined && item.subItems.length > 0){
 			item.isHover = true;
 		}
 	}
 
 	hoverOff(item){
-		if(item.subItems !== undefined){
+		if(item.subItems !== undefined && item.subItems.length > 0){
 			item.isHover = false;
 		}
 	}
@@ -58,6 +59,18 @@ export class NavbarComponent {
 		}
 		else{
 			return item.href;
+		}
+	}
+
+	expand(item){
+		if(item.subItems !== undefined){
+			item.expanded = true;
+		}
+	}
+
+	impolode(item){
+		if(item.subItems !== undefined){
+			item.expanded = false;
 		}
 	}
 

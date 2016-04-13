@@ -24,6 +24,11 @@
 				{{item.header}} 
 				<i style="font-size:18px; float:right;" class="fa fa-angle-down" *ngIf="item.isHover" ></i>
 			</a>
+			<ul *ngIf="item.subItems.length > 0">
+				<li *ngFor="#subItem of item.subItems">
+					<a>{{subItem.header}}</a>			
+				</li>
+			</ul>
 
 		</li>
 
