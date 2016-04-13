@@ -26,7 +26,10 @@
 						</a>
 			<ul *ngIf="item.subItems.length > 0 && item.expanded === true">
 				<li *ngFor="#subItem of item.subItems">
-					<a>{{subItem.header}}</a>			
+		   			<a [href]="checkForHref(subItem)">
+					{{subItem.header}}
+					</a>			
+
 				</li>
 			</ul>
 
