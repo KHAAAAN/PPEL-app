@@ -31,7 +31,6 @@ export class NavbarComponent {
 			data => {
 				this.homePath = data.homePath;
 				this.itemList = data.mainItems;
-				console.log(this.itemList);
 				this.ghostList = data.ghostItems;
 				this.socialHref = data.socialHref;
 				this.accessList = data.accessItems;
