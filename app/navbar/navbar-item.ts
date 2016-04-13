@@ -3,4 +3,5 @@ export class NavbarItem {
 	public subItems: NavbarItem[];
 	public href: string;
 	public isHover: boolean;
+	public expanded: boolean = false;
 }
