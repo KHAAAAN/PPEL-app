@@ -4,7 +4,8 @@ import {Component} from 'angular2/core';
 	selector: 'navbar-item',
 	templateUrl: 'app/navbar/navbar-item.component.html',
 	directives: [Navbar-Item],
-	styleUrls ['app/navbar/navbar.component.css']
+	styleUrls ['app/navbar/navbar.component.css'],
+	inputs: ['header', 'subItems']
 })
 
 export class Navbar-Item {
