@@ -26,7 +26,7 @@ node_modules
 
 #make sure no compiled ec5 or mappings are sent, npm start will take care of that
 #for you. 
-*.js
+app/*.js
 *.js.map
 .*.swp
 server
