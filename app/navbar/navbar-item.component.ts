@@ -3,14 +3,14 @@ import {Component} from 'angular2/core';
 @Component({
 	selector: 'navbar-item',
 	templateUrl: 'app/navbar/navbar-item.component.html',
-	directives: [Navbar-Item],
-	styleUrls ['app/navbar/navbar.component.css'],
+	directives: [NavbarItem],
+	styleUrls: ['app/navbar/navbar.component.css'],
 	inputs: ['header', 'subItems']
 })
 
-export class Navbar-Item {
+export class NavbarItem {
 	public header: string;
-	public subItems: Navbar-Item[];
+	public subItems: NavbarItem[];
 	public href: string;
 	public isHover: boolean;
 	public expanded: boolean = false;
@@ -31,7 +31,7 @@ export class Navbar-Item {
 	       }
         }
 
-       hoverOff(this){
+       hoverOff(){
 	       if(this.subItems !== undefined && this.subItems.length > 0){
 		       this.isHover = false;
 		}

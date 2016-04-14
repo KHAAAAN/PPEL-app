@@ -20,19 +20,8 @@
 		</li>
 
 		<li *ngFor="#item of itemList; #i=index">
-		   	<a (click)="flip(item)" (mouseover)="hoverOn(item)" (mouseleave)="hoverOff(item)" [href]="checkForHref(item)">
-				{{item.header}} 
-				<i style="font-size:18px; float:right;" class="fa fa-angle-down" *ngIf="item.isHover" ></i>
-						</a>
-			<ul *ngIf="item.subItems.length > 0 && item.expanded === true">
-				<li *ngFor="#subItem of item.subItems">
-		   			<a [href]="checkForHref(subItem)">
-					{{subItem.header}}
-					</a>			
-
-				</li>
-			</ul>
-
+			<navbar-item [header]="item.header" [subItems]="item.subItems">
+			</navbar-item>
 		</li>
 
     </ul>

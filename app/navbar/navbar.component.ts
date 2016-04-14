@@ -1,7 +1,7 @@
 import {Component, OnInit} from 'angular2/core';
 import {NavbarService} from './navbar.service';
-import {NavbarItem} from './navbar-item';
 import {LinkItem} from './link-item';
+import {NavbarItem} from './navbar-item.component';
 
 @Component({
     selector: 'navbar',
