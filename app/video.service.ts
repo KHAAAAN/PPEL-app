@@ -49,7 +49,7 @@ export class VideoService {
 	testSave(index){
 		console.log("testSave");
 		var xhr = new XMLHttpRequest();
-		var blob = this.players[index].recordedData;
+		var blob = this.players[index].recordedData.video;
 
 		var formData = new FormData();
 		formData.append("blob", blob, blob.name);
@@ -58,16 +58,31 @@ export class VideoService {
 		xhr.responseType = 'blob';
 		//xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-
-		/*xhr.onreadystatechange = function() {//Call a function when the state changes.
-			if(xhr.readyState == 4 && xhr.status == 200) {
-				//saveAs(blob, "Report.pdf");
-			}
-		}*/
-
 		xhr.send(formData);
 		
 	}
+
+   /*testSave(index){
+		console.log("testSave");
+		var blob = this.players[index].recordedData.video;
+
+		var uploader = new qq.FineUploaderBasic({
+                debug: true,
+                request: {
+                    endpoint: 'http://localhost:3000/test_save'
+                },
+                validation: {
+                    allowedExtensions: ['mp4', 'webm', 'mp3', 'ogg', 'oga', 'ogg']
+                }
+		});
+
+		console.log(uploader);
+
+		//upload data to server
+		var filesList = [blob];
+		uploader.addFiles(filesList);
+
+	}*/
 
 	makeRecorder(index){
 		var _this = this;

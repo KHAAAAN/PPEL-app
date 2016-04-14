@@ -207,7 +207,7 @@ func refreshHandler(w http.ResponseWriter, r*http.Request){
 }
 
 func testSaveHandler(w http.ResponseWriter, r *http.Request, db *sql.DB){
-	r.ParseForm()
+	/*r.ParseForm()
     fmt.Println(".This is the value of", r.Form)
 
 	keys := make([]string, len(r.Form))
@@ -222,8 +222,10 @@ func testSaveHandler(w http.ResponseWriter, r *http.Request, db *sql.DB){
 		
 		keys[i] = key
 		i++
-	}
-
+	}*/
+	fmt.Println("testSave")
+	r.ParseForm()
+	fmt.Println(r.Form)
 }
 
 func main() {
