@@ -39,7 +39,7 @@ export class FrontContentComponent{
 	 *to changing at every interval
 	 */
 	autoSubscribe(){
-		this.transSub = Observable.interval(2000).subscribe(() => {
+		this.transSub = Observable.interval(10000).subscribe(() => {
 			//let temp = this.curIndex;
 
 			this.curIndex = (this.curIndex + 1) % this._totalPics; //switch to this.images.length
