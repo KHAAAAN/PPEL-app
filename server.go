@@ -208,23 +208,23 @@ func refreshHandler(w http.ResponseWriter, r*http.Request){
 
 func testSaveHandler(w http.ResponseWriter, r *http.Request, db *sql.DB){
 	r.ParseForm()
-    //fmt.Println(".This is the value of", r.Form)
+    fmt.Println("This is the value of", r.Form)
 
-	keys := make([]string, len(r.Form))
+	/*keys := make([]string, len(r.Form))
 
 	i := 0
 	for key := range r.Form {
 		//fmt.Println("Key:", key, "Value:", value)
 		fmt.Println("Key:", key)
 
-		/*fmt.Println("\n\n*****\n\n")
+		fmt.Println("\n\n*****\n\n")
 		fmt.Println(r.Form[key])
-		fmt.Println("\n\n*****\n\n")*/
+		fmt.Println("\n\n*****\n\n")
 		
 		keys[i] = key
 		i++
 	}
-	fmt.Println(keys)
+	fmt.Println(keys)*/
 }
 
 func main() {

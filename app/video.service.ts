@@ -49,15 +49,20 @@ export class VideoService {
 	testSave(index){
 		console.log("testSave");
 		var xhr = new XMLHttpRequest();
+		//TODO: in firefox, take out the .video
 		var blob = this.players[index].recordedData.video;
 
 		var formData = new FormData();
-		formData.append("blob", blob, blob.name);
+		//formData.append("blob", blob, blob.name);
+		formData.append('fname', 'test.webm');
+		formData.append('file', blob);
 
-		xhr.open("POST", "http://localhost:3000/test_save", true);
-		xhr.responseType = 'blob';
+		xhr.open("POST", "http://localhost:3001/upload", true);
+		//xhr.responseType = 'blob';
 		//xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-		xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		//xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		//xhr.setRequestHeader("Content-type", "multipart/form-data");
+		
 		xhr.send(formData);
 		
 	}
