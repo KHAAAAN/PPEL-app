@@ -6,6 +6,7 @@ import {NavbarItem} from './navbar-item.component';
 @Component({
     selector: 'navbar',
     templateUrl: 'app/navbar/navbar.component.html',
+    directives: [NavbarItem],
     styleUrls: ['app/navbar/navbar.component.css']
 })
 
