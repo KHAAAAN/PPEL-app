@@ -23,6 +23,7 @@ export class NavbarItem {
 		if(this.subItems !== undefined && this.subItems.length > 0){
 			this.expanded = !this.expanded;
 		}
+		
 	}
 
        hoverOn(){
@@ -36,7 +37,6 @@ export class NavbarItem {
 		       this.isHover = false;
 		}
 	}
-
 
 	checkForHref(){
 		if(this.href === undefined){
