@@ -25,19 +25,22 @@
 				]
 			}
 			{"header" : "Research", "subItems":[
-				{"header": "Overview", "href":""},
-				{"header": "Centers, Institutes and Labs", "href":""},
-				{"header": "Undergraduate Research", "href":""},
-				{"header": "Advanced Materials", "href":""},
-				{"header": "Aerospace", "href":""},
-				{"header": "Air and Water Resources", "href":""},
-				{"header": "Energy Conversion and Catalysis", "href":""},
-				{"header": "Engineering for Health", "href":""},
-				{"header": "Smart Power Networks", "href":""},
-				{"header": "Sustainable Infrastructure", "href":""}
+				{"header": "Overview", "href":"https://vcea.wsu.edu/research/"},
+				{"header": "Centers, Institutes and Labs", "href":"https://vcea.wsu.edu/research/research-centers/"},
+				{"header": "Undergraduate Research", "href":"https://vcea.wsu.edu/research/undergraduate-research/"},
+				{"header": "Advanced Materials", "href":"https://vcea.wsu.edu/research/advanced-materials/"},
+				{"header": "Aerospace", "href":"https://vcea.wsu.edu/aerospace/"},
+				{"header": "Air and Water Resources", "href":"https://vcea.wsu.edu/research/air-and-water-resources/"},
+				{"header": "Energy Conversion and Catalysis", "href":"https://vcea.wsu.edu/research/energy-conversion-and-catalysis/"},
+				{"header": "Engineering for Health", "href":"https://vcea.wsu.edu/research/engineering-for-health/"},
+				{"header": "Smart Power Networks", "href":"https://vcea.wsu.edu/research/smart-power-networks/"},
+				{"header": "Sustainable Infrastructure", "href":"https://vcea.wsu.edu/research/sustainable-infrastructure/"}
 				]
 			},
-			{"header" : "Learning Outside the Classroom", "subItems":[]},
+			{"header" : "Learning Outside the Classroom", "subItems":[
+
+				]
+			},
 			{"header" : "Student Resources", "subItems":[]},
 			{"header" : "News and Events", "subItems":[]},
 			{"header" : "Contact Us", "href":"https://vcea.wsu.edu/directory/", "subItems":[]}
