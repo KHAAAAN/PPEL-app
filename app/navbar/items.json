@@ -2,9 +2,41 @@
 	"data": {
 		"homePath" :"https://vcea.wsu.edu/",
 		"mainItems":[
-			{"header": "About the College", "subItems":[{"header": "Office of the Dean", "href":"https://vcea.wsu.edu/office-of-the-dean/"}, {"header": "Executive Leadership Board", "href":"https://vcea.wsu.edu/executive-leadership-board/"}, {"header": "Faculty Awards", "href":"https://vcea.wsu.edu/awards/"}, {"header": "Schools and Departments", "href":"https://vcea.wsu.edu/departments/"}]},
-			{"header" : "Academics", "subItems":[{"header": "Undergraduate Studies", "href":""}, {"header":"Graduate Studies", "hrf":""}]},
-			{"header" : "Research", "subItems":[]},
+			{"header": "About the College", "subItems":[
+				{"header": "Office of the Dean", "href":"https://vcea.wsu.edu/office-of-the-dean/"}, 
+				{"header": "Executive Leadership Board", "href":"https://vcea.wsu.edu/executive-leadership-board/"},
+			       	{"header": "Faculty Awards", "href":"https://vcea.wsu.edu/awards/"},
+			       	{"header": "Schools and Departments", "href":"https://vcea.wsu.edu/departments/"}
+				]
+			},
+			{"header" : "Academics", "subItems":[
+				{"header": "Undergraduate Studies", "subItems":[
+					{"header": "Overview", "href": "https://vcea.wsu.edu/undergraduatestudies/"},
+					{"header": "Fields of Study", "href": "https://vcea.wsu.edu/undergraduatestudies/fields-of-study/"},
+					{"header": "STARS Program", "href": "https://vcea.wsu.edu/stars/"}
+					]
+				},
+				{"header":"Graduate Studies", "subItems": [
+					{"header": "Overview", "href":"https://vcea.wsu.edu/graduatestudy/"},
+					{"header": "Graduate Programs", "href":"https://vcea.wsu.edu/graduatestudy/degree-programs/"},
+					{"header": "Fellowships", "href":"https://vcea.wsu.edu/graduatestudy/fellowships/"}
+					]
+				}
+				]
+			}
+			{"header" : "Research", "subItems":[
+				{"header": "Overview", "href":""},
+				{"header": "Centers, Institutes and Labs", "href":""},
+				{"header": "Undergraduate Research", "href":""},
+				{"header": "Advanced Materials", "href":""},
+				{"header": "Aerospace", "href":""},
+				{"header": "Air and Water Resources", "href":""},
+				{"header": "Energy Conversion and Catalysis", "href":""},
+				{"header": "Engineering for Health", "href":""},
+				{"header": "Smart Power Networks", "href":""},
+				{"header": "Sustainable Infrastructure", "href":""}
+				]
+			},
 			{"header" : "Learning Outside the Classroom", "subItems":[]},
 			{"header" : "Student Resources", "subItems":[]},
 			{"header" : "News and Events", "subItems":[]},
