@@ -4,7 +4,7 @@
 			</a>
 <ul *ngIf="subItems?.length > 0 && expanded === true">
 	<li *ngFor="#subItem of subItems">
-		<navbar-item [header]="subItem.header" [subItems]="subItem.subItems">
+		<navbar-item [header]="subItem.header" [subItems]="subItem.subItems" [href]="subItem.href">
 		</navbar-item>
 	</li>
 </ul>
