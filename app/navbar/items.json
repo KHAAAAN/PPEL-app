@@ -38,12 +38,38 @@
 				]
 			},
 			{"header" : "Learning Outside the Classroom", "subItems":[
-
+				{"header": "Overview", "href":"https://vcea.wsu.edu/undergraduateexperience/"},
+				{"header": "Frank Innovation Zone", "href":"https://vcea.wsu.edu/fiz/"},
+				{"header": "Harold Frank Engineering Entrepreneurship Institute", "href":"https://vcea.wsu.edu/entrepreneurship/"},
+				{"header": "Interships and Cooperative Eduation", "subItems":[
+					{"header": "Overview", "href":"https://vcea.wsu.edu/ppel/"},
+					{"header": "Student Information", "href":"https://vcea.wsu.edu/ppel/students/"},
+					{"header": "Employer Information", "href":"https://vcea.wsu.edu/ppel/employer/"}
+					]
+				},
+				{"header": "Living-Learning Community", "href":"https://vcea.wsu.edu/living-learning-community/"},
+				{"header": "Mentorship Programs", "href":"https://vcea.wsu.edu/mentorships/"},
+				{"header": "Student Clubs and Professional Societies", "href":"https://vcea.wsu.edu/student-clubs-and-professional-societies/"},
+				{"header": "Study Abroad", "href":"https://vcea.wsu.edu/studyabroad/"}
 				]
 			},
-			{"header" : "Student Resources", "subItems":[]},
-			{"header" : "News and Events", "subItems":[]},
-			{"header" : "Contact Us", "href":"https://vcea.wsu.edu/directory/", "subItems":[]}
+			{"header" : "Student Resources", "subItems":[
+				{"header": "Overview", "href":"https://vcea.wsu.edu/studentsupport/"},
+				{"header": "Advising Gateway", "href":"https://vcea.wsu.edu/advising/"},
+				{"header": "Diversity Programs", "href":"https://vcea.wsu.edu/diversity/"},
+				{"header": "Scholarships", "href":"https://vcea.wsu.edu/scholarships/"},
+				{"header": "Summer Math for Incoming Students", "href":"https://vcea.wsu.edu/studentsupport/summer-math/"},
+				{"header": "Transfer Information", "href":"https://vcea.wsu.edu/transferstudents/"},
+				{"header": "Tutoring Center", "href":"https://vcea.wsu.edu/tutors/"}
+				]
+			},
+			{"header" : "News and Events", "subItems":[
+				{"header": "Calendar", "href":"https://vcea.wsu.edu/events/"},
+				{"header": "News", "href":"https://vcea.wsu.edu/news/"},
+				{"header": "Publications", "href":"https://vcea.wsu.edu/publications/"}
+				]
+			},
+			{"header" : "Contact Us", "href":"https://vcea.wsu.edu/directory/"}
 		],
 
 		"ghostItems":[
