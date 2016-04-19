@@ -20,7 +20,7 @@
 		</li>
 
 		<li *ngFor="#item of itemList; #i=index">
-			<navbar-item [header]="item.header" [subItems]="item.subItems">
+			<navbar-item [header]="item.header" [subItems]="item.subItems" [href]="item.href">
 			</navbar-item>
 		</li>
 
