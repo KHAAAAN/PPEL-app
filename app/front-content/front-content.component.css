@@ -8,9 +8,8 @@
 
 #cf {
 	position: relative;
-	width:990px;
-	height:400px;
-
+	width: 990px;
+	height: 450px;
 }
 
 #cf img {
@@ -26,6 +25,6 @@
 #frontContentMedia {
 	display: block;
     width: 100%;
-    height: 100%;
+    height: 90%;
     border: none;
 }

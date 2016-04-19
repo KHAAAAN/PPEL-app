@@ -1,0 +1,43 @@
+div {
+    display: inline;
+}
+
+#hiddenbar-component{
+    background-color: white;
+}
+
+#button {
+    position: fixed;
+    color: #b5babe;
+    font-size: 20px;
+    transform: scale(1.15,1);
+    display: inline-block;
+    overflow: hidden;
+    margin-left: 20px;
+    margin-top: 15px;
+}
+
+#top-bar {
+    background-color: white;
+    margin-left: 0%;
+    display: none;
+    height: 50px;
+    width: 1000px;
+}
+
+img {
+    position: fixed;
+    left: 50%;
+    margin-left: -160px;
+    padding-top: 15px;
+}
+
+@media screen and (max-width: 990px){
+    #hiddenbar-component{
+        padding-top: 100px;
+    }
+
+    #top-bar {
+        display: block;
+    }
+}

@@ -1,179 +1,242 @@
 #navbar-component{
-	width: 200px;
-	height: 500px;
-	padding-top: 30px;
-	padding-left: 355px;
+    width: 200px;
+    height: 500px;
+    padding-top: 30px;
+    padding-left: 0px;
+    display: inline-block;
+    background-color: white;
 }
 
 hr {
-	padding-left: 0px
-}	
+    padding-left: 0px
+}
 
 
 #ul1 {
-
     list-style-type: none;
-	width: 150px;
-	padding-left: 25px;
-	margin: 0;
+    width: 150px;
+    padding-left: 25px;
+    margin: 0;
 }
 
 #first{
-	color:#8d959a;
-	border-width: thin;
-	border-style: solid;
-	padding-top: 36px;
-	text-align: left;
-	width: 136px;
-	padding-left:15px;
-	border-width: 0 0 1px 0;
-	border-color: #e4e6e7;
-	padding-bottom: 15px;
+    color:#8d959a;
+    border-style: solid;
+    padding-top: 36px;
+    text-align: left;
+    width: 136px;
+    padding-left:15px;
+    border-width: 0 0 1px 0;
+    border-color: #e4e6e7;
+    padding-bottom: 15px;
 }
 
-#first a{	
-	color:#8d959a;
+#first a{
+    color:#8d959a;
 }
 
-#first a:hover{	
-	color: #981e32;
-	cursor: pointer;
+#first a:hover{
+    color: #981e32;
+    cursor: pointer;
 }
 
 #ul2{
-	margin: 0;
+    margin: 0;
     list-style-type: none;
-	text-align: center;
-	width: 150px;
-	padding-left: 25px;
+    text-align: center;
+    width: 150px;
+    padding-left: 25px;
 }
 
 #ul2 li {
-	border-width: thin;
-	border-style: solid;
-	text-align: left;
-	width: 150px;
-	border-width: 0 0 1px 0;
-	border-color: #e4e6e7;
-	padding-bottom: 9px;
-	padding-top: 9px;
+    border-style: solid;
+    text-align: left;
+    width: 150px;
+    border-width: 0 0 1px 0;
+    border-color: #e4e6e7;
+    padding-bottom: 9px;
+    padding-top: 9px;
 }
 
 #ul2 li a{
-	display: block;
-	font-family: 'Open Sans', 'Lucida Sans', sans-serif;
-	font-size: 12px;
-	color: #5E6A71;
-	width: 150px;
-	text-decoration: none;
-	cursor: pointer;
+    font-family: 'Open Sans', 'Lucida Sans', sans-serif;
+    font-size: 12px;
+    color: #5E6A71;
+    width: 100%;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 #ul2 li a:hover{
-	color: #981e32;
+    color: #981e32;
 }
 
 #ghost-list{
-	margin: 0;
-	margin-top: 30px;
+    margin: 0;
+    margin-top: 30px;
     list-style-type: none;
-	text-align: center;
-	width: 150px;
-	padding-left: 25px;
+    text-align: center;
+    width: 150px;
+    padding-left: 25px;
 }
 
 #ghost-list li {
-	text-align: left;
-	width: 150px;
-	font-size: 11.5px;
-	padding-bottom: 6px;
-	padding-top: 6px;
+    text-align: left;
+    width: 150px;
+    font-size: 11.5px;
+    padding-bottom: 6px;
+    padding-top: 6px;
 }
 
 #ghost-list a{
-	color: #b5babe;
-	text-decoration: none;
-	
+    color: #b5babe;
+    text-decoration: none;
+
 }
 
 #ghost-list a:hover{
-	color: #5E6A71;
+    color: #5E6A71;
 }
 
 #circle-list{
     list-style-type: none;
-	padding-left: 19px;
-	margin: 0;
-	margin-top: 27px;
-	margin-left: 24px;
-	padding-bottom: 10px;
-	letter-spacing: -10px;
-
-	border-width: thin;
-	border-style: solid;
-	width: 130px;
-	border-width: 0 0 1px 0;
-	border-color: #e4e6e7;
+    padding-left: 19px;
+    margin: 0;
+    margin-top: 27px;
+    margin-left: 24px;
+    padding-bottom: 10px;
+    letter-spacing: -10px;
+    border-style: solid;
+    width: 130px;
+    border-width: 0 0 1px 0;
+    border-color: #e4e6e7;
 
 }
 
 #circle-list a{
-	color: #d7dadb;
+    color: #d7dadb;
 }
 
 #circle-list .facebook:hover {
-	color:#3B5998;
+    color:#3B5998;
 }
 
 #circle-list .twitter:hover {
-	color:#55acee;
+    color:#55acee;
 }
 
 #circle-list .linkedin:hover{
-	color:#007bb6;
+    color:#007bb6;
 }
 
 #circle-list .youtube:hover{
-	color: #cc181e;
+    color: #cc181e;
 }
 
 #circle-list .fa-facebook{
-	margin-left: 1px;
+    margin-left: 1px;
 }
 
 #circle-list .fa-linkedin{
-	margin-left: 1px;
-	margin-top: -1px;
+    margin-left: 1px;
+    margin-top: -1px;
 }
 
 #circle-list .fa-twitter{
-	margin-left: 1px;
+    margin-left: 1px;
 }
 
 #circle-list .fa-youtube{
-	margin-left: 1px;
+    margin-left: 1px;
 }
 
 
 #access-list {
     list-style-type: none;
-	width: 157px;
-	padding-left: 25px;
-	margin: 0;
+    width: 157px;
+    padding-left: 25px;
+    margin: 0;
 }
 
 #access-list li a{
-	color: #B5BABE;
-	font-size: 8.63px;
-	text-decoration: none;
-	padding-right: 6px;
+    color: #B5BABE;
+    font-size: 8.63px;
+    text-decoration: none;
+    padding-right: 6px;
 }
 
 #acc-list li{
-	text-align: left;
+    text-align: left;
 }
 
 #access-list li a:hover{
-	color: #5E6A71;
+    color: #5E6A71;
 }
 
+#wsulogo {
+    padding-left: 25px;
+}
+
+#search {
+    font-size: 14px;
+}
+
+#envelope {
+    font-size: 14x;
+    margin-left: 34px
+}
+
+#share {
+    font-size: 14px;
+    margin-left: 34px;
+}
+
+#home {
+    padding-right: 4px;
+    font-size: 14px;
+}
+
+@media screen and (max-width: 990px){
+    #navbar-component{
+        overflow-y: scroll;
+        width: 298px;
+    }
+
+    #home {
+        font-size: 20px;
+    }
+
+    #search {
+        font-size: 20px;
+        margin-left: 15px
+
+    }
+
+    #envelope {
+        font-size: 20px;
+        margin-left: 55px
+    }
+
+    #share {
+        font-size: 20px;
+        margin-left: 55px;
+    }
+
+
+    #ul2 li {
+        width: 250px;
+    }
+
+    #first{
+        width: 236px;
+    }
+
+    #ul2 li a {
+        font-size: 20px;
+    }
+
+    #wsulogo {
+        display: none;
+    }
+
+}
