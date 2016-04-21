@@ -1,8 +1,8 @@
 import {Injectable} from 'angular2/core';
 import {Http, Response, URLSearchParams} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
-import {UserService} from './user.service';
-import {User} from './user';
+import {UserService} from '../user.service';
+import {User} from '../user';
 
 @Injectable()
 export class VideoService {

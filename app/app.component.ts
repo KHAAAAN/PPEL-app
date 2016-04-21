@@ -6,7 +6,7 @@ import {HomeComponent} from './home.component';
 import{LoginComponent} from './login.component';
 
 import {UserService} from './user.service';
-import {VideoService} from './video.service';
+import {VideoService} from './video/video.service';
 
 import {NavbarService} from './navbar/navbar.service';
 import {NavbarComponent} from './navbar/navbar.component';
