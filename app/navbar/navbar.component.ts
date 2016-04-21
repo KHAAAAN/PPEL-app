@@ -1,12 +1,12 @@
 import {Component, OnInit} from 'angular2/core';
 import {NavbarService} from './navbar.service';
-import {NavbarItem} from './navbar/navbar-item';
-import {LinkItem} from './navbar/link-item';
+import {NavbarItem} from './navbar-item';
+import {LinkItem} from './link-item';
 
 @Component({
     selector: 'navbar',
-    templateUrl: 'app/navbar.component.html',
-    styleUrls: ['app/navbar.component.css']
+    templateUrl: 'app/navbar/navbar.component.html',
+    styleUrls: ['app/navbar/navbar.component.css']
 })
 
 export class NavbarComponent {

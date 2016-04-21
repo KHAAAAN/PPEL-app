@@ -12,11 +12,11 @@ export class FrontContentService {
 		return this.http.get(this._locationUrl)
 		.map(res => <string[]> res.json().data)
 		.do(data => console.log(data))
-		.catch(this.handleError);
+		.catch(FrontContentService.handleError);
 	}
 
-	private handleError (error: Response) {
-		console.log("errors4days")
+	private static handleError (error: Response) {
+		console.log("errors4days");
 		console.error(error);
 		return Observable.throw(error.json().error || 'Server error');
 	}

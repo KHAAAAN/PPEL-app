@@ -52,8 +52,7 @@ export class TabContent implements OnInit {
 					if(i == 0){
 						this.files[i].active = true;
 					}
-			}	
-			
+				}	
 
 			},
 

@@ -8,9 +8,18 @@ import{LoginComponent} from './login.component';
 import {UserService} from './user.service';
 import {VideoService} from './video.service';
 
+import {NavbarService} from './navbar/navbar.service';
+import {NavbarComponent} from './navbar/navbar.component';
+
+import {Tab} from './tab/tab.component'
+import {Tabs} from './tabs/tabs.component'
+import {TabContent} from './tab/tab-content.component'
+import {TabContentService} from './tab/tab-content.service'
+
 @Component({
 	selector: 'PPEL-app',
 	templateUrl: 'app/app.component.html',
+	styleUrls: ['app/app.component.css'],
 
 	directives: [ROUTER_DIRECTIVES],
 	providers: [HTTP_PROVIDERS,
@@ -35,6 +44,8 @@ import {VideoService} from './video.service';
 ])
 
 export class AppComponent implements OnInit {
+	public title = 'PPEL';
+
 	ngOnInit(){
 	}
 }
