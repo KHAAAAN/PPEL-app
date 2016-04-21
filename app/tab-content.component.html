@@ -27,7 +27,7 @@
 
 			<ready [index]="i"></ready>
 			<div *ngIf="getCanSave(i)" style="margin-top:5px; width:300px; text-align:center">
-				<button (click)="saveVideoAnswer(i)" class="btn btn-md btn-primary">
+				<button (click)="saveVideoAnswer(i, data.path, data.isPublic, data.questionID)" class="btn btn-md btn-primary">
 					<i class="fa fa-save">
 					</i>
 				</button>

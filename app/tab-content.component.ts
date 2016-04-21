@@ -83,9 +83,19 @@ export class TabContent implements OnInit {
 
 	}
 
-	saveVideoAnswer(index){
+
+	saveVideoAnswer(index, path, isPublic, questionID){
+		var base = this.getBase(path);
 		console.log("saving..");
-		this._videoService.testSave(index);
+		this._videoService.testSave(index, base, isPublic, questionID);
+	}
+
+	private getBase(path){
+		var l = path.split("/");
+		var x = l[l.length - 1];
+		var y = x.substring(0, x.indexOf('.'));
+
+		return y;
 	}
 
 	ngOnInit(){

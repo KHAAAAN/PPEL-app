@@ -33,20 +33,21 @@ export class VideoService {
 
 
 	//TODO: MAKE SURE blob.name is unique to the user's vidoes later!!!
-	saveRecording(blob, isPublic, questionID){
+	saveRecording(fname, isPublic, questionID){
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('id', this.userModel.id);
-		params.set('videoName', blob.name);
-		params.set('isPublic', "1");
+		params.set('fname', fname);
+		params.set('isPublic', "0");
 		params.set('questionID', questionID);
 
-		return this.http.get(this._locationUrls[0], {search: params})
-		.map(res => <number>res.json().data)
+		return this.http.get("http://localhost:3000/test_save", {search: params})
+		//.map(() => )
 		.do(res => console.log("VideoService.saveRecording(): success"))
 		.catch(this.handleError);
 	}
 
-	testSave(index){
+	testSave(index, fname, isPublic, questionID){
+			
 		console.log("testSave");
 		var xhr = new XMLHttpRequest();
 		//TODO: in firefox, take out the .video
@@ -54,7 +55,8 @@ export class VideoService {
 
 		var formData = new FormData();
 		//formData.append("blob", blob, blob.name);
-		formData.append('fname', 'test.webm');
+		formData.append('fname', fname);
+		formData.append('id', this.userModel.id);
 		formData.append('file', blob);
 
 		xhr.open("POST", "http://localhost:3001/upload", true);
@@ -64,6 +66,10 @@ export class VideoService {
 		//xhr.setRequestHeader("Content-type", "multipart/form-data");
 		
 		xhr.send(formData);
+
+		//now save the Recording in database
+		this.saveRecording(fname, isPublic, questionID)
+		.subscribe();
 		
 	}
 

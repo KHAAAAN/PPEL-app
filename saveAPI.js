@@ -7,8 +7,19 @@ var multer = require('multer');
 var express = require('express');
 var app = express();
 var http = require('http').Server(app);
-var upload = multer({ dest: 'uploads/' });
 var jsonParser = bodyParser.json();
+
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'app/videos/' + req.body.id + '/')
+    },
+    filename: function (req, file, cb) {
+		//TODO parse mimetype for extension
+        cb(null, req.body.fname + ".webm")
+  }
+});
+
+var upload = multer({ storage: storage });
 
 app.use(jsonParser);
 app.use(cors());
@@ -18,7 +29,8 @@ app.get('/', function(req, res, next) {
 });
 
 app.post('/upload', upload.single('file'), function (req, res) {
-	//console.log(req);
+			
+	console.log(req.body);
 	console.log(req.file);
     //console.log(req.headers);
     //console.log(req.file.filename);
