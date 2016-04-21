@@ -1,5 +1,6 @@
 <html>
   <head>
+	<base href="/">
     <title>PPEL-app</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -13,7 +14,9 @@
     <script src="node_modules/rxjs/bundles/Rx.js"></script>
     <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
 
-	<script src="https://code.angularjs.org/2.0.0-beta.0/http.dev.js"></script>
+	<script src="node_modules/angular2/bundles/router.dev.js"></script>
+	<script src="node_modules/angular2/bundles/http.dev.js"></script>
+
 	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
 
 	<link href="//vjs.zencdn.net/5.8.0/video-js.css" rel="stylesheet">
@@ -21,6 +24,11 @@
 	<script src="//cdn.webrtc-experiment.com/RecordRTC.js"></script>
 	<script src="node_modules/videojs-record/src/js/videojs.record.js"></script>
 	<link href="node_modules/videojs-record/src/css/videojs.record.css" rel="stylesheet">
+
+	<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css"></script>
+	<script src="node_modules/jquery/dist/jquery.min.js"></script> <!-- this jquery is for bootstrapping only. -->
+	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+	<script src="node_modules/fine-uploader/fine-uploader/fine-uploader.js"></script>
 
     <!-- 2. Configure SystemJS -->
     <script>

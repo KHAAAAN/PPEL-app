@@ -1,13 +1,15 @@
 import {Component, OnInit} from 'angular2/core';
-import {HTTP_PROVIDERS, Http} from 'angular2/http';
+import {HTTP_PROVIDERS} from 'angular2/http';
+import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, Router, RouteConfig} from 'angular2/router';
 
-import {FrontContentComponent} from './front-content/front-content.component';
-import {FrontContentService} from './front-content/front-content.service';
+import {HomeComponent} from './home.component';
+import{LoginComponent} from './login.component';
+
+import {UserService} from './user.service';
+import {VideoService} from './video/video.service';
 
 import {NavbarService} from './navbar/navbar.service';
 import {NavbarComponent} from './navbar/navbar.component';
-
-import {HiddenNavbarComponent} from './hidden_navbar/hidden-navbar.component'
 
 import {Tab} from './tab/tab.component'
 import {Tabs} from './tabs/tabs.component'
@@ -18,11 +20,28 @@ import {TabContentService} from './tab/tab-content.service'
 @Component({
 	selector: 'PPEL-app',
 	templateUrl: 'app/app.component.html',
-	styleUrls: ['app/app.component.css'],
 
-	directives: [FrontContentComponent, NavbarComponent, HiddenNavbarComponent, TabContent],
-	providers: [HTTP_PROVIDERS, FrontContentService, TabContentService, NavbarService]
+	directives: [ROUTER_DIRECTIVES],
+	providers: [HTTP_PROVIDERS,
+				ROUTER_PROVIDERS,
+				UserService,
+				VideoService
+			   ]
 })
+
+@RouteConfig([
+	{
+		path: '/login',
+	   	name: 'Login',
+		component: LoginComponent,
+		useAsDefault: true
+	},
+	{
+		path: '/home',
+		name: 'Home',
+		component: HomeComponent
+	}
+])
 
 export class AppComponent implements OnInit {
 	public title = 'PPEL';

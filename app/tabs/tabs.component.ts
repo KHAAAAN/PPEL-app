@@ -9,14 +9,16 @@ import { Tab } from '../tab/tab.component';
 
 export class Tabs implements AfterContentInit {
   @ContentChildren(Tab) tabs: QueryList<Tab>;
+
   // contentChildren are set, this allows us to wait for ContentChildren
   // to load the tabs QueryList
   ngAfterContentInit() {
+
     // get all active tabs
     let activeTabs = this.tabs.filter((tab)=>tab.active);
     // if there is no active tab set, activate the first
     if(activeTabs.length === 0) {
-      this.selectTab(this.tabs.first);
+      //this.selectTab(this.tabs.first);
     }
   }
 
@@ -26,6 +28,7 @@ export class Tabs implements AfterContentInit {
     // activate the clicked tab
     tab.active = true;
   }
+
 
 }
 
