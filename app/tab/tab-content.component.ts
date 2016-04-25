@@ -24,6 +24,7 @@ export class Ready implements AfterViewInit{
 @Component({
 	selector: 'tab-content',
 	templateUrl: 'app/tab/tab-content.component.html',
+	styleUrls: ['app/tab/tab-content.component.css'],
 	directives: [Tab, Tabs, Ready]
 })
 
@@ -40,11 +41,11 @@ export class TabContent implements OnInit {
 	getContent() {
 		this._tabContentService.getTabContent()
 			.subscribe( pages => {
-			
+
 			var i: number;
 			for(i = 0; i < pages.length; ++i){
-					this.files[i] = { 
-						title: pages[i].Title, 
+					this.files[i] = {
+						title: pages[i].Title,
 						content: pages[i].Content
 					}
 
@@ -52,14 +53,14 @@ export class TabContent implements OnInit {
 					if(i == 0){
 						this.files[i].active = true;
 					}
-				}	
+				}
 
 			},
 
 			error => this.errorMessage = <any>error
 			);
 
-				   
+
 	}
 
 	getPublicVideos(){
@@ -67,12 +68,12 @@ export class TabContent implements OnInit {
 		.subscribe(res=>{
 			for(var i = 0; i < res.length; i++){
 				this.videoData.push(res[i]);
-				
+
 				//make a recorder for this video in paralell
 				//this._videoService.makeRecorder(i);
 			}
-			
-		});	
+
+		});
 	}
 
 	getCanSave(index){
@@ -104,4 +105,3 @@ export class TabContent implements OnInit {
 
 
 }
-

@@ -1,6 +1,6 @@
-<ul class="nav-tabs" style="height: 50px;">
+<ul class="nav-tabs" >
 <li *ngFor="#tab of tabs"
-  (click)="selectTab(tab)" 
+  (click)="selectTab(tab)"
   [class.active] = "tab.active">
   <a>{{tab.title }}</a>
 </li>

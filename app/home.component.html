@@ -1,20 +1,43 @@
-<div id="navbar">
-	<navbar> </navbar>
+<div class="fluid folio mac-1188">
 
+	<span id="button" class="fa fa-bars" (click)="changeViewable()"></span>
+
+	<a id="top-bar" href="http://wsu.edu">
+		<img src="app/images/wsu-horizontal.svg">
+	</a>
+
+	<div *ngIf="viewable" id="hiddenbar">
+		<div id="hiddenbuf">
+		</div>
+		<hiddenbar ></hiddenbar>
 	</div>
 
-	<div id="front-main">
+	<div>
+		<div>
+			<div id="navbar">
+				<navbar></navbar>
+			</div>
+		</div>
 
-	<a id="voiland">VOILAND COLLEGE OF ENGINEERING AND ARCHITECTURE</a>
+		<div>
+			<div id="front-main">
+				<div id="voiland">
+					<a> VOILAND COLLEGE OF ENGINEERING AND ARCHITECTURE </a>
+				</div>
 
-	<div id="fc-title">
-		<a>Professional Practice and Experiential Learning</a>
-	</div>
+				<div id="fc-title">
+					<a>Professional Practice and Experiential Learning</a>
+				</div>
 
-	<front-content> </front-content>
+				<div id="iframs">
+					<front-content> </front-content>
+				</div>
 
-	<div id="tab-content-container" style="margin-top:30px">
-		<tab-content id="tab-content"></tab-content>
+				<div id="tab-content-container">
+					<tab-content></tab-content>
+				</div>
+				
+			</div>
+		</div>
 	</div>
 </div>
-

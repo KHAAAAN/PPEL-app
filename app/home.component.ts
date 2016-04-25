@@ -4,6 +4,7 @@ import {HTTP_PROVIDERS, Http} from 'angular2/http';
 import {FrontContentComponent} from './front-content/front-content.component';
 import {FrontContentService} from './front-content/front-content.service';
 
+import {HiddenNavbarComponent} from './hidden_navbar/hidden-navbar.component';
 import {NavbarService} from './navbar/navbar.service';
 import {NavbarComponent} from './navbar/navbar.component';
 
@@ -20,17 +21,27 @@ import {UserService} from './user.service';
 	templateUrl: 'app/home.component.html',
 	styleUrls: ['app/home.component.css'],
 
-	directives: [FrontContentComponent, NavbarComponent, TabContent],
+	directives: [FrontContentComponent, NavbarComponent, HiddenNavbarComponent, TabContent],
 	providers: [FrontContentService, TabContentService, NavbarService]
 })
 
 export class HomeComponent implements OnInit {
 	public userModel: User;
+	public viewable = false;
 
 	constructor(private _userService:UserService){}
 
 	ngOnInit(){
 		this.userModel = this._userService.getUserModel();
 		console.log(this.userModel);
+	}
+
+	changeViewable(){
+		if (this.viewable == true)
+		{
+			this.viewable = false;
+		}
+		else
+			this.viewable = true;
 	}
 }

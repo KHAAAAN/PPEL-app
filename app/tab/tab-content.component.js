@@ -109,6 +109,7 @@ System.register(['angular2/core', './tab-content.service', './tab.component', '.
                     core_1.Component({
                         selector: 'tab-content',
                         templateUrl: 'app/tab/tab-content.component.html',
+                        styleUrls: ['app/tab/tab-content.component.css'],
                         directives: [tab_component_1.Tab, tabs_component_1.Tabs, Ready]
                     }), 
                     __metadata('design:paramtypes', [tab_content_service_1.TabContentService, video_service_1.VideoService])

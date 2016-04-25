@@ -4,7 +4,7 @@
 
 	<tab *ngFor="#file of files"
 	active="{{file.active}}"
-   	tabTitle="{{file.title}}" 
+   	tabTitle="{{file.title}}"
 	content="{{file.content}}">
 	</tab>
 
@@ -18,7 +18,7 @@
 			</video>
 
 			<video style="margin-top:5px;" id="{{'record'+i}}" class="video-js vjs-default-skin" controls
-			preload="auto"	  
+			preload="auto"
 			width="640" height="264"
 			 data-setup='{
 			}'
@@ -38,7 +38,7 @@
 	</tab>
 
 	<!-- idk why this has to be here to work, will fix in future -->
-	<!--tab>	
+	<!--tab>
 	</tab-->
 	<!--uncomment above tab if you don't have an extra tab other than the ones in *ngFor-->
 

@@ -2,12 +2,14 @@
 	width: 200px;
 	height: 500px;
 	padding-top: 30px;
-	padding-left: 355px;
+	padding-left: 0px;
+	display: inline-block;
+	background-color: white;
 }
 
 hr {
 	padding-left: 0px
-}	
+}
 
 
 #ul1 {
@@ -31,11 +33,11 @@ hr {
 	padding-bottom: 15px;
 }
 
-#first a{	
+#first a{
 	color:#8d959a;
 }
 
-#first a:hover{	
+#first a:hover{
 	color: #981e32;
 	cursor: pointer;
 }
@@ -60,11 +62,11 @@ hr {
 }
 
 #ul2 li a{
-	display: block;
+
 	font-family: 'Open Sans', 'Lucida Sans', sans-serif;
 	font-size: 12px;
 	color: #5E6A71;
-	width: 150px;
+	width: 100%;
 	text-decoration: none;
 	cursor: pointer;
 }
@@ -93,7 +95,7 @@ hr {
 #ghost-list a{
 	color: #b5babe;
 	text-decoration: none;
-	
+
 }
 
 #ghost-list a:hover{
@@ -102,7 +104,7 @@ hr {
 
 #circle-list{
     list-style-type: none;
-	padding-left: 0px;
+	padding-left: 19px;
 	margin: 0;
 	margin-top: 27px;
 	margin-left: 24px;
@@ -177,3 +179,70 @@ hr {
 	color: #5E6A71;
 }
 
+#wsulogo {
+	padding-left: 25px;
+}
+
+#search {
+	font-size: 14px;
+}
+
+#envelope {
+	font-size: 14x;
+	margin-left: 34px
+}
+
+#share {
+	font-size: 14px;
+	margin-left: 34px;
+}
+
+#home {
+	padding-right: 4px;
+	font-size: 14px;
+}
+
+@media screen and (max-width: 990px){
+	#navbar-component{
+		overflow-y: scroll;
+		width: 298px;
+	}
+
+	#home {
+		font-size: 20px;
+	}
+
+	#search {
+		font-size: 20px;
+		margin-left: 15px
+
+	}
+
+	#envelope {
+		font-size: 20px;
+		margin-left: 55px
+	}
+
+	#share {
+		font-size: 20px;
+		margin-left: 55px;
+	}
+
+
+	#ul2 li {
+		width: 250px;
+	}
+
+	#first{
+		width: 236px;
+	}
+
+	#ul2 li a {
+		font-size: 20px;
+	}
+
+	#wsulogo {
+		display: none;
+	}
+
+}

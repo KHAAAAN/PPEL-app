@@ -2,4 +2,5 @@
   padding: 10 10px;
   border: 1px solid #DCDCDC;
   background-color: #ffffff;
+  overflow-wrap: break-word;
 }
