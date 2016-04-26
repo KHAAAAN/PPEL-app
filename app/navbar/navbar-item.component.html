@@ -1,11 +1,12 @@
+<span class="navbar-item-s">
 <a (click)="flip()" (mouseover)="hoverOn()" (mouseleave)="hoverOff()" [href]="checkForHref()">
 	{{header}}
 <i style="font-size:18px; float:right;" class="fa fa-angle-down" *ngIf="isHover" ></i>
 			</a>
 <ul *ngIf="subItems?.length > 0 && expanded === true">
 	<li *ngFor="#subItem of subItems">
-		<navbar-item [header]="subItem.header" [subItems]="subItem.subItems" [href]="subItem.href">
+		<navbar-item class="navbar-item" [header]="subItem.header" [subItems]="subItem.subItems" [href]="subItem.href">
 		</navbar-item>
 	</li>
 </ul>
-
+</span>
