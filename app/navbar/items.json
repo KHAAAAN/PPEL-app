@@ -2,12 +2,73 @@
 	"data": {
 		"homePath" :"https://vcea.wsu.edu/",
 		"mainItems":[
-			{"header": "About the College", "subItems":[{"header": "test"}]},
-			{"header" : "Academics", "subItems":[]},
-			{"header" : "Research", "subItems":[]},
-			{"header" : "Learning Outside the Classroom", "subItems":[]},
-			{"header" : "Student Resources", "subItems":[]},
-			{"header" : "News and Events", "subItems":[]},
+			{"header": "About the College", "subItems":[
+				{"header": "Office of the Dean", "href":"https://vcea.wsu.edu/office-of-the-dean/"}, 
+				{"header": "Executive Leadership Board", "href":"https://vcea.wsu.edu/executive-leadership-board/"},
+			       	{"header": "Faculty Awards", "href":"https://vcea.wsu.edu/awards/"},
+			       	{"header": "Schools and Departments", "href":"https://vcea.wsu.edu/departments/"}
+				]
+			},
+			{"header" : "Academics", "subItems":[
+				{"header": "Undergraduate Studies", "subItems":[
+					{"header": "Overview", "href": "https://vcea.wsu.edu/undergraduatestudies/"},
+					{"header": "Fields of Study", "href": "https://vcea.wsu.edu/undergraduatestudies/fields-of-study/"},
+					{"header": "STARS Program", "href": "https://vcea.wsu.edu/stars/"}
+					]
+				},
+				{"header":"Graduate Studies", "subItems": [
+					{"header": "Overview", "href":"https://vcea.wsu.edu/graduatestudy/"},
+					{"header": "Graduate Programs", "href":"https://vcea.wsu.edu/graduatestudy/degree-programs/"},
+					{"header": "Fellowships", "href":"https://vcea.wsu.edu/graduatestudy/fellowships/"}
+					]
+				}
+				]
+			},
+			{"header" : "Research", "subItems":[
+				{"header": "Overview", "href":"https://vcea.wsu.edu/research/"},
+				{"header": "Centers, Institutes and Labs", "href":"https://vcea.wsu.edu/research/research-centers/"},
+				{"header": "Undergraduate Research", "href":"https://vcea.wsu.edu/research/undergraduate-research/"},
+				{"header": "Advanced Materials", "href":"https://vcea.wsu.edu/research/advanced-materials/"},
+				{"header": "Aerospace", "href":"https://vcea.wsu.edu/aerospace/"},
+				{"header": "Air and Water Resources", "href":"https://vcea.wsu.edu/research/air-and-water-resources/"},
+				{"header": "Energy Conversion and Catalysis", "href":"https://vcea.wsu.edu/research/energy-conversion-and-catalysis/"},
+				{"header": "Engineering for Health", "href":"https://vcea.wsu.edu/research/engineering-for-health/"},
+				{"header": "Smart Power Networks", "href":"https://vcea.wsu.edu/research/smart-power-networks/"},
+				{"header": "Sustainable Infrastructure", "href":"https://vcea.wsu.edu/research/sustainable-infrastructure/"}
+				]
+			},
+			{"header" : "Learning Outside the Classroom", "subItems":[
+				{"header": "Overview", "href":"https://vcea.wsu.edu/undergraduateexperience/"},
+				{"header": "Frank Innovation Zone", "href":"https://vcea.wsu.edu/fiz/"},
+				{"header": "Harold Frank Engineering Entrepreneurship Institute", "href":"https://vcea.wsu.edu/entrepreneurship/"},
+				{"header": "Interships and Cooperative Eduation", "subItems":[
+					{"header": "Overview", "href":"https://vcea.wsu.edu/ppel/"},
+					{"header": "Student Information", "href":"https://vcea.wsu.edu/ppel/students/"},
+					{"header": "Employer Information", "href":"https://vcea.wsu.edu/ppel/employer/"}
+					]
+				},
+				{"header": "Living-Learning Community", "href":"https://vcea.wsu.edu/living-learning-community/"},
+				{"header": "Mentorship Programs", "href":"https://vcea.wsu.edu/mentorships/"},
+				{"header": "Student Clubs and Professional Societies", "href":"https://vcea.wsu.edu/student-clubs-and-professional-societies/"},
+				{"header": "Study Abroad", "href":"https://vcea.wsu.edu/studyabroad/"}
+				]
+			},
+			{"header" : "Student Resources", "subItems":[
+				{"header": "Overview", "href":"https://vcea.wsu.edu/studentsupport/"},
+				{"header": "Advising Gateway", "href":"https://vcea.wsu.edu/advising/"},
+				{"header": "Diversity Programs", "href":"https://vcea.wsu.edu/diversity/"},
+				{"header": "Scholarships", "href":"https://vcea.wsu.edu/scholarships/"},
+				{"header": "Summer Math for Incoming Students", "href":"https://vcea.wsu.edu/studentsupport/summer-math/"},
+				{"header": "Transfer Information", "href":"https://vcea.wsu.edu/transferstudents/"},
+				{"header": "Tutoring Center", "href":"https://vcea.wsu.edu/tutors/"}
+				]
+			},
+			{"header" : "News and Events", "subItems":[
+				{"header": "Calendar", "href":"https://vcea.wsu.edu/events/"},
+				{"header": "News", "href":"https://vcea.wsu.edu/news/"},
+				{"header": "Publications", "href":"https://vcea.wsu.edu/publications/"}
+				]
+			},
 			{"header" : "Contact Us", "href":"https://vcea.wsu.edu/directory/"}
 		],
 

@@ -1,7 +1,5 @@
 <div id="navbar-component">
-
-    <img id="wsulogo" src="app/images/wsu.svg">
-
+    <img src="app/images/wsu.svg" style="margin-left:25px;">
 
 	<ul id="ul1">
 		<li id="first">
@@ -22,11 +20,8 @@
 		</li>
 
 		<li *ngFor="#item of itemList; #i=index">
-		   	<a (mouseover)="hoverOn(item)" (mouseleave)="hoverOff(item)" [href]="checkForHref(item)">
-				{{item.header}}
-				<i style="font-size:18px; float:right;" class="fa fa-angle-down" *ngIf="item.isHover" ></i>
-			</a>
-
+			<navbar-item class="navbar-item" [header]="item.header" [subItems]="item.subItems" [href]="item.href">
+			</navbar-item>
 		</li>
 
     </ul>

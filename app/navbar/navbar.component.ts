@@ -1,11 +1,12 @@
 import {Component, OnInit} from 'angular2/core';
 import {NavbarService} from './navbar.service';
-import {NavbarItem} from './navbar-item';
 import {LinkItem} from './link-item';
+import {NavbarItem} from './navbar-item.component';
 
 @Component({
     selector: 'navbar',
     templateUrl: 'app/navbar/navbar.component.html',
+    directives: [NavbarItem],
     styleUrls: ['app/navbar/navbar.component.css']
 })
 
@@ -29,7 +30,7 @@ export class NavbarComponent {
 		this._navbarService.getItems ()
 		.subscribe(
 			data => {
-				this.homePath = data.homePath
+				this.homePath = data.homePath;
 				this.itemList = data.mainItems;
 				this.ghostList = data.ghostItems;
 				this.socialHref = data.socialHref;
@@ -41,13 +42,13 @@ export class NavbarComponent {
 	}
 
 	hoverOn(item){
-		if(item.subItems !== undefined){
+		if(item.subItems !== undefined && item.subItems.length > 0){
 			item.isHover = true;
 		}
 	}
 
 	hoverOff(item){
-		if(item.subItems !== undefined){
+		if(item.subItems !== undefined && item.subItems.length > 0){
 			item.isHover = false;
 		}
 	}
@@ -58,6 +59,12 @@ export class NavbarComponent {
 		}
 		else{
 			return item.href;
+		}
+	}
+
+	flip(item){
+		if(item.subItems !== undefined && item.subItems.length > 0){
+			item.expanded = !item.expanded;
 		}
 	}
 
