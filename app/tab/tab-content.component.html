@@ -17,6 +17,22 @@
 
 			</video>
 
+
+			<a (click)="getAnswers(data.questionID)"> test </a>
+			<div *ngIf="answervideoData?.length > 0">
+				<div *ngFor="#answer of answervideoData; #j=index">
+				<video id="{{'video'+j + 10}}" class="video-js vjs-default-skin" controls
+				 preload="auto" width="640" height="264"
+				 data-setup='{}'>
+				  <source [src]="answer.path" type="video/mp4">
+
+				</video>
+				</div>
+
+
+			</div>
+
+
 			<video style="margin-top:5px;" id="{{'record'+i}}" class="video-js vjs-default-skin" controls
 			preload="auto"
 			width="640" height="264"
@@ -25,14 +41,13 @@
 			 >
 			</video>
 
+
 			<ready [index]="i"></ready>
 			<div *ngIf="getCanSave(i)" style="margin-top:5px; width:300px; text-align:center">
 				<button (click)="saveVideoAnswer(i, data.path, data.isPublic, data.questionID)" class="btn btn-md btn-primary">
-					<i class="fa fa-save">
-					</i>
+					<i class="fa fa-save"></i>
 				</button>
 			</div>
-
 		</div>
 
 	</tab>

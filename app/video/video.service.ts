@@ -9,7 +9,7 @@ export class VideoService {
 	//constructor (private http: Http) {}
 	public userModel: User;
 
-	private _locationUrls = ['http://localhost:3000/public_video_QA', 'http://localhost:3000/private_video_QA'];
+	private _locationUrls = ['http://localhost:3000/public_video_QA', 'http://localhost:3000/private_video_QA', 'http://localhost:3000/video_answers'];
 
 	public players = [];
 	public canSave: boolean[];
@@ -28,6 +28,17 @@ export class VideoService {
 		return this.http.get(this._locationUrls[0], {search: params})
 		.map(res => res.json())
 		.do(res => console.log("VideoService.getPublicVideos(): success"))
+		.catch(this.handleError);
+	}
+
+	getYourAnswers(questionID){	
+		let params: URLSearchParams = new URLSearchParams();
+		params.set('id', this.userModel.id);
+		params.set('questionID', questionID);
+
+		return this.http.get(this._locationUrls[2], {search: params})
+		.map(res => res.json())
+		.do(res => console.log("VideoService.getAnswers(): success"))
 		.catch(this.handleError);
 	}
 

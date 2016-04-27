@@ -31,6 +31,7 @@ export class Ready implements AfterViewInit{
 export class TabContent implements OnInit {
 	public files = [];
 	public videoData = [];
+	public answervideoData = [];
 
 	public errorMessage: string;
 
@@ -76,13 +77,24 @@ export class TabContent implements OnInit {
 		});
 	}
 
+	getAnswers(questionID){
+		this._videoService.getYourAnswers(questionID)
+		.subscribe(res=>{
+			for(var i = 0; i < res.length; i++){
+				this.answervideoData.push(res[i]);
+			}
+
+		});
+	}
+
+
+
 	getCanSave(index){
 		var canSave = false;
 		canSave = this._videoService.canSave[index];
 		return canSave;
 
 	}
-
 
 	saveVideoAnswer(index, path, isPublic, questionID){
 		var base = this.getBase(path);
