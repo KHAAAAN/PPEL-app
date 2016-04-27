@@ -182,7 +182,7 @@ func publicVideoQAHandler(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 	fmt.Println(id)
 
 	//first look for public video Questions
-	rows, err := db.Query("SELECT questionId, path, isPublic, ts FROM VideoQuestions WHERE id IS NULL")
+	rows, err := db.Query("SELECT questionId, path, isPublic, ts, text FROM VideoQuestions WHERE id IS NULL")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -194,6 +194,7 @@ func publicVideoQAHandler(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 		Path       string `json:"path"`
 		IsPublic   int    `json:"isPublic"`
 		Ts         string `json:"ts"`
+		Text       string `json:"text"`
 	}
 
 	var videoQuestions []VideoQuestion
@@ -203,7 +204,7 @@ func publicVideoQAHandler(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 
 	for rows.Next() {
 		vq.Id = ""
-		if err := rows.Scan(&vq.QuestionId, &vq.Path, &vq.IsPublic, &vq.Ts); err != nil {
+		if err := rows.Scan(&vq.QuestionId, &vq.Path, &vq.IsPublic, &vq.Ts, &vq.Text); err != nil {
 			log.Fatal(err)
 		}
 
@@ -213,7 +214,7 @@ func publicVideoQAHandler(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 			vq.IsPublic = 0
 		}
 
-		fmt.Printf("vq.questionId = %d, vq.id = %d, vq.path = %s, vq.isPublic = %t, vq.ts = %s", vq.QuestionId, vq.Id, vq.Path, vq.IsPublic, vq.Ts)
+		fmt.Printf("vq.questionId = %d, vq.id = %d, vq.path = %s, vq.isPublic = %t, vq.ts = %s, vq.text = %s", vq.QuestionId, vq.Id, vq.Path, vq.IsPublic, vq.Ts, vq.Text)
 		videoQuestions = append(videoQuestions, vq)
 		exists = 1
 
