@@ -15,6 +15,8 @@
 			</select>
 
 			
+
+			//Loads the question	
 			<div *ngIf="selectedQuestion?.length > 0">
 			<video id="qvideo" class="video-js vjs-default-skin" controls
 			 preload="auto" width="640" height="264"
@@ -25,6 +27,7 @@
 			</video>
 			</div>
 
+			//Loads the answer video if there is one
 			<div *ngIf="answervideoData?.length > 0">
 				<div *ngFor="#answer of answervideoData; #j=index">
 				<video id="avideo" class="video-js vjs-default-skin" controls
@@ -36,8 +39,8 @@
 				</div>
 			</div>
 
+			//If there is no answer, loads a recorder
 			<div *ngIf="answervideoData?.length < 1 && selectedQuestion?.length >0">
-
 			<video style="margin-top:5px;" id="record1" class="video-js vjs-default-skin" controls
 			preload="auto"
 			width="640" height="264"
@@ -46,6 +49,7 @@
 			 >
 			</video>
 
+			//Save button for recorder
 			<ready [index]="1"></ready>
 			<div *ngIf="getCanSave('1')" style="margin-top:5px; width:300px; text-align:center">
 				<button (click)="saveVideoAnswer(1, selectedQuestion[0].path, selectedQuestion[0].isPublic, selectedQuestion[0].questionID)" class="btn btn-md btn-primary">
