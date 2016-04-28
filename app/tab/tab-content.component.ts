@@ -33,6 +33,8 @@ export class TabContent implements OnInit {
 	public videoData = [];
 	public answervideoData = [];
 
+	public selectedQuestion = [];
+
 	public errorMessage: string;
 
 	constructor(private _tabContentService: TabContentService,
@@ -75,6 +77,21 @@ export class TabContent implements OnInit {
 			}
 
 		});
+	}
+
+	getQuestion(questionID){
+		console.log("getQuestion");
+		for (var i = 0; i < this.videoData.length; i++){
+			console.log("QuestionID: " + questionID)
+			console.log(" video data q " + this.videoData[i].questionID)
+			if (questionID == this.videoData[i].questionID){
+
+				console.log("question found");
+				this.selectedQuestion[0] = this.videoData[i];
+				console.log("new question " + this.selectedQuestion[0].path);
+				break;
+			}
+		}
 	}
 
 	getAnswers(questionID){

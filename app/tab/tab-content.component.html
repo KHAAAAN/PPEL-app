@@ -8,7 +8,26 @@
 	content="{{file.content}}">
 	</tab>
 
-	<tab tabTitle="Videos"> 	<div *ngFor="#data of videoData; #i=index" style="margin-bottom:30px;">
+	<tab tabTitle="Videos"> 
+			<select (change)="getQuestion($event.target.value)" >
+				<option selected> Questions </option>
+				<option *ngFor="#question of videoData" [value]="question.questionID">{{question.text}}</option>
+			</select>
+
+			<div *ngIf="selectedQuestion?.length > 0">
+
+			<video id="qvideo" class="video-js vjs-default-skin" controls
+			 preload="auto" width="640" height="264"
+			 data-setup='{}'>
+
+			  <source [src]="selectedQuestion[0].path" type="video/mp4">
+
+			</video>
+
+			</div>
+
+			<!--
+			<div *ngFor="#data of videoData; #i=index" style="margin-bottom:30px;">
 			<video id="{{'video'+i}}" class="video-js vjs-default-skin" controls
 			 preload="auto" width="640" height="264"
 			 data-setup='{}'>
@@ -18,15 +37,17 @@
 			</video>
 
 
-			<a (click)="getAnswers(data.questionID)"> test </a>
+			<a (click)="getAnswers(data.questionID)"> Answer</a>
 			<div *ngIf="answervideoData?.length > 0">
 				<div *ngFor="#answer of answervideoData; #j=index">
+				<div *ngIf="answer.questionID === data.questionID">
 				<video id="{{'video'+j + 10}}" class="video-js vjs-default-skin" controls
 				 preload="auto" width="640" height="264"
 				 data-setup='{}'>
 				  <source [src]="answer.path" type="video/mp4">
 
 				</video>
+				</div>
 				</div>
 
 
@@ -49,6 +70,7 @@
 				</button>
 			</div>
 		</div>
+		-->
 
 	</tab>
 
