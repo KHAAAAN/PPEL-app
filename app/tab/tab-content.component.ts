@@ -79,36 +79,51 @@ export class TabContent implements OnInit {
 		});
 	}
 
+	//Gets a question based on the questionID
 	getQuestion(questionID){
 		console.log("getQuestion");
+
+
+		//Checks to make sure the videojs player is visible, if not, it will crash
 		if (this.selectedQuestion.length > 0){
 			var vid = videojs("qvideo");
 			console.log(vid);
 		}
 
+		//Loops through all avaliable videos and grabs the selected one
 		for (var i = 0; i < this.videoData.length; i++){
-			console.log("QuestionID: " + questionID)
-			console.log(" video data q " + this.videoData[i].questionID)
 			if (questionID == this.videoData[i].questionID){
-
-				console.log("question found");
+				//This wasnt chaning the source properly
 				this.selectedQuestion[0] = this.videoData[i];
+
+				//This properly changes the source of the videojs player
 				if (this.selectedQuestion.length > 0){
 					vid.src({"type":"video/mp4", "src":this.selectedQuestion[0].path});
-					vid.load();
 				}
-				console.log("new question " + this.selectedQuestion[0].path);
 				break;
 			}
 		}
+
+		//Get answers
+		this._videoService.getYourAnswers(questionID)
+			.subscribe(res=>{
+				if (res.length > 0){
+					this.answervideoData.push(res[0]);
+				}
+				else {
+					this.answervideoData = [];
+				}
+
+				console.log("ans vid data: " + this.answervideoData);
+			});
+
 	}
 
 	getAnswers(questionID){
 		this._videoService.getYourAnswers(questionID)
 		.subscribe(res=>{
 			for(var i = 0; i < res.length; i++){
-				this.answervideoData.push(res[i]);
-			}
+				this.answervideoData.push(res[i]); }
 
 		});
 	}

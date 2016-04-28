@@ -20,13 +20,39 @@
 			 preload="auto" width="640" height="264"
 			 data-setup='{}'>
 
-
 			  <source [src]="selectedQuestion[0].path" type="video/mp4">
-
 
 			</video>
 			</div>
 
+			<div *ngIf="answervideoData?.length > 0">
+				<div *ngFor="#answer of answervideoData; #j=index">
+				<video id="avideo" class="video-js vjs-default-skin" controls
+				 preload="auto" width="640" height="264"
+				 data-setup='{}'>
+				  <source [src]="answer.path" type="video/mp4">
+
+				</video>
+				</div>
+			</div>
+
+			<div *ngIf="answervideoData?.length < 1 && selectedQuestion?.length >0">
+
+			<video style="margin-top:5px;" id="record1" class="video-js vjs-default-skin" controls
+			preload="auto"
+			width="640" height="264"
+			 data-setup='{
+			}'
+			 >
+			</video>
+
+			<ready [index]="1"></ready>
+			<div *ngIf="getCanSave('1')" style="margin-top:5px; width:300px; text-align:center">
+				<button (click)="saveVideoAnswer(1, selectedQuestion[0].path, selectedQuestion[0].isPublic, selectedQuestion[0].questionID)" class="btn btn-md btn-primary">
+					<i class="fa fa-save"></i>
+				</button>
+			</div>
+		</div>
 
 
 			<!--
