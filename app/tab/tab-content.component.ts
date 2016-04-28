@@ -1,4 +1,4 @@
-import {Input, Component, OnInit, AfterViewInit} from 'angular2/core';
+import {Input, Component, OnInit, AfterViewInit, ViewChild} from 'angular2/core';
 import {Observable} from 'rxjs/Observable';
 import {TabContentService} from './tab-content.service';
 
@@ -81,6 +81,11 @@ export class TabContent implements OnInit {
 
 	getQuestion(questionID){
 		console.log("getQuestion");
+		if (this.selectedQuestion.length > 0){
+			var vid = videojs("qvideo");
+			console.log(vid);
+		}
+
 		for (var i = 0; i < this.videoData.length; i++){
 			console.log("QuestionID: " + questionID)
 			console.log(" video data q " + this.videoData[i].questionID)
@@ -88,6 +93,10 @@ export class TabContent implements OnInit {
 
 				console.log("question found");
 				this.selectedQuestion[0] = this.videoData[i];
+				if (this.selectedQuestion.length > 0){
+					vid.src({"type":"video/mp4", "src":this.selectedQuestion[0].path});
+					vid.load();
+				}
 				console.log("new question " + this.selectedQuestion[0].path);
 				break;
 			}

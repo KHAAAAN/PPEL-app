@@ -14,17 +14,20 @@
 				<option *ngFor="#question of videoData" [value]="question.questionID">{{question.text}}</option>
 			</select>
 
+			
 			<div *ngIf="selectedQuestion?.length > 0">
-
 			<video id="qvideo" class="video-js vjs-default-skin" controls
 			 preload="auto" width="640" height="264"
 			 data-setup='{}'>
 
+
 			  <source [src]="selectedQuestion[0].path" type="video/mp4">
 
-			</video>
 
+			</video>
 			</div>
+
+
 
 			<!--
 			<div *ngFor="#data of videoData; #i=index" style="margin-bottom:30px;">
