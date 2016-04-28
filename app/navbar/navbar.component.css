@@ -249,6 +249,10 @@ hr {
 	font-size: 14px;
 }
 
+#wsulogo {
+	padding-left: 25px;
+}
+
 @media screen and (max-width: 990px){
 	#navbar-component{
 		overflow-y: scroll;
