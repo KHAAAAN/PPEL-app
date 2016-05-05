@@ -84,7 +84,7 @@ export class TabContent implements OnInit {
 		console.log("getQuestion");
 
 
-		//Checks to make sure the videojs player is visible, if not, it will crash
+		//Checks to make sure the videojs player is visible, if not, it wont work
 		if (this.selectedQuestion.length > 0){
 			var vid = videojs("qvideo");
 			console.log(vid);
@@ -97,7 +97,7 @@ export class TabContent implements OnInit {
 				this.selectedQuestion[0] = this.videoData[i];
 
 				//This properly changes the source of the videojs player
-				if (this.selectedQuestion.length > 0){
+				if (this.selectedQuestion.length > 0 && vid){
 					vid.src({"type":"video/mp4", "src":this.selectedQuestion[0].path});
 				}
 				break;
@@ -109,6 +109,9 @@ export class TabContent implements OnInit {
 			.subscribe(res=>{
 				if (res.length > 0){
 					this.answervideoData.push(res[0]);
+					//Have to dispose to create new recorders
+					var rec = videojs("record1");
+					rec.dispose();
 				}
 				else {
 					this.answervideoData = [];
