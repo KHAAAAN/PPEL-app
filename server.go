@@ -258,7 +258,14 @@ func saveVideoHandler(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 }
 
 func deleteVideoHandler(w http.ResponseWriter, r *http.Request, db *sql.DB) {
+	fmt.Println("POST to delete_save acknowledged")
 
+	m := r.URL.Query()
+	questionID := m["questionID"][0]
+	id := 11346814
+
+	//Need to pass in user ID and use that instead of hardcoded
+	db.Exec("DELETE FROM VideoAnswers WHERE questionID=? AND id=?", questionID, id)
 }
 
 func refreshHandler(w http.ResponseWriter, r *http.Request) {
@@ -312,7 +319,8 @@ func main() {
 		saveVideoHandler(w, r, db)
 	})
 
-	http.HandleFunc("/delete_video", func(w http.ResponseWriter, r *http.Request) {
+	http.HandleFunc("/delete_videos", func(w http.ResponseWriter, r *http.Request) {
+		fmt.Println("go to delete handler")
 		deleteVideoHandler(w, r, db)
 	})
 

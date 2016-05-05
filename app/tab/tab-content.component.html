@@ -38,6 +38,15 @@
 
 				</video>
 				</div>
+			<!--Delete button for recorder-->
+			<div style="margin-top:5px; width:300px; text-align:center">
+				<button (click)="deleteVideoAnswer(1, selectedQuestion[0].questionID)" class="btn btn-md btn-primary">
+					<i class="fa fa-trash-o"></i>
+				</button>
+
+
+			</div>
+
 			</div>
 
 			<!--If there is no answer, loads a recorder-->
@@ -56,7 +65,10 @@
 				<button (click)="saveVideoAnswer(1, selectedQuestion[0].path, selectedQuestion[0].isPublic, selectedQuestion[0].questionID)" class="btn btn-md btn-primary">
 					<i class="fa fa-save"></i>
 				</button>
+
+
 			</div>
+
 		</div>
 
 

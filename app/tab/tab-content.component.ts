@@ -21,9 +21,7 @@ export class Ready implements AfterViewInit{
 	}
 }
 
-@Component({
-	selector: 'tab-content',
-	templateUrl: 'app/tab/tab-content.component.html',
+@Component({ selector: 'tab-content', templateUrl: 'app/tab/tab-content.component.html',
 	styleUrls: ['app/tab/tab-content.component.css'],
 	directives: [Tab, Tabs, Ready]
 })
@@ -143,8 +141,23 @@ export class TabContent implements OnInit {
 	saveVideoAnswer(index, path, isPublic, questionID){
 		var base = this.getBase(path);
 		console.log("saving..");
-		this._videoService.testSave(index, base, isPublic, questionID);
+		this._videoService.saveAnswer(index, base, isPublic, questionID);
 	}
+
+
+	getCanDelete(index){
+		var canDelete = false;
+		canDelete = this._videoService.canDelete[index];
+		return canDelete;
+	}
+
+	deleteVideoAnswer(index, questionID){
+		console.log("deleting..");
+		this.answervideoData = [];
+		this._videoService.deleteAnswer(index, questionID);
+	}
+
+
 
 	private getBase(path){
 		var l = path.split("/");

@@ -13,10 +13,12 @@ export class VideoService {
 
 	public players = [];
 	public canSave: boolean[];
+	public canDelete: boolean[];
 
 	constructor(private http : Http, private _userService: UserService){
 		this.userModel = _userService.getUserModel();	
 		this.canSave = [];
+		this.canDelete = [];
 		console.log("this.canSave = ", this.canSave);
 
 	}
@@ -57,12 +59,12 @@ export class VideoService {
 		.catch(this.handleError);
 	}
 
-	testSave(index, fname, isPublic, questionID){
+	saveAnswer(index, fname, isPublic, questionID){
 			
 		console.log("testSave");
 		var xhr = new XMLHttpRequest();
 		//TODO: in firefox, take out the .video
-		var blob = this.players[index].recordedData.video;
+		var blob = this.players[index].recordedData;
 
 		var formData = new FormData();
 		//formData.append("blob", blob, blob.name);
@@ -84,27 +86,19 @@ export class VideoService {
 		
 	}
 
-   /*testSave(index){
-		console.log("testSave");
-		var blob = this.players[index].recordedData.video;
+	//Need to pass in user ID
+	deleteAnswer(index, questionID){
+		console.log("index =", index);
+		console.log("questionID =", questionID);
+		let params: URLSearchParams = new URLSearchParams();
+		params.set('questionID', questionID);
 
-		var uploader = new qq.FineUploaderBasic({
-                debug: true,
-                request: {
-                    endpoint: 'http://localhost:3000/test_save'
-                },
-                validation: {
-                    allowedExtensions: ['mp4', 'webm', 'mp3', 'ogg', 'oga', 'ogg']
-                }
-		});
+		console.log("index pt 2=", index);
 
-		console.log(uploader);
-
-		//upload data to server
-		var filesList = [blob];
-		uploader.addFiles(filesList);
-
-	}*/
+		return this.http.get("http://localhost:3000/delete_videos", {search: params})
+		.do(res => console.log("VideoService.deleteAnswer(): success"))
+		.catch(this.handleError);
+	}
 
 	makeRecorder(index){
 		var _this = this;
@@ -128,11 +122,12 @@ export class VideoService {
 		{
 			console.log('device error:', player.deviceErrorCode);
 			_this.canSave[index] = false;
+			_this.canDelete[index] = false;
 		}); // user clicked the record button and started recording
 		player.on('startRecord', function()
 		{
 			console.log('started recording!');
-			_this.canSave[index] = false;
+			_this.canDelete[index] = false;
 		});
 		// user completed recording and stream is available
 		player.on('finishRecord', function()
@@ -141,6 +136,7 @@ export class VideoService {
 			// can be downloaded by the user, stored on server etc.
 			console.log('finished recording: ', player.recordedData);
 			_this.canSave[index] = true;
+			_this.canDelete[index] = true;
 		});
 
 		this.players[index] = player;
