@@ -145,12 +145,6 @@ export class TabContent implements OnInit {
 	}
 
 
-	getCanDelete(index){
-		var canDelete = false;
-		canDelete = this._videoService.canDelete[index];
-		return canDelete;
-	}
-
 	deleteVideoAnswer(index, questionID){
 		console.log("deleting..");
 		this.answervideoData = [];

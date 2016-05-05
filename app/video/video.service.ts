@@ -86,18 +86,20 @@ export class VideoService {
 		
 	}
 
-	//Need to pass in user ID
-	deleteAnswer(index, questionID){
-		console.log("index =", index);
-		console.log("questionID =", questionID);
+	deleteA(questionID){
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('questionID', questionID);
 
-		console.log("index pt 2=", index);
-
 		return this.http.get("http://localhost:3000/delete_videos", {search: params})
-		.do(res => console.log("VideoService.deleteAnswer(): success"))
+		.do(res => console.log("VideoService.deleteRecording(): success"))
 		.catch(this.handleError);
+	}
+
+
+	//Need to pass in user ID
+	deleteAnswer(index, questionID){
+		this.deleteA(questionID)
+		.subscribe();
 	}
 
 	makeRecorder(index){
