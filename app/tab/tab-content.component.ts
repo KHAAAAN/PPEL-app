@@ -1,4 +1,4 @@
-import {Input, Component, OnInit, AfterViewInit} from 'angular2/core';
+import {Input, Component, OnInit, AfterViewInit, ViewChild} from 'angular2/core';
 import {Observable} from 'rxjs/Observable';
 import {TabContentService} from './tab-content.service';
 
@@ -21,9 +21,7 @@ export class Ready implements AfterViewInit{
 	}
 }
 
-@Component({
-	selector: 'tab-content',
-	templateUrl: 'app/tab/tab-content.component.html',
+@Component({ selector: 'tab-content', templateUrl: 'app/tab/tab-content.component.html',
 	styleUrls: ['app/tab/tab-content.component.css'],
 	directives: [Tab, Tabs, Ready]
 })
@@ -31,6 +29,9 @@ export class Ready implements AfterViewInit{
 export class TabContent implements OnInit {
 	public files = [];
 	public videoData = [];
+	public answervideoData = [];
+
+	public selectedQuestion = [];
 
 	public errorMessage: string;
 
@@ -76,6 +77,60 @@ export class TabContent implements OnInit {
 		});
 	}
 
+	//Gets a question based on the questionID
+	getQuestion(questionID){
+		console.log("getQuestion");
+
+
+		//Checks to make sure the videojs player is visible, if not, it wont work
+		if (this.selectedQuestion.length > 0){
+			var vid = videojs("qvideo");
+			console.log(vid);
+		}
+
+		//Loops through all avaliable videos and grabs the selected one
+		for (var i = 0; i < this.videoData.length; i++){
+			if (questionID == this.videoData[i].questionID){
+				//This wasnt chaning the source properly
+				this.selectedQuestion[0] = this.videoData[i];
+
+				//This properly changes the source of the videojs player
+				if (this.selectedQuestion.length > 0 && vid){
+					vid.src({"type":"video/mp4", "src":this.selectedQuestion[0].path});
+				}
+				break;
+			}
+		}
+
+		//Get answers
+		this._videoService.getYourAnswers(questionID)
+			.subscribe(res=>{
+				if (res.length > 0){
+					this.answervideoData.push(res[0]);
+					//Have to dispose to create new recorders
+					var rec = videojs("record1");
+					rec.dispose();
+				}
+				else {
+					this.answervideoData = [];
+				}
+
+				console.log("ans vid data: " + this.answervideoData);
+			});
+
+	}
+
+	getAnswers(questionID){
+		this._videoService.getYourAnswers(questionID)
+		.subscribe(res=>{
+			for(var i = 0; i < res.length; i++){
+				this.answervideoData.push(res[i]); }
+
+		});
+	}
+
+
+
 	getCanSave(index){
 		var canSave = false;
 		canSave = this._videoService.canSave[index];
@@ -83,12 +138,20 @@ export class TabContent implements OnInit {
 
 	}
 
-
 	saveVideoAnswer(index, path, isPublic, questionID){
 		var base = this.getBase(path);
 		console.log("saving..");
-		this._videoService.testSave(index, base, isPublic, questionID);
+		this._videoService.saveAnswer(index, base, isPublic, questionID);
 	}
+
+
+	deleteVideoAnswer(index, questionID){
+		console.log("deleting..");
+		this.answervideoData = [];
+		this._videoService.deleteAnswer(index, questionID);
+	}
+
+
 
 	private getBase(path){
 		var l = path.split("/");
