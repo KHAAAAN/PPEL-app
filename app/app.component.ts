@@ -18,6 +18,8 @@ import {TabContentService} from './tab/tab-content.service'
 
 import {LoginService} from './login.service';
 
+declare var myip;
+
 @Component({
 	selector: 'PPEL-app',
 	templateUrl: 'app/app.component.html',
@@ -48,7 +50,6 @@ import {LoginService} from './login.service';
 
 export class AppComponent implements OnInit {
 	public title = 'PPEL';	
-	public pa_session_id: string;
 
 
 	constructor(private _userService: UserService, private _loginService: LoginService){
@@ -71,7 +72,18 @@ export class AppComponent implements OnInit {
 	}
 
 	public signIn(){
-		alert(this.getCookie('pasessionid'));
+	   
+		var pa_session_id = this.getCookie('pasessionid');
+
+		if(pa_session_id !== ""){
+			var xhr = new XMLHttpRequest();
+			xhr.open("GET", "https://secure.wsu.edu/login-server/auth-validate.asp?session_id="+ pa_session_id +"&client_address=" + myip, true);
+			xhr.send();
+			
+			alert(xhr.responseText);
+		}	
+	}
+
 		/*this._loginService.authenticate(this.id)
 		.subscribe(
 			res => {
@@ -87,9 +99,6 @@ export class AppComponent implements OnInit {
 				}
 			}	
 		);*/
-
-
-	}
 
 	ngOnInit(){
 	}
