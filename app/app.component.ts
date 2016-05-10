@@ -46,9 +46,26 @@ import {LoginService} from './login.service';
 	}
 ])
 
-export class AppComponent implements OnInit {
+export class AppComponent {
 	public title = 'PPEL';	
 
-	ngOnInit(){
+
+	constructor(private _loginService: LoginService, private _userService: UserService){
+		if(this._loginService.getCookie('pasessionid') !== ""){
+			this._loginService.wsuRequest()
+			.subscribe(res => {
+				var id = res.split("\n")[2].split(" ")[2];	
+				console.log("signIn(): id = " + id);
+				this._loginService.authenticate(id)
+				.subscribe(
+					res => {
+						if(res){	
+							this._userService.setUserModel(id, res.ts, res.admin);
+						}
+					}	
+				);
+					
+			});
+		}
 	}
 }

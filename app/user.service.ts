@@ -43,26 +43,8 @@ export class UserService {
 	constructor(private _loginService: LoginService){
 
 		this.user$ = new Observable(observer => {
-				 this._userObserver = observer;
+			 this._userObserver = observer;
 
-
-
-				if(this._loginService.getCookie('pasessionid') !== ""){
-					this._loginService.wsuRequest()
-					.subscribe(res => {
-						var id = res.split("\n")[2].split(" ")[2];	
-						console.log("signIn(): id = " + id);
-						this._loginService.authenticate(id)
-						.subscribe(
-							res => {
-								if(res){	
-									this.setUserModel(id, res.ts, res.admin);
-								}
-							}	
-						);
-							
-					});
-				}
 
 		}).share();
 		
