@@ -116,7 +116,7 @@ export class VideoService {
 		params.set('questionID', questionID);
 		params.set('id', this.userModel.id);
 
-		return this.http.get("http://localhost:3000/delete_videos", {search: params})
+		return this.http.get(this._locationUrl + "/delete_videos", {search: params})
 		.do(res => console.log("VideoService.deleteRecording(): success"))
 		.catch(this.handleError);
 	}
