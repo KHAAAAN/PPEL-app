@@ -47,11 +47,31 @@ import {LoginService} from './login.service';
 ])
 
 export class AppComponent implements OnInit {
-	public title = 'PPEL';
+	public title = 'PPEL';	
+	public pa_session_id: string;
 
-	constructor(private _userService: UserService, private _loginService: LoginService){}
+
+	constructor(private _userService: UserService, private _loginService: LoginService){
+		this.signIn();	
+	}
+
+	private getCookie(cname) {
+		var name = cname + "=";
+		var ca = document.cookie.split(';');
+		for(var i = 0; i <ca.length; i++) {
+			var c = ca[i];
+			while (c.charAt(0)==' ') {
+				c = c.substring(1);
+			}
+			if (c.indexOf(name) == 0) {
+				return c.substring(name.length,c.length);
+			}
+		}
+		return "";
+	}
 
 	public signIn(){
+		alert(this.getCookie('pasessionid'));
 		/*this._loginService.authenticate(this.id)
 		.subscribe(
 			res => {
