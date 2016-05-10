@@ -11,11 +11,13 @@ var jsonParser = bodyParser.json();
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
+		console.log("test");
+		console.log("req.body.id=" + req.body.id);
         cb(null, 'app/videos/' + req.body.id + '/')
     },
     filename: function (req, file, cb) {
 		//TODO parse mimetype for extension
-        cb(null, req.body.fname + ".webm")
+        cb(null, req.body.fname + ".webm");
   }
 });
 
@@ -30,8 +32,9 @@ app.get('/', function(req, res, next) {
 
 app.post('/upload', upload.single('file'), function (req, res) {
 			
+	console.log("saveAPI: post to /upload acknowledged");
 	console.log(req.body);
-	console.log(req.file);
+	//console.log(req.file);
     //console.log(req.headers);
     //console.log(req.file.filename);
 

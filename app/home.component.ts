@@ -22,7 +22,7 @@ import {UserService} from './user.service';
 	styleUrls: ['app/home.component.css'],
 
 	directives: [FrontContentComponent, NavbarComponent, HiddenNavbarComponent, TabContent],
-	providers: [FrontContentService, TabContentService, NavbarService]
+	providers: [FrontContentService, TabContentService, NavbarService, LoginService]
 })
 
 export class HomeComponent implements OnInit {
@@ -32,8 +32,8 @@ export class HomeComponent implements OnInit {
 	constructor(private _userService:UserService){}
 
 	ngOnInit(){
-		this.userModel = this._userService.getUserModel();
-		console.log(this.userModel);
+		/*this.userModel = this._userService.getUserModel();
+		console.log(this.userModel);*/
 	}
 
 	changeViewable(){

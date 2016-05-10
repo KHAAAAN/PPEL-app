@@ -9,7 +9,8 @@
 	</tab>
 
 	<tab tabTitle="Videos"> 
-			<select (change)="getQuestion($event.target.value)" >
+			<select (change)="getQuestion($event.target.value)"
+			(change)="getAnswers($event.target.value)" >
 				<option selected> Questions </option>
 				<option *ngFor="#question of videoData" [value]="question.questionID">{{question.text}}</option>
 			</select>
@@ -29,7 +30,7 @@
 
 
 			<!--loads the answer video if there is one-->
-			<div *ngIf="answervideoData?.length > 0">
+			<div *ngIf="getUser() != undefined && answervideoData?.length > 0">
 				<div *ngFor="#answer of answervideoData; #j=index">
 				<video id="avideo" class="video-js vjs-default-skin" controls
 				 preload="auto" width="640" height="264"
@@ -38,87 +39,47 @@
 
 				</video>
 				</div>
-			<!--Delete button for recorder-->
-			<div style="margin-top:5px; width:300px; text-align:center">
-				<button (click)="deleteVideoAnswer(1, selectedQuestion[0].questionID)" class="btn btn-md btn-primary">
-					<i class="fa fa-trash-o"></i>
-				</button>
+				<!--Delete button for recorder-->
+				<div *ngIf="getUser() != undefined" style="margin-top:5px; width:300px; text-align:center">
+					<button (click)="deleteVideoAnswer(1, selectedQuestion[0].questionID)" class="btn btn-md btn-primary">
+						<i class="fa fa-trash-o"></i>
+					</button>
 
 
-			</div>
+				</div>
 
 			</div>
 
 			<!--If there is no answer, loads a recorder-->
-			<div *ngIf="answervideoData?.length < 1 && selectedQuestion?.length >0">
-			<video style="margin-top:5px;" id="record1" class="video-js vjs-default-skin" controls
-			preload="auto"
-			width="640" height="264"
-			 data-setup='{
-			}'
-			 >
-			</video>
-
-			<!--Save button for recorder-->
-			<ready [index]="1"></ready>
-			<div *ngIf="getCanSave('1')" style="margin-top:5px; width:300px; text-align:center">
-				<button (click)="saveVideoAnswer(1, selectedQuestion[0].path, selectedQuestion[0].isPublic, selectedQuestion[0].questionID)" class="btn btn-md btn-primary">
-					<i class="fa fa-save"></i>
-				</button>
-
-
-			</div>
-
-		</div>
-
-
-			<!--
-			<div *ngFor="#data of videoData; #i=index" style="margin-bottom:30px;">
-			<video id="{{'video'+i}}" class="video-js vjs-default-skin" controls
-			 preload="auto" width="640" height="264"
-			 data-setup='{}'>
-
-			  <source [src]="data.path" type="video/mp4">
-
-			</video>
-
-
-			<a (click)="getAnswers(data.questionID)"> Answer</a>
-			<div *ngIf="answervideoData?.length > 0">
-				<div *ngFor="#answer of answervideoData; #j=index">
-				<div *ngIf="answer.questionID === data.questionID">
-				<video id="{{'video'+j + 10}}" class="video-js vjs-default-skin" controls
-				 preload="auto" width="640" height="264"
-				 data-setup='{}'>
-				  <source [src]="answer.path" type="video/mp4">
-
+			<div *ngIf="getUser() != undefined && answervideoData?.length < 1 && selectedQuestion?.length >0">
+				<video style="margin-top:5px;" id="record1" class="video-js vjs-default-skin" controls
+				preload="auto"
+				width="640" height="264"
+				 data-setup='{
+				}'
+				 >
 				</video>
-				</div>
-				</div>
 
+				<!--Save button for recorder-->
+				<ready [index]="1"></ready>
+				<div *ngIf="getUser() != undefined && getCanSave('1')" style="margin-top:5px; width:300px; text-align:center">
+					<button (click)="saveVideoAnswer(1, selectedQuestion[0].path, selectedQuestion[0].isPublic, selectedQuestion[0].questionID)" class="btn btn-md btn-primary">
+						<i class="fa fa-save"></i>
+					</button>
+				</div>
 
 			</div>
 
 
-			<video style="margin-top:5px;" id="{{'record'+i}}" class="video-js vjs-default-skin" controls
-			preload="auto"
-			width="640" height="264"
-			 data-setup='{
-			}'
-			 >
-			</video>
+		<div>
 
-
-			<ready [index]="i"></ready>
-			<div *ngIf="getCanSave(i)" style="margin-top:5px; width:300px; text-align:center">
-				<button (click)="saveVideoAnswer(i, data.path, data.isPublic, data.questionID)" class="btn btn-md btn-primary">
-					<i class="fa fa-save"></i>
-				</button>
-			</div>
+			<h1> You are currently not logged in.</h1>
+			<a href="https://secure.wsu.edu/login/fidlogin.aspx?dest=http://debianvm.eecs.wsu.edu:3000">Click here to login.</a>
 		</div>
-		-->
 
 	</tab>
+
+
 
 	<!-- idk why this has to be here to work, will fix in future -->
 	<!--tab>
@@ -126,3 +87,4 @@
 	<!--uncomment above tab if you don't have an extra tab other than the ones in *ngFor-->
 
 </tabs>
+

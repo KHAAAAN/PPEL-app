@@ -81,7 +81,7 @@ func loginHandler(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 	fmt.Println(id)
 
 	//now check if id exists in our database
-	rows, err := db.Query("SELECT ORD(admin) admin, email, ts FROM USER WHERE id=?", id)
+	rows, err := db.Query("SELECT ORD(admin) admin, ts FROM USER WHERE id=?", id)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -90,11 +90,10 @@ func loginHandler(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 	var exists int = 0
 
 	var admin int = 0
-	var email string
 	var ts string
 
 	for rows.Next() {
-		if err := rows.Scan(&admin, &email, &ts); err != nil {
+		if err := rows.Scan(&admin, &ts); err != nil {
 			log.Fatal(err)
 		}
 		if admin == 49 {
@@ -102,14 +101,13 @@ func loginHandler(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 		}
 
 		fmt.Printf("admin = %d, ", admin)
-		fmt.Printf("email = %s, ", email)
 		fmt.Printf("ts = %s", ts)
 		exists = 1
 	}
 
 	w.Header().Set("Content-Type", "application/json")
 	if exists == 1 {
-		fmt.Fprintf(w, "{\"data\" : { \"admin\" : %d, \"email\" : \"%s\", \"ts\" : \"%s\"} }", admin, email, ts)
+		fmt.Fprintf(w, "{\"data\" : { \"admin\" : %d, \"ts\" : \"%s\"} }", admin, ts)
 	} else {
 		fmt.Fprintf(w, "{\"data\" : 0}")
 	}
@@ -175,11 +173,12 @@ func videoAnswers(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 	}
 }
 
+//only handles public questions: *********FIX THE NAME***********
 func publicVideoQAHandler(w http.ResponseWriter, r *http.Request, db *sql.DB) {
-	m := r.URL.Query()
-	id := m["id"][0]
+	//m := r.URL.Query()
+	//id := m["id"][0]
 
-	fmt.Println(id)
+	//fmt.Println(id)
 
 	//first look for public video Questions
 	rows, err := db.Query("SELECT questionId, path, isPublic, ts, text FROM VideoQuestions WHERE id IS NULL")
@@ -261,8 +260,7 @@ func deleteVideoHandler(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 	fmt.Println("POST to delete_save acknowledged")
 
 	m := r.URL.Query()
-	questionID := m["questionID"][0]
-	id := 11346814
+	id, questionID := m["id"][0], m["questionID"][0]
 
 	//Need to pass in user ID and use that instead of hardcoded
 	db.Exec("DELETE FROM VideoAnswers WHERE questionID=? AND id=?", questionID, id)

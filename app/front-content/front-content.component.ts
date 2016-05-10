@@ -8,18 +8,14 @@ import {FrontContentService} from './front-content.service';
 	styleUrls: ['app/front-content/front-content.component.css']
 })
 
-export class FrontContentComponent{
+export class FrontContentComponent implements OnInit{
 	public images = [
 	];
 
 	public curIndex: number;
-
 	public curPicture: string;
-
 	public transSub;
-
 	public errorMessage: string;
-
 	private _totalPics: number;
 
 	transition(index: number){
@@ -59,7 +55,7 @@ export class FrontContentComponent{
 				this._totalPics = images.length;
 				for(var i = 0; i < this._totalPics; i++)
 				{
-					console.log(images[i]);
+					//console.log(images[i]);
 					this.images[i] = {};
 					this.images[i].picture = images[i];
 				}

@@ -3,7 +3,7 @@ import {HTTP_PROVIDERS} from 'angular2/http';
 import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, Router, RouteConfig} from 'angular2/router';
 
 import {HomeComponent} from './home.component';
-import{LoginComponent} from './login.component';
+import {LoginComponent} from './login.component';
 
 import {UserService} from './user.service';
 import {VideoService} from './video/video.service';
@@ -16,6 +16,7 @@ import {Tabs} from './tabs/tabs.component'
 import {TabContent} from './tab/tab-content.component'
 import {TabContentService} from './tab/tab-content.service'
 
+import {LoginService} from './login.service';
 
 @Component({
 	selector: 'PPEL-app',
@@ -30,21 +31,44 @@ import {TabContentService} from './tab/tab-content.service'
 })
 
 @RouteConfig([
-	{
+	/*{
 		path: '/login',
 	   	name: 'Login',
 		component: LoginComponent,
 		useAsDefault: true
-	},
+	},*/
 	{
 		path: '/home',
 		name: 'Home',
-		component: HomeComponent
+		component: HomeComponent,
+		useAsDefault: true
 	}
 ])
 
 export class AppComponent implements OnInit {
 	public title = 'PPEL';
+
+	constructor(private _userService: UserService, private _loginService: LoginService){}
+
+	public signIn(){
+		/*this._loginService.authenticate(this.id)
+		.subscribe(
+			res => {
+				if(res){	
+					console.log(this.id + " exists");
+
+					this._userService.setUserModel(this.id, res.email, res.ts, res.admin);
+					let link = ['Home'];
+					this._router.parent.navigate(link);
+				}
+				else{
+					console.log(this.id + " doesn't exist.");
+				}
+			}	
+		);*/
+
+
+	}
 
 	ngOnInit(){
 	}

@@ -24,10 +24,11 @@ export class VideoService {
 	}
 
 	getPublicVideos(){	
-		let params: URLSearchParams = new URLSearchParams();
-		params.set('id', this.userModel.id);
-
-		return this.http.get(this._locationUrls[0], {search: params})
+		//let params: URLSearchParams = new URLSearchParams();
+		//params.set('id', this.userModel.id);
+		//return this.http.get(this._locationUrls[0], {search: params})
+		
+		return this.http.get(this._locationUrls[0])
 		.map(res => res.json())
 		.do(res => console.log("VideoService.getPublicVideos(): success"))
 		.catch(this.handleError);
@@ -64,10 +65,15 @@ export class VideoService {
 		console.log("testSave");
 		var xhr = new XMLHttpRequest();
 		//TODO: in firefox, take out the .video
-		var blob = this.players[index].recordedData;
+		var blob = this.players[index].recordedData.video;
+		console.log(blob);
+		console.log(blob.video);
+		//var blob = this.players[index].recordedData;
 
 		var formData = new FormData();
 		//formData.append("blob", blob, blob.name);
+		
+		console.log(this.userModel);
 		formData.append('fname', fname);
 		formData.append('id', this.userModel.id);
 		formData.append('file', blob);
@@ -89,6 +95,7 @@ export class VideoService {
 	deleteA(questionID){
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('questionID', questionID);
+		params.set('id', this.userModel.id);
 
 		return this.http.get("http://localhost:3000/delete_videos", {search: params})
 		.do(res => console.log("VideoService.deleteRecording(): success"))

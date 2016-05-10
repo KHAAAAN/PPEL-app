@@ -16,32 +16,6 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `TextQuestions`
---
-
-DROP TABLE IF EXISTS `TextQuestions`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `TextQuestions` (
-  `id` char(8) NOT NULL,
-  `text` varchar(1000) NOT NULL,
-  `isPublic` tinyint(1) NOT NULL,
-  `ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  KEY `id` (`id`),
-  CONSTRAINT `TextQuestions_ibfk_1` FOREIGN KEY (`id`) REFERENCES `USER` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Dumping data for table `TextQuestions`
---
-
-LOCK TABLES `TextQuestions` WRITE;
-/*!40000 ALTER TABLE `TextQuestions` DISABLE KEYS */;
-/*!40000 ALTER TABLE `TextQuestions` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
 -- Table structure for table `USER`
 --
 
@@ -49,12 +23,10 @@ DROP TABLE IF EXISTS `USER`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `USER` (
-  `id` char(8) NOT NULL,
+  `id` varchar(128) NOT NULL DEFAULT '',
   `admin` tinyint(1) NOT NULL,
-  `email` varchar(64) NOT NULL,
   `ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `email` (`email`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -64,7 +36,7 @@ CREATE TABLE `USER` (
 
 LOCK TABLES `USER` WRITE;
 /*!40000 ALTER TABLE `USER` DISABLE KEYS */;
-INSERT INTO `USER` VALUES ('11346814',1,'junaid.khan@wsu.edu','2016-04-13 04:12:57');
+INSERT INTO `USER` VALUES ('junaid.khan',1,'2016-05-09 23:17:18');
 /*!40000 ALTER TABLE `USER` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -76,7 +48,7 @@ DROP TABLE IF EXISTS `VideoAnswers`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `VideoAnswers` (
-  `id` char(8) NOT NULL,
+  `id` varchar(128) DEFAULT NULL,
   `path` varchar(4096) NOT NULL,
   `isPublic` tinyint(1) NOT NULL,
   `ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
@@ -95,7 +67,7 @@ CREATE TABLE `VideoAnswers` (
 
 LOCK TABLES `VideoAnswers` WRITE;
 /*!40000 ALTER TABLE `VideoAnswers` DISABLE KEYS */;
-INSERT INTO `VideoAnswers` VALUES ('11346814','/app/videos/11346814/public1.mp4',0,'2016-04-13 21:27:06',1),('11346814','/app/videos/11346814/public2.mp4',0,'2016-04-13 21:28:15',2);
+INSERT INTO `VideoAnswers` VALUES ('junaid.khan','/app/videos/junaid.khan/public1.webm',0,'2016-05-10 02:09:24',1);
 /*!40000 ALTER TABLE `VideoAnswers` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -107,11 +79,12 @@ DROP TABLE IF EXISTS `VideoQuestions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `VideoQuestions` (
-  `id` char(8) DEFAULT NULL,
+  `id` varchar(128) DEFAULT NULL,
   `path` varchar(4096) NOT NULL,
   `isPublic` tinyint(1) NOT NULL DEFAULT '1',
   `ts` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `questionId` int(11) NOT NULL AUTO_INCREMENT,
+  `text` varchar(500) DEFAULT NULL,
   PRIMARY KEY (`questionId`),
   KEY `id` (`id`),
   CONSTRAINT `VideoQuestions_ibfk_1` FOREIGN KEY (`id`) REFERENCES `USER` (`id`)
@@ -124,7 +97,7 @@ CREATE TABLE `VideoQuestions` (
 
 LOCK TABLES `VideoQuestions` WRITE;
 /*!40000 ALTER TABLE `VideoQuestions` DISABLE KEYS */;
-INSERT INTO `VideoQuestions` VALUES (NULL,'/app/videos/public/public1.mp4',1,'2016-04-13 21:26:16',1),(NULL,'/app/videos/public/public2.mp4',1,'2016-04-13 21:27:35',2);
+INSERT INTO `VideoQuestions` VALUES (NULL,'/app/videos/public/public1.mp4',1,'2016-04-27 22:21:38',1,'What is a question?'),(NULL,'/app/videos/public/public2.mp4',1,'2016-04-27 22:21:52',2,'Is this a question?');
 /*!40000 ALTER TABLE `VideoQuestions` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -137,4 +110,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-04-13 23:26:38
+-- Dump completed on 2016-05-09 19:47:53

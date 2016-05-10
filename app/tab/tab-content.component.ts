@@ -7,6 +7,9 @@ import {Tabs} from '../tabs/tabs.component';
 
 import {VideoService} from '../video/video.service';
 
+import {User} from '../user';
+import {UserService} from '../user.service';
+
 @Component({
 	selector: 'ready',
 	template: ``
@@ -36,7 +39,12 @@ export class TabContent implements OnInit {
 	public errorMessage: string;
 
 	constructor(private _tabContentService: TabContentService,
-			   private _videoService: VideoService){
+			   private _videoService: VideoService,
+			   private _userService: UserService){
+	}
+
+	getUser(){
+		return this._userService.getUserModel();
 	}
 
 	getContent() {
@@ -103,7 +111,7 @@ export class TabContent implements OnInit {
 		}
 
 		//Get answers
-		this._videoService.getYourAnswers(questionID)
+		/*this._videoService.getYourAnswers(questionID)
 			.subscribe(res=>{
 				if (res.length > 0){
 					this.answervideoData.push(res[0]);
@@ -116,17 +124,27 @@ export class TabContent implements OnInit {
 				}
 
 				console.log("ans vid data: " + this.answervideoData);
-			});
+			});*/
 
 	}
 
 	getAnswers(questionID){
-		this._videoService.getYourAnswers(questionID)
-		.subscribe(res=>{
-			for(var i = 0; i < res.length; i++){
-				this.answervideoData.push(res[i]); }
+		if(this.getUser() != undefined){
+			this._videoService.getYourAnswers(questionID)
+				.subscribe(res=>{
+					if (res.length > 0){
+						this.answervideoData.push(res[0]);
+						//Have to dispose to create new recorders
+						var rec = videojs("record1");
+						rec.dispose();
+					}
+					else {
+						this.answervideoData = [];
+					}
 
-		});
+					console.log("ans vid data: " + this.answervideoData);
+				});
+		}
 	}
 
 
@@ -165,6 +183,5 @@ export class TabContent implements OnInit {
 		this.getContent();
 		this.getPublicVideos();
 	}
-
 
 }
