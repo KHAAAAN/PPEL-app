@@ -34,7 +34,7 @@ export class VideoService {
 
 		this._locationUrls = [this._locationUrl + '/public_video_QA',
 			this._locationUrl + '/private_video_QA', 
-			this._locationUrl + 'video_answers'
+			this._locationUrl + '/video_answers'
 		]
 
 	}
