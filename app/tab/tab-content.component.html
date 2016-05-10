@@ -30,7 +30,7 @@
 
 
 			<!--loads the answer video if there is one-->
-			<div *ngIf="getUser() != undefined && answervideoData?.length > 0">
+			<div *ngIf="userModel != undefined && answervideoData?.length > 0">
 				<div *ngFor="#answer of answervideoData; #j=index">
 				<video id="avideo" class="video-js vjs-default-skin" controls
 				 preload="auto" width="640" height="264"
@@ -40,7 +40,7 @@
 				</video>
 				</div>
 				<!--Delete button for recorder-->
-				<div *ngIf="getUser() != undefined" style="margin-top:5px; width:300px; text-align:center">
+				<div *ngIf="userModel != undefined" style="margin-top:5px; width:300px; text-align:center">
 					<button (click)="deleteVideoAnswer(1, selectedQuestion[0].questionID)" class="btn btn-md btn-primary">
 						<i class="fa fa-trash-o"></i>
 					</button>
@@ -51,7 +51,7 @@
 			</div>
 
 			<!--If there is no answer, loads a recorder-->
-			<div *ngIf="getUser() != undefined && answervideoData?.length < 1 && selectedQuestion?.length >0">
+			<div *ngIf="userModel != undefined && answervideoData?.length < 1 && selectedQuestion?.length >0">
 				<video style="margin-top:5px;" id="record1" class="video-js vjs-default-skin" controls
 				preload="auto"
 				width="640" height="264"
@@ -62,7 +62,7 @@
 
 				<!--Save button for recorder-->
 				<ready [index]="1"></ready>
-				<div *ngIf="getUser() != undefined && getCanSave('1')" style="margin-top:5px; width:300px; text-align:center">
+				<div *ngIf="userModel != undefined && getCanSave('1')" style="margin-top:5px; width:300px; text-align:center">
 					<button (click)="saveVideoAnswer(1, selectedQuestion[0].path, selectedQuestion[0].isPublic, selectedQuestion[0].questionID)" class="btn btn-md btn-primary">
 						<i class="fa fa-save"></i>
 					</button>
@@ -71,7 +71,7 @@
 			</div>
 
 
-		<div *ngIf="getUser() == undefined">
+		<div *ngIf="userModel == undefined">
 
 			<h1> You are currently not logged in.</h1>
 			<h1> But you may still view public question videos.</h1>

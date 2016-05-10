@@ -33,14 +33,27 @@ export class TabContent implements OnInit {
 	public files = [];
 	public videoData = [];
 	public answervideoData = [];
-
 	public selectedQuestion = [];
+
+	public userModel: User;
 
 	public errorMessage: string;
 
 	constructor(private _tabContentService: TabContentService,
 			   private _videoService: VideoService,
 			   private _userService: UserService){
+
+		//when ready to set this.userModel, it will do so
+		this._userService.user$.subscribe(userModel => { 
+			this.userModel = userModel[0];
+
+			console.log(this.userModel);
+
+
+		} );
+
+		//this is REALLY important
+		this._userService.loadUser();
 	}
 
 	getUser(){
@@ -146,8 +159,6 @@ export class TabContent implements OnInit {
 				});
 		}
 	}
-
-
 
 	getCanSave(index){
 		var canSave = false;

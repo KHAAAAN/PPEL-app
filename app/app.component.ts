@@ -41,64 +41,13 @@ import {LoginService} from './login.service';
 	{
 		path: '/home',
 		name: 'Home',
-		component: HomeComponent/*,
-		useAsDefault: true*/
+		component: HomeComponent,
+		useAsDefault: true
 	}
 ])
 
 export class AppComponent implements OnInit {
 	public title = 'PPEL';	
-
-
-	constructor(private _router: Router, private _userService: UserService, private _loginService: LoginService){
-		this.signIn();	
-	}
-
-	public signIn(){
-		if(this._loginService.getCookie('pasessionid') !== ""){
-			this._loginService.wsuRequest()
-			.subscribe(res => {
-					var id = res.split("\n")[2].split(" ")[2];	
-					console.log("signIn(): id = " + id);
-					this._loginService.authenticate(id)
-					.subscribe(
-						res => {
-							if(res){	
-								console.log(id + " exists");
-
-								this._userService.setUserModel(id, res.ts, res.admin);
-								let link = ['Home'];
-								this._router.navigate(link);
-							}
-							else{
-								console.log(id + " doesn't exist.");
-							}
-						}	
-					);
-					
-				});
-		}
-		else{
-			let link = ['Home'];
-			this._router.parent.navigate(link);
-		}
-	}
-
-		/*this._loginService.authenticate(this.id)
-		.subscribe(
-			res => {
-				if(res){	
-					console.log(this.id + " exists");
-
-					this._userService.setUserModel(this.id, res.email, res.ts, res.admin);
-					let link = ['Home'];
-					this._router.parent.navigate(link);
-				}
-				else{
-					console.log(this.id + " doesn't exist.");
-				}
-			}	
-		);*/
 
 	ngOnInit(){
 	}
