@@ -55,8 +55,13 @@ export class AppComponent implements OnInit {
 	}
 
 	public signIn(){
-		this._loginService.wsuRequest()
-		.subscribe(res => {console.log(res)});
+		if(this._loginService.getCookie('pasessionid') !== ""){
+			this._loginService.wsuRequest()
+			.subscribe(res => {
+					var id = res.split("\n")[2].split(" ")[2];	
+					console.log("signIn(): id = " + id);
+				});
+		}
 
 		/*var pa_session_id = this.getCookie('pasessionid');
 

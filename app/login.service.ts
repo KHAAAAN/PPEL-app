@@ -32,7 +32,7 @@ export class LoginService {
 		.catch(this.handleError);
 	}
 
-	private getCookie(cname) {
+	public getCookie(cname) {
 		var name = cname + "=";
 		var ca = document.cookie.split(';');
 		for(var i = 0; i <ca.length; i++) {
@@ -56,7 +56,8 @@ export class LoginService {
 		params.set('client_address', myip);
 
 		return this.http.get("https://secure.wsu.edu/login-server/auth-validate.asp", {search: params})
-		.map(res => res)
+		.map(res => res._body)
+		.do(str => console.log(str))
 		.catch(this.handleError);
 
 		/*var xhr = new XMLHttpRequest();
