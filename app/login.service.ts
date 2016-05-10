@@ -4,7 +4,9 @@ import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class LoginService {
-	constructor (private http: Http) {}
+	constructor (private http: Http) {
+	
+	}
 
 	private _locationUrl = 'http://localhost:3000/login_attempt';
 

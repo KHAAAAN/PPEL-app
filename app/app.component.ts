@@ -26,7 +26,8 @@ import {LoginService} from './login.service';
 	providers: [HTTP_PROVIDERS,
 				ROUTER_PROVIDERS,
 				UserService,
-				VideoService
+				VideoService,
+				LoginService
 			   ]
 })
 

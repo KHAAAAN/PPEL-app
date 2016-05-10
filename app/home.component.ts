@@ -22,7 +22,7 @@ import {UserService} from './user.service';
 	styleUrls: ['app/home.component.css'],
 
 	directives: [FrontContentComponent, NavbarComponent, HiddenNavbarComponent, TabContent],
-	providers: [FrontContentService, TabContentService, NavbarService, LoginService]
+	providers: [FrontContentService, TabContentService, NavbarService]
 })
 
 export class HomeComponent implements OnInit {
