@@ -6,7 +6,7 @@ import {Observable} from 'rxjs/Observable';
 export class FrontContentService {
 	constructor (private http: Http) {
 		//var publicIp =		
-		//this._locationUrl = 'http://debianvm.eecs.wsu.edu:3000/app/front-content/images.json';
+		this._locationUrl = 'http://debianvm.eecs.wsu.edu:3000/app/front-content/images.json';
 	}
 
 	//private _locationUrl = 'http://localhost:3000/app/front-content/images.json';
