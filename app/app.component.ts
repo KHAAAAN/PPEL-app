@@ -51,6 +51,7 @@ export class AppComponent {
 
 
 	constructor(private _loginService: LoginService, private _userService: UserService){
+		console.log(this._userService);
 		if(this._loginService.getCookie('pasessionid') !== ""){
 			this._loginService.wsuRequest()
 			.subscribe(res => {

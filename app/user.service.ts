@@ -27,8 +27,9 @@ export class UserService {
 			this.userModel.permissions["superUser"] = true;
 		}
 
-		this.loadUser();
-
+		if(this._userObserver != undefined){
+			this.loadUser();
+		}
 	}
 
 	loadUser(){
