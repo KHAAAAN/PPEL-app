@@ -2,6 +2,8 @@ import {Injectable} from 'angular2/core';
 import {Http, Response, URLSearchParams} from 'angular2/http';
 import {Observable} from 'rxjs/Observable';
 
+declare var myip;
+
 @Injectable()
 export class LoginService {
 	constructor (private http: Http) {
@@ -27,6 +29,32 @@ export class LoginService {
 		return this.http.get(this._locationUrl, {search: params})
 		.map(res => res.json().data)
 		.do(res => console.log("LoginService.authenticate(id): success"))
+		.catch(this.handleError);
+	}
+
+	private getCookie(cname) {
+		var name = cname + "=";
+		var ca = document.cookie.split(';');
+		for(var i = 0; i <ca.length; i++) {
+			var c = ca[i];
+			while (c.charAt(0)==' ') {
+				c = c.substring(1);
+			}
+			if (c.indexOf(name) == 0) {
+				return c.substring(name.length,c.length);
+			}
+		}
+		return "";
+	}
+
+	wsuRequest(){
+		var pa_session_id = this.getCookie('pasessionid');
+		let params: URLSearchParams = new URLSearchParams();
+		params.set('session_id', pa_session_id);
+		params.set('client_address', myip);
+
+		return this.http.get(this._locationUrl, {search: params})
+		.map(res => res)
 		.catch(this.handleError);
 	}
 

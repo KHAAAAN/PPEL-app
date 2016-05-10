@@ -71,9 +71,13 @@ export class AppComponent implements OnInit {
 		return "";
 	}
 
+	public text: string;
+
 	public signIn(){
-	   
-		var pa_session_id = this.getCookie('pasessionid');
+		this._loginService.wsuRequest()
+		.subscribe(res => {alert(res)});
+
+		/*var pa_session_id = this.getCookie('pasessionid');
 
 		if(pa_session_id !== ""){
 			var xhr = new XMLHttpRequest();
@@ -81,7 +85,7 @@ export class AppComponent implements OnInit {
 			xhr.send();
 			
 			alert(xhr.responseText);
-		}	
+		}	*/
 	}
 
 		/*this._loginService.authenticate(this.id)
