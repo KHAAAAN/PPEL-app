@@ -47,7 +47,7 @@ export class VideoService {
 	}
 
 	getYourAnswers(questionID){	
-		this.userModel = _userService.getUserModel();	
+		this.userModel = this._userService.getUserModel();	
 
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('id', this.userModel.id);
@@ -62,7 +62,7 @@ export class VideoService {
 
 	//TODO: MAKE SURE blob.name is unique to the user's vidoes later!!!
 	saveRecording(fname, isPublic, questionID){
-		this.userModel = _userService.getUserModel();	
+		this.userModel = this._userService.getUserModel();	
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('id', this.userModel.id);
 		params.set('fname', fname);
@@ -76,7 +76,7 @@ export class VideoService {
 	}
 
 	saveAnswer(index, fname, isPublic, questionID){
-		this.userModel = _userService.getUserModel();	
+		this.userModel = this._userService.getUserModel();	
 			
 		console.log("testSave");
 		var xhr = new XMLHttpRequest();
@@ -109,7 +109,7 @@ export class VideoService {
 	}
 
 	deleteA(questionID){
-		this.userModel = _userService.getUserModel();	
+		this.userModel = this._userService.getUserModel();	
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('questionID', questionID);
 		params.set('id', this.userModel.id);
