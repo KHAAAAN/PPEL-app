@@ -4,9 +4,19 @@ import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class NavbarService {
-	constructor (private http: Http) {}
+	constructor (private http: Http) {
+		var hostName = window.location.hostname;
 
-	private _locationUrl = 'http://localhost:3000/app/navbar/items.json';
+		if(hostName === "debianvm.eecs.wsu.edu"){
+			this._locationUrl = 'http://debianvm.eecs.wsu.edu:3000';
+		}
+		else{
+			this._locationUrl = 'http://localhost:3000';
+		}
+		this._locationUrl += '/app/navbar/items.json';
+	}
+
+	private _locationUrl; // = 'http://localhost:3000/app/navbar/items.json';
 
 	getItems () {
 		return this.http.get(this._locationUrl)
