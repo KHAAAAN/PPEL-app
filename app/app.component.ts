@@ -3,7 +3,7 @@ import {HTTP_PROVIDERS} from 'angular2/http';
 import {ROUTER_PROVIDERS, ROUTER_DIRECTIVES, Router, RouteConfig} from 'angular2/router';
 
 import {HomeComponent} from './home.component';
-import {LoginComponent} from './login.component';
+//import {LoginComponent} from './login.component';
 
 import {UserService} from './user.service';
 import {VideoService} from './video/video.service';
@@ -60,18 +60,22 @@ export class AppComponent implements OnInit {
 			.subscribe(res => {
 					var id = res.split("\n")[2].split(" ")[2];	
 					console.log("signIn(): id = " + id);
+					this._loginService.authenticate(id)
+					.subscribe(
+						res => {
+							if(res){	
+								console.log(id + " exists");
+
+								this._userService.setUserModel(id, res.ts, res.admin);
+							}
+							else{
+								console.log(id + " doesn't exist.");
+							}
+						}	
+					);
+					
 				});
 		}
-
-		/*var pa_session_id = this.getCookie('pasessionid');
-
-		if(pa_session_id !== ""){
-			var xhr = new XMLHttpRequest();
-			xhr.open("GET", "https://secure.wsu.edu/login-server/auth-validate.asp?session_id="+ pa_session_id +"&client_address=" + myip, true);
-			xhr.send();
-			
-			alert(xhr.responseText);
-		}	*/
 	}
 
 		/*this._loginService.authenticate(this.id)

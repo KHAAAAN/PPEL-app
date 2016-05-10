@@ -9,10 +9,9 @@ export class UserService {
 
 	private userModel: User;
 
-	public setUserModel(id: string, email: string, ts: string, token: number){
+	public setUserModel(id: string, ts: string, token: number){
 		this.userModel = new User();
 		this.userModel.id = id;	
-		this.userModel.email = email;
 		this.userModel.ts = ts;
 
 		this.userModel.permissions["normalUser"] = true;
