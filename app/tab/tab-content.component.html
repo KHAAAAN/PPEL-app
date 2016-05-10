@@ -71,7 +71,7 @@
 			</div>
 
 
-		<div>
+		<div *ngIf="getUser() == undefined">
 
 			<h1> You are currently not logged in.</h1>
 			<h1> But you may still view public question videos.</h1>
