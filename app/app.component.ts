@@ -41,8 +41,8 @@ import {LoginService} from './login.service';
 	{
 		path: '/home',
 		name: 'Home',
-		component: HomeComponent,
-		useAsDefault: true
+		component: HomeComponent/*,
+		useAsDefault: true*/
 	}
 ])
 
@@ -50,7 +50,7 @@ export class AppComponent implements OnInit {
 	public title = 'PPEL';	
 
 
-	constructor(private _userService: UserService, private _loginService: LoginService){
+	constructor(private _router: Router, private _userService: UserService, private _loginService: LoginService){
 		this.signIn();	
 	}
 
@@ -67,6 +67,8 @@ export class AppComponent implements OnInit {
 								console.log(id + " exists");
 
 								this._userService.setUserModel(id, res.ts, res.admin);
+								let link = ['Home'];
+								this._router.parent.navigate(link);
 							}
 							else{
 								console.log(id + " doesn't exist.");
@@ -75,6 +77,10 @@ export class AppComponent implements OnInit {
 					);
 					
 				});
+		}
+		else{
+			let link = ['Home'];
+			this._router.parent.navigate(link);
 		}
 	}
 
