@@ -80,14 +80,34 @@ func loginHandler(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 
 	fmt.Println(id)
 
-	//now check if id exists in our database
+	//check if user exists in our database
+	rowsExists, errExists := db.Query("SELECT EXISTS(SELECT * FROM USER WHERE id=?)", id)
+	if errExists != nil{
+		log.Fatal(errExists)
+	}
+	defer rowsExists.Close()
+
+	var exists int = 0; // 0 if not exists, 1 otherwise
+
+	for rowsExists.Next() {
+		if errExists := rowsExists.Scan(&exists); errExists != nil {
+			log.Fatal(errExists)
+		}
+		fmt.Printf("exists = %d\n", exists)
+	}
+
+	//if doesn't exist
+	if exists == 0 {	
+		db.Exec("INSERT INTO USER(id, admin) VALUES(?, 0)", id)
+	}
+
+
+	//now get that data whether we inserted or old.
 	rows, err := db.Query("SELECT ORD(admin) admin, ts FROM USER WHERE id=?", id)
 	if err != nil {
 		log.Fatal(err)
 	}
 	defer rows.Close()
-
-	var exists int = 0
 
 	var admin int = 0
 	var ts string
@@ -102,15 +122,10 @@ func loginHandler(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 
 		fmt.Printf("admin = %d, ", admin)
 		fmt.Printf("ts = %s", ts)
-		exists = 1
 	}
 
 	w.Header().Set("Content-Type", "application/json")
-	if exists == 1 {
-		fmt.Fprintf(w, "{\"data\" : { \"admin\" : %d, \"ts\" : \"%s\"} }", admin, ts)
-	} else {
-		fmt.Fprintf(w, "{\"data\" : 0}")
-	}
+	fmt.Fprintf(w, "{\"data\" : { \"admin\" : %d, \"ts\" : \"%s\"} }", admin, ts)
 }
 
 func videoAnswers(w http.ResponseWriter, r *http.Request, db *sql.DB) {
@@ -283,6 +298,40 @@ func testSaveHandler(w http.ResponseWriter, r *http.Request, db *sql.DB) {
 	db.Exec("INSERT INTO VideoAnswers(id, path, isPublic, questionID) Values(?, ?, ?, ?)", id, path, isPublic, questionID)
 }
 
+//POST request
+func registerHandler(w http.ResponseWriter, r *http.Request, db *sql.DB){
+
+	fmt.Println("Request to register_attempt acknowledged.")
+
+	m := r.URL.Query()
+	id := m["id"][0]
+
+	//now check if user exists in our database
+	rows, err := db.Query("SELECT EXISTS(SELECT * FROM USER WHERE id=?)", id)
+	if err != nil{
+		log.Fatal(err)
+	}
+	defer rows.Close()
+	fmt.Println(rows)
+
+	var exists int = 0; // 0 if not exists, 1 otherwise
+
+	for rows.Next() {
+		if err := rows.Scan(&exists); err != nil {
+			log.Fatal(err)
+		}
+		fmt.Printf("exists = %d\n", exists)
+	}
+
+	//if doesn't exist
+	if exists == 0 {	
+		db.Exec("INSERT INTO USER(id, admin) VALUES(?, 0)", id)
+	}
+
+	w.Header().Set("Content-Type", "application/json")
+	fmt.Fprintf(w, "{\"data\" : \"%d\"}", exists)
+}
+
 func main() {
 
 	// Create the databse handle, confirm driver is present
@@ -324,6 +373,10 @@ func main() {
 
 	http.HandleFunc("/test_save", func(w http.ResponseWriter, r *http.Request) {
 		testSaveHandler(w, r, db)
+	})
+
+	http.HandleFunc("/register_attempt",  func(w http.ResponseWriter, r *http.Request){
+		registerHandler(w, r, db);
 	})
 
 	/*******All refresh/history*****/

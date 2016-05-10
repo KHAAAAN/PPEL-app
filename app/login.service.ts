@@ -16,7 +16,6 @@ export class LoginService {
 			this._locationUrl = 'http://localhost:3000';
 		}
 
-		this._locationUrl += "/login_attempt";	
 	}
 
 	//private _locationUrl = 'http://localhost:3000/login_attempt';
@@ -26,7 +25,7 @@ export class LoginService {
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('id', id);
 
-		return this.http.get(this._locationUrl, {search: params})
+		return this.http.get(this._locationUrl + "/login_attempt", {search: params})
 		.map(res => res.json().data)
 		.do(res => console.log("LoginService.authenticate(id): success"))
 		.catch(this.handleError);
@@ -67,7 +66,7 @@ export class LoginService {
 		
 		console.log(xhr.responseText);*/
 	}
-
+	
 	private handleError (error: Response) {
 		console.log("errors4days")
 		console.error(error);
