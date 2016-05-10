@@ -68,7 +68,7 @@ export class AppComponent implements OnInit {
 
 								this._userService.setUserModel(id, res.ts, res.admin);
 								let link = ['Home'];
-								this._router.parent.navigate(link);
+								this._router.navigate(link);
 							}
 							else{
 								console.log(id + " doesn't exist.");
