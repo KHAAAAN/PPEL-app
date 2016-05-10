@@ -49,6 +49,8 @@ export class LoginService {
 
 	wsuRequest(){
 		var pa_session_id = this.getCookie('pasessionid');
+		console.log(pa_session_id);
+		console.log(myip);
 		let params: URLSearchParams = new URLSearchParams();
 		params.set('session_id', pa_session_id);
 		params.set('client_address', myip);
@@ -56,6 +58,13 @@ export class LoginService {
 		return this.http.get("https://secure.wsu.edu/login-server/auth-validate.asp", {search: params})
 		.map(res => res)
 		.catch(this.handleError);
+
+		/*var xhr = new XMLHttpRequest();
+
+		xhr.open("GET", "https://secure.wsu.edu/login-server/auth-validate.asp?session_id="+ pa_session_id +"&client_address=" + myip, true);
+		xhr.send();
+		
+		console.log(xhr.responseText);*/
 	}
 
 	private handleError (error: Response) {

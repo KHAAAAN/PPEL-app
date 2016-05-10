@@ -18,8 +18,6 @@ import {TabContentService} from './tab/tab-content.service'
 
 import {LoginService} from './login.service';
 
-declare var myip;
-
 @Component({
 	selector: 'PPEL-app',
 	templateUrl: 'app/app.component.html',
@@ -56,26 +54,9 @@ export class AppComponent implements OnInit {
 		this.signIn();	
 	}
 
-	private getCookie(cname) {
-		var name = cname + "=";
-		var ca = document.cookie.split(';');
-		for(var i = 0; i <ca.length; i++) {
-			var c = ca[i];
-			while (c.charAt(0)==' ') {
-				c = c.substring(1);
-			}
-			if (c.indexOf(name) == 0) {
-				return c.substring(name.length,c.length);
-			}
-		}
-		return "";
-	}
-
-	public text: string;
-
 	public signIn(){
 		this._loginService.wsuRequest()
-		.subscribe(res => {alert(res)});
+		.subscribe(res => {console.log(res)});
 
 		/*var pa_session_id = this.getCookie('pasessionid');
 
