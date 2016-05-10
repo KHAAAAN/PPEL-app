@@ -27,16 +27,16 @@ export class UserService {
 			this.userModel.permissions["superUser"] = true;
 		}
 
-		if(this._userObserver != undefined){
-			this.loadUser();
-		}
+		this.loadUser();
 	}
 
 	loadUser(){
 		this._dataStore.users = [this.userModel];
 
-		//push datastore.users into rx stream
-		this._userObserver.next(this._dataStore.users);
+		if(this._userObserver != undefined){
+			//push datastore.users into rx stream
+			this._userObserver.next(this._dataStore.users);
+		}
 	}
 
 	public getUserModel(){
