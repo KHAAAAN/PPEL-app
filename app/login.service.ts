@@ -5,10 +5,20 @@ import {Observable} from 'rxjs/Observable';
 @Injectable()
 export class LoginService {
 	constructor (private http: Http) {
-	
+		var hostName = window.location.hostname;
+
+		if(hostName === "debianvm.eecs.wsu.edu"){
+			this._locationUrl = 'http://debianvm.eecs.wsu.edu:3000';
+		}
+		else{
+			this._locationUrl = 'http://localhost:3000';
+		}
+
+		this._locationUrl += "/login_attempt";	
 	}
 
-	private _locationUrl = 'http://localhost:3000/login_attempt';
+	//private _locationUrl = 'http://localhost:3000/login_attempt';
+	private _locationUrl;
 
 	authenticate (id: string) {
 		let params: URLSearchParams = new URLSearchParams();

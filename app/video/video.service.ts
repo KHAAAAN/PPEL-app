@@ -6,10 +6,12 @@ import {User} from '../user';
 
 @Injectable()
 export class VideoService {
-	//constructor (private http: Http) {}
 	public userModel: User;
 
-	private _locationUrls = ['http://localhost:3000/public_video_QA', 'http://localhost:3000/private_video_QA', 'http://localhost:3000/video_answers'];
+	private _locationUrl;
+	private _locationUrls;
+
+	//private _locationUrls = ['http://localhost:3000/public_video_QA', 'http://localhost:3000/private_video_QA', 'http://localhost:3000/video_answers'];
 
 	public players = [];
 	public canSave: boolean[];
@@ -20,6 +22,20 @@ export class VideoService {
 		this.canSave = [];
 		this.canDelete = [];
 		console.log("this.canSave = ", this.canSave);
+
+		var hostName = window.location.hostname;
+
+		if(hostName === "debianvm.eecs.wsu.edu"){
+			this._locationUrl = 'http://debianvm.eecs.wsu.edu:3000';
+		}
+		else{
+			this._locationUrl = 'http://localhost:3000';
+		}
+
+		this._locationUrls = [this._locationUrl + '/public_video_QA',
+			this._locationUrl + '/private_video_QA', 
+			this._locationUrl + 'video_answers'
+		]
 
 	}
 

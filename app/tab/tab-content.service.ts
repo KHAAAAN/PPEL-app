@@ -4,9 +4,20 @@ import {Observable} from 'rxjs/Observable';
 
 @Injectable()
 export class TabContentService {
-	constructor (private http: Http) {}
+	constructor (private http: Http) {
+		var hostName = window.location.hostname;
 
-	private _locationUrl = 'http://localhost:3000/app/tabcontent';
+		if(hostName === "debianvm.eecs.wsu.edu"){
+			this._locationUrl = 'http://debianvm.eecs.wsu.edu:3000';
+		}
+		else{
+			this._locationUrl = 'http://localhost:3000';
+		}
+		this._locationUrl += '/app/tabcontent';
+	}
+
+	//private _locationUrl = 'http://localhost:3000/app/tabcontent';
+	private _locationUrl;
 
 	getTabContent() {
 		return this.http.get(this._locationUrl)

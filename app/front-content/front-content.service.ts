@@ -7,7 +7,9 @@ export class FrontContentService {
 	constructor (private http: Http) {
 		//var publicIp =		
 		var hostName = window.location.hostname;
+
 		console.log(hostName);
+
 		if(hostName === "debianvm.eecs.wsu.edu"){
 			this._locationUrl = 'http://debianvm.eecs.wsu.edu:3000/app/front-content/images.json';
 		}
@@ -18,7 +20,7 @@ export class FrontContentService {
 
 	private _locationUrl; 
 
-	getImages () {
+	getImages() {
 		return this.http.get(this._locationUrl)
 		.map(res => <string[]> res.json().data)
 		.do(data => console.log(data))
