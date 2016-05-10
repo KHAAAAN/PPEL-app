@@ -1,4 +1,4 @@
-import {Injectable, OnInit} from 'angular2/core';
+import {Injectable} from 'angular2/core';
 import {Observable} from 'rxjs/Observable';
 import {User} from './user';
 
@@ -45,6 +45,7 @@ export class UserService {
 	constructor(private _loginService: LoginService){
 
 		this.user$ = new Observable(observer => {
+			console.log(observer);
 			 this._userObserver = observer;
 
 
