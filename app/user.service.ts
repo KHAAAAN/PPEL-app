@@ -39,6 +39,17 @@ export class UserService {
 		}
 	}
 
+	unloadUser(){
+		this.userModel = null;
+		this._dataStore.users = [null];
+
+		//push datastore.users into rx stream
+		this._userObserver.next(this._dataStore.users);
+
+		//remove cookies
+		document.cookie = "pasessionid=; expires=Thu, 01 Jan 1970 00:00:00 UTC";
+	}
+
 	public getUserModel(){
 		return this.userModel;
 	}

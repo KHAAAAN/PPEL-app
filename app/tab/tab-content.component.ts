@@ -56,6 +56,10 @@ export class TabContent implements OnInit {
 		this._userService.loadUser();
 	}
 
+	logout(){
+		this._userService.unloadUser();
+	}
+
 	getUser(){
 		return this._userService.getUserModel();
 	}

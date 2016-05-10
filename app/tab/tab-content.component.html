@@ -78,6 +78,12 @@
 			<a href="https://secure.wsu.edu/login/fidlogin.aspx?dest=http://debianvm.eecs.wsu.edu:3000">Click here to login.</a>
 		</div>
 
+		<div *ngIf="userModel">
+			
+			<h1> You are signed in as {{userModel.id}} </h1>
+			<a (click)=logout() href>Click here to logout</a>			
+		</div>
+
 	</tab>
 
 
