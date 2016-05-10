@@ -53,7 +53,7 @@ export class LoginService {
 		params.set('session_id', pa_session_id);
 		params.set('client_address', myip);
 
-		return this.http.get(this._locationUrl, {search: params})
+		return this.http.get("https://secure.wsu.edu/login-server/auth-validate.asp", {search: params})
 		.map(res => res)
 		.catch(this.handleError);
 	}
