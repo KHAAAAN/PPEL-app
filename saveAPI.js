@@ -21,8 +21,8 @@ var storage = multer.diskStorage({
     destination: function (req, file, cb) {
 		console.log("req.body.id=" + req.body.id);
 
-		var dir = 'app/videos/' + req.body.id.trim('\n\r');
-		fs.mkdir(dir, err => cb(err, dir));
+		/*var dir = 'app/videos/' + req.body.id.trim('\n\r');
+		fs.mkdir(dir, err => cb(err, dir));*/
 
         cb(null, 'app/videos/' + req.body.id.trim('\n\r') + '/');
     },
