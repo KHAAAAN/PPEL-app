@@ -11,8 +11,10 @@ var jsonParser = bodyParser.json();
 
 var fs = require('fs');
 var https = require('https');
-var privateKey  = fs.readFileSync(__dirname + '/nginx.key', 'utf8');
-var certificate = fs.readFileSync(__dirname + '/nginx.crt', 'utf8');
+
+app.use('/', express.static(__dirname));
+var privateKey  = fs.readFileSync('nginx.key', 'utf8');
+var certificate = fs.readFileSync('nginx.crt', 'utf8');
 var credentials = {key: privateKey, cert: certificate};
 
 var storage = multer.diskStorage({
@@ -48,7 +50,7 @@ app.post('/upload', upload.single('file'), function (req, res) {
 });
 
 //Templating
-app.use(express.static(__dirname + '/public'));
+//app.use(express.static(__dirname + '/public'));
 
 //Server
 //var localPort = process.env.VCAP_APP_PORT || 3000;
