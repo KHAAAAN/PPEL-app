@@ -19,12 +19,12 @@ var credentials = {key: privateKey, cert: certificate};
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
-		console.log("test");
 		console.log("req.body.id=" + req.body.id);
-        cb(null, 'app/videos/' + req.body.id + '/')
+        cb(null, 'app/videos/' + req.body.id.trim('\n\r') + '/')
     },
     filename: function (req, file, cb) {
 		//TODO parse mimetype for extension
+        console.log("setting filename..");
         cb(null, req.body.fname + ".webm");
   }
 });
@@ -38,9 +38,8 @@ app.get('/', function(req, res, next) {
 	next();
 });
 
-app.post('/test', function (req, res){
-	console.log("request to test\n");
-	return res.end();
+app.post('/test', function(req, res){
+  console.log("test acknowledged\n");
 });
 
 app.post('/upload', upload.single('file'), function (req, res) {

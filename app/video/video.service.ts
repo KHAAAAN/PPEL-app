@@ -103,7 +103,7 @@ export class VideoService {
 			xhr.open("POST", "http://localhost:3001/upload", true);
 		}
 		//xhr.responseType = 'blob';
-		//xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
+		xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 		//xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
 		//xhr.setRequestHeader("Content-type", "multipart/form-data");
 		
