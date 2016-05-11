@@ -16,7 +16,6 @@ app.use('/', express.static(__dirname));
 var privateKey  = fs.readFileSync('nginx.key', 'utf8');
 var certificate = fs.readFileSync('nginx.crt', 'utf8');
 var credentials = {key: privateKey, cert: certificate};
-console.log(credentials);
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
@@ -39,6 +38,11 @@ app.get('/', function(req, res, next) {
 	next();
 });
 
+app.post('/test', function (req, res){
+	console.log("request to test\n");
+	return res.end();
+});
+
 app.post('/upload', upload.single('file'), function (req, res) {
 			
 	console.log("saveAPI: post to /upload acknowledged");
@@ -50,18 +54,7 @@ app.post('/upload', upload.single('file'), function (req, res) {
     return res.end();
 });
 
-//Templating
-//app.use(express.static(__dirname + '/public'));
-
-//Server
 //var localPort = process.env.VCAP_APP_PORT || 3000;
-/*var localPort = 3001;
-http.listen(localPort, function () {
-    console.log('saveAPI listening on *:' + localPort);
-});*/
-
-
-
 // your express configuration here
 
 var httpsServer = https.createServer(credentials, app);
@@ -69,3 +62,4 @@ var httpsServer = https.createServer(credentials, app);
 httpsServer.listen(3001, function(){
    	console.log('saveAPI listening on *:3001');
 });
+
