@@ -17,9 +17,17 @@ var privateKey  = fs.readFileSync('nginx.key', 'utf8');
 var certificate = fs.readFileSync('nginx.crt', 'utf8');
 var credentials = {key: privateKey, cert: certificate};
 
+var mkdirp = require('mkdirp');
+
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
 		console.log("req.body.id=" + req.body.id);
+
+		//mkdir if doesnt exist
+		mkdirp('app/videos/' + req.body.id.trim('\n\r'), function (err) {
+			if (err) console.error(err)
+			else console.log('pow!')
+		});
 
 		/*var dir = 'app/videos/' + req.body.id.trim('\n\r');
 		fs.mkdir(dir, err => cb(err, dir));*/
