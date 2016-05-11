@@ -16,6 +16,7 @@ app.use('/', express.static(__dirname));
 var privateKey  = fs.readFileSync('nginx.key', 'utf8');
 var certificate = fs.readFileSync('nginx.crt', 'utf8');
 var credentials = {key: privateKey, cert: certificate};
+console.log(credentials);
 
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
