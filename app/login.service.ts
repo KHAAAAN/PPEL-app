@@ -48,6 +48,7 @@ export class LoginService {
 	}
 
 	wsuRequest(){
+		var myip = "69.76.16.248"
 		var pa_session_id = this.getCookie('pasessionid');
 		console.log(pa_session_id);
 		console.log(myip);
