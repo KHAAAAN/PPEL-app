@@ -82,8 +82,21 @@ export class VideoService {
 			
 		console.log("testSave");
 		var xhr = new XMLHttpRequest();
-		//TODO: in firefox, take out the .video
-		var blob = this.players[index].recordedData.video;
+		var blob;
+
+		//if chrome
+		if (/chrome/i.test( navigator.userAgent ) === true){
+			blob = this.players[index].recordedData.video;
+		}
+		//if firefox
+		else if ( (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) === true){
+			blob = this.players[index].recordedData;
+		}
+		//TODO: support all browsers
+		else{
+			blob = this.players[index].recordedData;
+		}
+
 		console.log(blob);
 		console.log(blob.video);
 		//var blob = this.players[index].recordedData;
