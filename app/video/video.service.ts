@@ -71,7 +71,7 @@ export class VideoService {
 		params.set('isPublic', "0");
 		params.set('questionID', questionID);
 
-		return this.http.get("http://localhost:3000/test_save", {search: params})
+		return this.http.get(this._locationUrl + "/test_save", {search: params})
 		//.map(() => )
 		.do(res => console.log("VideoService.saveRecording(): success"))
 		.catch(this.handleError);
@@ -96,7 +96,12 @@ export class VideoService {
 		formData.append('id', this.userModel.id);
 		formData.append('file', blob);
 
-		xhr.open("POST", "http://localhost:3001/upload", true);
+		if(this._locationUrl == 'https://debianvm.eecs.wsu.edu:3000'){
+			xhr.open("POST", "https://debianvm.eecs.wsu.edu:3001/upload", true);
+		}
+		else{
+			xhr.open("POST", "http://localhost:3001/upload", true);
+		}
 		//xhr.responseType = 'blob';
 		//xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 		//xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

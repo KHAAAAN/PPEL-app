@@ -9,6 +9,12 @@ var app = express();
 var http = require('http').Server(app);
 var jsonParser = bodyParser.json();
 
+var fs = require('fs');
+var https = require('https');
+var privateKey  = fs.readFileSync('nginx.key', 'utf8');
+var certificate = fs.readFileSync('nginx.crt', 'utf8');
+var credentials = {key: privateKey, cert: certificate};
+
 var storage = multer.diskStorage({
     destination: function (req, file, cb) {
 		console.log("test");
@@ -46,7 +52,17 @@ app.use(express.static(__dirname + '/public'));
 
 //Server
 //var localPort = process.env.VCAP_APP_PORT || 3000;
-var localPort = 3001;
+/*var localPort = 3001;
 http.listen(localPort, function () {
     console.log('saveAPI listening on *:' + localPort);
+});*/
+
+
+
+// your express configuration here
+
+var httpsServer = https.createServer(credentials, app);
+
+httpsServer.listen(3001, function(){
+   	console.log('saveAPI listening on *:3001');
 });
