@@ -48,5 +48,5 @@ app.use(express.static(__dirname + '/public'));
 //var localPort = process.env.VCAP_APP_PORT || 3000;
 var localPort = 3001;
 http.listen(localPort, function () {
-    console.log('Listening on *:' + localPort);
+    console.log('saveAPI listening on *:' + localPort);
 });

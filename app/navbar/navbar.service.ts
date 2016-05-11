@@ -8,7 +8,8 @@ export class NavbarService {
 		var hostName = window.location.hostname;
 
 		if(hostName === "debianvm.eecs.wsu.edu"){
-			this._locationUrl = 'http://debianvm.eecs.wsu.edu:3000';
+			//this._locationUrl = 'http://debianvm.eecs.wsu.edu:3000';
+			this._locationUrl = 'https://debianvm.eecs.wsu.edu:3000';
 		}
 		else{
 			this._locationUrl = 'http://localhost:3000';
