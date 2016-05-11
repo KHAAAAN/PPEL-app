@@ -384,5 +384,6 @@ func main() {
 	http.HandleFunc("/login", refreshHandler)
 
 	fmt.Println("Listening on 3000")
-	http.ListenAndServe(":3000", nil)
+	//http.ListenAndServe(":3000", nil)
+	http.ListenAndServe(":3000", "nginx.crt", "nginx.key", nil)
 }
