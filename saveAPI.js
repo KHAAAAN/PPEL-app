@@ -11,8 +11,8 @@ var jsonParser = bodyParser.json();
 
 var fs = require('fs');
 var https = require('https');
-var privateKey  = fs.readFileSync('nginx.key', 'utf8');
-var certificate = fs.readFileSync('nginx.crt', 'utf8');
+var privateKey  = fs.readFileSync(__dirname + '/nginx.key', 'utf8');
+var certificate = fs.readFileSync(__dirname + '/nginx.crt', 'utf8');
 var credentials = {key: privateKey, cert: certificate};
 
 var storage = multer.diskStorage({
