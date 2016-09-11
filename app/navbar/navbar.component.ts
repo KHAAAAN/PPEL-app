@@ -1,4 +1,4 @@
-import {Component, OnInit} from 'angular2/core';
+import {Component, OnInit} from '@angular/core';
 import {NavbarService} from './navbar.service';
 import {LinkItem} from './link-item';
 import {NavbarItem} from './navbar-item.component';
@@ -6,7 +6,7 @@ import {NavbarItem} from './navbar-item.component';
 @Component({
     selector: 'navbar',
     templateUrl: 'app/navbar/navbar.component.html',
-    directives: [NavbarItem],
+    //directives: [NavbarItem],
     styleUrls: ['app/navbar/navbar.component.css']
 })
 
@@ -25,11 +25,12 @@ export class NavbarComponent {
 	public homePath: string;
 	public captionPath: string;
 	public errorMessage: string;
+	public data: any;
 
 	getItems(){
 		this._navbarService.getItems ()
 		.subscribe(
-			data => {
+			data  => {
 				this.homePath = data.homePath;
 				this.itemList = data.mainItems;
 				this.ghostList = data.ghostItems;
@@ -41,19 +42,19 @@ export class NavbarComponent {
 		);
 	}
 
-	hoverOn(item){
+	hoverOn(item: any){
 		if(item.subItems !== undefined && item.subItems.length > 0){
 			item.isHover = true;
 		}
 	}
 
-	hoverOff(item){
+	hoverOff(item: any){
 		if(item.subItems !== undefined && item.subItems.length > 0){
 			item.isHover = false;
 		}
 	}
 
-	checkForHref(item){
+	checkForHref(item: any){
 		if(item.href === undefined){
 			return "javascript:;";
 		}
@@ -62,7 +63,7 @@ export class NavbarComponent {
 		}
 	}
 
-	flip(item){
+	flip(item: any){
 		if(item.subItems !== undefined && item.subItems.length > 0){
 			item.expanded = !item.expanded;
 		}

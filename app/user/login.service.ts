@@ -1,8 +1,8 @@
-import {Injectable} from 'angular2/core';
-import {Http, Response, URLSearchParams} from 'angular2/http';
+import {Injectable} from '@angular/core';
+import {Http, Response, URLSearchParams} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 
-declare var myip;
+declare var myip: string;
 
 @Injectable()
 export class LoginService {
@@ -20,7 +20,7 @@ export class LoginService {
 	}
 
 	//private _locationUrl = 'http://localhost:3000/login_attempt';
-	private _locationUrl;
+	private _locationUrl: string;
 
 	authenticate (id: string) {
 		let params: URLSearchParams = new URLSearchParams();
@@ -32,7 +32,7 @@ export class LoginService {
 		.catch(this.handleError);
 	}
 
-	public getCookie(cname) {
+	public getCookie(cname: string) {
 		var name = cname + "=";
 		var ca = document.cookie.split(';');
 		for(var i = 0; i <ca.length; i++) {
@@ -56,7 +56,7 @@ export class LoginService {
 		params.set('client_address', myip);
 
 		return this.http.get("https://secure.wsu.edu/login-server/auth-validate.asp", {search: params})
-		.map(res => res._body)
+		.map(res => res.json().data)
 		.do(str => console.log(str))
 		.catch(this.handleError);
 

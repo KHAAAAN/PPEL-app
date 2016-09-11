@@ -1,5 +1,5 @@
-import {Injectable} from 'angular2/core';
-import {Http, Response, URLSearchParams} from 'angular2/http';
+import {Injectable} from '@angular/core';
+import {Http, Response, URLSearchParams} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 
 @Injectable()
@@ -18,11 +18,11 @@ export class TabContentService {
 	}
 
 	//private _locationUrl = 'http://localhost:3000/app/tabcontent';
-	private _locationUrl;
+	private _locationUrl: string;
 
 	getTabContent() {
 		return this.http.get(this._locationUrl)
-			.map(res => res.json().Pages)
+			.map((res:Response) => res.json().Pages)
 			.catch(TabContentService.handleError);
 	}
 

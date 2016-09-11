@@ -1,73 +1,42 @@
+<!DOCTYPE html>
 <html>
   <head>
-	<base href="/">
+    <base href="/">
     <title>PPEL-app</title>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="styles.css">
 
-    <!-- 1. Load libraries -->
-    <!-- IE required polyfills, in this exact order -->
-    <script src="node_modules/es6-shim/es6-shim.min.js"></script>
-    <script src="node_modules/systemjs/dist/system-polyfills.js"></script>
+    <!-- Polyfill(s) for older browsers -->
+    <script src="node_modules/core-js/client/shim.min.js"></script>
 
-    <script src="node_modules/angular2/bundles/angular2-polyfills.js"></script>
+    <script src="node_modules/zone.js/dist/zone.js"></script>
+    <script src="node_modules/reflect-metadata/Reflect.js"></script>
     <script src="node_modules/systemjs/dist/system.src.js"></script>
-    <script src="node_modules/rxjs/bundles/Rx.js"></script>
-    <script src="node_modules/angular2/bundles/angular2.dev.js"></script>
 
-	<script src="node_modules/angular2/bundles/router.dev.js"></script>
-	<script src="node_modules/angular2/bundles/http.dev.js"></script>
-
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css">
-
-	<link href="//vjs.zencdn.net/5.8.0/video-js.css" rel="stylesheet">
-	<script src="//vjs.zencdn.net/5.8.0/video.min.js"></script>
-	<script src="//cdn.webrtc-experiment.com/RecordRTC.js"></script>
-	<script src="node_modules/videojs-record/src/js/videojs.record.js"></script>
-	<link href="node_modules/videojs-record/src/css/videojs.record.css" rel="stylesheet">
-
-	<link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css"></script>
-	<script src="node_modules/jquery/dist/jquery.min.js"></script> <!-- this jquery is for bootstrapping only. -->
-	<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
-	<script src="node_modules/fine-uploader/fine-uploader/fine-uploader.js"></script>
-
-	<script type="text/javascript" src="https://l2.io/ip.js?var=myip"></script>
-
-    <!-- 2. Configure SystemJS -->
+    <script src="systemjs.config.js"></script>
     <script>
-      System.config({
-        packages: {
-          app: {
-            format: 'register',
-            defaultExtension: 'js'
-          }
-        }
-      });
-      System.import('app/main')
-            .then(null, console.error.bind(console));
+      System.import('app').catch(function(err){ console.error(err); });
     </script>
 
-	<style>
-		body{
-			font-family: 'Open Sans', 'Lucida Sans', 'Lucida Grande', 'Lucida Unicode', sans-serif;
-			  margin:0;
-			  background: #F9F9F9;
-		}
-
-	</style>
-
+    <style>
+      body{
+        font-family: 'Open Sans', 'Lucida Sans', 'Lucida Grande', 'Lucida Unicode', sans-serif;
+        margin:0;
+        background: #F9F9F9;
+      }  </style>
   </head>
 
-  <!-- 3. Display the application -->
-  <body>
+    <body>
     <PPEL-app>
-		<i style="color: red; margin-left: 10px; margin-top: 10px;  position:absolute; top: 0; font-size:100px;" class="fa fa-cog fa-spin"></i>
-		<i style="color: orange; margin-top: 10px; margin-left: 150px; top:0;  position:absolute;  font-size:100px;" class="fa fa-cog fa-spin"></i>
-		<i style="color: yellow; margin-top: 10px; margin-left: 300px; top:0;  position:absolute;  font-size:100px;" class="fa fa-cog fa-spin"></i>
-		<i style="color: green; margin-top: 10px; margin-left: 450px; top:0;  position:absolute;  font-size:100px;" class="fa fa-cog fa-spin"></i>
-		<i style="color: blue; margin-top: 10px; margin-left: 600px; top:0;  position:absolute;  font-size:100px;" class="fa fa-cog fa-spin"></i>
-		<i style="color: indigo; margin-top: 10px; margin-left: 750px; top:0;  position:absolute;  font-size:100px;" class="fa fa-cog fa-spin"></i>
-		<i style="color: violet; margin-top: 10px; margin-left: 900px; top:0;  position:absolute;  font-size:100px;" class="fa fa-cog fa-spin"></i>
-	</PPEL-app>
+      <!--i style="color: red; margin-left: 10px; margin-top: 10px;  position:absolute; top: 0; font-size:100px;" class="fa fa-cog fa-spin"></i>
+      <i style="color: orange; margin-top: 10px; margin-left: 150px; top:0;  position:absolute;  font-size:100px;" class="fa fa-cog fa-spin"></i>
+      <i style="color: yellow; margin-top: 10px; margin-left: 300px; top:0;  position:absolute;  font-size:100px;" class="fa fa-cog fa-spin"></i>
+      <i style="color: green; margin-top: 10px; margin-left: 450px; top:0;  position:absolute;  font-size:100px;" class="fa fa-cog fa-spin"></i>
+      <i style="color: blue; margin-top: 10px; margin-left: 600px; top:0;  position:absolute;  font-size:100px;" class="fa fa-cog fa-spin"></i>
+      <i style="color: indigo; margin-top: 10px; margin-left: 750px; top:0;  position:absolute;  font-size:100px;" class="fa fa-cog fa-spin"></i>
+      <i style="color: violet; margin-top: 10px; margin-left: 900px; top:0;  position:absolute;  font-size:100px;" class="fa fa-cog fa-spin"></i-->
+  </PPEL-app>
   </body>
 
 </html>

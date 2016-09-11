@@ -2,13 +2,13 @@
 	<!--TODO pass in a model instead of properties-->
 
 
-	<tab *ngFor="#file of files"
+	<!--tab *ngFor="#file of files"
 	active="{{file.active}}"
    	tabTitle="{{file.title}}"
 	content="{{file.content}}">
-	</tab>
+	</tab-->
 
-	<tab tabTitle="Videos"> 
+	<!--tab tabTitle="Videos"> 
 			<select (change)="getQuestion($event.target.value)"
 			(change)="getAnswers($event.target.value)" >
 				<option selected> Questions </option>
@@ -17,7 +17,7 @@
 
 			
 
-			<!--Loads the question	-->
+			
 			<div *ngIf="selectedQuestion?.length > 0">
 			<video id="qvideo" class="video-js vjs-default-skin" controls
 			 preload="auto" width="640" height="264"
@@ -29,7 +29,7 @@
 			</div>
 
 
-			<!--loads the answer video if there is one-->
+			
 			<div *ngIf="userModel != undefined && answervideoData?.length > 0">
 				<div *ngFor="#answer of answervideoData; #j=index">
 				<video id="avideo" class="video-js vjs-default-skin" controls
@@ -39,7 +39,7 @@
 
 				</video>
 				</div>
-				<!--Delete button for recorder-->
+				
 				<div *ngIf="userModel != undefined" style="margin-top:5px; width:300px; text-align:center">
 					<button (click)="deleteVideoAnswer(1, selectedQuestion[0].questionID)" class="btn btn-md btn-primary">
 						<i class="fa fa-trash-o"></i>
@@ -50,7 +50,7 @@
 
 			</div>
 
-			<!--If there is no answer, loads a recorder-->
+			
 			<div *ngIf="userModel != undefined && answervideoData?.length < 1 && selectedQuestion?.length >0">
 				<video style="margin-top:5px;" id="record1" class="video-js vjs-default-skin" controls
 				preload="auto"
@@ -60,7 +60,7 @@
 				 >
 				</video>
 
-				<!--Save button for recorder-->
+				
 				<ready [index]="1"></ready>
 				<div *ngIf="userModel != undefined && getCanSave('1')" style="margin-top:5px; width:300px; text-align:center">
 					<button (click)="saveVideoAnswer(1, selectedQuestion[0].path, selectedQuestion[0].isPublic, selectedQuestion[0].questionID)" class="btn btn-md btn-primary">
@@ -84,7 +84,7 @@
 			<a (click)=logout()>Click here to logout</a>			
 		</div>
 
-	</tab>
+	</tab-->
 
 
 

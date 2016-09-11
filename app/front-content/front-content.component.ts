@@ -1,20 +1,21 @@
-import {Component, OnInit} from 'angular2/core';
+import {Component, OnInit} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {FrontContentService} from './front-content.service';
+import {IntervalObservable} from 'rxjs/observable/IntervalObservable'
 
 @Component({
 	selector: 'front-content',
+	providers: [FrontContentService],
 	templateUrl: 'app/front-content/front-content.component.html',
 	styleUrls: ['app/front-content/front-content.component.css']
 })
 
 export class FrontContentComponent implements OnInit{
-	public images = [
-	];
+	public images = <any[]>[];
 
 	public curIndex: number;
 	public curPicture: string;
-	public transSub;
+	public transSub: any;
 	public errorMessage: string;
 	private _totalPics: number;
 
@@ -35,7 +36,7 @@ export class FrontContentComponent implements OnInit{
 	 *to changing at every interval
 	 */
 	autoSubscribe(){
-		this.transSub = Observable.interval(10000).subscribe(() => {
+		this.transSub = new IntervalObservable(10000).subscribe(() => {
 			//let temp = this.curIndex;
 
 			this.curIndex = (this.curIndex + 1) % this._totalPics; //switch to this.images.length

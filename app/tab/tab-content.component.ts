@@ -1,14 +1,14 @@
-import {Input, Component, OnInit, AfterViewInit, ViewChild} from 'angular2/core';
+import {Input, Component, OnInit, AfterViewInit, ViewChild} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {TabContentService} from './tab-content.service';
 
 import {Tab} from './tab.component';
 import {Tabs} from '../tabs/tabs.component';
 
-import {VideoService} from '../video/video.service';
+//import {VideoService} from '../video/video.service';
 
-import {User} from '../user';
-import {UserService} from '../user.service';
+import {User} from '../user/user';
+import {UserService} from '../user/user.service';
 
 @Component({
 	selector: 'ready',
@@ -16,31 +16,33 @@ import {UserService} from '../user.service';
 })
 export class Ready implements AfterViewInit{
 	@Input('index') index:number;
-	constructor(private _videoService: VideoService){
+	constructor(
+		//private _videoService: VideoService
+		){
 	}
 	ngAfterViewInit(){
 		console.log(this.index);
-		this._videoService.makeRecorder(this.index)
+		//this._videoService.makeRecorder(this.index)
 	}
 }
 
 @Component({ selector: 'tab-content', templateUrl: 'app/tab/tab-content.component.html',
 	styleUrls: ['app/tab/tab-content.component.css'],
-	directives: [Tab, Tabs, Ready]
+	//directives: [Tab, Tabs, Ready]
 })
 
 export class TabContent implements OnInit {
-	public files = [];
-	public videoData = [];
-	public answervideoData = [];
-	public selectedQuestion = [];
+	public files = <any>[];
+	public videoData = <any>[];
+	public answervideoData = <any>[];
+	public selectedQuestion = <any>[];
 
 	public userModel: User;
 
 	public errorMessage: string;
 
 	constructor(private _tabContentService: TabContentService,
-			   private _videoService: VideoService,
+			   //private _videoService: VideoService,
 			   private _userService: UserService){
 
 		//when ready to set this.userModel, it will do so
@@ -66,7 +68,7 @@ export class TabContent implements OnInit {
 
 	getContent() {
 		this._tabContentService.getTabContent()
-			.subscribe( pages => {
+			.subscribe((pages:any) => {
 
 			var i: number;
 			for(i = 0; i < pages.length; ++i){
@@ -88,7 +90,7 @@ export class TabContent implements OnInit {
 
 
 	}
-
+/*
 	getPublicVideos(){
 		this._videoService.getPublicVideos()
 		.subscribe(res=>{
@@ -101,7 +103,8 @@ export class TabContent implements OnInit {
 
 		});
 	}
-
+*/
+/*
 	//Gets a question based on the questionID
 	getQuestion(questionID){
 		console.log("getQuestion");
@@ -142,7 +145,7 @@ export class TabContent implements OnInit {
 
 				console.log("ans vid data: " + this.answervideoData);
 			});*/
-
+/*
 	}
 
 	getAnswers(questionID){
@@ -184,9 +187,11 @@ export class TabContent implements OnInit {
 		this._videoService.deleteAnswer(index, questionID);
 	}
 
+*/
 
 
-	private getBase(path){
+
+	private getBase(path: string){
 		var l = path.split("/");
 		var x = l[l.length - 1];
 		var y = x.substring(0, x.indexOf('.'));
@@ -196,7 +201,7 @@ export class TabContent implements OnInit {
 
 	ngOnInit(){
 		this.getContent();
-		this.getPublicVideos();
+		//this.getPublicVideos();
 	}
 
 }

@@ -1,6 +1,10 @@
-import {Injectable} from 'angular2/core';
-import {Http, Response, URLSearchParams} from 'angular2/http';
+import {Injectable} from '@angular/core';
+import {Http, Response, URLSearchParams} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/catch';
+
 
 @Injectable()
 export class FrontContentService {
@@ -19,7 +23,7 @@ export class FrontContentService {
 		}
 	}
 
-	private _locationUrl; 
+	private _locationUrl: string; 
 
 	getImages() {
 		return this.http.get(this._locationUrl)
