@@ -1,9 +1,9 @@
 <ul class="nav-tabs" >
-<!--li *ngFor="#tab of tabs"
+<li *ngFor="let tab of tabs"
   (click)="selectTab(tab)"
   [class.active] = "tab.active">
   <a>{{tab.title }}</a>
-</li-->
+</li>
 
 </ul>
 <ng-content class="content"></ng-content>

@@ -8,6 +8,7 @@ import { HomeComponent } from './home/home.component';
 
 import {HiddenNavbarComponent} from './hidden_navbar/hidden-navbar.component';
 import {NavbarComponent} from './navbar/navbar.component';
+import {NavbarItem} from './navbar/navbar-item.component';
 
 import {LoginService} from './user/login.service';
 
@@ -16,7 +17,6 @@ import {Tabs} from './tabs/tabs.component';
 import {Ready, TabContent} from './tab/tab-content.component'
 
 /*
-import {TabContent} from './tab/tab-content.component';
 import {TabContentService} from './tab/tab-content.service';
 */
 
@@ -36,7 +36,8 @@ import {FrontContentComponent} from './front-content/front-content.component';
     FrontContentComponent,
     Tab, Tabs, Ready, TabContent,
     HiddenNavbarComponent,
-    NavbarComponent
+    NavbarComponent,
+    NavbarItem
   	],
   providers: [
     appRoutingProviders, HttpModule, LoginService

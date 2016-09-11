@@ -1,12 +1,12 @@
 <div id="cf" class="shadow">
-		<iframe id="frontContentMedia" [src]="curPicture"></iframe>
+	<iframe id="frontContentMedia" [src]="curPicture"></iframe>
 </div>
 
 <div id="buttons">
 
-		<!--label *ngFor="#i=index" class="radio-inline">
-				<input type="radio" name="optradio" checked="checked"
-				(change)="transition(i)"
-				[checked] = "curIndex === i">s
-		</label-->
+		<label *ngFor="let i=index" class="radio-inline">
+			<input type="radio" name="optradio" checked="checked"
+			(change)="transition(i)"
+			[checked] = "curIndex === i">s
+		</label>
 </div>
