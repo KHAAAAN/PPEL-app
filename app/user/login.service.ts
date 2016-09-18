@@ -64,12 +64,12 @@ export class LoginService {
 
 		xhr.open("GET", "https://secure.wsu.edu/login-server/auth-validate.asp?session_id="+ pa_session_id +"&client_address=" + myip, true);
 		xhr.send();
-		
+
 		console.log(xhr.responseText);*/
 	}
-	
+
 	private handleError (error: Response) {
-		console.log("errors4days")
+		console.log("errors4days");
 		console.error(error);
 		return Observable.throw(error.json().error || 'Server error');
 	}
