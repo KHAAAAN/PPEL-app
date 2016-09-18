@@ -3,7 +3,6 @@ import {Component} from '@angular/core';
 @Component({
 	selector: 'navbar-item',
 	templateUrl: 'app/navbar/navbar-item.component.html',
-	//directives: [NavbarItem],
 	styleUrls: ['app/navbar/navbar.component.css'],
 	inputs: ['header', 'subItems', 'href']
 })
@@ -19,20 +18,20 @@ export class NavbarItem {
 		this.subItems = [];
 	}
 
-	flip(){
+  flip(){
 		if(this.subItems !== undefined && this.subItems.length > 0){
 			this.expanded = !this.expanded;
 		}
-		
+
 	}
 
-       hoverOn(){
-	       if(this.subItems !== undefined && this.subItems.length > 0){
-		       this.isHover = true;
-	       }
-        }
+  hoverOn(){
+     if(this.subItems !== undefined && this.subItems.length > 0){
+       this.isHover = true;
+     }
+  }
 
-       hoverOff(){
+  hoverOff(){
 	       if(this.subItems !== undefined && this.subItems.length > 0){
 		       this.isHover = false;
 		}

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { HttpModule } from '@angular/http';
-import { Routes, RouterModule, Route, RouterOutlet,  } from '@angular/router';
+import {  RouterModule,  } from '@angular/router';
 
 
 @Component({
