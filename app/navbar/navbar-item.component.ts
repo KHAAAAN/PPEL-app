@@ -1,9 +1,9 @@
-import {Component} from 'angular2/core';
+import {Component} from '@angular/core';
 
 @Component({
 	selector: 'navbar-item',
 	templateUrl: 'app/navbar/navbar-item.component.html',
-	directives: [NavbarItem],
+	//directives: [NavbarItem],
 	styleUrls: ['app/navbar/navbar.component.css'],
 	inputs: ['header', 'subItems', 'href']
 })

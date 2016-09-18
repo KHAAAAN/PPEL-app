@@ -1,10 +1,11 @@
-import {Injectable} from 'angular2/core';
+import {Injectable, Component} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {User} from './user';
 
 import {LoginService} from './login.service';
 
 import 'rxjs/add/operator/share'; //for sharing Observable stream
+
 
 @Injectable()
 export class UserService {
@@ -16,6 +17,7 @@ export class UserService {
 		};
 
 	public user$: Observable<Array<User>>;
+
 
 	public setUserModel(id: string, ts: string, token: number){
 		this.userModel = new User();
@@ -55,15 +57,15 @@ export class UserService {
 	}
 
 	constructor(private _loginService: LoginService){
-
-		this.user$ = new Observable(observer => {
+		this.user$ = new Observable((observer:any) => {
 			console.log(observer);
 			 this._userObserver = observer;
-
 
 		}).share();
 		
 		this._dataStore = { users: [] };
 	}	
+	
+	
 
 }

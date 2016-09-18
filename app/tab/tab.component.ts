@@ -1,6 +1,5 @@
-import {Component, Input} from 'angular2/core';
-import {AfterViewInit} from 'angular2/core';
-import {ViewChild} from 'angular2/core';
+import {Component, Input, AfterViewInit, ViewChild} from '@angular/core';
+
 
 @Component({
   selector: 'tab',
@@ -13,7 +12,7 @@ export class Tab implements AfterViewInit{
 	@Input('tabTitle') title: string = "";
 	@Input('content') content: string = "";
 
-	@ViewChild('article') input;
+	@ViewChild('article') input:any;
 
 	ngAfterViewInit(){	
 	}

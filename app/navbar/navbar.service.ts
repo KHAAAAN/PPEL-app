@@ -1,5 +1,5 @@
-import {Injectable} from 'angular2/core';
-import {Http, Response, URLSearchParams} from 'angular2/http';
+import {Injectable} from '@angular/core';
+import {Http, Response, URLSearchParams} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 
 @Injectable()
@@ -17,7 +17,7 @@ export class NavbarService {
 		this._locationUrl += '/app/navbar/items.json';
 	}
 
-	private _locationUrl; // = 'http://localhost:3000/app/navbar/items.json';
+	private _locationUrl : string; // = 'http://localhost:3000/app/navbar/items.json';
 
 	getItems () {
 		return this.http.get(this._locationUrl)
