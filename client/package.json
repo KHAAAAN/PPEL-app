@@ -18,7 +18,6 @@
     "typings": "typings",
     "webdriver:update": "webdriver-manager update",
     "startWithoutServer": "tsc && concurrently \"tsc -w\""
-
   },
   "keywords": [],
   "author": "",
