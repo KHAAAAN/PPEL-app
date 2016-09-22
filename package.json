@@ -3,7 +3,12 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
+<<<<<<< HEAD
 	"start": "node ./bin/www"
+=======
+    "start": "node ./bin/www",
+    "installAll": "cd client && npm i && cd .. && npm i"
+>>>>>>> a6b554824ce28cc4918f7252d3abc842527d0ae9
   },
   "dependencies": {
     "body-parser": "^1.15.2",

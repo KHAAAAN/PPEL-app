@@ -46,7 +46,7 @@ export class TabContent implements OnInit {
 			   private _userService: UserService){
 
 		//when ready to set this.userModel, it will do so
-		this._userService.user$.subscribe(userModel => { 
+		this._userService.user$.subscribe(userModel => {
 			this.userModel = userModel[0];
 
 			console.log(this.userModel);
@@ -75,7 +75,7 @@ export class TabContent implements OnInit {
 					this.files[i] = {
 						title: pages[i].Title,
 						content: pages[i].Content
-					}
+					};
 
 					//defaults to the first one
 					if(i == 0){

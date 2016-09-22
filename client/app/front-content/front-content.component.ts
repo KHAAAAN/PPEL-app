@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {Observable} from 'rxjs/Observable';
 import {FrontContentService} from './front-content.service';
 import {IntervalObservable} from 'rxjs/observable/IntervalObservable'
+import { DomSanitizer, SafeUrl} from '@angular/platform-browser';
 
 @Component({
 	selector: 'front-content',
@@ -14,7 +14,7 @@ export class FrontContentComponent implements OnInit{
 	public images = <any[]>[];
 
 	public curIndex: number;
-	public curPicture: string;
+	public curPicture: SafeUrl;
 	public transSub: any;
 	public errorMessage: string;
 	private _totalPics: number;
@@ -23,7 +23,7 @@ export class FrontContentComponent implements OnInit{
 
         this.curIndex = index;
         this.curPicture = this.images[this.curIndex].picture;
-        console.log(this.curPicture);
+        //console.log(this.curPicture);
 
         //reset subscription because think about it..
         //if we were to select a radio button the interval should reset to 2000
@@ -58,7 +58,7 @@ export class FrontContentComponent implements OnInit{
 				{
 					//console.log(images[i]);
 					this.images[i] = {};
-					this.images[i].picture = images[i];
+					this.images[i].picture = this.sanitizer.bypassSecurityTrustResourceUrl(images[i]);
 				}
 				this.curIndex = 0;
 				this.curPicture = this.images[0].picture;
@@ -70,7 +70,8 @@ export class FrontContentComponent implements OnInit{
 		);
 	}
 
-	constructor (private _frontContentService: FrontContentService) {}
+	constructor (private _frontContentService: FrontContentService,
+                private sanitizer: DomSanitizer) {}
 
 	ngOnInit(){
 		this.getImages();

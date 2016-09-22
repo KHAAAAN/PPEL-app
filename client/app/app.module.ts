@@ -1,6 +1,8 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { FormsModule } from '@angular/forms';
+
 import { AppComponent }  from './app.component';
 import { HttpModule } from '@angular/http';
 import { routing, appRoutingProviders } from './app.routing';
@@ -25,12 +27,13 @@ import {User} from './user/user';
 import {FrontContentComponent} from './front-content/front-content.component';
 
 @NgModule({
-  imports: [ 
-  	BrowserModule, 
-  	HttpModule, 
-  	routing 
+  imports: [
+  	BrowserModule,
+  	HttpModule,
+  	routing,
+    FormsModule
   ],
-  declarations: [ 
+  declarations: [
   	AppComponent,
     HomeComponent,
     FrontContentComponent,

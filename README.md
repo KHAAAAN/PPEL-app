@@ -1,5 +1,3 @@
-1. run "npm install" in your ./client 
-2. run "tsc" in your ./client
-3. run "npm install" in ./
-4. run "npm start" in ./
-5. open up a browser with "npm start" in ./
+1. run "npm run installAll"
+2. run "sh launch.sh" 
+(make sure launch is executable chmod +x launch.sh)

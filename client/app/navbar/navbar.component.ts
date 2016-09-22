@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {NavbarService} from './navbar.service';
 import {LinkItem} from './link-item';
 import {NavbarItem} from './navbar-item.component';
@@ -6,7 +6,6 @@ import {NavbarItem} from './navbar-item.component';
 @Component({
     selector: 'navbar',
     templateUrl: 'app/navbar/navbar.component.html',
-    //directives: [NavbarItem],
     styleUrls: ['app/navbar/navbar.component.css']
 })
 
@@ -16,8 +15,8 @@ export class NavbarComponent {
 	public ghostList: LinkItem[];
 	public socialHref = {
 			facebook: null as string,
-		   	twitter: null as string,
-		   	linkedin: null as string, 
+      twitter: null as string,
+      linkedin: null as string,
 			youtube: null as string
 	};
 	public accessList: LinkItem[];
@@ -42,7 +41,7 @@ export class NavbarComponent {
 		);
 	}
 
-	hoverOn(item: any){
+  hoverOn(item: any){
 		if(item.subItems !== undefined && item.subItems.length > 0){
 			item.isHover = true;
 		}
@@ -63,7 +62,7 @@ export class NavbarComponent {
 		}
 	}
 
-	flip(item: any){
+  flip(item: any){
 		if(item.subItems !== undefined && item.subItems.length > 0){
 			item.expanded = !item.expanded;
 		}
@@ -73,5 +72,5 @@ export class NavbarComponent {
 
 	ngOnInit(){
 		this.getItems();
-	}	
+	}
 }

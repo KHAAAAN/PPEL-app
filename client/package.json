@@ -17,7 +17,7 @@
     "tsc:w": "tsc -w",
     "typings": "typings",
     "webdriver:update": "webdriver-manager update",
-	"startWithoutServer": "tsc && concurrently \"tsc -w\""
+    "startWithoutServer": "tsc && concurrently \"tsc -w\""
   },
   "keywords": [],
   "author": "",
