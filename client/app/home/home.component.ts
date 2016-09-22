@@ -8,15 +8,21 @@ import {UserService} from '../user/user.service';
 import {NavbarService} from '../navbar/navbar.service';
 import {TabContentService} from '../tab/tab-content.service';
 
+//import * as MdGroup from '../../node_modules/@angular2-material/tabs';
+import {MdTabsModule} from '@angular2-material/tabs';
+
 @Component({
 	selector: 'home',
 
 	templateUrl: 'app/home/home.component.html',
 	styleUrls: ['app/home/home.component.css'],
+	
 	providers: [FrontContentService, UserService,
 	TabContentService,
-	NavbarService
-	]
+	NavbarService, 
+	MdTabsModule],
+	
+	
 })
 
 export class HomeComponent implements OnInit {

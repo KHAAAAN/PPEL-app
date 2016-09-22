@@ -18,6 +18,7 @@ import {Tab} from './tab/tab.component';
 import {Tabs} from './tabs/tabs.component';
 import {Ready, TabContent} from './tab/tab-content.component'
 
+import {MdTabsModule} from '@angular2-material/tabs';
 /*
 import {TabContentService} from './tab/tab-content.service';
 */
@@ -38,6 +39,7 @@ import {FrontContentComponent} from './front-content/front-content.component';
     HomeComponent,
     FrontContentComponent,
     Tab, Tabs, Ready, TabContent,
+    MdTabsModule,
     HiddenNavbarComponent,
     NavbarComponent,
     NavbarItem
