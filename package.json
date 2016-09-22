@@ -1,12 +1,13 @@
 {
-  "name": "PPEL-app-test",
+  "name": "PPEL-app",
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+	"start": "node ./bin/www"
   },
   "dependencies": {
     "body-parser": "^1.15.2",
+    "concurrently": "^2.2.0",
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
     "dotenv": "^2.0.0",
