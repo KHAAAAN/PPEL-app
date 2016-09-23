@@ -1,23 +1,26 @@
 import {Injectable} from '@angular/core';
 import {Http, Response, URLSearchParams} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
-import {UserService} from '../user.service';
-import {User} from '../user';
+import {UserService} from '../user/user.service';
+import {User} from '../user/user';
+import {DomSanitizer, SafeUrl} from '@angular/platform-browser';
+
+declare var videojs: any;
 
 @Injectable()
 export class VideoService {
 	public userModel: User;
 
 	private _locationUrl: string;
-	private _locationUrls: any;
-
-	//private _locationUrls = ['http://localhost:3000/public_video_QA', 'http://localhost:3000/private_video_QA', 'http://localhost:3000/video_answers'];
+	private _locationUrls = <any>[];
 
 	public players = <any>[];
 	public canSave: boolean[];
 	public canDelete: boolean[];
 
-	constructor(private http : Http, private _userService: UserService){
+	constructor(private http : Http, 
+		        private _userService: UserService,
+		        private sanitizer: DomSanitizer){
 		this.userModel = _userService.getUserModel();	
 		this.canSave = [];
 		this.canDelete = [];
@@ -32,18 +35,17 @@ export class VideoService {
 		else{
 			this._locationUrl = 'http://localhost:3000';
 		}
-
-		this._locationUrls = [this._locationUrl + '/public_video_QA',
-			this._locationUrl + '/private_video_QA', 
+		this._locationUrls = [
+	        this._locationUrl + '/public_video_QA',
+			this._locationUrl + '/private_video_QA',
 			this._locationUrl + '/video_answers'
-		]
-
+		];
 	}
 
 	getPublicVideos(){	
 		return this.http.get(this._locationUrls[0])
-		.map(res => res.json())
-		.do(res => console.log("VideoService.getPublicVideos(): success"))
+		.map((res:any) => res.json())
+		.do((res:any) => console.log("VideoService.getPublicVideos(): success"))
 		.catch(this.handleError);
 	}
 
@@ -188,6 +190,7 @@ export class VideoService {
 
 		this.players[index] = player;
 	}
+
 
 	private handleError (error: Response) {
 		console.log("errors4days");
