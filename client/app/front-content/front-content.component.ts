@@ -18,8 +18,6 @@ export class FrontContentComponent implements OnInit{
 	public transSub: any;
 	public errorMessage: string;
 	private _totalPics: number;
-	private ckeditorContent: string;
-	private configSettings: string;
 
 	transition(index: number){
 
