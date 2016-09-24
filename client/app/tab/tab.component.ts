@@ -14,6 +14,8 @@ export class Tab implements AfterViewInit{
 
 	@ViewChild('article') input:any;
 
+	private configSettings: string;
+
 	ngAfterViewInit(){	
 	}
 }
