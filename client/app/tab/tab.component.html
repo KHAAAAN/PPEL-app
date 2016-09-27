@@ -3,5 +3,12 @@
 		</article>
 
 		<ng-content></ng-content>
+
+		<ckeditor
+		    [(ngModel)]="content"
+		    [config]="configSettings"
+
+		    debounce="500">
+  		</ckeditor>
 </div>
 
