@@ -5,30 +5,33 @@ import {TabContentService} from './tab-content.service';
 import {Tab} from './tab.component';
 import {Tabs} from '../tabs/tabs.component';
 
-//import {VideoService} from '../video/video.service';
+import {VideoService} from '../video/video.service';
 
 import {User} from '../user/user';
 import {UserService} from '../user/user.service';
 
+declare var videojs: any;
+
 @Component({
 	selector: 'ready',
-	template: ``
+	template: ``,
+	providers: [VideoService]
 })
 export class Ready implements AfterViewInit{
 	@Input('index') index:number;
 	constructor(
-		//private _videoService: VideoService
-		){
+		private _videoService: VideoService){
 	}
 	ngAfterViewInit(){
 		console.log(this.index);
-		//this._videoService.makeRecorder(this.index)
+		this._videoService.makeRecorder(this.index)
 	}
 }
 
-@Component({ selector: 'tab-content', templateUrl: 'app/tab/tab-content.component.html',
+@Component({ selector: 'tab-content', 
+	templateUrl: 'app/tab/tab-content.component.html',
 	styleUrls: ['app/tab/tab-content.component.css'],
-	//directives: [Tab, Tabs, Ready]
+	providers: [VideoService]
 })
 
 export class TabContent implements OnInit {
@@ -42,16 +45,13 @@ export class TabContent implements OnInit {
 	public errorMessage: string;
 
 	constructor(private _tabContentService: TabContentService,
-			   //private _videoService: VideoService,
+			   private _videoService: VideoService,
 			   private _userService: UserService){
 
 		//when ready to set this.userModel, it will do so
 		this._userService.user$.subscribe(userModel => {
 			this.userModel = userModel[0];
-
 			console.log(this.userModel);
-
-
 		} );
 
 		//this is REALLY important
@@ -68,48 +68,38 @@ export class TabContent implements OnInit {
 
 	getContent() {
 		this._tabContentService.getTabContent()
-			.subscribe((pages:any) => {
-
+		.subscribe((pages:any) => {
 			var i: number;
 			for(i = 0; i < pages.length; ++i){
-					this.files[i] = {
-						title: pages[i].Title,
-						content: pages[i].Content
-					};
-
-					//defaults to the first one
-					if(i == 0){
-						this.files[i].active = true;
-					}
+				this.files[i] = {
+					title: pages[i].Title,
+					content: pages[i].Content
+				};
+				//defaults to the first one
+				if(i == 0){
+					this.files[i].active = true;
 				}
-
-			},
-
-			error => this.errorMessage = <any>error
-			);
-
-
+			}
+	    },
+	    error => this.errorMessage = <any>error
+        );
 	}
-/*
+
 	getPublicVideos(){
 		this._videoService.getPublicVideos()
-		.subscribe(res=>{
-			for(var i = 0; i < res.length; i++){
-				this.videoData.push(res[i]);
+			.subscribe(res=>{
+				for(var i = 0; i < res.length; i++){
+					this.videoData.push(res[i]);
 
-				//make a recorder for this video in paralell
-				//this._videoService.makeRecorder(i);
-			}
-
-		});
+					//make a recorder for this video in paralell
+					this._videoService.makeRecorder(i);
+				}
+			});
 	}
-*/
-/*
+
 	//Gets a question based on the questionID
-	getQuestion(questionID){
+	getQuestion(questionID: string){
 		console.log("getQuestion");
-
-
 		//Checks to make sure the videojs player is visible, if not, it wont work
 		if (this.selectedQuestion.length > 0){
 			var vid = videojs("qvideo");
@@ -131,7 +121,7 @@ export class TabContent implements OnInit {
 		}
 
 		//Get answers
-		/*this._videoService.getYourAnswers(questionID)
+		this._videoService.getYourAnswers(questionID)
 			.subscribe(res=>{
 				if (res.length > 0){
 					this.answervideoData.push(res[0]);
@@ -144,11 +134,10 @@ export class TabContent implements OnInit {
 				}
 
 				console.log("ans vid data: " + this.answervideoData);
-			});*/
-/*
+			});
 	}
 
-	getAnswers(questionID){
+	getAnswers(questionID: string){
 		if(this.getUser() != undefined){
 			this._videoService.getYourAnswers(questionID)
 				.subscribe(res=>{
@@ -167,29 +156,24 @@ export class TabContent implements OnInit {
 		}
 	}
 
-	getCanSave(index){
+	getCanSave(index: number){
 		var canSave = false;
 		canSave = this._videoService.canSave[index];
 		return canSave;
-
 	}
 
-	saveVideoAnswer(index, path, isPublic, questionID){
+	saveVideoAnswer(index: number, path: string, isPublic: boolean, questionID: string){
 		var base = this.getBase(path);
 		console.log("saving..");
 		this._videoService.saveAnswer(index, base, isPublic, questionID);
 	}
 
 
-	deleteVideoAnswer(index, questionID){
+	deleteVideoAnswer(index: number, questionID: string){
 		console.log("deleting..");
 		this.answervideoData = [];
 		this._videoService.deleteAnswer(index, questionID);
 	}
-
-*/
-
-
 
 	private getBase(path: string){
 		var l = path.split("/");
@@ -201,7 +185,6 @@ export class TabContent implements OnInit {
 
 	ngOnInit(){
 		this.getContent();
-		//this.getPublicVideos();
+		this.getPublicVideos();
 	}
-
 }

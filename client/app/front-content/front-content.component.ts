@@ -45,12 +45,11 @@ export class FrontContentComponent implements OnInit{
 	}
 
 	resetSubscription(){
-			this.transSub.unsubscribe();
-			this.autoSubscribe();
+		this.transSub.unsubscribe();
+		this.autoSubscribe();
 	}
 
 	getImages(){
-
 		this._frontContentService.getImages()
 		.subscribe(images => {
 				this._totalPics = images.length;
