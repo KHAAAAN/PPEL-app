@@ -1,6 +1,7 @@
-import {Input, Component, OnInit, AfterViewInit, ViewChild} from '@angular/core';
+import {Input, Component, OnInit, AfterViewInit, ViewChild, ViewContainerRef, ViewEncapsulation} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
 import {TabContentService} from './tab-content.service';
+import { DomSanitizer, SafeUrl} from '@angular/platform-browser';
 
 import {Tab} from './tab.component';
 import {Tabs} from '../tabs/tabs.component';
@@ -24,7 +25,7 @@ export class Ready implements AfterViewInit{
 	}
 	ngAfterViewInit(){
 		console.log(this.index);
-		this._videoService.makeRecorder(this.index)
+		this._videoService.makeRecorder()//this.index)
 	}
 }
 
@@ -36,9 +37,13 @@ export class Ready implements AfterViewInit{
 
 export class TabContent implements OnInit {
 	public files = <any>[];
-	public videoData = <any>[];
-	public answervideoData = <any>[];
+	public activeTab: any;
+	public allQuestionVideos = <any>[];
+	public videoPaths = <any>[];
+	public answerVideo: any;
+	public questionVideo: any;
 	public selectedQuestion = <any>[];
+	public questionText: any;
 
 	public userModel: User;
 
@@ -46,7 +51,8 @@ export class TabContent implements OnInit {
 
 	constructor(private _tabContentService: TabContentService,
 			   private _videoService: VideoService,
-			   private _userService: UserService){
+			   private _userService: UserService,
+			   private sanitizer: DomSanitizer){
 
 		//when ready to set this.userModel, it will do so
 		this._userService.user$.subscribe(userModel => {
@@ -56,6 +62,11 @@ export class TabContent implements OnInit {
 
 		//this is REALLY important
 		this._userService.loadUser();
+	}
+
+	changeTab(title: string){
+		console.log("changing tab to = ", title);
+		this.activeTab = true;
 	}
 
 	logout(){
@@ -85,30 +96,89 @@ export class TabContent implements OnInit {
         );
 	}
 
+	// This will get the 'public' videos, meaning the video questions
 	getPublicVideos(){
+
 		this._videoService.getPublicVideos()
 			.subscribe(res=>{
 				for(var i = 0; i < res.length; i++){
-					this.videoData.push(res[i]);
-
-					//make a recorder for this video in paralell
-					this._videoService.makeRecorder(i);
+					this.videoPaths.push(res[i].path);
+					this.allQuestionVideos.push(res[i]);
 				}
+
 			});
+	}
+
+	setSelectedQuestion(questionID: string) {
+		console.log("getting selected question");
+
+		//Loops through all avaliable videos and grabs the selected one
+		for (var i = 0; i < this.allQuestionVideos.length; i++){
+			if (questionID == this.allQuestionVideos[i]._id){
+				console.log("i = ", i, "question id = ", this.allQuestionVideos[i]._id);
+				console.log("questions id url = ", this.allQuestionVideos[i].path);
+
+				//This wasnt chaning the source properly
+				this.selectedQuestion[0] = this.allQuestionVideos[i];
+				this.questionText = this.selectedQuestion[0]._id;
+
+				this.questionVideo = this.allQuestionVideos[i];
+
+				//This properly changes the source of the videojs player
+				console.log("selectedQuestion from inside select q = ", this.selectedQuestion)
+				
+				break;
+			}
+		}
+
+		/*if (!isQSet) {
+			this.selectedQuestion = new Array(0);
+		}*/
 	}
 
 	//Gets a question based on the questionID
 	getQuestion(questionID: string){
-		console.log("getQuestion");
+		console.log("In get questions want id = ", questionID);
+		console.log("selectedQuestion length = ", this.selectedQuestion.length);
+		console.log("selectedQuestion[0] = ", this.selectedQuestion[0]);
+		console.log("selectedQuestion = ", this.selectedQuestion);
+
+
 		//Checks to make sure the videojs player is visible, if not, it wont work
 		if (this.selectedQuestion.length > 0){
 			var vid = videojs("qvideo");
 			console.log(vid);
 		}
 
+		
+		console.log("questionData = ", this.allQuestionVideos);
+		
+
+		/*var vid: any;
+
+		for (var i = 0; i < 50000; i++) {
+			try {
+				vid = videojs("qvideo")
+			} catch (error) {
+				vid = null;
+			}
+		}*/
+
+		console.log("selected q len = ", this.selectedQuestion.length);
+		
+		if (this.selectedQuestion.length > 0 && vid){
+			console.log("setting question src to: ", this.selectedQuestion[0].path);
+			vid.src({"type":"video/mp4", "src":this.selectedQuestion[0].path});
+		}
+
+		/*if (this.selectedQuestion.length > 0){
+			var vid = videojs("avideo");
+			console.log(vid);
+		}
+
 		//Loops through all avaliable videos and grabs the selected one
 		for (var i = 0; i < this.videoData.length; i++){
-			if (questionID == this.videoData[i].questionID){
+			if (questionID == this.videoData[i]._id){
 				//This wasnt chaning the source properly
 				this.selectedQuestion[0] = this.videoData[i];
 
@@ -118,10 +188,10 @@ export class TabContent implements OnInit {
 				}
 				break;
 			}
-		}
+		}*/
 
 		//Get answers
-		this._videoService.getYourAnswers(questionID)
+		/*this._videoService.getYourAnswers(questionID)
 			.subscribe(res=>{
 				if (res.length > 0){
 					this.answervideoData.push(res[0]);
@@ -134,11 +204,57 @@ export class TabContent implements OnInit {
 				}
 
 				console.log("ans vid data: " + this.answervideoData);
-			});
+			});*/
 	}
 
-	getAnswers(questionID: string){
-		if(this.getUser() != undefined){
+	setQuestionAndAnswer(questionID: string){
+		console.log("in set q and a");
+
+		if (this.selectedQuestion.length > 0)
+		{
+			this._videoService.getYourAnswers(questionID)
+				.subscribe(res=>{
+					if (res != undefined){
+						console.log("res = ", res);
+						//this.answervideoData.push(res);
+						this.answerVideo = res;
+						console.log("answerVideo = ", this.answerVideo.path);
+
+						var avid = videojs("avideo");
+
+						console.log("setting answer src to: ", res.path);
+						avid.src(res.path);
+
+						// Make new recorder
+						
+						
+					}
+
+					var qvid = videojs("qvideo");
+
+					console.log("setting question src to: ", this.selectedQuestion[0].path);
+					qvid.src( this.selectedQuestion[0].path);
+
+					/*try {
+						// If we have a rvideo already present, then dispose it. 
+						console.log("resetting rvideo");
+						var rec = videojs("rvideo");
+						rec.dispose();
+					} catch (error) {
+						// If we don't have one we do not need to do anything since we are making one. 
+
+					}*/
+
+					this._videoService.makeRecorder();
+
+
+					console.log("ans vid data: " + this.answerVideo);
+				});
+		
+		}
+
+
+		/*if(this.getUser() != undefined){
 			this._videoService.getYourAnswers(questionID)
 				.subscribe(res=>{
 					if (res.length > 0){
@@ -153,7 +269,7 @@ export class TabContent implements OnInit {
 
 					console.log("ans vid data: " + this.answervideoData);
 				});
-		}
+		}*/
 	}
 
 	getCanSave(index: number){
@@ -162,17 +278,20 @@ export class TabContent implements OnInit {
 		return canSave;
 	}
 
-	saveVideoAnswer(index: number, path: string, isPublic: boolean, questionID: string){
-		var base = this.getBase(path);
-		console.log("saving..");
-		this._videoService.saveAnswer(index, base, isPublic, questionID);
+	saveVideoAnswer() {
+
+
+		console.log("Saving");
+		//var base = this.getBase(this.selectedQuestion[0].path);
+		//console.log("saving..");
+		//this._videoService.saveAnswer(1, base, this.selectedQuestion[0].isPublic, this.selectedQuestion[0].questionID);
 	}
 
 
-	deleteVideoAnswer(index: number, questionID: string){
+	deleteVideoAnswer(){
 		console.log("deleting..");
-		this.answervideoData = [];
-		this._videoService.deleteAnswer(index, questionID);
+		this.answerVideo = [];
+		this._videoService.deleteAnswer(1, this.selectedQuestion[0].questionID);
 	}
 
 	private getBase(path: string){

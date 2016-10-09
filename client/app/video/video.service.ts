@@ -30,12 +30,13 @@ export class VideoService {
 
 		if(hostName === "debianvm.eecs.wsu.edu"){
 			//this._locationUrl = 'http://debianvm.eecs.wsu.edu:3000';
-			this._locationUrl = 'https://debianvm.eecs.wsu.edu:3000';
+			this._locationUrl = " https://debianvm.eecs.wsu.edu";
 		}
 		else{
 			this._locationUrl = 'http://localhost:3000';
 		}
 		this._locationUrls = [
+			this._locationUrl + '/VideoQuestions',
 	        this._locationUrl + '/public_video_QA',
 			this._locationUrl + '/private_video_QA',
 			this._locationUrl + '/video_answers'
@@ -43,7 +44,12 @@ export class VideoService {
 	}
 
 	getPublicVideos(){	
-		return this.http.get(this._locationUrls[0])
+		console.log("in get all video questions");
+		//console.log("UserModel = ", this.userModel);
+		
+		var urlGetRequest = this._locationUrl + "/api/questions";
+
+		return this.http.get(urlGetRequest)
 		.map((res:any) => res.json())
 		.do((res:any) => console.log("VideoService.getPublicVideos(): success"))
 		.catch(this.handleError);
@@ -51,12 +57,12 @@ export class VideoService {
 
 	getYourAnswers(questionID: string){	
 		//this.userModel = this._userService.getUserModel();	
+		console.log("In get your answers");
+		console.log("Want answer for questions id = ", questionID);
 
-		let params: URLSearchParams = new URLSearchParams();
-		params.set('id', this.userModel.id);
-		params.set('questionID', questionID);
+		var urlGetRequest = this._locationUrl + "/api/responses" + questionID + "?userId=" + this.userModel.id;
 
-		return this.http.get(this._locationUrls[2], {search: params})
+		return this.http.get(urlGetRequest)
 		.map(res => res.json())
 		.do(res => console.log("VideoService.getAnswers(): success"))
 		.catch(this.handleError);
@@ -67,13 +73,10 @@ export class VideoService {
 	saveRecording(fname: string, isPublic: boolean, questionID: string){
 		//this.userModel = this._userService.getUserModel();	
 
-		let params: URLSearchParams = new URLSearchParams();
-		params.set('id', this.userModel.id);
-		params.set('fname', fname);
-		params.set('isPublic', "0");
-		params.set('questionID', questionID);
+		var postRequest = this._locationUrl + "/api/responses/" + questionID + "?userid=" + this.userModel.id
+				+ "?video=" + fname;
 
-		return this.http.get(this._locationUrl + "/test_save", {search: params})
+		return this.http.post(postRequest, null, null)
 		//.map(() => )
 		.do(res => console.log("VideoService.saveRecording(): success"))
 		.catch(this.handleError);
@@ -108,7 +111,7 @@ export class VideoService {
 		
 		console.log(this.userModel);
 		formData.append('fname', fname);
-		formData.append('id', this.userModel.id);
+		//formData.append('id', this.userModel.id);
 		formData.append('file', blob);
 
 		if(this._locationUrl == 'https://debianvm.eecs.wsu.edu:3000'){
@@ -131,13 +134,11 @@ export class VideoService {
 	}
 
 	deleteA(questionID: string){
-		//this.userModel = this._userService.getUserModel();	
+		//this.userModel = this._userService.getUserModel();
 
-		let params: URLSearchParams = new URLSearchParams();
-		params.set('questionID', questionID);
-		params.set('id', this.userModel.id);
+		var deletRequest = this._locationUrl + "/api/questions/" + questionID + "?userId=" + this.userModel.id;
 
-		return this.http.get(this._locationUrl + "/delete_videos", {search: params})
+		return this.http.delete(deletRequest)
 		.do((res: any) => console.log("VideoService.deleteRecording(): success"))
 		.catch(this.handleError);
 	}
@@ -149,34 +150,36 @@ export class VideoService {
 		.subscribe();
 	}
 
-	makeRecorder(index: number){
+	makeRecorder(){
 		var _this = this;
 
-		var player = videojs("record"+index,
+		var player = videojs("rvideo",
 		{
 			controls: true,
-			width: 300,
-			height: 240,
 			plugins: {
 				record: {
 					audio: true,
 					video: true,
 					maxLength: 120,
-					debug: true
+					debug: true,
+					videoMimeType: "video/mp4"
 				}
 			}
 		});
+
+		//All these arrays had 'index' as its posistion into it. 
+
 		// error handling
 		player.on('deviceError', function()
 		{
 			console.log('device error:', player.deviceErrorCode);
-			_this.canSave[index] = false;
-			_this.canDelete[index] = false;
+			_this.canSave[0] = false;
+			_this.canDelete[0] = false;
 		}); // user clicked the record button and started recording
 		player.on('startRecord', function()
 		{
 			console.log('started recording!');
-			_this.canDelete[index] = false;
+			_this.canDelete[0] = false;
 		});
 		// user completed recording and stream is available
 		player.on('finishRecord', function()
@@ -184,11 +187,12 @@ export class VideoService {
 			// the blob object contains the recorded data that
 			// can be downloaded by the user, stored on server etc.
 			console.log('finished recording: ', player.recordedData);
-			_this.canSave[index] = true;
-			_this.canDelete[index] = true;
+			_this.canSave[0] = true;
+			_this.canDelete[0] = true;
+
 		});
 
-		this.players[index] = player;
+		this.players[0] = player;
 	}
 
 
