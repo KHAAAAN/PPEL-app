@@ -60,7 +60,8 @@ export class VideoService {
 		console.log("In get your answers");
 		console.log("Want answer for questions id = ", questionID);
 
-		var urlGetRequest = this._locationUrl + "/api/responses" + questionID + "?userId=" + this.userModel.id;
+		// un coment the back when we get the auth done. 
+		var urlGetRequest = this._locationUrl + "/api/responses" + questionID;// + "?userId=" + this.userModel.id;
 
 		return this.http.get(urlGetRequest)
 		.map(res => res.json())

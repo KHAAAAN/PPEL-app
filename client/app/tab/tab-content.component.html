@@ -8,6 +8,8 @@
 	</tab>
 
 	<tab tabTitle="Videos"> 
+
+		<!-- this all needs to be in a ngif usermodal is not undefined -->
 			<select 
 				(change)="setSelectedQuestion($event.target.value)"
 				(change)="setQuestionAndAnswer($event.target.value)">
