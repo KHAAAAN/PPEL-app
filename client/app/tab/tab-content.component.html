@@ -1,90 +1,127 @@
 <tabs id="main-tabs">
 	<!--TODO pass in a model instead of properties-->
 
-
 	<tab *ngFor="let file of files"
 		active="{{file.active}}"
    		tabTitle="{{file.title}}"
 		content="{{file.content}}">
 	</tab>
 
-	<!--tab tabTitle="Videos"> 
-			<select (change)="getQuestion($event.target.value)"
-			(change)="getAnswers($event.target.value)" >
+	<tab tabTitle="Videos"> 
+
+		<!-- this all needs to be in a ngif usermodal is not undefined -->
+			<select 
+				(change)="setSelectedQuestion($event.target.value)"
+				(change)="setQuestionAndAnswer($event.target.value)">
 				<option selected> Questions </option>
-				<option *ngFor="#question of videoData" [value]="question.questionID">{{question.text}}</option>
+				<option *ngFor="let question of allQuestionVideos" [value]="question._id">{{question.title}}</option>
 			</select>
 
 			
 
-			
 			<div *ngIf="selectedQuestion?.length > 0">
-			<video id="qvideo" class="video-js vjs-default-skin" controls
-			 preload="auto" width="640" height="264"
-			 data-setup='{}'>
-
-			  <source [src]="selectedQuestion[0].path" type="video/mp4">
-
-			</video>
-			</div>
-
-
-			
-			<div *ngIf="userModel != undefined && answervideoData?.length > 0">
-				<div *ngFor="#answer of answervideoData; #j=index">
-				<video id="avideo" class="video-js vjs-default-skin" controls
-				 preload="auto" width="640" height="264"
-				 data-setup='{}'>
-				  <source [src]="answer.path" type="video/mp4">
-
-				</video>
+				<div id="questionTextBox">
+					<header>Question Text:</header>
+					<div id="text"> {{questionText}} </div>
 				</div>
+
+				<tabs id="videoTabs">
+					<tab tabTitle="Questions"
+						active="true">
+
+						<div id="qvideoDiv">
+							<video id="qvideo" class="video-js vjs-default-skin" controls
+								preload="auto" width="550" height="284">						
+							</video>
+						</div>
+
+						<div id="rvideoDiv">
+							<video id="rvideo" class="video-js vjs-default-skin" controls 
+								preload="auto" width="200" height="100">
+							</video>
+						</div>
+
+						<button (click)="SaveModal.open()" id="saveQuestion" class="btn btn-md btn-primary">
+							<i class="fa fa-save"></i>
+						</button>
+							
+						<modal #SaveModal title="Are You Sure?"
+							cancelButtonLabel="Cancel"
+							submitButtonLabel="Save"
+							modalClass="btn btn-info btn-lg"
+							[hideCloseButton]="true"
+							[closeOnEscape]="true"
+							[closeOnOutsideClick]="false"
+							(onSubmit)="saveVideoAnswer()">
+					
+							<modal-header>
+								This will overwrite your previously saved video!
+							</modal-header>
+						
+							<modal-content>
+								By clicking 'Save', you will replace your previously saved video with this new one, this action cannot
+								be undone. 
+							</modal-content>
+						</modal>
+
+					</tab>
+
+
+					<tab tabTitle="Answers">
+						<div id="avideoDiv">
+							<video id="avideo" class="video-js vjs-default-skin" controls
+								preload="auto" width="550" height="284">
+							</video>
+						</div>
+
+						<button (click)="DeleteModal.open()" id="saveQuestion" class="btn btn-md btn-primary">
+							<i class="fa fa-trash-o"></i>
+						</button>
+
+						<modal #DeleteModal title="Are You Sure?"
+							cancelButtonLabel="Cancel"
+							submitButtonLabel="Delete"
+							modalClass="btn btn-info btn-lg"
+							[hideCloseButton]="true"
+							[closeOnEscape]="true"
+							[closeOnOutsideClick]="false"
+							(onSubmit)="deleteVideoAnswer()">
+					
+							<modal-header>
+								This will perminatly delete your saved video!
+							</modal-header>
+						
+							<modal-content>
+								By clicking 'Delete', you will perminatly remove your saved video, this action cannot
+								be undone. 
+							</modal-content>
+						</modal>
+
+
+
+						<!--div id="recordedReplay">
+							<video id="recordedReplay" class="video-js vjs-default-skin"controls
+								preload="auto" width="550" height="284">
+							</video>
+						</div-->
+
+					</tab>
+				</tabs>		
 				
-				<div *ngIf="userModel != undefined" style="margin-top:5px; width:300px; text-align:center">
-					<button (click)="deleteVideoAnswer(1, selectedQuestion[0].questionID)" class="btn btn-md btn-primary">
-						<i class="fa fa-trash-o"></i>
-					</button>
-
-
-				</div>
-
-			</div>
-
-			
-			<div *ngIf="userModel != undefined && answervideoData?.length < 1 && selectedQuestion?.length >0">
-				<video style="margin-top:5px;" id="record1" class="video-js vjs-default-skin" controls
-				preload="auto"
-				width="640" height="264"
-				 data-setup='{
-				}'
-				 >
-				</video>
-
-				
-				<ready [index]="1"></ready>
-				<div *ngIf="userModel != undefined && getCanSave('1')" style="margin-top:5px; width:300px; text-align:center">
-					<button (click)="saveVideoAnswer(1, selectedQuestion[0].path, selectedQuestion[0].isPublic, selectedQuestion[0].questionID)" class="btn btn-md btn-primary">
-						<i class="fa fa-save"></i>
-					</button>
-				</div>
-
 			</div>
 
 
 		<div *ngIf="userModel == undefined">
-
 			<h1> You are currently not logged in.</h1>
 			<h1> But you may still view public question videos.</h1>
 			<a href="https://secure.wsu.edu/login/fidlogin.aspx?dest=https://debianvm.eecs.wsu.edu:3000">Click here to login.</a>
 		</div>
 
 		<div *ngIf="userModel">
-			
 			<h1> You are signed in as {{userModel.id}} </h1>
 			<a (click)=logout()>Click here to logout</a>			
 		</div>
-
-	</tab-->
+	</tab>
 
 
 

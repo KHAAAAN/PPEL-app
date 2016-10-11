@@ -18,6 +18,9 @@ import {Tab} from './tab/tab.component';
 import {Tabs} from './tabs/tabs.component';
 import {Ready, TabContent} from './tab/tab-content.component'
 
+import {ModalModule} from "ng2-modal";
+
+
 /*
 import {TabContentService} from './tab/tab-content.service';
 */
@@ -31,7 +34,8 @@ import {FrontContentComponent} from './front-content/front-content.component';
   	BrowserModule,
   	HttpModule,
   	routing,
-    FormsModule
+    FormsModule,
+    ModalModule
   ],
   declarations: [
   	AppComponent,
