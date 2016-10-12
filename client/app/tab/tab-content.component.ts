@@ -204,4 +204,6 @@ export class TabContent implements OnInit {
 		//this.getPublicVideos();
 	}
 
+	//private cougLinkContent = "<div id=\"symp_jobswidget\" data-csm=\"wsu-csm.symplicity.com\" data-id=\"3c03fee9e5418f3f5be5643490884b37" data-size="custom" data-css="http://wsu-csm.symplicity.com/css/list_jobs_widget.css" data-logo="" data-header-text="Business Widget" data-width="380" data-height="220" data-sort-by="" ></div> <script>(function(d, s, id) {   var js, sjs = d.getElementsByTagName(s)[0];   if (d.getElementById(id)) {return;}   js = d.createElement(s); js.id = id;   js.src = "https://static.symplicity.com/jslib/jobswidget/jobswidget.js";   sjs.parentNode.insertBefore(js, sjs); }(document, "script", "symp_jobswidget_js"));</script>"
+
 }

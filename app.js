@@ -7,11 +7,15 @@ require('dotenv').config();
 
 var app = express();
 
+import tabPages from './routes/tabPageRoutes';
+
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'client')));
+
+app.use('/tabPages', tabPages);
 
 //app.use('/', require('./routes/index'));
 
