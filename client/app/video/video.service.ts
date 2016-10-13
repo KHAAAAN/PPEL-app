@@ -61,7 +61,7 @@ export class VideoService {
 		console.log("Want answer for questions id = ", questionID);
 
 		// un coment the back when we get the auth done. 
-		var urlGetRequest = this._locationUrl + "/api/responses" + questionID;// + "?userId=" + this.userModel.id;
+		var urlGetRequest = this._locationUrl + "/api/responses" + questionID + "?userId=" + "11335741";// + this.userModel.id;
 
 		return this.http.get(urlGetRequest)
 		.map(res => res.json())
@@ -74,7 +74,7 @@ export class VideoService {
 	saveRecording(fname: string, isPublic: boolean, questionID: string){
 		//this.userModel = this._userService.getUserModel();	
 
-		var postRequest = this._locationUrl + "/api/responses/" + questionID + "?userid=" + this.userModel.id
+		var postRequest = this._locationUrl + "/api/responses/" + questionID + "?userid=" + "11335741";// + this.userModel.id
 				+ "?video=" + fname;
 
 		return this.http.post(postRequest, null, null)
@@ -137,7 +137,7 @@ export class VideoService {
 	deleteA(questionID: string){
 		//this.userModel = this._userService.getUserModel();
 
-		var deletRequest = this._locationUrl + "/api/questions/" + questionID + "?userId=" + this.userModel.id;
+		var deletRequest = this._locationUrl + "/api/questions/" + questionID + "?userId=" + "11335741";// + this.userModel.id;
 
 		return this.http.delete(deletRequest)
 		.do((res: any) => console.log("VideoService.deleteRecording(): success"))
