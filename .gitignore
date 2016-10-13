@@ -24,4 +24,4 @@ e2e/
 !/app.js
 !/routes/
 !/controllers/
-!/utils
+!/utils/
