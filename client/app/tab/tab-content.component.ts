@@ -105,6 +105,8 @@ export class TabContent implements OnInit {
 				}
 
 			});
+
+			console.log("all Videos = ", this.allQuestionVideos);
 	}
 
 	setSelectedQuestion(questionID: string) {
@@ -208,44 +210,48 @@ export class TabContent implements OnInit {
 	setQuestionAndAnswer(questionID: string){
 		console.log("in set q and a");
 
+		var setA = false;
+
 		if (this.selectedQuestion.length > 0)
 		{
-			this._videoService.getYourAnswers(questionID)
-				.subscribe(res=>{
-					if (res != undefined){
-						console.log("res = ", res);
-						//this.answervideoData.push(res);
-						this.answerVideo = res;
-						console.log("answerVideo = ", this.answerVideo.path);
+			var answer = this._videoService.getYourAnswers(questionID);
+			console.log("after getting answer, before setting src");
+			console.log("answer = ", answer);
+			
+			answer.subscribe(res=>{
+				if (res != undefined){
+					console.log("res = ", res);
+					//this.answervideoData.push(res);
+					this.answerVideo = res;
+					console.log("answerVideo = ", this.answerVideo.path);
 
-						var avid = videojs("avideo");
+					var avid = videojs("avideo");
+					console.log("setting answer src to: ", res.path);
+					avid.src('https://debianvm.eecs.wsu.edu' + res.path);
+					setA = true;
+				}
 
-						console.log("setting answer src to: ", res.path);
-						avid.src('https://debianvm.eecs.wsu.edu' + res.path);
+				this._videoService.makeRecorder();
+				console.log("ans vid data: " + this.answerVideo);
+			});
 
-						// Make new recorder
-						
-						
-					}
+			// Set Question
+			var qvid = videojs("qvideo");
+			console.log("setting question src to: ", this.selectedQuestion[0].path);
+			qvid.src('https://debianvm.eecs.wsu.edu' + this.selectedQuestion[0].path);
 
-					var qvid = videojs("qvideo");
+			// Set Answer if not set already
+			if (!setA)
+			{
+				var avid = videojs("avideo");
+				console.log("setting answer src to: ");
+				avid.src("");
+			}
+			
+			
+		 	console.log("leving set answer func");	
 
-					console.log("setting question src to: ", this.selectedQuestion[0].path);
-					qvid.src('https://debianvm.eecs.wsu.edu' + this.selectedQuestion[0].path);
-
-					/*try {
-						// If we have a rvideo already present, then dispose it. 
-						console.log("resetting rvideo");
-						var rec = videojs("rvideo");
-						rec.dispose();
-					} catch (error) {
-						// If we don't have one we do not need to do anything since we are making one. 
-
-					}*/
-
-					this._videoService.makeRecorder();
-					console.log("ans vid data: " + this.answerVideo);
-				});
+					
 		
 		}
 

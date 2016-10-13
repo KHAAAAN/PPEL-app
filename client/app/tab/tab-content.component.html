@@ -17,9 +17,9 @@
 				<option *ngFor="let question of allQuestionVideos" [value]="question._id">{{question.title}}</option>
 			</select>
 
-			
+	
 
-			<div *ngIf="selectedQuestion?.length > 0">
+			<!--div *ngIf="selectedQuestion?.length > 0"-->
 				<div id="questionTextBox">
 					<header>Question Text:</header>
 					<div id="text"> {{questionText}} </div>
@@ -35,7 +35,13 @@
 							</video>
 						</div>
 
-						<div id="rvideoDiv">
+						<div *ngIf="selectedQuestion?.length <= 0" id="rvideoDiv">
+							<video id="rvideo" class="video-js vjs-default-skin" controls 
+								preload="auto" width="200" height="100" style="display:none">
+							</video>
+						</div>
+
+						<div *ngIf="selectedQuestion?.length > 0" id="rvideoDiv">
 							<video id="rvideo" class="video-js vjs-default-skin" controls 
 								preload="auto" width="200" height="100">
 							</video>
@@ -50,8 +56,8 @@
 							submitButtonLabel="Save"
 							modalClass="btn btn-info btn-lg"
 							[hideCloseButton]="true"
-							[closeOnEscape]="true"
-							[closeOnOutsideClick]="false"
+							[closeOnEscape]="false"
+							[closeOnOutsideClick]="true"
 							(onSubmit)="saveVideoAnswer()">
 					
 							<modal-header>
@@ -66,11 +72,11 @@
 
 					</tab>
 
-
 					<tab tabTitle="Answers">
+
 						<div id="avideoDiv">
 							<video id="avideo" class="video-js vjs-default-skin" controls
-								preload="auto" width="550" height="284">
+								preload="auto" width="550" height="284" >
 							</video>
 						</div>
 
@@ -83,8 +89,8 @@
 							submitButtonLabel="Delete"
 							modalClass="btn btn-info btn-lg"
 							[hideCloseButton]="true"
-							[closeOnEscape]="true"
-							[closeOnOutsideClick]="false"
+							[closeOnEscape]="false"
+							[closeOnOutsideClick]="true"
 							(onSubmit)="deleteVideoAnswer()">
 					
 							<modal-header>
@@ -108,7 +114,7 @@
 					</tab>
 				</tabs>		
 				
-			</div>
+			<!--/div-->
 
 
 		<div *ngIf="userModel == undefined">
