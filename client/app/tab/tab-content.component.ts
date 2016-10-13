@@ -240,13 +240,24 @@ export class TabContent implements OnInit {
 			console.log("setting question src to: ", this.selectedQuestion[0].path);
 			qvid.src('https://debianvm.eecs.wsu.edu' + this.selectedQuestion[0].path);
 
+			var avid = videojs("avideo");
+
 			// Set Answer if not set already
 			if (!setA)
 			{
-				var avid = videojs("avideo");
 				console.log("setting answer src to: ");
 				avid.src("");
 			}
+
+			avid.errors({
+			errors: {
+				4: {
+				headline: `There is no saved video for this answer.
+				Please go to the questions tab and record a new video, or chang the questions from the dropdown menu.`,
+				type: 'No Video Saved'
+				}
+			}
+			});
 			
 			
 		 	console.log("leving set answer func");	
