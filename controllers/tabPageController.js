@@ -2,14 +2,8 @@ import fs from 'fs';
 import { notFound, unprocessableEntity } from '../utils/statusCodes';
 
 function update(req, res) {
-  const attrs = req.body;
 
-  res.send("in update tab page");
-
-  /*
   var filename = "client/app/tab_content/tabpages.json";
-
-  console.log("in update");
 
   // Get content from file
   var contents = fs.readFileSync(filename);
@@ -34,7 +28,7 @@ function update(req, res) {
   fs.writeFile(fileName, jsonContent);
 
   return res.status(200);
-*/
+
 }
 
 module.exports = {
