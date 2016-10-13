@@ -59,10 +59,21 @@ export class VideoService {
 		var urlGetRequest = this._locationUrl + "/api/responses/" + questionID + "?userId=" + "11335741";// + this.userModel.id;
 
 		console.log("url request = ", urlGetRequest);
-		return this.http.get(urlGetRequest)
-		.map(res => res.json())
-		.do(res => console.log("VideoService.getAnswers(): success"))
-		.catch(this.handleError);
+		var response = this.http.get(urlGetRequest);
+		console.log("response = ", response);
+
+			var toReturn = response
+			.map(res => res.json())
+			.do(res => console.log("VideoService.getAnswers(): success"))
+			.catch(this.handleError);
+
+			//throw new Error("Testing");
+
+			console.log("toReturn = ", toReturn);
+			return toReturn;
+	
+	
+
 	}
 
 
