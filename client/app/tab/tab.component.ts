@@ -23,19 +23,20 @@ export class Tab implements AfterViewInit{
 
 	private configSettings: string;
 
-	ngAfterViewInit(){	
+	ngAfterViewInit(){
 	}
 
 	handleSave(event: Event) {
 		var url: string;
 		url = "localhost:3000/tabPages/" + this.title;
+		url = encodeURI(url);
 		let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
-        let body = JSON.stringify({tab_content : this.content});
+        let body = JSON.stringify({"tab_content" : this.content});
         console.log(body);
-        console.log("url " + url);
-        this.http.patch(url, body);
+        console.log("ur: " + url);
+        this.http.put(url, body);
         //this.http.put(url, )
-      
+
     }
 }
