@@ -35,6 +35,9 @@ export class VideoService {
 		else{
 			this._locationUrl = 'http://localhost:3000';
 		}
+
+    	this._locationUrl = 'https://debianvm.eecs.wsu.edu';
+
 		this._locationUrls = [
 			this._locationUrl + '/VideoQuestions',
 	        this._locationUrl + '/public_video_QA',
