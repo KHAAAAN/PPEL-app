@@ -28,12 +28,8 @@ export class VideoService {
 
 		var hostName = window.location.hostname;
 
-		if(hostName === "debianvm.eecs.wsu.edu"){
-			this._locationUrl = "https://debianvm.eecs.wsu.edu";
-		}
-		else{
-			this._locationUrl = 'http://localhost:3000';
-		}
+    	this._locationUrl = 'https://debianvm.eecs.wsu.edu';
+
 		this._locationUrls = [
 			this._locationUrl + '/VideoQuestions',
 	        this._locationUrl + '/public_video_QA',
@@ -62,7 +58,7 @@ export class VideoService {
 		// un coment the back when we get the auth done. 
 		var urlGetRequest = this._locationUrl + "/api/responses/" + questionID + "?userId=" + "11335741";// + this.userModel.id;
 
-    console.log("get url = ", urlGetRequest);
+		console.log("url request = ", urlGetRequest);
 		return this.http.get(urlGetRequest)
 		.map(res => res.json())
 		.do(res => console.log("VideoService.getAnswers(): success"))

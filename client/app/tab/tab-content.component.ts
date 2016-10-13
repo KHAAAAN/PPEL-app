@@ -166,7 +166,7 @@ export class TabContent implements OnInit {
 		
 		if (this.selectedQuestion.length > 0 && vid){
 			console.log("setting question src to: ", this.selectedQuestion[0].path);
-			vid.src({"type":"video/mp4", "src":this.selectedQuestion[0].path});
+			vid.src({"type":"video/mp4", "src": 'https://debianvm.eecs.wsu.edu' + this.selectedQuestion[0].path});
 		}
 
 		/*if (this.selectedQuestion.length > 0){
@@ -221,7 +221,7 @@ export class TabContent implements OnInit {
 						var avid = videojs("avideo");
 
 						console.log("setting answer src to: ", res.path);
-						avid.src(res.path);
+						avid.src('https://debianvm.eecs.wsu.edu' + res.path);
 
 						// Make new recorder
 						
@@ -231,7 +231,7 @@ export class TabContent implements OnInit {
 					var qvid = videojs("qvideo");
 
 					console.log("setting question src to: ", this.selectedQuestion[0].path);
-					qvid.src(this.selectedQuestion[0].path);
+					qvid.src('https://debianvm.eecs.wsu.edu' + this.selectedQuestion[0].path);
 
 					/*try {
 						// If we have a rvideo already present, then dispose it. 
