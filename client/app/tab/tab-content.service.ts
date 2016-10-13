@@ -8,8 +8,7 @@ export class TabContentService {
 		var hostName = window.location.hostname;
 
 		if(hostName === "debianvm.eecs.wsu.edu"){
-			//this._locationUrl = 'http://debianvm.eecs.wsu.edu:3000';
-			this._locationUrl = 'https://debianvm.eecs.wsu.edu:3000';
+			this._locationUrl = 'https://debianvm.eecs.wsu.edu';
 		}
 		else{
 			this._locationUrl = 'http://localhost:3000';
@@ -17,7 +16,6 @@ export class TabContentService {
 		this._locationUrl += '/app/tab_content/tabpages.json';
 	}
 
-	//private _locationUrl = 'http://localhost:3000/app/tabcontent';
 	private _locationUrl: string;
 
 	getTabContent() {
