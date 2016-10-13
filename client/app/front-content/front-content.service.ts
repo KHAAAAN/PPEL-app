@@ -14,7 +14,7 @@ export class FrontContentService {
 		console.log(hostName);
 
 		if(hostName === "debianvm.eecs.wsu.edu"){
-			this._locationUrl = 'https://debianvm.eecs.wsu.edu:3000/app/front-content/images.json';
+			this._locationUrl = 'https://debianvm.eecs.wsu.edu/app/front-content/images.json';
 		}
 		else{
 			this._locationUrl = 'http://localhost:3000/app/front-content/images.json';
