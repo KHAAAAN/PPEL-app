@@ -39,7 +39,6 @@ export class TabContent implements OnInit {
 	public files = <any>[];
 	public activeTab: any;
 	public allQuestionVideos = <any>[];
-	public videoPaths = <any>[];
 	public answerVideo: any;
 	public questionVideo: any;
 	public selectedQuestion = <any>[];
@@ -102,7 +101,6 @@ export class TabContent implements OnInit {
 		this._videoService.getPublicVideos()
 			.subscribe(res=>{
 				for(var i = 0; i < res.length; i++){
-					this.videoPaths.push(res[i].path);
 					this.allQuestionVideos.push(res[i]);
 				}
 
@@ -233,7 +231,7 @@ export class TabContent implements OnInit {
 					var qvid = videojs("qvideo");
 
 					console.log("setting question src to: ", this.selectedQuestion[0].path);
-					qvid.src( this.selectedQuestion[0].path);
+					qvid.src(this.selectedQuestion[0].path);
 
 					/*try {
 						// If we have a rvideo already present, then dispose it. 
@@ -246,8 +244,6 @@ export class TabContent implements OnInit {
 					}*/
 
 					this._videoService.makeRecorder();
-
-
 					console.log("ans vid data: " + this.answerVideo);
 				});
 		
