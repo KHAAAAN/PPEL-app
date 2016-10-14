@@ -62,18 +62,13 @@ export class VideoService {
 		var response = this.http.get(urlGetRequest);
 		console.log("response = ", response);
 
-			var toReturn = response
-			.map(res => res.json())
-			.do(res => console.log("VideoService.getAnswers(): success"))
-			.catch(this.handleError);
+		var toReturn = response
+		.map(res => res.json())
+		.do(res => console.log("VideoService.getAnswers(): success"))
+		.catch(this.handleError);
 
-			//throw new Error("Testing");
-
-			console.log("toReturn = ", toReturn);
-			return toReturn;
-	
-	
-
+		console.log("toReturn = ", toReturn);
+		return toReturn;
 	}
 
 
@@ -81,8 +76,10 @@ export class VideoService {
 	saveRecording(fname: string, isPublic: boolean, questionID: string){
 		//this.userModel = this._userService.getUserModel();	
 
-		var postRequest = this._locationUrl + "/api/responses/" + questionID + "?userid=" + "11335741";// + this.userModel.id
+		var postRequest = this._locationUrl + "/api/responses/" + questionID + "?userid=" + "11335741"// + this.userModel.id
 				+ "?video=" + fname;
+
+		console.log("Post Request = ", postRequest);
 
 		return this.http.post(postRequest, null, null)
 		//.map(() => )

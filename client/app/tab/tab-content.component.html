@@ -13,10 +13,12 @@
 			<select 
 				(change)="setSelectedQuestion($event.target.value)"
 				(change)="setQuestionAndAnswer($event.target.value)">
-				<option selected> Questions </option>
+				<option selected *ngIf="allQuestionVideos?.length == 0">Questions</option>
 				<option *ngFor="let question of allQuestionVideos" [value]="question._id">{{question.title}}</option>
+				
 			</select>
-
+			
+			
 	
 
 			<!--div *ngIf="selectedQuestion?.length > 0"-->
@@ -35,13 +37,13 @@
 							</video>
 						</div>
 
-						<div *ngIf="selectedQuestion?.length <= 0" id="rvideoDiv">
+						<!--div *ngIf="selectedQuestion?.length <= 0" id="rvideoDiv"  style="display:none">
 							<video id="rvideo" class="video-js vjs-default-skin" controls 
-								preload="auto" width="200" height="100" style="display:none">
+								preload="auto" width="200" height="100">
 							</video>
-						</div>
+						</div-->
 
-						<div *ngIf="selectedQuestion?.length > 0" id="rvideoDiv">
+						<div id="rvideoDiv">
 							<video id="rvideo" class="video-js vjs-default-skin" controls 
 								preload="auto" width="200" height="100">
 							</video>

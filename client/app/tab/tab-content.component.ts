@@ -97,16 +97,27 @@ export class TabContent implements OnInit {
 
 	// This will get the 'public' videos, meaning the video questions
 	getPublicVideos(){
+		console.log("in get public videos");
 
 		this._videoService.getPublicVideos()
 			.subscribe(res=>{
 				for(var i = 0; i < res.length; i++){
 					this.allQuestionVideos.push(res[i]);
+
+					if (i == 0)
+					{
+						console.log("setting default questions and answers");
+						this.setSelectedQuestion(this.allQuestionVideos[0]._id);
+						this.setQuestionAndAnswer(this.allQuestionVideos[0]._id);
+					}
 				}
+			
 
 			});
 
-			console.log("all Videos = ", this.allQuestionVideos);
+		
+
+		console.log("all Videos = ", this.allQuestionVideos);
 	}
 
 	setSelectedQuestion(questionID: string) {
@@ -229,10 +240,11 @@ export class TabContent implements OnInit {
 					console.log("setting answer src to: ", res.path);
 					avid.src('https://debianvm.eecs.wsu.edu' + res.path);
 					setA = true;
-				}
 
-				this._videoService.makeRecorder();
-				console.log("ans vid data: " + this.answerVideo);
+					console.log("making a new recorder");
+					this._videoService.makeRecorder();
+
+				}
 			});
 
 			// Set Question
@@ -245,6 +257,10 @@ export class TabContent implements OnInit {
 			// Set Answer if not set already
 			if (!setA)
 			{
+				console.log("making a new recorder");
+					this._videoService.makeRecorder();
+				//this._videoService.makeRecorder();
+
 				console.log("setting answer src to: ");
 				avid.src("");
 			}
@@ -258,12 +274,9 @@ export class TabContent implements OnInit {
 				}
 			}
 			});
-			
-			
-		 	console.log("leving set answer func");	
 
-					
-		
+
+		 	console.log("leving set answer func");
 		}
 
 
