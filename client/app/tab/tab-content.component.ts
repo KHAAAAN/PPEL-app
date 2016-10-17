@@ -254,16 +254,13 @@ export class TabContent implements OnInit {
 	saveVideoAnswer() {
 		console.log("Saving");
 		this._videoService.saveRecording(this.selectedQuestion[0]._id);
-		//var base = this.getBase(this.selectedQuestion[0].path);
-		//console.log("saving..");
-		//this._videoService.saveAnswer(1, base, this.selectedQuestion[0].isPublic, this.selectedQuestion[0].questionID);
 	}
 
 
 	deleteVideoAnswer(){
 		console.log("deleting..");
-		this.answerVideo = [];
-		this._videoService.deleteAnswer(this.selectedQuestion[0].questionID);
+		//this.answerVideo = [];
+		this._videoService.deleteAnswer(this.answerVideo._id);
 	}
 
 	private getBase(path: string){
