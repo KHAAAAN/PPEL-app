@@ -37,14 +37,14 @@ export class Tab implements AfterViewInit{
 
 		url = encodeURI(url);
 		let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-    let body = JSON.stringify({"tab_content" : this.content});
+    	let options = new RequestOptions({ headers: headers });
+	    let body = JSON.stringify({"tab_content" : this.content});
 
-    console.log("body:" + body);
-    console.log("url: " + url);
+	    console.log("body:" + body);
+	    console.log("url: " + url);
 
-    this.http.put(url, body, options)
-      .map((res: Response) => res.json());
+	    this.http.put(url, body, options)
+     		.map((res: Response) => res.json()).subscribe();;
 
 
     }
