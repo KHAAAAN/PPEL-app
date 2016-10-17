@@ -48,7 +48,7 @@
     "systemjs": "0.19.27",
     "xmlhttprequest": "^1.8.0",
     "zone.js": "^0.6.23",
-    "ng2-ckeditor": "latest"
+    "ng2-ckeditor": "1.1.4"
   },
   "devDependencies": {
     "concurrently": "^2.2.0",

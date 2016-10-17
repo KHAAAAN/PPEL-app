@@ -28,15 +28,22 @@ export class Tab implements AfterViewInit{
 
 	handleSave(event: Event) {
 		var url: string;
-		url = "localhost:3000/tabPages/" + this.title;
+		var hostName = window.location.hostname;
+
+		if(hostName === "debianvm.eecs.wsu.edu"){
+ 			url = "https://debianvm.eecs.wsu.edu/tabpages/" + this.title;
+  		}		  		
+  		else{		  		
+  			url = "localhost:3000/tabpages/" + this.title;
+  		}
+
 		url = encodeURI(url);
 		let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
         let body = JSON.stringify({"tab_content" : this.content});
-        console.log(body);
-        console.log("ur: " + url);
+        console.log("body:" + body);
+        console.log("url: " + url);
         this.http.put(url, body);
-        //this.http.put(url, )
 
     }
 }
