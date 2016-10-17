@@ -181,41 +181,6 @@ export class TabContent implements OnInit {
 			console.log("setting question src to: ", this.selectedQuestion[0].path);
 			vid.src({"type":"video/mp4", "src": 'https://debianvm.eecs.wsu.edu' + this.selectedQuestion[0].path});
 		}
-
-		/*if (this.selectedQuestion.length > 0){
-			var vid = videojs("avideo");
-			console.log(vid);
-		}
-
-		//Loops through all avaliable videos and grabs the selected one
-		for (var i = 0; i < this.videoData.length; i++){
-			if (questionID == this.videoData[i]._id){
-				//This wasnt chaning the source properly
-				this.selectedQuestion[0] = this.videoData[i];
-
-				//This properly changes the source of the videojs player
-				if (this.selectedQuestion.length > 0 && vid){
-					vid.src({"type":"video/mp4", "src":this.selectedQuestion[0].path});
-				}
-				break;
-			}
-		}*/
-
-		//Get answers
-		/*this._videoService.getYourAnswers(questionID)
-			.subscribe(res=>{
-				if (res.length > 0){
-					this.answervideoData.push(res[0]);
-					//Have to dispose to create new recorders
-					var rec = videojs("record1");
-					rec.dispose();
-				}
-				else {
-					this.answervideoData = [];
-				}
-
-				console.log("ans vid data: " + this.answervideoData);
-			});*/
 	}
 
 	setQuestionAndAnswer(questionID: string){
@@ -278,24 +243,6 @@ export class TabContent implements OnInit {
 
 		 	console.log("leving set answer func");
 		}
-
-
-		/*if(this.getUser() != undefined){
-			this._videoService.getYourAnswers(questionID)
-				.subscribe(res=>{
-					if (res.length > 0){
-						this.answervideoData.push(res[0]);
-						//Have to dispose to create new recorders
-						var rec = videojs("record1");
-						rec.dispose();
-					}
-					else {
-						this.answervideoData = [];
-					}
-
-					console.log("ans vid data: " + this.answervideoData);
-				});
-		}*/
 	}
 
 	getCanSave(index: number){
@@ -305,9 +252,8 @@ export class TabContent implements OnInit {
 	}
 
 	saveVideoAnswer() {
-
-
 		console.log("Saving");
+		this._videoService.saveRecording(this.selectedQuestion[0]._id);
 		//var base = this.getBase(this.selectedQuestion[0].path);
 		//console.log("saving..");
 		//this._videoService.saveAnswer(1, base, this.selectedQuestion[0].isPublic, this.selectedQuestion[0].questionID);
@@ -317,7 +263,7 @@ export class TabContent implements OnInit {
 	deleteVideoAnswer(){
 		console.log("deleting..");
 		this.answerVideo = [];
-		this._videoService.deleteAnswer(1, this.selectedQuestion[0].questionID);
+		this._videoService.deleteAnswer(this.selectedQuestion[0].questionID);
 	}
 
 	private getBase(path: string){

@@ -73,18 +73,32 @@ export class VideoService {
 
 
 	//TODO: MAKE SURE blob.name is unique to the user's vidoes later!!!
-	saveRecording(fname: string, isPublic: boolean, questionID: string){
+	saveRecording(questionID: string){
 		//this.userModel = this._userService.getUserModel();	
+		console.log("Inside of Save Recording");
 
-		var postRequest = this._locationUrl + "/api/responses/" + questionID + "?userid=" + "11335741"// + this.userModel.id
-				+ "?video=" + fname;
+		return new Promise((resolve, reject) => {
+			let formData: FormData = new FormData(),
+				xhr: XMLHttpRequest = new XMLHttpRequest();
+			
+			formData.append("video", this.players[0].recordedData.video, this.players[0].recordedData.video.name);
+			formData.append("userId", 11335741);
 
-		console.log("Post Request = ", postRequest);
+			xhr.onreadystatechange = () => {
+				if (xhr.readyState === 4) {
+					if (xhr.status === 200) {
+						resolve(JSON.parse(xhr.response));
+					} else {
+						reject(xhr.response);
+					}
+				}
+			};
+			
+			var requestURL = this._locationUrl + "/api/responses/" + questionID;
 
-		return this.http.post(postRequest, null, null)
-		//.map(() => )
-		.do(res => console.log("VideoService.saveRecording(): success"))
-		.catch(this.handleError);
+			xhr.open('POST', requestURL, true);
+			xhr.send(formData);
+		});
 	}
 
 	saveAnswer(index: number, fname: string, isPublic: boolean, questionID: string){
@@ -133,26 +147,23 @@ export class VideoService {
 		xhr.send(formData);
 
 		//now save the Recording in database
-		this.saveRecording(fname, isPublic, questionID)
-		.subscribe();
+		//this.saveRecording(fname, isPublic, questionID)
+		//.subscribe();
 		
 	}
 
-	deleteA(questionID: string){
+	deleteAnswer(responseID: string){
 		//this.userModel = this._userService.getUserModel();
+		var xhr = new XMLHttpRequest();
 
-		var deletRequest = this._locationUrl + "/api/questions/" + questionID + "?userId=" + "11335741";// + this.userModel.id;
+		var deletRequest = this._locationUrl + "/api/responses/" + responseID;
 
-		return this.http.delete(deletRequest)
-		.do((res: any) => console.log("VideoService.deleteRecording(): success"))
-		.catch(this.handleError);
-	}
+		console.log("delete request = ", deletRequest);
 
-
-	//Need to pass in user ID
-	deleteAnswer(index: number, questionID: string){
-		this.deleteA(questionID)
-		.subscribe();
+		xhr.open("DELETE", deletRequest);
+		xhr.send();
+		console.log("VideoService.deleteRecording(): success");
+		return;
 	}
 
 	makeRecorder(){
