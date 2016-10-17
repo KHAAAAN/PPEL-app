@@ -18,6 +18,7 @@ export class Tab implements AfterViewInit{
 	@Input() active = false;
 	@Input('tabTitle') title: string = "";
 	@Input('content') content: string = "";
+	@Input('enableEditor') canEditTab: boolean = true;
 
 	@ViewChild('article') input:any;
 

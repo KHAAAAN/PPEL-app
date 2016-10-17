@@ -4,16 +4,17 @@
 
 		<ng-content></ng-content>
 
-		<ckeditor
-		    [(ngModel)]="content"
-		    [config]="configSettings"
+		<div *ngIf="canEditTab==true" >
+			<ckeditor
+			    [(ngModel)]="content"
+			    [config]="configSettings"
 
-		    debounce="500">
-  		</ckeditor>
-  		<br>
-  		<button (click) = "handleSave($event)"> Save </button>
-  		<br>
-  		<hr>
-
+			    debounce="500">
+	  		</ckeditor>
+	  		<br>
+	  		<button (click) = "handleSave($event)"> Save </button>
+	  		<br>
+	  		<hr>
+  		</div>
 </div>
 
