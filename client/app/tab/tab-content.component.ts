@@ -131,7 +131,8 @@ export class TabContent implements OnInit {
 
 				//This wasnt chaning the source properly
 				this.selectedQuestion[0] = this.allQuestionVideos[i];
-				this.questionText = this.selectedQuestion[0]._id;
+
+				this.questionText = this.selectedQuestion[0].text;
 
 				this.questionVideo = this.allQuestionVideos[i];
 

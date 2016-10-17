@@ -22,7 +22,7 @@
 	
 
 			<!--div *ngIf="selectedQuestion?.length > 0"-->
-				<div id="questionTextBox">
+				<div id="questionTextBox" *ngIf="questionText != undefined">
 					<header>Question Text:</header>
 					<div id="text"> {{questionText}} </div>
 				</div>
