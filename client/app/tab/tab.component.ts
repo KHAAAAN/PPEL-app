@@ -21,8 +21,6 @@ export class Tab implements AfterViewInit{
 
 	@ViewChild('article') input:any;
 
-	private configSettings: string;
-
 	ngAfterViewInit(){
 	}
 
@@ -32,18 +30,22 @@ export class Tab implements AfterViewInit{
 
 		if(hostName === "debianvm.eecs.wsu.edu"){
  			url = "https://debianvm.eecs.wsu.edu/tabpages/" + this.title;
-  		}		  		
-  		else{		  		
-  			url = "localhost:3000/tabpages/" + this.title;
+  		}
+  		else{
+  			url = "http://localhost:3000/tabpages/" + this.title;
   		}
 
 		url = encodeURI(url);
 		let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
-        let body = JSON.stringify({"tab_content" : this.content});
-        console.log("body:" + body);
-        console.log("url: " + url);
-        this.http.put(url, body);
+    let options = new RequestOptions({ headers: headers });
+    let body = JSON.stringify({"tab_content" : this.content});
+
+    console.log("body:" + body);
+    console.log("url: " + url);
+
+    this.http.put(url, body, options)
+      .map((res: Response) => res.json());
+
 
     }
 }
