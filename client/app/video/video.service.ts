@@ -45,9 +45,10 @@ export class VideoService {
 		var urlGetRequest = this._locationUrl + "/api/questions";
 
 		return this.http.get(urlGetRequest)
-		.map((res:any) => res.json())
-		.do((res:any) => console.log("VideoService.getPublicVideos(): success"))
-		.catch(this.handleError);
+			.map((res:any) => res.json())
+			.do((res:any) => console.log("VideoService.getPublicVideos(): success"))
+			.catch(this.handleError);
+			
 	}
 
 	getYourAnswers(questionID: string){	
@@ -154,16 +155,27 @@ export class VideoService {
 
 	deleteAnswer(responseID: string){
 		//this.userModel = this._userService.getUserModel();
-		var xhr = new XMLHttpRequest();
 
-		var deletRequest = this._locationUrl + "/api/responses/" + responseID;
+		return new Promise((resolve, reject) => {
+			let formData: FormData = new FormData(),
+				xhr: XMLHttpRequest = new XMLHttpRequest();
 
-		console.log("delete request = ", deletRequest);
-
-		xhr.open("DELETE", deletRequest);
-		xhr.send();
-		console.log("VideoService.deleteRecording(): success");
-		return;
+			xhr.onreadystatechange = () => {
+				if (xhr.readyState === 4) {
+					if (xhr.status === 200) {
+						resolve(JSON.parse(xhr.response));
+					} else {
+						reject(xhr.response);
+					}
+				}
+			};
+			
+			var deletRequest = this._locationUrl + "/api/responses/" + responseID;
+			console.log("delete request = ", deletRequest);
+			
+			xhr.open("DELETE", deletRequest);
+			xhr.send();
+		});
 	}
 
 	makeRecorder(){
@@ -180,7 +192,7 @@ export class VideoService {
 					debug: true,
 					videoMimeType: "video/mp4"
 				}
-			}
+			},
 		});
 
 		//All these arrays had 'index' as its posistion into it. 
@@ -206,6 +218,12 @@ export class VideoService {
 			_this.canSave[0] = true;
 			_this.canDelete[0] = true;
 
+			// Setting unsaved video src
+			var url = window.URL.createObjectURL(player.recordedData.video);
+			console.log("url: ", url);
+			
+			var avid = videojs("unsavedVideo");
+			avid.src(url);
 		});
 
 		this.players[0] = player;

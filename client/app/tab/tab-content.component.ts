@@ -111,11 +111,8 @@ export class TabContent implements OnInit {
 						this.setQuestionAndAnswer(this.allQuestionVideos[0]._id);
 					}
 				}
-			
 
 			});
-
-		
 
 		console.log("all Videos = ", this.allQuestionVideos);
 	}
@@ -164,17 +161,6 @@ export class TabContent implements OnInit {
 
 		
 		console.log("questionData = ", this.allQuestionVideos);
-		
-
-		/*var vid: any;
-
-		for (var i = 0; i < 50000; i++) {
-			try {
-				vid = videojs("qvideo")
-			} catch (error) {
-				vid = null;
-			}
-		}*/
 
 		console.log("selected q len = ", this.selectedQuestion.length);
 		
@@ -186,8 +172,10 @@ export class TabContent implements OnInit {
 
 	setQuestionAndAnswer(questionID: string){
 		console.log("in set q and a");
-
 		var setA = false;
+
+		// set answer to undefined
+		this.answerVideo = undefined;
 
 		if (this.selectedQuestion.length > 0)
 		{
@@ -224,9 +212,10 @@ export class TabContent implements OnInit {
 			if (!setA)
 			{
 				console.log("making a new recorder");
-					this._videoService.makeRecorder();
+				this._videoService.makeRecorder();
 				//this._videoService.makeRecorder();
 
+				//avid.disose();
 				console.log("setting answer src to: ");
 				avid.src("");
 			}
@@ -253,15 +242,34 @@ export class TabContent implements OnInit {
 	}
 
 	saveVideoAnswer() {
-		console.log("Saving");
-		this._videoService.saveRecording(this.selectedQuestion[0]._id);
+		console.log("Saving..");
+
+		if (this.answerVideo != undefined)
+		{
+			this._videoService.deleteAnswer(this.answerVideo._id);
+		}
+
+		var savedVideo = this._videoService.saveRecording(this.selectedQuestion[0]._id);
+
+		// this .then will wait for the call to return before executing. 
+		savedVideo.then(result => { 
+			this.setQuestionAndAnswer(this.selectedQuestion[0]._id);
+		});
+		
 	}
 
 
 	deleteVideoAnswer(){
 		console.log("deleting..");
 		//this.answerVideo = [];
-		this._videoService.deleteAnswer(this.answerVideo._id);
+		this._videoService.deleteAnswer(this.answerVideo._id)
+		.then( result => {
+			this.setQuestionAndAnswer(this.selectedQuestion[0]._id);
+		});
+
+		var avid = videojs("avideo");
+		console.log("setting answer src to: ", "Empty");
+		avid.src('');
 	}
 
 	private getBase(path: string){

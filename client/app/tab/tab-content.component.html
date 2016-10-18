@@ -9,17 +9,14 @@
 
 	<tab tabTitle="Videos"> 
 
+
 		<!-- this all needs to be in a ngif usermodal is not undefined -->
 			<select 
 				(change)="setSelectedQuestion($event.target.value)"
 				(change)="setQuestionAndAnswer($event.target.value)">
-				<option selected *ngIf="allQuestionVideos?.length == 0">Questions</option>
+				<option selected *ngIf="allQuestionVideos?.length == 0">No Questions Available</option>
 				<option *ngFor="let question of allQuestionVideos" [value]="question._id">{{question.title}}</option>
-				
 			</select>
-			
-			
-	
 
 			<!--div *ngIf="selectedQuestion?.length > 0"-->
 				<div id="questionTextBox" *ngIf="questionText != undefined">
@@ -49,8 +46,12 @@
 							</video>
 						</div>
 
-						<button (click)="SaveModal.open()" id="saveQuestion" class="btn btn-md btn-primary">
-							<i class="fa fa-save"></i>
+					</tab>
+
+					<tab tabTitle="Answers">
+
+						<button (click)="SaveModal.open()" id="saveQuestion" class="btn btn-lg btn-primary">
+							<i class="fa fa-save"> Save</i>
 						</button>
 							
 						<modal #SaveModal title="Are You Sure?"
@@ -60,6 +61,7 @@
 							[hideCloseButton]="true"
 							[closeOnEscape]="false"
 							[closeOnOutsideClick]="true"
+							(onSubmit)="SaveModal.close()"
 							(onSubmit)="saveVideoAnswer()">
 					
 							<modal-header>
@@ -72,18 +74,8 @@
 							</modal-content>
 						</modal>
 
-					</tab>
-
-					<tab tabTitle="Answers">
-
-						<div id="avideoDiv">
-							<video id="avideo" class="video-js vjs-default-skin" controls
-								preload="auto" width="550" height="284">
-							</video>
-						</div>
-
-						<button (click)="DeleteModal.open()" id="saveQuestion" class="btn btn-md btn-primary">
-							<i class="fa fa-trash-o"></i>
+						<button (click)="DeleteModal.open()" id="saveQuestion" class="btn btn-lg btn-primary">
+							<i class="fa fa-trash-o"> Delete</i>
 						</button>
 
 						<modal #DeleteModal title="Are You Sure?"
@@ -91,8 +83,9 @@
 							submitButtonLabel="Delete"
 							modalClass="btn btn-info btn-lg"
 							[hideCloseButton]="true"
-							[closeOnEscape]="false"
+							[closeOnEscape]="true"
 							[closeOnOutsideClick]="true"
+							(onSubmit)="DeleteModal.close()"
 							(onSubmit)="deleteVideoAnswer()">
 					
 							<modal-header>
@@ -105,13 +98,17 @@
 							</modal-content>
 						</modal>
 
-
-
-						<!--div id="recordedReplay">
-							<video id="recordedReplay" class="video-js vjs-default-skin"controls
+						<div id="avideoDiv">
+							<video id="avideo" class="video-js vjs-default-skin" controls
 								preload="auto" width="550" height="284">
 							</video>
-						</div-->
+						</div>
+
+						<div id="unsavedVideoDiv">
+							<video id="unsavedVideo" class="video-js vjs-default-skin" controls
+								preload="auto" width="550" height="284">
+							</video>
+						</div>
 
 					</tab>
 				</tabs>		
