@@ -4,6 +4,11 @@ div{
 	display: flex;
 }
 
+#symp_jobswidget{
+	height: 250px;
+	width: 250px;
+}
+
 #front-main{
 	background: white;
 	border-style:solid;

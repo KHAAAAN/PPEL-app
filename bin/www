@@ -4,6 +4,9 @@
  * Module dependencies.
  */
 
+require('babel-register');
+require('babel-polyfill');
+
 var app = require('../app');
 var debug = require('debug')('PPEL-app-test:server');
 var http = require('http');

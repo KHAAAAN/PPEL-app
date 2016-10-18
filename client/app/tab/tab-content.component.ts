@@ -25,11 +25,11 @@ export class Ready implements AfterViewInit{
 	}
 	ngAfterViewInit(){
 		console.log(this.index);
-		this._videoService.makeRecorder()//this.index)
+		this._videoService.makeRecorder();
 	}
 }
 
-@Component({ selector: 'tab-content', 
+@Component({ selector: 'tab-content',
 	templateUrl: 'app/tab/tab-content.component.html',
 	styleUrls: ['app/tab/tab-content.component.css'],
 	providers: [VideoService]
@@ -91,19 +91,18 @@ export class TabContent implements OnInit {
 				}
 			}
 	    },
-	    error => this.errorMessage = <any>error
-        );
+      (error: any) => this.errorMessage = <any>error
+    );
 	}
 
 	// This will get the 'public' videos, meaning the video questions
 	getPublicVideos(){
 
 		this._videoService.getPublicVideos()
-			.subscribe(res=>{
+			.subscribe((res:any)=>{
 				for(var i = 0; i < res.length; i++){
 					this.allQuestionVideos.push(res[i]);
 				}
-
 			});
 
 			console.log("all Videos = ", this.allQuestionVideos);
@@ -125,8 +124,8 @@ export class TabContent implements OnInit {
 				this.questionVideo = this.allQuestionVideos[i];
 
 				//This properly changes the source of the videojs player
-				console.log("selectedQuestion from inside select q = ", this.selectedQuestion)
-				
+				console.log("selectedQuestion from inside select q = ", this.selectedQuestion);
+
 				break;
 			}
 		}
@@ -150,9 +149,9 @@ export class TabContent implements OnInit {
 			console.log(vid);
 		}
 
-		
+
 		console.log("questionData = ", this.allQuestionVideos);
-		
+
 
 		/*var vid: any;
 
@@ -165,7 +164,7 @@ export class TabContent implements OnInit {
 		}*/
 
 		console.log("selected q len = ", this.selectedQuestion.length);
-		
+
 		if (this.selectedQuestion.length > 0 && vid){
 			console.log("setting question src to: ", this.selectedQuestion[0].path);
 			vid.src({"type":"video/mp4", "src": 'https://debianvm.eecs.wsu.edu' + this.selectedQuestion[0].path});
@@ -217,8 +216,8 @@ export class TabContent implements OnInit {
 			var answer = this._videoService.getYourAnswers(questionID);
 			console.log("after getting answer, before setting src");
 			console.log("answer = ", answer);
-			
-			answer.subscribe(res=>{
+
+			answer.subscribe((res:any)=>{
 				if (res != undefined){
 					console.log("res = ", res);
 					//this.answervideoData.push(res);
@@ -258,12 +257,12 @@ export class TabContent implements OnInit {
 				}
 			}
 			});
-			
-			
-		 	console.log("leving set answer func");	
 
-					
-		
+
+		 	console.log("leving set answer func");
+
+
+
 		}
 
 
@@ -319,4 +318,5 @@ export class TabContent implements OnInit {
 		this.getContent();
 		this.getPublicVideos();
 	}
+
 }

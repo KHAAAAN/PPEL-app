@@ -7,6 +7,11 @@
     "installAll": "cd client && npm i && cd .. && npm i"
   },
   "dependencies": {
+    "babel": "^6.5.2",
+    "babel-polyfill": "^6.13.0",
+    "babel-preset-es2015": "^6.14.0",
+    "babel-register": "^6.14.0",
+    "babel-cli" : "latest",
     "body-parser": "^1.15.2",
     "cookie-parser": "~1.4.3",
     "debug": "~2.2.0",
