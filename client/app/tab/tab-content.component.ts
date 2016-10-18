@@ -111,7 +111,6 @@ export class TabContent implements OnInit {
 						this.setQuestionAndAnswer(this.allQuestionVideos[0]._id);
 					}
 				}
-
 			});
 
 		console.log("all Videos = ", this.allQuestionVideos);
@@ -245,6 +244,12 @@ export class TabContent implements OnInit {
 	deleteVideoAnswer(){
 		console.log("deleting..");
 		//this.answerVideo = [];
+
+		if (this.answerVideo == undefined)
+		{
+			return;
+		}
+
 		this._videoService.deleteAnswer(this.answerVideo._id)
 		.then( result => {
 			this.setQuestionAndAnswer(this.selectedQuestion[0]._id);
@@ -265,13 +270,13 @@ export class TabContent implements OnInit {
 	}
 
 	ngOnInit(){
-		this.getContent();
-		this.getPublicVideos();
-
 		var avid = videojs("avideo");
 		avid.hide();
 
 		var unSavVid = videojs("unsavedVideo");
 		unSavVid.hide();
+
+		this.getContent();
+		this.getPublicVideos();
 	}
 }

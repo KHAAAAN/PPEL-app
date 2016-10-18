@@ -89,7 +89,6 @@ export class VideoService {
 				formData.append("video", this.unSavedRecording.recordedData, this.unSavedRecording.recordedData.name);
 			}
 
-
 			formData.append("userId", 11335741);
 
 			xhr.onreadystatechange = () => {
@@ -154,7 +153,7 @@ export class VideoService {
 	makeRecorder(){
 		var _this = this;
 
-		var player = videojs("rvideo",
+		var player = new videojs("rvideo",
 		{
 			controls: true,
 			plugins: {
@@ -168,18 +167,24 @@ export class VideoService {
 			},
 		});
 
-		//All these arrays had 'index' as its posistion into it. 
+		//If we want to reset the recorder uncomment this line,
+		// I think saving the same recorder makes sense
+		// we would also need to set the unsaved video to hide. 
+		//player.recorder.reset();
 
 		// error handling
 		player.on('deviceError', function()
 		{
 			console.log('device error:', player.deviceErrorCode);
 			_this.canSave = false;
-		}); // user clicked the record button and started recording
+		});
+		
+		 // user clicked the record button and started recording
 		player.on('startRecord', function()
 		{
 			console.log('started recording!');
 		});
+		
 		// user completed recording and stream is available
 		player.on('finishRecord', function()
 		{
