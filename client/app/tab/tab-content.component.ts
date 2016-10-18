@@ -221,6 +221,12 @@ export class TabContent implements OnInit {
 	saveVideoAnswer() {
 		console.log("Saving..");
 
+		if (this._videoService.canSave == false)
+		{
+			console.log("Unable to save recording");
+			return;
+		}
+
 		if (this.answerVideo != undefined)
 		{
 			this._videoService.deleteAnswer(this.answerVideo._id);

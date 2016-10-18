@@ -14,16 +14,14 @@ export class VideoService {
 	private _locationUrl: string;
 	private _locationUrls = <any>[];
 
-	public players = <any>[];
-	public canSave: boolean[];
-	public canDelete: boolean[];
+	public unSavedRecording: any;
+	public canSave: boolean;
 
 	constructor(private http : Http, 
 		        private _userService: UserService,
 		        private sanitizer: DomSanitizer){
 		this.userModel = _userService.getUserModel();	
-		this.canSave = [];
-		this.canDelete = [];
+		this.canSave = false;
 		console.log("this.canSave = ", this.canSave);
 
 		var hostName = window.location.hostname;
@@ -43,6 +41,7 @@ export class VideoService {
 		//console.log("UserModel = ", this.userModel);
 		
 		var urlGetRequest = this._locationUrl + "/api/questions";
+		console.log("url request: ", urlGetRequest);
 
 		return this.http.get(urlGetRequest)
 			.map((res:any) => res.json())
@@ -83,11 +82,11 @@ export class VideoService {
 				xhr: XMLHttpRequest = new XMLHttpRequest();
 			
 			if (/chrome/i.test( navigator.userAgent ) === true){
-				formData.append("video", this.players[0].recordedData.video, this.players[0].recordedData.video.name);
+				formData.append("video", this.unSavedRecording.recordedData.video, this.unSavedRecording.recordedData.video.name);
 			} else if ( (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) === true){
-				formData.append("video", this.players[0].recordedData, this.players[0].recordedData.name);
+				formData.append("video", this.unSavedRecording.recordedData, this.unSavedRecording.recordedData.name);
 			} else {
-				formData.append("video", this.players[0].recordedData, this.players[0].recordedData.name);
+				formData.append("video", this.unSavedRecording.recordedData, this.unSavedRecording.recordedData.name);
 			}
 
 
@@ -135,6 +134,23 @@ export class VideoService {
 		});
 	}
 
+	SetUnsavedVideoSrc() {
+		// Setting unsaved video src
+		var url: string;
+
+		if (/chrome/i.test( navigator.userAgent ) === true){
+			url = window.URL.createObjectURL(this.unSavedRecording.recordedData.video);
+		} else if ( (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) === true){
+			url = window.URL.createObjectURL(this.unSavedRecording.recordedData);
+		} else {
+			url = window.URL.createObjectURL(this.unSavedRecording.recordedData);
+		}
+
+		var unSavVid = videojs("unsavedVideo");
+		unSavVid.src(url);
+		unSavVid.show();
+	}
+
 	makeRecorder(){
 		var _this = this;
 
@@ -158,13 +174,11 @@ export class VideoService {
 		player.on('deviceError', function()
 		{
 			console.log('device error:', player.deviceErrorCode);
-			_this.canSave[0] = false;
-			_this.canDelete[0] = false;
+			_this.canSave = false;
 		}); // user clicked the record button and started recording
 		player.on('startRecord', function()
 		{
 			console.log('started recording!');
-			_this.canDelete[0] = false;
 		});
 		// user completed recording and stream is available
 		player.on('finishRecord', function()
@@ -172,22 +186,13 @@ export class VideoService {
 			// the blob object contains the recorded data that
 			// can be downloaded by the user, stored on server etc.
 			console.log('finished recording: ', player.recordedData);
-			_this.canSave[0] = true;
-			_this.canDelete[0] = true;
+			_this.canSave = true;
 
-			// Setting unsaved video src
-			var url = window.URL.createObjectURL(player.recordedData.video);
-			console.log("url: ", url);
-			
-			var unSavVid = videojs("unsavedVideo");
-			unSavVid.src(url);
-			unSavVid.show();
+			_this.unSavedRecording = player;
+			_this.SetUnsavedVideoSrc();
 
 		});
-
-		this.players[0] = player;
 	}
-
 
 	private handleError (error: Response) {
 		console.log("errors4days");
