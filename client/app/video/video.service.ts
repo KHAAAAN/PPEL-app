@@ -82,7 +82,15 @@ export class VideoService {
 			let formData: FormData = new FormData(),
 				xhr: XMLHttpRequest = new XMLHttpRequest();
 			
-			formData.append("video", this.players[0].recordedData.video, this.players[0].recordedData.video.name);
+			if (/chrome/i.test( navigator.userAgent ) === true){
+				formData.append("video", this.players[0].recordedData.video, this.players[0].recordedData.video.name);
+			} else if ( (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) === true){
+				formData.append("video", this.players[0].recordedData, this.players[0].recordedData.name);
+			} else {
+				formData.append("video", this.players[0].recordedData, this.players[0].recordedData.name);
+			}
+
+
 			formData.append("userId", 11335741);
 
 			xhr.onreadystatechange = () => {
@@ -100,57 +108,6 @@ export class VideoService {
 			xhr.open('POST', requestURL, true);
 			xhr.send(formData);
 		});
-	}
-
-	saveAnswer(index: number, fname: string, isPublic: boolean, questionID: string){
-		//this.userModel = this._userService.getUserModel();	
-			
-		console.log("testSave");
-		var xhr = new XMLHttpRequest();
-		var blob: any;
-
-		//if chrome
-		if (/chrome/i.test( navigator.userAgent ) === true){
-			blob = this.players[index].recordedData.video;
-		}
-		//if firefox
-		else if ( (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) === true){
-			blob = this.players[index].recordedData;
-		}
-		//TODO: support all browsers
-		else{
-			blob = this.players[index].recordedData;
-		}
-
-		console.log(blob);
-		console.log(blob.video);
-		//var blob = this.players[index].recordedData;
-
-		var formData = new FormData();
-		//formData.append("blob", blob, blob.name);
-		
-		console.log(this.userModel);
-		formData.append('fname', fname);
-		//formData.append('id', this.userModel.id);
-		formData.append('file', blob);
-
-		if(this._locationUrl == 'https://debianvm.eecs.wsu.edu:3000'){
-			xhr.open("POST", "https://debianvm.eecs.wsu.edu:3001/upload", true);
-		}
-		else{
-			xhr.open("POST", "http://localhost:3001/upload", true);
-		}
-		//xhr.responseType = 'blob';
-		xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-		//xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		//xhr.setRequestHeader("Content-type", "multipart/form-data");
-		
-		xhr.send(formData);
-
-		//now save the Recording in database
-		//this.saveRecording(fname, isPublic, questionID)
-		//.subscribe();
-		
 	}
 
 	deleteAnswer(responseID: string){
