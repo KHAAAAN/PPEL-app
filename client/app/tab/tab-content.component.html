@@ -32,7 +32,8 @@
 
 				<tabs id="videoTabs">
 					<tab tabTitle="Questions"
-						active="true">
+						active="true"
+						enableEditor="false">
 
 						<div id="qvideoDiv">
 							<video id="qvideo" class="video-js vjs-default-skin" controls
@@ -48,7 +49,8 @@
 
 					</tab>
 
-					<tab tabTitle="Answers">
+					<tab tabTitle="Answers"
+						enableEditor="false">
 
 						<button (click)="SaveModal.open()" id="saveQuestion" class="btn btn-lg btn-primary">
 							<i class="fa fa-save"> Save</i>
@@ -109,7 +111,6 @@
 								preload="auto" width="550" height="284">
 							</video>
 						</div>
-
 					</tab>
 				</tabs>	
 
@@ -123,6 +124,5 @@
 			<h1> You are signed in as {{userModel.id}} </h1>
 			<a (click)=logout()>Click here to logout</a>			
 		</div>
-
+		</tab>
 </tabs>
-

@@ -80,6 +80,8 @@ export class VideoService {
 		return new Promise((resolve, reject) => {
 			let formData: FormData = new FormData(),
 				xhr: XMLHttpRequest = new XMLHttpRequest();
+
+			formData.append("userId", 11335741);
 			
 			if (/chrome/i.test( navigator.userAgent ) === true){
 				formData.append("video", this.unSavedRecording.recordedData.video, this.unSavedRecording.recordedData.video.name);
@@ -88,8 +90,6 @@ export class VideoService {
 			} else {
 				formData.append("video", this.unSavedRecording.recordedData, this.unSavedRecording.recordedData.name);
 			}
-
-			formData.append("userId", 11335741);
 
 			xhr.onreadystatechange = () => {
 				if (xhr.readyState === 4) {
