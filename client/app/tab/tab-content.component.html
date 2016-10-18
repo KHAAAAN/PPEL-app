@@ -1,5 +1,6 @@
+
+
 <tabs id="main-tabs">
-	<!--TODO pass in a model instead of properties-->
 
 	<tab *ngFor="let file of files"
 		active="{{file.active}}"
@@ -7,8 +8,13 @@
 		content="{{file.content}}">
 	</tab>
 
-	<tab tabTitle="Videos"> 
+	<tab tabTitle="CougLink">
+    	<div id="symp_jobswidget" data-csm="wsu-csm.symplicity.com" data-id="852ea8bf194185c51c98bf979145d7be" data-size="auto" data-css="http://wsu-csm.symplicity.com/css/list_jobs_widget.css" data-logo="" data-header-text="Engineering" data-width="320" data-height="480" data-sort-by="posting_date" ></div>
+	</tab>
 
+
+	<tab tabTitle="Videos"
+		enableEditor="false"> 
 
 		<!-- this all needs to be in a ngif usermodal is not undefined -->
 			<select 
@@ -33,12 +39,6 @@
 								preload="auto" width="550" height="284">						
 							</video>
 						</div>
-
-						<!--div *ngIf="selectedQuestion?.length <= 0" id="rvideoDiv"  style="display:none">
-							<video id="rvideo" class="video-js vjs-default-skin" controls 
-								preload="auto" width="200" height="100">
-							</video>
-						</div-->
 
 						<div id="rvideoDiv">
 							<video id="rvideo" class="video-js vjs-default-skin" controls 
@@ -111,10 +111,7 @@
 						</div>
 
 					</tab>
-				</tabs>		
-				
-			<!--/div-->
-
+				</tabs>	
 
 		<div *ngIf="userModel == undefined">
 			<h1> You are currently not logged in.</h1>
@@ -126,14 +123,6 @@
 			<h1> You are signed in as {{userModel.id}} </h1>
 			<a (click)=logout()>Click here to logout</a>			
 		</div>
-	</tab>
-
-
-
-	<!-- idk why this has to be here to work, will fix in future -->
-	<!--tab>
-	</tab-->
-	<!--uncomment above tab if you don't have an extra tab other than the ones in *ngFor-->
 
 </tabs>
 

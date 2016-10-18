@@ -8,6 +8,8 @@ import { HttpModule } from '@angular/http';
 import { routing, appRoutingProviders } from './app.routing';
 import { HomeComponent } from './home/home.component';
 
+import {CKEditorModule} from 'ng2-ckeditor';
+
 import {HiddenNavbarComponent} from './hidden_navbar/hidden-navbar.component';
 import {NavbarComponent} from './navbar/navbar.component';
 import {NavbarItem} from './navbar/navbar-item.component';
@@ -34,6 +36,7 @@ import {FrontContentComponent} from './front-content/front-content.component';
   	HttpModule,
   	routing,
     FormsModule,
+    CKEditorModule,
     ModalModule
   ],
   declarations: [
