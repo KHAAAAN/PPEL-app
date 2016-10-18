@@ -222,8 +222,10 @@ export class VideoService {
 			var url = window.URL.createObjectURL(player.recordedData.video);
 			console.log("url: ", url);
 			
-			var avid = videojs("unsavedVideo");
-			avid.src(url);
+			var unSavVid = videojs("unsavedVideo");
+			unSavVid.src(url);
+			unSavVid.show();
+
 		});
 
 		this.players[0] = player;

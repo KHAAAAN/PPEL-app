@@ -145,31 +145,6 @@ export class TabContent implements OnInit {
 		}*/
 	}
 
-	//Gets a question based on the questionID
-	getQuestion(questionID: string){
-		console.log("In get questions want id = ", questionID);
-		console.log("selectedQuestion length = ", this.selectedQuestion.length);
-		console.log("selectedQuestion[0] = ", this.selectedQuestion[0]);
-		console.log("selectedQuestion = ", this.selectedQuestion);
-
-
-		//Checks to make sure the videojs player is visible, if not, it wont work
-		if (this.selectedQuestion.length > 0){
-			var vid = videojs("qvideo");
-			console.log(vid);
-		}
-
-		
-		console.log("questionData = ", this.allQuestionVideos);
-
-		console.log("selected q len = ", this.selectedQuestion.length);
-		
-		if (this.selectedQuestion.length > 0 && vid){
-			console.log("setting question src to: ", this.selectedQuestion[0].path);
-			vid.src({"type":"video/mp4", "src": 'https://debianvm.eecs.wsu.edu' + this.selectedQuestion[0].path});
-		}
-	}
-
 	setQuestionAndAnswer(questionID: string){
 		console.log("in set q and a");
 		var setA = false;
@@ -193,6 +168,7 @@ export class TabContent implements OnInit {
 					var avid = videojs("avideo");
 					console.log("setting answer src to: ", res.path);
 					avid.src('https://debianvm.eecs.wsu.edu' + res.path);
+					avid.show();
 					setA = true;
 
 					console.log("making a new recorder");
@@ -218,6 +194,7 @@ export class TabContent implements OnInit {
 				//avid.disose();
 				console.log("setting answer src to: ");
 				avid.src("");
+				avid.hide();
 			}
 
 			avid.errors({
@@ -270,6 +247,7 @@ export class TabContent implements OnInit {
 		var avid = videojs("avideo");
 		console.log("setting answer src to: ", "Empty");
 		avid.src('');
+		avid.hide();
 	}
 
 	private getBase(path: string){
@@ -283,5 +261,11 @@ export class TabContent implements OnInit {
 	ngOnInit(){
 		this.getContent();
 		this.getPublicVideos();
+
+		var avid = videojs("avideo");
+		avid.hide();
+
+		var unSavVid = videojs("unsavedVideo");
+		unSavVid.hide();
 	}
 }
