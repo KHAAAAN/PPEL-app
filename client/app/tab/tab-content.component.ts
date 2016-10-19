@@ -164,7 +164,7 @@ export class TabContent implements OnInit {
 					this.answerVideo = res;
 					console.log("answerVideo = ", this.answerVideo.path);
 
-					var avid = videojs("avideo");
+					let avid = videojs("avideo");
 					console.log("setting answer src to: ", res.path);
 					avid.src('https://debianvm.eecs.wsu.edu' + res.path);
 					avid.show();
@@ -177,11 +177,11 @@ export class TabContent implements OnInit {
 			});
 
 			// Set Question
-			var qvid = videojs("qvideo");
+			let qvid = videojs("qvideo");
 			console.log("setting question src to: ", this.selectedQuestion[0].path);
 			qvid.src('https://debianvm.eecs.wsu.edu' + this.selectedQuestion[0].path);
 
-			var avid = videojs("avideo");
+			let avid = videojs("avideo");
 
 			// Set Answer if not set already
 			if (!setA)
@@ -252,7 +252,8 @@ export class TabContent implements OnInit {
 			this.setQuestionAndAnswer(this.selectedQuestion[0]._id);
 		});
 
-		var avid = videojs("avideo");
+		
+		let avid = videojs("avideo");
 		console.log("setting answer src to: ", "Empty");
 		avid.src('');
 		avid.hide();
@@ -267,7 +268,7 @@ export class TabContent implements OnInit {
 	}
 
 	ngOnInit(){
-		var avid = videojs("avideo");
+		let avid = videojs("avideo");
 		avid.hide();
 
 		var unSavVid = videojs("unsavedVideo");
