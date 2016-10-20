@@ -22,7 +22,6 @@ import {Ready, TabContent} from './tab/tab-content.component'
 
 import {ModalModule} from "ng2-modal";
 
-
 /*
 import {TabContentService} from './tab/tab-content.service';
 */

@@ -14,16 +14,14 @@ export class VideoService {
 	private _locationUrl: string;
 	private _locationUrls = <any>[];
 
-	public players = <any>[];
-	public canSave: boolean[];
-	public canDelete: boolean[];
+	public unSavedRecording: any;
+	public canSave: boolean;
 
 	constructor(private http : Http, 
 		        private _userService: UserService,
 		        private sanitizer: DomSanitizer){
 		this.userModel = _userService.getUserModel();	
-		this.canSave = [];
-		this.canDelete = [];
+		this.canSave = false;
 		console.log("this.canSave = ", this.canSave);
 
 		var hostName = window.location.hostname;
@@ -43,11 +41,13 @@ export class VideoService {
 		//console.log("UserModel = ", this.userModel);
 		
 		var urlGetRequest = this._locationUrl + "/api/questions";
+		console.log("url request: ", urlGetRequest);
 
 		return this.http.get(urlGetRequest)
-		.map((res:any) => res.json())
-		.do((res:any) => console.log("VideoService.getPublicVideos(): success"))
-		.catch(this.handleError);
+			.map((res:any) => res.json())
+			.do((res:any) => console.log("VideoService.getPublicVideos(): success"))
+			.catch(this.handleError);
+			
 	}
 
 	getYourAnswers(questionID: string){	
@@ -62,106 +62,98 @@ export class VideoService {
 		var response = this.http.get(urlGetRequest);
 		console.log("response = ", response);
 
-			var toReturn = response
-			.map(res => res.json())
-			.do(res => console.log("VideoService.getAnswers(): success"))
-			.catch(this.handleError);
+		var toReturn = response
+		.map(res => res.json())
+		.do(res => console.log("VideoService.getAnswers(): success"))
+		.catch(this.handleError);
 
-			//throw new Error("Testing");
-
-			console.log("toReturn = ", toReturn);
-			return toReturn;
-	
-	
-
+		console.log("toReturn = ", toReturn);
+		return toReturn;
 	}
 
 
 	//TODO: MAKE SURE blob.name is unique to the user's vidoes later!!!
-	saveRecording(fname: string, isPublic: boolean, questionID: string){
+	saveRecording(questionID: string){
 		//this.userModel = this._userService.getUserModel();	
+		console.log("Inside of Save Recording");
 
-		var postRequest = this._locationUrl + "/api/responses/" + questionID + "?userid=" + "11335741";// + this.userModel.id
-				+ "?video=" + fname;
+		return new Promise((resolve, reject) => {
+			let formData: FormData = new FormData(),
+				xhr: XMLHttpRequest = new XMLHttpRequest();
 
-		return this.http.post(postRequest, null, null)
-		//.map(() => )
-		.do(res => console.log("VideoService.saveRecording(): success"))
-		.catch(this.handleError);
-	}
-
-	saveAnswer(index: number, fname: string, isPublic: boolean, questionID: string){
-		//this.userModel = this._userService.getUserModel();	
+			formData.append("userId", 11335741);
 			
-		console.log("testSave");
-		var xhr = new XMLHttpRequest();
-		var blob: any;
+			if (/chrome/i.test( navigator.userAgent ) === true){
+				formData.append("video", this.unSavedRecording.recordedData.video, this.unSavedRecording.recordedData.video.name);
+			} else if ( (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) === true){
+				formData.append("video", this.unSavedRecording.recordedData, this.unSavedRecording.recordedData.name);
+			} else {
+				formData.append("video", this.unSavedRecording.recordedData, this.unSavedRecording.recordedData.name);
+			}
 
-		//if chrome
-		if (/chrome/i.test( navigator.userAgent ) === true){
-			blob = this.players[index].recordedData.video;
-		}
-		//if firefox
-		else if ( (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) === true){
-			blob = this.players[index].recordedData;
-		}
-		//TODO: support all browsers
-		else{
-			blob = this.players[index].recordedData;
-		}
+			xhr.onreadystatechange = () => {
+				if (xhr.readyState === 4) {
+					if (xhr.status === 200) {
+						resolve(JSON.parse(xhr.response));
+					} else {
+						reject(xhr.response);
+					}
+				}
+			};
+			
+			var requestURL = this._locationUrl + "/api/responses/" + questionID;
 
-		console.log(blob);
-		console.log(blob.video);
-		//var blob = this.players[index].recordedData;
-
-		var formData = new FormData();
-		//formData.append("blob", blob, blob.name);
-		
-		console.log(this.userModel);
-		formData.append('fname', fname);
-		//formData.append('id', this.userModel.id);
-		formData.append('file', blob);
-
-		if(this._locationUrl == 'https://debianvm.eecs.wsu.edu:3000'){
-			xhr.open("POST", "https://debianvm.eecs.wsu.edu:3001/upload", true);
-		}
-		else{
-			xhr.open("POST", "http://localhost:3001/upload", true);
-		}
-		//xhr.responseType = 'blob';
-		xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-		//xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-		//xhr.setRequestHeader("Content-type", "multipart/form-data");
-		
-		xhr.send(formData);
-
-		//now save the Recording in database
-		this.saveRecording(fname, isPublic, questionID)
-		.subscribe();
-		
+			xhr.open('POST', requestURL, true);
+			xhr.send(formData);
+		});
 	}
 
-	deleteA(questionID: string){
+	deleteAnswer(responseID: string){
 		//this.userModel = this._userService.getUserModel();
 
-		var deletRequest = this._locationUrl + "/api/questions/" + questionID + "?userId=" + "11335741";// + this.userModel.id;
+		return new Promise((resolve, reject) => {
+			let formData: FormData = new FormData(),
+				xhr: XMLHttpRequest = new XMLHttpRequest();
 
-		return this.http.delete(deletRequest)
-		.do((res: any) => console.log("VideoService.deleteRecording(): success"))
-		.catch(this.handleError);
+			xhr.onreadystatechange = () => {
+				if (xhr.readyState === 4) {
+					if (xhr.status === 200) {
+						resolve(JSON.parse(xhr.response));
+					} else {
+						reject(xhr.response);
+					}
+				}
+			};
+			
+			var deletRequest = this._locationUrl + "/api/responses/" + responseID;
+			console.log("delete request = ", deletRequest);
+			
+			xhr.open("DELETE", deletRequest);
+			xhr.send();
+		});
 	}
 
+	SetUnsavedVideoSrc() {
+		// Setting unsaved video src
+		var url: string;
 
-	//Need to pass in user ID
-	deleteAnswer(index: number, questionID: string){
-		this.deleteA(questionID)
-		.subscribe();
+		if (/chrome/i.test( navigator.userAgent ) === true){
+			url = window.URL.createObjectURL(this.unSavedRecording.recordedData.video);
+		} else if ( (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) === true){
+			url = window.URL.createObjectURL(this.unSavedRecording.recordedData);
+		} else {
+			url = window.URL.createObjectURL(this.unSavedRecording.recordedData);
+		}
+
+		var unSavVid = videojs("unsavedVideo");
+		unSavVid.src(url);
+		unSavVid.show();
 	}
 
 	makeRecorder(){
 		var _this = this;
 
-		var player = videojs("rvideo",
+		var player = new videojs("rvideo",
 		{
 			controls: true,
 			plugins: {
@@ -172,37 +164,40 @@ export class VideoService {
 					debug: true,
 					videoMimeType: "video/mp4"
 				}
-			}
+			},
 		});
 
-		//All these arrays had 'index' as its posistion into it. 
+		//If we want to reset the recorder uncomment this line,
+		// I think saving the same recorder makes sense
+		// we would also need to set the unsaved video to hide. 
+		//player.recorder.reset();
 
 		// error handling
 		player.on('deviceError', function()
 		{
 			console.log('device error:', player.deviceErrorCode);
-			_this.canSave[0] = false;
-			_this.canDelete[0] = false;
-		}); // user clicked the record button and started recording
+			_this.canSave = false;
+		});
+		
+		 // user clicked the record button and started recording
 		player.on('startRecord', function()
 		{
 			console.log('started recording!');
-			_this.canDelete[0] = false;
 		});
+		
 		// user completed recording and stream is available
 		player.on('finishRecord', function()
 		{
 			// the blob object contains the recorded data that
 			// can be downloaded by the user, stored on server etc.
 			console.log('finished recording: ', player.recordedData);
-			_this.canSave[0] = true;
-			_this.canDelete[0] = true;
+			_this.canSave = true;
+
+			_this.unSavedRecording = player;
+			_this.SetUnsavedVideoSrc();
 
 		});
-
-		this.players[0] = player;
 	}
-
 
 	private handleError (error: Response) {
 		console.log("errors4days");

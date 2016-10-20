@@ -97,15 +97,23 @@ export class TabContent implements OnInit {
 
 	// This will get the 'public' videos, meaning the video questions
 	getPublicVideos(){
+		console.log("in get public videos");
 
 		this._videoService.getPublicVideos()
 			.subscribe((res:any)=>{
 				for(var i = 0; i < res.length; i++){
 					this.allQuestionVideos.push(res[i]);
+
+					if (i == 0)
+					{
+						console.log("setting default questions and answers");
+						this.setSelectedQuestion(this.allQuestionVideos[0]._id);
+						this.setQuestionAndAnswer(this.allQuestionVideos[0]._id);
+					}
 				}
 			});
 
-			console.log("all Videos = ", this.allQuestionVideos);
+		console.log("all Videos = ", this.allQuestionVideos);
 	}
 
 	setSelectedQuestion(questionID: string) {
@@ -119,7 +127,8 @@ export class TabContent implements OnInit {
 
 				//This wasnt chaning the source properly
 				this.selectedQuestion[0] = this.allQuestionVideos[i];
-				this.questionText = this.selectedQuestion[0]._id;
+
+				this.questionText = this.selectedQuestion[0].text;
 
 				this.questionVideo = this.allQuestionVideos[i];
 
@@ -135,81 +144,12 @@ export class TabContent implements OnInit {
 		}*/
 	}
 
-	//Gets a question based on the questionID
-	getQuestion(questionID: string){
-		console.log("In get questions want id = ", questionID);
-		console.log("selectedQuestion length = ", this.selectedQuestion.length);
-		console.log("selectedQuestion[0] = ", this.selectedQuestion[0]);
-		console.log("selectedQuestion = ", this.selectedQuestion);
-
-
-		//Checks to make sure the videojs player is visible, if not, it wont work
-		if (this.selectedQuestion.length > 0){
-			var vid = videojs("qvideo");
-			console.log(vid);
-		}
-
-
-		console.log("questionData = ", this.allQuestionVideos);
-
-
-		/*var vid: any;
-
-		for (var i = 0; i < 50000; i++) {
-			try {
-				vid = videojs("qvideo")
-			} catch (error) {
-				vid = null;
-			}
-		}*/
-
-		console.log("selected q len = ", this.selectedQuestion.length);
-
-		if (this.selectedQuestion.length > 0 && vid){
-			console.log("setting question src to: ", this.selectedQuestion[0].path);
-			vid.src({"type":"video/mp4", "src": 'https://debianvm.eecs.wsu.edu' + this.selectedQuestion[0].path});
-		}
-
-		/*if (this.selectedQuestion.length > 0){
-			var vid = videojs("avideo");
-			console.log(vid);
-		}
-
-		//Loops through all avaliable videos and grabs the selected one
-		for (var i = 0; i < this.videoData.length; i++){
-			if (questionID == this.videoData[i]._id){
-				//This wasnt chaning the source properly
-				this.selectedQuestion[0] = this.videoData[i];
-
-				//This properly changes the source of the videojs player
-				if (this.selectedQuestion.length > 0 && vid){
-					vid.src({"type":"video/mp4", "src":this.selectedQuestion[0].path});
-				}
-				break;
-			}
-		}*/
-
-		//Get answers
-		/*this._videoService.getYourAnswers(questionID)
-			.subscribe(res=>{
-				if (res.length > 0){
-					this.answervideoData.push(res[0]);
-					//Have to dispose to create new recorders
-					var rec = videojs("record1");
-					rec.dispose();
-				}
-				else {
-					this.answervideoData = [];
-				}
-
-				console.log("ans vid data: " + this.answervideoData);
-			});*/
-	}
-
 	setQuestionAndAnswer(questionID: string){
 		console.log("in set q and a");
-
 		var setA = false;
+
+		// set answer to undefined
+		this.answerVideo = undefined;
 
 		if (this.selectedQuestion.length > 0)
 		{
@@ -224,28 +164,36 @@ export class TabContent implements OnInit {
 					this.answerVideo = res;
 					console.log("answerVideo = ", this.answerVideo.path);
 
-					var avid = videojs("avideo");
+					let avid = videojs("avideo");
 					console.log("setting answer src to: ", res.path);
 					avid.src('https://debianvm.eecs.wsu.edu' + res.path);
+					avid.show();
 					setA = true;
-				}
 
-				this._videoService.makeRecorder();
-				console.log("ans vid data: " + this.answerVideo);
+					console.log("making a new recorder");
+					this._videoService.makeRecorder();
+
+				}
 			});
 
 			// Set Question
-			var qvid = videojs("qvideo");
+			let qvid = videojs("qvideo");
 			console.log("setting question src to: ", this.selectedQuestion[0].path);
 			qvid.src('https://debianvm.eecs.wsu.edu' + this.selectedQuestion[0].path);
 
-			var avid = videojs("avideo");
+			let avid = videojs("avideo");
 
 			// Set Answer if not set already
 			if (!setA)
 			{
+				console.log("making a new recorder");
+				this._videoService.makeRecorder();
+				//this._videoService.makeRecorder();
+
+				//avid.disose();
 				console.log("setting answer src to: ");
 				avid.src("");
+				avid.hide();
 			}
 
 			avid.errors({
@@ -257,31 +205,7 @@ export class TabContent implements OnInit {
 				}
 			}
 			});
-
-
-		 	console.log("leving set answer func");
-
-
-
 		}
-
-
-		/*if(this.getUser() != undefined){
-			this._videoService.getYourAnswers(questionID)
-				.subscribe(res=>{
-					if (res.length > 0){
-						this.answervideoData.push(res[0]);
-						//Have to dispose to create new recorders
-						var rec = videojs("record1");
-						rec.dispose();
-					}
-					else {
-						this.answervideoData = [];
-					}
-
-					console.log("ans vid data: " + this.answervideoData);
-				});
-		}*/
 	}
 
 	getCanSave(index: number){
@@ -291,19 +215,48 @@ export class TabContent implements OnInit {
 	}
 
 	saveVideoAnswer() {
+		console.log("Saving..");
 
+		if (this._videoService.canSave == false)
+		{
+			console.log("Unable to save recording");
+			return;
+		}
 
-		console.log("Saving");
-		//var base = this.getBase(this.selectedQuestion[0].path);
-		//console.log("saving..");
-		//this._videoService.saveAnswer(1, base, this.selectedQuestion[0].isPublic, this.selectedQuestion[0].questionID);
+		if (this.answerVideo != undefined)
+		{
+			this._videoService.deleteAnswer(this.answerVideo._id);
+		}
+
+		var savedVideo = this._videoService.saveRecording(this.selectedQuestion[0]._id);
+
+		// this .then will wait for the call to return before executing. 
+		savedVideo.then(result => { 
+			this.setQuestionAndAnswer(this.selectedQuestion[0]._id);
+		});
+		
 	}
 
 
 	deleteVideoAnswer(){
 		console.log("deleting..");
-		this.answerVideo = [];
-		this._videoService.deleteAnswer(1, this.selectedQuestion[0].questionID);
+		//this.answerVideo = [];
+
+		if (this.answerVideo == undefined)
+		{
+			return;
+		}
+
+		this._videoService.deleteAnswer(this.answerVideo._id)
+		.then( result => {
+			this.setQuestionAndAnswer(this.selectedQuestion[0]._id);
+		});
+
+		
+		let avid = videojs("avideo");
+		console.log("setting answer src to: ", "Empty");
+		avid.src('');
+		avid.hide();
 	}
 
 	private getBase(path: string){
@@ -315,6 +268,12 @@ export class TabContent implements OnInit {
 	}
 
 	ngOnInit(){
+		let avid = videojs("avideo");
+		avid.hide();
+
+		var unSavVid = videojs("unsavedVideo");
+		unSavVid.hide();
+
 		this.getContent();
 		this.getPublicVideos();
 	}

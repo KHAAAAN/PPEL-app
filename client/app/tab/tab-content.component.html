@@ -12,127 +12,117 @@
     	<div id="symp_jobswidget" data-csm="wsu-csm.symplicity.com" data-id="852ea8bf194185c51c98bf979145d7be" data-size="auto" data-css="http://wsu-csm.symplicity.com/css/list_jobs_widget.css" data-logo="" data-header-text="Engineering" data-width="320" data-height="480" data-sort-by="posting_date" ></div>
 	</tab>
 
-  <tab tabTitle="Videos"
-        enableEditor="false">
 
-    <!-- this all needs to be in a ngif usermodal is not undefined -->
-    <select
-      (change)="setSelectedQuestion($event.target.value)"
-      (change)="setQuestionAndAnswer($event.target.value)">
-      <option selected> Questions </option>
-      <option *ngFor="let question of allQuestionVideos" [value]="question._id">{{question.title}}</option>
-    </select>
+	<tab tabTitle="Videos"
+		enableEditor="false"> 
 
+		<!-- this all needs to be in a ngif usermodal is not undefined -->
+			<select 
+				(change)="setSelectedQuestion($event.target.value)"
+				(change)="setQuestionAndAnswer($event.target.value)">
+				<option selected *ngIf="allQuestionVideos?.length == 0">No Questions Available</option>
+				<option *ngFor="let question of allQuestionVideos" [value]="question._id">{{question.title}}</option>
+			</select>
 
+			<!--div *ngIf="selectedQuestion?.length > 0"-->
+				<div id="questionTextBox" *ngIf="questionText != undefined">
+					<header>Question Text:</header>
+					<div id="text"> {{questionText}} </div>
+				</div>
 
-    <!--div *ngIf="selectedQuestion?.length > 0"-->
-    <div id="questionTextBox">
-      <header>Question Text:</header>
-      <div id="text"> {{questionText}} </div>
-    </div>
+				<tabs id="videoTabs">
+					<tab tabTitle="Questions"
+						active="true"
+						enableEditor="false">
 
-    <tabs id="videoTabs">
-      <tab tabTitle="Questions"
-           active="true"
-           enableEditor="false">
+						<div id="qvideoDiv">
+							<video id="qvideo" class="video-js vjs-default-skin" controls
+								preload="auto" width="550" height="284">						
+							</video>
+						</div>
 
-        <div id="qvideoDiv">
-          <video id="qvideo" class="video-js vjs-default-skin" controls
-                 preload="auto" width="550" height="284">
-          </video>
-        </div>
+						<div id="rvideoDiv">
+							<video id="rvideo" class="video-js vjs-default-skin" controls 
+								preload="auto" width="200" height="100">
+							</video>
+						</div>
 
-        <div *ngIf="selectedQuestion?.length <= 0" id="rvideoDiv">
-          <video id="rvideo" class="video-js vjs-default-skin" controls
-                 preload="auto" width="200" height="100" style="display:none">
-          </video>
-        </div>
+					</tab>
 
-        <div *ngIf="selectedQuestion?.length > 0" id="rvideoDiv2">
-          <video id="rvideo2" class="video-js vjs-default-skin" controls
-                 preload="auto" width="200" height="100">
-          </video>
-        </div>
+					<tab tabTitle="Answers"
+						enableEditor="false">
 
-        <button (click)="SaveModal.open()" id="saveQuestion" class="btn btn-md btn-primary">
-          <i class="fa fa-save"></i>
-        </button>
+						<button (click)="SaveModal.open()" id="saveQuestion" class="btn btn-lg btn-primary">
+							<i class="fa fa-save"> Save</i>
+						</button>
+							
+						<modal #SaveModal title="Are You Sure?"
+							cancelButtonLabel="Cancel"
+							submitButtonLabel="Save"
+							modalClass="btn btn-info btn-lg"
+							[hideCloseButton]="true"
+							[closeOnEscape]="false"
+							[closeOnOutsideClick]="true"
+							(onSubmit)="SaveModal.close()"
+							(onSubmit)="saveVideoAnswer()">
+					
+							<modal-header>
+								This will overwrite your previously saved video!
+							</modal-header>
+						
+							<modal-content>
+								By clicking 'Save', you will replace your previously saved video with this new one, this action cannot
+								be undone. 
+							</modal-content>
+						</modal>
 
-        <modal #SaveModal title="Are You Sure?"
-               cancelButtonLabel="Cancel"
-               submitButtonLabel="Save"
-               modalClass="btn btn-info btn-lg"
-               [hideCloseButton]="true"
-               [closeOnEscape]="false"
-               [closeOnOutsideClick]="true"
-               (onSubmit)="saveVideoAnswer()">
+						<button (click)="DeleteModal.open()" id="saveQuestion" class="btn btn-lg btn-primary">
+							<i class="fa fa-trash-o"> Delete</i>
+						</button>
 
-          <modal-header>
-            This will overwrite your previously saved video!
-          </modal-header>
+						<modal #DeleteModal title="Are You Sure?"
+							cancelButtonLabel="Cancel"
+							submitButtonLabel="Delete"
+							modalClass="btn btn-info btn-lg"
+							[hideCloseButton]="true"
+							[closeOnEscape]="true"
+							[closeOnOutsideClick]="true"
+							(onSubmit)="DeleteModal.close()"
+							(onSubmit)="deleteVideoAnswer()">
+					
+							<modal-header>
+								This will permanently delete your saved video!
+							</modal-header>
+						
+							<modal-content>
+								By clicking 'Delete', you will permanently remove your saved video, this action cannot
+								be undone. 
+							</modal-content>
+						</modal>
 
-          <modal-content>
-            By clicking 'Save', you will replace your previously saved video with this new one, this action cannot
-            be undone.
-          </modal-content>
-        </modal>
+						<div id="avideoDiv">
+							<video id="avideo" class="video-js vjs-default-skin" controls
+								preload="auto" width="550" height="284">
+							</video>
+						</div>
 
-      </tab>
+						<div id="unsavedVideoDiv">
+							<video id="unsavedVideo" class="video-js vjs-default-skin" controls
+								preload="auto" width="550" height="284">
+							</video>
+						</div>
+					</tab>
+				</tabs>	
 
-      <tab tabTitle="Answers"
-      enableEditor="false">
+		<div *ngIf="userModel == undefined">
+			<h1> You are currently not logged in.</h1>
+			<h1> But you may still view public question videos.</h1>
+			<a href="https://secure.wsu.edu/login/fidlogin.aspx?dest=https://debianvm.eecs.wsu.edu">Click here to login.</a>
+		</div>
 
-        <div id="avideoDiv">
-          <video id="avideo" class="video-js vjs-default-skin" controls
-                 preload="auto" width="550" height="284">
-          </video>
-        </div>
-
-        <button (click)="DeleteModal.open()" id="saveQuestion2" class="btn btn-md btn-primary">
-          <i class="fa fa-trash-o"></i>
-        </button>
-
-        <modal #DeleteModal title="Are You Sure?"
-               cancelButtonLabel="Cancel"
-               submitButtonLabel="Delete"
-               modalClass="btn btn-info btn-lg"
-               [hideCloseButton]="true"
-               [closeOnEscape]="false"
-               [closeOnOutsideClick]="true"
-               (onSubmit)="deleteVideoAnswer()">
-
-          <modal-header>
-            This will perminatly delete your saved video!
-          </modal-header>
-
-          <modal-content>
-            By clicking 'Delete', you will perminatly remove your saved video, this action cannot
-            be undone.
-          </modal-content>
-        </modal>
-
-
-
-        <!--div id="recordedReplay">
-                        <video id="recordedReplay" class="video-js vjs-default-skin"controls
-                            preload="auto" width="550" height="284">
-                        </video>
-                    </div-->
-
-      </tab>
-    </tabs>
-
-    <div *ngIf="userModel == undefined">
-      <h1> You are currently not logged in.</h1>
-      <h1> But you may still view public question videos.</h1>
-      <a href="https://secure.wsu.edu/login/fidlogin.aspx?dest=https://debianvm.eecs.wsu.edu">Click here to login.</a>
-    </div>
-
-    <div *ngIf="userModel">
-      <h1> You are signed in as {{userModel.id}} </h1>
-      <a (click)=logout()>Click here to logout</a>
-    </div>
-  </tab>
-
+		<div *ngIf="userModel">
+			<h1> You are signed in as {{userModel.id}} </h1>
+			<a (click)=logout()>Click here to logout</a>			
+		</div>
+		</tab>
 </tabs>
-
