@@ -51,6 +51,21 @@
 					<tab tabTitle="Answers"
 						enableEditor="false">
 
+						<div id="avideoDiv">
+							Saved Video
+							<video id="avideo" class="video-js vjs-default-skin" controls
+								preload="auto" width="550" height="284">
+							</video>
+						</div>
+
+						<div id="unsavedVideoDiv">
+							Not Saved Video
+
+							<video id="unsavedVideo" class="video-js vjs-default-skin" controls
+								preload="auto" width="550" height="284">
+							</video>
+						</div>
+
 						<button (click)="SaveModal.open()" id="saveQuestion" class="btn btn-lg btn-primary">
 							<i class="fa fa-save"> Save</i>
 						</button>
@@ -98,18 +113,6 @@
 								be undone. 
 							</modal-content>
 						</modal>
-
-						<div id="avideoDiv">
-							<video id="avideo" class="video-js vjs-default-skin" controls
-								preload="auto" width="550" height="284">
-							</video>
-						</div>
-
-						<div id="unsavedVideoDiv">
-							<video id="unsavedVideo" class="video-js vjs-default-skin" controls
-								preload="auto" width="550" height="284">
-							</video>
-						</div>
 					</tab>
 				</tabs>	
 

@@ -233,6 +233,8 @@ export class TabContent implements OnInit {
 		// this .then will wait for the call to return before executing. 
 		savedVideo.then(result => { 
 			this.setQuestionAndAnswer(this.selectedQuestion[0]._id);
+			let unsavedVideo = videojs("unsavedVideo");
+			unsavedVideo.hide();
 		});
 		
 	}

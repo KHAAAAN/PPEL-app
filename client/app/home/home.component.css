@@ -152,9 +152,6 @@ img {
 	display: table;
 }
 
-.col-sm-8{
-}
-
 .fluid.folio{
 	height: 3250px;
 	max-width: 1188px;
@@ -165,6 +162,23 @@ img {
 
 .row {
 	width: 100%;
+}
+
+#welcomeDiv{
+	color: black;
+	font-size: 2em;
+	display: block;
+	width: 96%;
+	padding-left: 2%;
+}
+
+#welcomeText {
+	color: #888;
+	font-size: large;
+	padding-left: 3em;
+	border: 2px solid  #DCDCDC;
+	padding-top: .75em;
+	padding-bottom: .75em;
 }
 
 @media screen and (max-width: 990px){
@@ -194,5 +208,6 @@ img {
 
 	#top-bar {
 		display: block;
+		z-index: 1;
 	}
 }

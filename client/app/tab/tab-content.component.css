@@ -8,7 +8,6 @@
 
 #qvideo {
 	width: 65%;
-	
 }
 
 #qvideoDiv{
@@ -27,7 +26,15 @@
 }
 
 #unsavedVideoDiv {
-    margin-top: 1%;	
+    margin-top: 2%;	
+	font-size: 2em;
+	color: black;
+
+}
+
+#avideoDiv {
+	font-size: 2em;
+	color: black;
 }
 
 #questionTextBox {
