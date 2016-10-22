@@ -6,9 +6,24 @@
 	width: 100%;
 }
 
+#qvideo {
+	width: 65%;
+	
+}
+
+#qvideoDiv{
+	display: inline;
+}
+
+#rvideoDiv{
+	display: inline;
+}
+
 #rvideo {
-	left:560px;
+	width: 34%;
+	margin-left: 66%;
 	bottom: 284px;
+	border: .4em solid #e22323;
 }
 
 #unsavedVideoDiv {
