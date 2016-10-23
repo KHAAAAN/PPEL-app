@@ -30,7 +30,9 @@
 					<div id="text"> {{questionText}} </div>
 				</div>
 
-				<tabs id="videoTabs">
+				<tabs id="videoTabs" 
+					(click)="GetIsUnsaved()">
+
 					<tab tabTitle="Questions"
 						active="true"
 						enableEditor="false">
@@ -43,30 +45,33 @@
 								preload="auto" width="298" height="150">
 							</video>
 						</div>
-
-						
-
 					</tab>
 
 					<tab tabTitle="Answers"
-						enableEditor="false">
+						enableEditor="false"
+						>
 
 						<div id="avideoDiv">
-							Saved Video
+							<div id="aLabel" *ngIf="answerVideo != undefined">
+								Saved Video
+							</div>
 							<video id="avideo" class="video-js vjs-default-skin" controls
 								preload="auto" width="550" height="284">
 							</video>
 						</div>
 
 						<div id="unsavedVideoDiv">
-							Not Saved Video
+							<div id="unsavedLabel" *ngIf="unSavedVideo != undefined">
+								Not Saved Video
+							</div>
 
 							<video id="unsavedVideo" class="video-js vjs-default-skin" controls
 								preload="auto" width="550" height="284">
 							</video>
 						</div>
 
-						<button (click)="SaveModal.open()" id="saveQuestion" class="btn btn-lg btn-primary">
+						<button (click)="SaveModal.open()" id="saveQuestion" class="btn btn-lg btn-primary"
+							*ngIf="unSavedVideo != undefined">
 							<i class="fa fa-save"> Save</i>
 						</button>
 							
@@ -90,7 +95,8 @@
 							</modal-content>
 						</modal>
 
-						<button (click)="DeleteModal.open()" id="saveQuestion" class="btn btn-lg btn-primary">
+						<button (click)="DeleteModal.open()" id="saveQuestion" class="btn btn-lg btn-primary"
+							*ngIf="answerVideo != undefined">
 							<i class="fa fa-trash-o"> Delete</i>
 						</button>
 
