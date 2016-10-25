@@ -43,6 +43,7 @@ export class TabContent implements OnInit {
 	public questionVideo: any;
 	public selectedQuestion = <any>[];
 	public questionText: any;
+	public unSavedVideo: any;
 
 	public userModel: User;
 
@@ -233,10 +234,13 @@ export class TabContent implements OnInit {
 		// this .then will wait for the call to return before executing. 
 		savedVideo.then(result => { 
 			this.setQuestionAndAnswer(this.selectedQuestion[0]._id);
+			let unsavedVideo = videojs("unsavedVideo");
+			unsavedVideo.hide();
+			this._videoService.unSavedRecording = undefined;
+			this.unSavedVideo = undefined;
 		});
 		
 	}
-
 
 	deleteVideoAnswer(){
 		console.log("deleting..");
@@ -250,6 +254,7 @@ export class TabContent implements OnInit {
 		this._videoService.deleteAnswer(this.answerVideo._id)
 		.then( result => {
 			this.setQuestionAndAnswer(this.selectedQuestion[0]._id);
+			this.answerVideo = undefined;
 		});
 
 		
@@ -257,6 +262,10 @@ export class TabContent implements OnInit {
 		console.log("setting answer src to: ", "Empty");
 		avid.src('');
 		avid.hide();
+	}
+
+	GetIsUnsaved() {
+		this.unSavedVideo = this._videoService.unSavedRecording;
 	}
 
 	private getBase(path: string){

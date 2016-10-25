@@ -143,8 +143,13 @@ nav a.router-link-active {
 .vjs-hidden
 .vjs-tracksettings-colors,
 .vjs-modal-dialog-description,
-.vjs-offscreen {
+.vjs-offscreen
+.vjs-volume-menu-button{
     display: none;
+}
+
+#rvideo .vjs-fullscreen-control{
+  display: none;
 }
 
 /* everywhere else */
