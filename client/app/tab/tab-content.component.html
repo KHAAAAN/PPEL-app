@@ -1,6 +1,6 @@
 
 
-<tabs id="main-tabs">
+<tabs id="main-tabs" (click)="stopAutoTrans()">
 
 	<tab *ngFor="let file of files"
 		active="{{file.active}}"
