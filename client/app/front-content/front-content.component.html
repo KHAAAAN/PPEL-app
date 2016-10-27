@@ -1,5 +1,15 @@
-<div id="cf" class="shadow">
+
+
+<!--div id="cf" class="shadow">
 	<iframe id="frontContentMedia" [src]="curPicture"></iframe>
+</div-->
+
+<div id="front">
+	<img *ngIf="firstImage != undefined" id="firstImage" src="{{firstImage.changingThisBreaksApplicationSecurity}}">
+
+	<video id="vid1" class="video-js vjs-default-skin"
+	width="auto">
+	</video>
 </div>
 
 <div id="buttons">
@@ -9,4 +19,6 @@
 			[checked] = "curIndex === i">
 		</label>
 </div>
+
+
 
