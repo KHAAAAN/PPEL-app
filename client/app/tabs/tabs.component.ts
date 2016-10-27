@@ -1,5 +1,6 @@
 import { Component, ContentChildren, QueryList, AfterContentInit } from '@angular/core';
 import { Tab } from '../tab/tab.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'tabs',
@@ -8,7 +9,7 @@ import { Tab } from '../tab/tab.component';
 })
 
 export class Tabs implements AfterContentInit {
-  @ContentChildren(Tab) tabs: QueryList<Tab>;
+  @ContentChildren(Tab) tabs: QueryList<Tab>; 
 
   // contentChildren are set, this allows us to wait for ContentChildren
   // to load the tabs QueryList
