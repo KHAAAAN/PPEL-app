@@ -1,11 +1,11 @@
-import { NgModule }      from '@angular/core';
+import { NgModule,  }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { FormsModule } from '@angular/forms';
 
 import { AppComponent }  from './app.component';
 import { HttpModule } from '@angular/http';
-import { routing, appRoutingProviders } from './app.routing';
+import { appRoutingProviders, appRoutes } from './app.routing';
 import { HomeComponent } from './home/home.component';
 
 import {CKEditorModule} from 'ng2-ckeditor';
@@ -30,14 +30,16 @@ import {User} from './user/user';
 
 import {FrontContentComponent} from './front-content/front-content.component';
 
+import {RouterModule} from '@angular/router'
+
 @NgModule({
   imports: [
   	BrowserModule,
   	HttpModule,
-  	routing,
     FormsModule,
     CKEditorModule,
-    ModalModule
+    ModalModule,
+    RouterModule.forRoot(appRoutes)
   ],
   declarations: [
   	AppComponent,
@@ -49,7 +51,7 @@ import {FrontContentComponent} from './front-content/front-content.component';
     NavbarItem
   	],
   providers: [
-    appRoutingProviders, HttpModule, LoginService
+    HttpModule, LoginService,
   ],
   bootstrap: [ AppComponent ]
 })

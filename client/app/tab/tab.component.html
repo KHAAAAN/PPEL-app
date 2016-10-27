@@ -7,7 +7,10 @@
 		<div *ngIf="canEditTab==true" >
 			<ckeditor
 			    [(ngModel)]="content"
-			    [config]="configSettings"
+			    [config]="{
+				    fullPage: true,
+				    allowedContent: true
+				}"
 
 			    debounce="500">
 	  		</ckeditor>
