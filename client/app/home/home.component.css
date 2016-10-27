@@ -17,7 +17,7 @@ div{
 	padding-top: 10px;
   	display: block;
   	width: 100%;
-  	margin-left: 19%;
+  	margin-left: 22%;
 }
 
 #tab-content-container{
@@ -87,7 +87,7 @@ div{
 
 #hiddenbar {
 	top: 50px;
-	height: 1000px;
+	height: 100vh;
 	position: fixed;
 	display: none;
 	z-index: 100;

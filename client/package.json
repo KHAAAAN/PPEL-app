@@ -55,8 +55,9 @@
     "video.js": "5.11.6",
     "videojs-errors": "1.1.0",
     "videojs-record": "1.5.0",
+    "videojs-youtube": "2.1.1",
     "xmlhttprequest": "^1.8.0",
-    "zone.js": "0.6.23"
+    "zone.js": "^0.6.23"
   },
   "devDependencies": {
     "concurrently": "2.2.0",

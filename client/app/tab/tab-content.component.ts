@@ -11,6 +11,8 @@ import {VideoService} from '../video/video.service';
 import {User} from '../user/user';
 import {UserService} from '../user/user.service';
 
+import myGlobals = require('../globals');
+
 declare var videojs: any;
 
 @Component({
@@ -266,6 +268,12 @@ export class TabContent implements OnInit {
 
 	GetIsUnsaved() {
 		this.unSavedVideo = this._videoService.unSavedRecording;
+	}
+
+	stopAutoTrans() {
+		console.log("setting trnas to false");
+		myGlobals.autoTranitionVideo = false;
+		console.log("auto trns = ", myGlobals.autoTranitionVideo);
 	}
 
 	private getBase(path: string){
