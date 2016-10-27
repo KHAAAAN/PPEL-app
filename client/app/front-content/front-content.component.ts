@@ -37,8 +37,6 @@ export class FrontContentComponent implements OnInit{
 
 		let v1 = videojs("vid1");
 
-		
-
 		//Reset the image that is displayed before we play the video
 		v1.poster('');
 		this.firstImage = undefined;
