@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { HttpModule } from '@angular/http';
-import {  RouterModule,  } from '@angular/router';
+import {  RouterModule } from '@angular/router';
 
 
 @Component({
@@ -9,7 +9,7 @@ import {  RouterModule,  } from '@angular/router';
 	templateUrl: 'app/app.component.html',
 	providers: [
 		HttpModule,
-		RouterModule,
+		RouterModule
 	]
 })
 
