@@ -34,7 +34,7 @@ export class Ready implements AfterViewInit{
 @Component({ selector: 'tab-content',
 	templateUrl: 'app/tab/tab-content.component.html',
 	styleUrls: ['app/tab/tab-content.component.css'],
-	providers: [VideoService]
+	providers: [VideoService, Tab]
 })
 
 export class TabContent implements OnInit {
@@ -52,6 +52,7 @@ export class TabContent implements OnInit {
 	public errorMessage: string;
 
 	constructor(private _tabContentService: TabContentService,
+				private _tabContent: Tab,
 			   private _videoService: VideoService,
 			   private _userService: UserService,
 			   private sanitizer: DomSanitizer){
@@ -72,7 +73,8 @@ export class TabContent implements OnInit {
 	}
 
 	logout(){
-		this._userService.unloadUser();
+		// on logout reload the page
+		window.location.reload();
 	}
 
 	getUser(){
@@ -198,16 +200,6 @@ export class TabContent implements OnInit {
 				avid.src("");
 				avid.hide();
 			}
-
-			avid.errors({
-			errors: {
-				4: {
-				headline: `There is no saved video for this answer.
-				Please go to the questions tab and record a new video, or chang the questions from the dropdown menu.`,
-				type: 'No Video Saved'
-				}
-			}
-			});
 		}
 	}
 
@@ -276,6 +268,26 @@ export class TabContent implements OnInit {
 		console.log("auto trns = ", myGlobals.autoTranitionVideo);
 	}
 
+	setUserModel() {
+		this._userService.setUserModel("11335741", "", 0);
+		console.log("User Model = ", this.userModel);
+
+		this._tabContent.updateCanEdit(false);
+
+		this.ngOnInit();
+	}
+
+	setAdminModel(){
+		//this._userService.setUserModel("11335741", "", 1);
+		//console.log("User Model = ", this.userModel);
+
+		//this.ngOnInit();
+
+		console.log("setting admin");
+		this._tabContent.updateCanEdit(true);
+		//this.ngOnInit();
+	}
+
 	private getBase(path: string){
 		var l = path.split("/");
 		var x = l[l.length - 1];
@@ -285,14 +297,16 @@ export class TabContent implements OnInit {
 	}
 
 	ngOnInit(){
-		let avid = videojs("avideo");
-		avid.hide();
 
-		var unSavVid = videojs("unsavedVideo");
-		unSavVid.hide();
+		if (this.userModel == undefined)
+		{
+			this.getContent();
+		}
+		else
+		{
+			this.getPublicVideos();
+		}
 
-		this.getContent();
-		this.getPublicVideos();
 	}
 
 }

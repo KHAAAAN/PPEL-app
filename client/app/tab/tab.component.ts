@@ -13,16 +13,23 @@ import {Observable} from 'rxjs/Observable';
 export class Tab implements AfterViewInit{
 
 	constructor (private http: Http) {
+		this.canEditTab = true;
 	}
 
 	@Input() active = false;
 	@Input('tabTitle') title: string = "";
 	@Input('content') content: string = "";
-	@Input('enableEditor') canEditTab: boolean = true;
+	@Input('enableEditor') canEditTab: boolean;
 
 	@ViewChild('article') input:any;
 
 	ngAfterViewInit(){
+	}
+
+	updateCanEdit(canEdit: boolean){
+		console.log("updating can edit")
+		this.canEditTab = canEdit;
+		console.log("can edit = ", this.canEditTab);
 	}
 
 	handleSave(event: Event) {

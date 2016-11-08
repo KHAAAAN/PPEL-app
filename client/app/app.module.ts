@@ -41,7 +41,7 @@ import {FrontContentComponent} from './front-content/front-content.component';
   ],
   declarations: [
   	AppComponent,
-    HomeComponent,
+    HomeComponent,  
     FrontContentComponent,
     Tab, Tabs, Ready, TabContent,
     HiddenNavbarComponent,

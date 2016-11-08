@@ -34,8 +34,23 @@
 
 				<div id="welcomeDiv">
 					Welcome!
-					<div id="welcomeText">
-						{{welcomeText}}
+					<div id="welcomeText" [innerHtml]="content"></div>
+
+					<div>
+						<ng-content></ng-content>
+
+						<div>
+							<ckeditor
+								[(ngModel)]="content"
+								[config]="configSettings"
+
+								debounce="500">
+							</ckeditor>
+								<br>
+									<button (click)="SaveWelcomeText()"> Save </button>
+								<br>
+							<hr>
+						</div>
 					</div>
 				</div>
 
