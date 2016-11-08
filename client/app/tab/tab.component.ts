@@ -21,6 +21,8 @@ export class Tab implements AfterViewInit{
 	@Input('content') content: string = "";
 	@Input('enableEditor') canEditTab: boolean;
 
+	private configSettings: string = ""
+
 	@ViewChild('article') input:any;
 
 	ngAfterViewInit(){

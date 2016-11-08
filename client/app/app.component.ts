@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 import { HttpModule } from '@angular/http';
-import {  RouterModule  } from '@angular/router';
+import {  RouterModule } from '@angular/router';
 
 
 @Component({
@@ -15,3 +15,5 @@ import {  RouterModule  } from '@angular/router';
 
 
 export class AppComponent { }
+
+
