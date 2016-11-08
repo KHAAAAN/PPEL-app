@@ -52,7 +52,6 @@ export class TabContent implements OnInit {
 	public errorMessage: string;
 
 	constructor(private _tabContentService: TabContentService,
-				private _tabContent: Tab,
 			   private _videoService: VideoService,
 			   private _userService: UserService,
 			   private sanitizer: DomSanitizer){
@@ -74,6 +73,7 @@ export class TabContent implements OnInit {
 
 	logout(){
 		// on logout reload the page
+		this._userService.unloadUser();
 		window.location.reload();
 	}
 
@@ -272,20 +272,16 @@ export class TabContent implements OnInit {
 		this._userService.setUserModel("11335741", "", 0);
 		console.log("User Model = ", this.userModel);
 
-		this._tabContent.updateCanEdit(false);
-
 		this.ngOnInit();
 	}
 
 	setAdminModel(){
-		//this._userService.setUserModel("11335741", "", 1);
-		//console.log("User Model = ", this.userModel);
+		this._userService.setUserModel("11335741", "", 1);
+		console.log("User Model = ", this.userModel);
 
-		//this.ngOnInit();
+		console.log("admin user");
 
-		console.log("setting admin");
-		this._tabContent.updateCanEdit(true);
-		//this.ngOnInit();
+		this.ngOnInit();
 	}
 
 	private getBase(path: string){

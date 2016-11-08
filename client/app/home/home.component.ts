@@ -25,6 +25,7 @@ import {HomeService} from './home.service';
 
 export class HomeComponent implements OnInit {
 	public userModel: User;
+	public isSuperUser: boolean;
 	public viewable = false;
 	public welcomeText: string;
 
@@ -34,11 +35,27 @@ export class HomeComponent implements OnInit {
 
 	constructor(private _userService:UserService,
 				private _homeService: HomeService,
-				private http: Http){}
+				private http: Http){
+
+					//when ready to set this.userModel, it will do so
+		this._userService.user$.subscribe(userModel => {
+			this.userModel = userModel[0];
+			if (this.userModel != undefined)
+			{
+				if (this.userModel.permissions.superUser != null)
+				{
+					this.isSuperUser = this.userModel.permissions.superUser;
+				}
+			}
+		} );
+
+		//this is REALLY important
+		this._userService.loadUser();
+	}
 
 	ngOnInit(){
-		this.userModel = this._userService.getUserModel();
-		console.log(this.userModel);
+		//this.userModel = this._userService.getUserModel();
+		//console.log(this.userModel);
 
 		this._homeService.getWelcomeMessage()
 		.subscribe ((text:any) => {
