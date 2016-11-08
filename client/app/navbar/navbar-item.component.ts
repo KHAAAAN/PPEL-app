@@ -19,6 +19,7 @@ export class NavbarItem {
 	}
 
   flip(){
+		console.log("clicked a nav item with a submenu");
 		if(this.subItems !== undefined && this.subItems.length > 0){
 			this.expanded = !this.expanded;
 		}
@@ -37,12 +38,7 @@ export class NavbarItem {
 	}
 
 	checkForHref(){
-		if(this.href === undefined){
-			return "javascript:;";
-		}
-		else{
-			return this.href;
-		}
+		return this.href;
 	}
 }
 
