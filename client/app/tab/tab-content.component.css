@@ -41,6 +41,7 @@
 	margin-top: 10px;
 	margin-bottom: 10px;
 	border: 1px solid  #DCDCDC;
+	width: 800px;
 }
 
 #text {
@@ -50,4 +51,10 @@
 #saveQuestion {
 	margin-top: 2%;
 	font-size: 150%;
+}
+
+@media screen and (max-width: 990px){
+	#questionTextBox {
+		width: 100%;
+	}
 }

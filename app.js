@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 require('dotenv').config();
 
 var updateTapPage = require('./routes/tabPageRoutes');
+var updateWelcomeText = require('./routes/welcomeTextRoute');
 var fs = require("fs");
 
 var app = express();
@@ -21,6 +22,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'client')));
 
 app.use('/tabpages', updateTapPage);
+app.use('/welcomeText', updateWelcomeText);
+
 
 // catch 404 and forward to error handler		
 app.use(function(req, res, next) {		

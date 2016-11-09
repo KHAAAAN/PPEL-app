@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 
-router.put('/:name', function update(req, res) {
+router.put('/:name', function save(req, res) {
   var filename = "client/app/tab_content/tabpages.json";
 
   // Get content from file

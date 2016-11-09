@@ -4,8 +4,8 @@
 
 		<ng-content></ng-content>
 
-		<div *ngIf="canEditTab==true" >
-			<ckeditor
+		<div *ngIf="canEditTab==true">
+			<ckeditor *ngIf= "isSuperUser" 
 			    [(ngModel)]="content"
 			    [config]="{
 				    fullPage: true,
@@ -15,7 +15,7 @@
 			    debounce="500">
 	  		</ckeditor>
 	  		<br>
-	  		<button (click) = "handleSave($event)"> Save </button>
+	  			<button *ngIf= "isSuperUser"  (click) = "handleSave($event)"> Save </button>
 	  		<br>
 	  		<hr>
   		</div>
