@@ -3,7 +3,7 @@ module.exports = function(config) {
 
   var appBase    = 'app/';       // transpiled app JS and map files
   var appSrcBase = 'app/';       // app source TS files
-  var appAssets  = '/base/app/'; // component assets fetched by Angular's compiler
+  var appAssets  = 'base/app/'; // component assets fetched by Angular's compiler
 
   var testBase    = 'testing/';       // transpiled test JS and map files
   var testSrcBase = 'testing/';       // test source TS files
@@ -14,7 +14,8 @@ module.exports = function(config) {
     plugins: [
       require('karma-jasmine'),
       require('karma-chrome-launcher'),
-      require('karma-htmlfile-reporter')
+      require('karma-jasmine-html-reporter'), // click "Debug" in browser to see it
+      require('karma-htmlfile-reporter') // crashing w/ strange socket error
     ],
 
     customLaunchers: {
@@ -48,28 +49,28 @@ module.exports = function(config) {
 
       // Paths loaded via module imports:
       // Angular itself
-      {pattern: 'node_modules/@angular/**/*.js', included: false, watched: false},
-      {pattern: 'node_modules/@angular/**/*.js.map', included: false, watched: false},
+      { pattern: 'node_modules/@angular/**/*.js', included: false, watched: false },
+      { pattern: 'node_modules/@angular/**/*.js.map', included: false, watched: false },
 
-      {pattern: 'systemjs.config.js', included: false, watched: false},
-      {pattern: 'systemjs.config.extras.js', included: false, watched: false},
+      { pattern: 'systemjs.config.js', included: false, watched: false },
+      { pattern: 'systemjs.config.extras.js', included: false, watched: false },
       'karma-test-shim.js',
 
       // transpiled application & spec code paths loaded via module imports
-      {pattern: appBase + '**/*.js', included: false, watched: true},
-      {pattern: testBase + '**/*.js', included: false, watched: true},
+      { pattern: appBase + '**/*.js', included: false, watched: true },
+      { pattern: testBase + '**/*.js', included: false, watched: true },
 
 
       // Asset (HTML & CSS) paths loaded via Angular's component compiler
       // (these paths need to be rewritten, see proxies section)
-      {pattern: appBase + '**/*.html', included: false, watched: true},
-      {pattern: appBase + '**/*.css', included: false, watched: true},
+      { pattern: appBase + '**/*.html', included: false, watched: true },
+      { pattern: appBase + '**/*.css', included: false, watched: true },
 
       // Paths for debugging with source maps in dev tools
-      {pattern: appSrcBase + '**/*.ts', included: false, watched: false},
-      {pattern: appBase + '**/*.js.map', included: false, watched: false},
-      {pattern: testSrcBase + '**/*.ts', included: false, watched: false},
-      {pattern: testBase + '**/*.js.map', included: false, watched: false}
+      { pattern: appSrcBase + '**/*.ts', included: false, watched: false },
+      { pattern: appBase + '**/*.js.map', included: false, watched: false },
+      { pattern: testSrcBase + '**/*.ts', included: false, watched: false },
+      { pattern: testBase + '**/*.js.map', included: false, watched: false }
     ],
 
     // Proxied base paths for loading assets
@@ -80,7 +81,8 @@ module.exports = function(config) {
 
     exclude: [],
     preprocessors: {},
-    reporters: ['progress', 'html'],
+    // disabled HtmlReporter; suddenly crashing w/ strange socket error
+    reporters: ['progress', 'kjhtml'],//'html'],
 
     // HtmlReporter configuration
     htmlReporter: {

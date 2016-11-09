@@ -74,7 +74,7 @@ export class FrontContentComponent implements OnInit{
 
 	getImages(){
 		this._frontContentService.getImages()
-		.subscribe(images => {
+		.subscribe((images:any)=> {
 				this._totalPics = images.length;
 				for(var i = 0; i < this._totalPics; i++)
 				{
