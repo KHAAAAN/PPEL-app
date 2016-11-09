@@ -136,6 +136,24 @@ nav a.router-link-active {
   border-radius: 4px 0 0 4px;
 }
 
+/* Video.js Controls Style Overrides */    
+.vjs-control-bar,   
+.vjs-caption-settings,    
+.vjs-modal-overlay,   
+.vjs-hidden   
+.vjs-tracksettings-colors,    
+.vjs-modal-dialog-description,    
+.vjs-offscreen    
+.vjs-volume-menu-button{    
+    display: none;    
+}   
+    
+#rvideo .vjs-fullscreen-control{    
+  display: none;    
+}   
+    
+    
+    
 /* everywhere else */
 * { 
   font-family: Arial, Helvetica, sans-serif; 
