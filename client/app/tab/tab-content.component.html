@@ -19,7 +19,7 @@
 	<tab tabTitle="Videos"
 		enableEditor="false"> 
 	
-		<div *ngIf="allQuestionVideos?.length > 0">
+		<div *ngIf="userModel">
 			<select
 				(change)="setSelectedQuestion($event.target.value)"
 				(change)="setQuestionAndAnswer($event.target.value)">
@@ -123,7 +123,7 @@
 				</tabs>	
 		</div>
 
-		<div *ngIf="allQuestionVideos?.length == 0">
+		<div *ngIf="userModel == undefined">
 			<h1> You are currently not logged in.</h1>
 			<a href="https://debianvm.eecs.wsu.edu/auth"> click here to clogin </a>
 			<!--button (click)="setUserModel()"> Click Here to login as normal user</button>

@@ -116,40 +116,12 @@ export class TabContent implements OnInit {
 						this.setQuestionAndAnswer(this.allQuestionVideos[0]._id);
 					}
 				}
-
-				if (this.allQuestionVideos.length > 0 && this.userModel == undefined)
-				{
-					//we are already logged in
-					console.log("we are logged in! setting user model");
-					this.setUserModel();
-				}
 				
 			});
 
 		console.log("all Videos = ", this.allQuestionVideos);
 	}
 
-	setUserModel() {
-
-		//Get is admin from api
-
-		console.log("in Set User Model");
-		
-
-		this._userService.setUserModel(false);
-		console.log("User Model = ", this.userModel);
-
-		
-	}
-
-	setAdminModel(){
-		this._userService.setUserModel(true);
-		console.log("User Model = ", this.userModel);
-
-		console.log("admin user");
-
-		this.ngOnInit();
-	}
 
 	setSelectedQuestion(questionID: string) {
 		console.log("getting selected question");
@@ -306,18 +278,57 @@ export class TabContent implements OnInit {
 		return y;
 	}
 
+	checkIsLoggedIn(){
+
+		this._videoService.getPublicVideos()
+			.subscribe((res:any)=>{
+				console.log("checking if logged in, res.len = ", res.length)
+				if (res.length > 0)
+				{
+					//we are already logged in
+					console.log("we are logged in! setting user model");
+					this.setUserModel();
+				}
+			});
+	}
+
+
+	setUserModel() {
+
+		//Get is admin from api
+
+		console.log("in Set User Model");
+		
+
+		this._userService.setUserModel(true);
+		console.log("User Model = ", this.userModel);
+
+		this.ngOnInit();		
+	}
+
+	setAdminModel(){
+		this._userService.setUserModel(true);
+		console.log("User Model = ", this.userModel);
+
+		console.log("admin user");
+
+		this.ngOnInit();
+	}
+
 	ngOnInit(){
 
 		if (this.userModel == undefined)
 		{
 			this.getContent();
+			this.checkIsLoggedIn();
 		}
-		/*else
+		else
 		{
 			this.getPublicVideos();
-		}*/
+		}
 
-		this.getPublicVideos();
+
+		//this.getPublicVideos();
 		// If no videos are returned from api, then we are not loged in.
 		// When logged in request from api is admin or not
 		// then set userModel based on is admin
