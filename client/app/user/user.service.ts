@@ -19,13 +19,11 @@ export class UserService {
 	public user$: Observable<Array<User>>;
 
 
-	public setUserModel(id: string, ts: string, token: number){
+	public setUserModel(isAdmin: boolean){
 		this.userModel = new User();
-		this.userModel.id = id;	
-		this.userModel.ts = ts;
 
 		this.userModel.permissions["normalUser"] = true;
-		if(token === 1){
+		if(isAdmin){
 			this.userModel.permissions["superUser"] = true;
 		}
 

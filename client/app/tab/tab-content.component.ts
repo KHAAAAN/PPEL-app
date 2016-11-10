@@ -116,10 +116,12 @@ export class TabContent implements OnInit {
 						this.setQuestionAndAnswer(this.allQuestionVideos[0]._id);
 					}
 				}
+				
 			});
 
 		console.log("all Videos = ", this.allQuestionVideos);
 	}
+
 
 	setSelectedQuestion(questionID: string) {
 		console.log("getting selected question");
@@ -268,22 +270,6 @@ export class TabContent implements OnInit {
 		console.log("auto trns = ", myGlobals.autoTranitionVideo);
 	}
 
-	setUserModel() {
-		this._userService.setUserModel("11335741", "", 0);
-		console.log("User Model = ", this.userModel);
-
-		this.ngOnInit();
-	}
-
-	setAdminModel(){
-		this._userService.setUserModel("11335741", "", 1);
-		console.log("User Model = ", this.userModel);
-
-		console.log("admin user");
-
-		this.ngOnInit();
-	}
-
 	private getBase(path: string){
 		var l = path.split("/");
 		var x = l[l.length - 1];
@@ -292,16 +278,48 @@ export class TabContent implements OnInit {
 		return y;
 	}
 
+	checkIsLoggedIn(){
+
+		this._videoService.getPublicVideos()
+			.subscribe((res:any)=>{
+				console.log("checking if logged in, res.len = ", res.length)
+				if (res.length > 0)
+				{
+					//we are already logged in
+					console.log("we are logged in! setting user model");
+					this.setUserModel();
+				}
+			});
+	}
+
+
+	setUserModel() {
+
+		//Get is admin from api
+		this._userService.setUserModel(false);
+		console.log("User Model = ", this.userModel);
+
+		this.ngOnInit();		
+	}
+
 	ngOnInit(){
 
 		if (this.userModel == undefined)
 		{
 			this.getContent();
+			this.checkIsLoggedIn();
 		}
 		else
 		{
 			this.getPublicVideos();
 		}
+
+
+		//this.getPublicVideos();
+		// If no videos are returned from api, then we are not loged in.
+		// When logged in request from api is admin or not
+		// then set userModel based on is admin
+		// we do not need to send id with video request anymore
 
 	}
 
