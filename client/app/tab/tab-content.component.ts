@@ -117,11 +117,12 @@ export class TabContent implements OnInit {
 					}
 				}
 
-				if (res.length > 0 && this.userModel == undefined)
+				if (this.allQuestionVideos.length > 0 && this.userModel == undefined)
 				{
 					//we are already logged in
 					this.setUserModel();
 				}
+				
 			});
 
 		console.log("all Videos = ", this.allQuestionVideos);
