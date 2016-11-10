@@ -54,7 +54,7 @@ export class VideoService {
 		console.log("Want answer for questions id = ", questionID);
 
 		// un coment the back when we get the auth done. 
-		var urlGetRequest = this._locationUrl + "/api/responses/" + questionID + "?userId=" + this.userModel.id;
+		var urlGetRequest = this._locationUrl + "/api/responses/" + questionID;// + "?userId=" + this.userModel.id;
 
 		console.log("url request = ", urlGetRequest);
 		var response = this.http.get(urlGetRequest);
@@ -79,7 +79,7 @@ export class VideoService {
 			let formData: FormData = new FormData(),
 				xhr: XMLHttpRequest = new XMLHttpRequest();
 
-			formData.append("userId", this.userModel.id);
+			//formData.append("userId", this.userModel.id);
 			
 			if (/chrome/i.test( navigator.userAgent ) === true){
 				formData.append("video", this.unSavedRecording.recordedData.video, this.unSavedRecording.recordedData.video.name);
