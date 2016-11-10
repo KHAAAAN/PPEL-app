@@ -296,23 +296,10 @@ export class TabContent implements OnInit {
 	setUserModel() {
 
 		//Get is admin from api
-
-		console.log("in Set User Model");
-		
-
-		this._userService.setUserModel(true);
+		this._userService.setUserModel(false);
 		console.log("User Model = ", this.userModel);
 
 		this.ngOnInit();		
-	}
-
-	setAdminModel(){
-		this._userService.setUserModel(true);
-		console.log("User Model = ", this.userModel);
-
-		console.log("admin user");
-
-		this.ngOnInit();
 	}
 
 	ngOnInit(){
