@@ -29,7 +29,5 @@ export class Tabs implements AfterContentInit {
     // activate the clicked tab
     tab.active = true;
   }
-
-
 }
 

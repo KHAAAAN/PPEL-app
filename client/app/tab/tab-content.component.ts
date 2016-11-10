@@ -34,7 +34,7 @@ export class Ready implements AfterViewInit{
 @Component({ selector: 'tab-content',
 	templateUrl: 'app/tab/tab-content.component.html',
 	styleUrls: ['app/tab/tab-content.component.css'],
-	providers: [VideoService]
+	providers: [VideoService, Tab]
 })
 
 export class TabContent implements OnInit {
@@ -72,7 +72,9 @@ export class TabContent implements OnInit {
 	}
 
 	logout(){
+		// on logout reload the page
 		this._userService.unloadUser();
+		window.location.reload();
 	}
 
 	getUser(){
@@ -114,10 +116,12 @@ export class TabContent implements OnInit {
 						this.setQuestionAndAnswer(this.allQuestionVideos[0]._id);
 					}
 				}
+				
 			});
 
 		console.log("all Videos = ", this.allQuestionVideos);
 	}
+
 
 	setSelectedQuestion(questionID: string) {
 		console.log("getting selected question");
@@ -198,16 +202,6 @@ export class TabContent implements OnInit {
 				avid.src("");
 				avid.hide();
 			}
-
-			avid.errors({
-			errors: {
-				4: {
-				headline: `There is no saved video for this answer.
-				Please go to the questions tab and record a new video, or chang the questions from the dropdown menu.`,
-				type: 'No Video Saved'
-				}
-			}
-			});
 		}
 	}
 
@@ -284,15 +278,49 @@ export class TabContent implements OnInit {
 		return y;
 	}
 
+	checkIsLoggedIn(){
+
+		this._videoService.getPublicVideos()
+			.subscribe((res:any)=>{
+				console.log("checking if logged in, res.len = ", res.length)
+				if (res.length > 0)
+				{
+					//we are already logged in
+					console.log("we are logged in! setting user model");
+					this.setUserModel();
+				}
+			});
+	}
+
+
+	setUserModel() {
+
+		//Get is admin from api
+		this._userService.setUserModel(false);
+		console.log("User Model = ", this.userModel);
+
+		this.ngOnInit();		
+	}
+
 	ngOnInit(){
-		let avid = videojs("avideo");
-		avid.hide();
 
-		var unSavVid = videojs("unsavedVideo");
-		unSavVid.hide();
+		if (this.userModel == undefined)
+		{
+			this.getContent();
+			this.checkIsLoggedIn();
+		}
+		else
+		{
+			this.getPublicVideos();
+		}
 
-		this.getContent();
-		this.getPublicVideos();
+
+		//this.getPublicVideos();
+		// If no videos are returned from api, then we are not loged in.
+		// When logged in request from api is admin or not
+		// then set userModel based on is admin
+		// we do not need to send id with video request anymore
+
 	}
 
 }

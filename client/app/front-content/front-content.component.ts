@@ -111,7 +111,6 @@ export class FrontContentComponent implements OnInit{
 		v1.on('play', function()
 		{
 			myGlobals.autoTranitionVideo = false;
-			//_this.autoTrans = false;
 		});
 
 	}

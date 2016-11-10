@@ -52,22 +52,7 @@ export class NavbarComponent {
 			item.isHover = false;
 		}
 	}
-
-	checkForHref(item: any){
-		if(item.href === undefined){
-			return "javascript:;";
-		}
-		else{
-			return item.href;
-		}
-	}
-
-  flip(item: any){
-		if(item.subItems !== undefined && item.subItems.length > 0){
-			item.expanded = !item.expanded;
-		}
-	}
-
+	
 	constructor (private _navbarService: NavbarService) {}
 
 	ngOnInit(){

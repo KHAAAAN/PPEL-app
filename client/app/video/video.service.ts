@@ -22,7 +22,6 @@ export class VideoService {
 		        private sanitizer: DomSanitizer){
 		this.userModel = _userService.getUserModel();	
 		this.canSave = false;
-		console.log("this.canSave = ", this.canSave);
 
 		var hostName = window.location.hostname;
 
@@ -38,7 +37,6 @@ export class VideoService {
 
 	getPublicVideos(){	
 		console.log("in get all video questions");
-		//console.log("UserModel = ", this.userModel);
 		
 		var urlGetRequest = this._locationUrl + "/api/questions";
 		console.log("url request: ", urlGetRequest);
@@ -51,12 +49,12 @@ export class VideoService {
 	}
 
 	getYourAnswers(questionID: string){	
-		//this.userModel = this._userService.getUserModel();	
+		this.userModel = this._userService.getUserModel();	
 		console.log("In get your answers");
 		console.log("Want answer for questions id = ", questionID);
 
 		// un coment the back when we get the auth done. 
-		var urlGetRequest = this._locationUrl + "/api/responses/" + questionID + "?userId=" + "11335741";// + this.userModel.id;
+		var urlGetRequest = this._locationUrl + "/api/responses/" + questionID;// + "?userId=" + this.userModel.id;
 
 		console.log("url request = ", urlGetRequest);
 		var response = this.http.get(urlGetRequest);
@@ -74,14 +72,14 @@ export class VideoService {
 
 	//TODO: MAKE SURE blob.name is unique to the user's vidoes later!!!
 	saveRecording(questionID: string){
-		//this.userModel = this._userService.getUserModel();	
+		this.userModel = this._userService.getUserModel();	
 		console.log("Inside of Save Recording");
 
 		return new Promise((resolve, reject) => {
 			let formData: FormData = new FormData(),
 				xhr: XMLHttpRequest = new XMLHttpRequest();
 
-			formData.append("userId", 11335741);
+			//formData.append("userId", this.userModel.id);
 			
 			if (/chrome/i.test( navigator.userAgent ) === true){
 				formData.append("video", this.unSavedRecording.recordedData.video, this.unSavedRecording.recordedData.video.name);
@@ -109,7 +107,6 @@ export class VideoService {
 	}
 
 	deleteAnswer(responseID: string){
-		//this.userModel = this._userService.getUserModel();
 
 		return new Promise((resolve, reject) => {
 			let formData: FormData = new FormData(),

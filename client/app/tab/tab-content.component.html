@@ -18,16 +18,15 @@
 
 	<tab tabTitle="Videos"
 		enableEditor="false"> 
-
-		<!-- this all needs to be in a ngif usermodal is not undefined -->
-			<select 
+	
+		<div *ngIf="userModel">
+			<select
 				(change)="setSelectedQuestion($event.target.value)"
 				(change)="setQuestionAndAnswer($event.target.value)">
 				<option selected *ngIf="allQuestionVideos?.length == 0">No Questions Available</option>
 				<option *ngFor="let question of allQuestionVideos" [value]="question._id">{{question.title}}</option>
 			</select>
 
-			<!--div *ngIf="selectedQuestion?.length > 0"-->
 				<div id="questionTextBox" *ngIf="questionText != undefined">
 					<header>Question Text:</header>
 					<div id="text"> {{questionText}} </div>
@@ -51,14 +50,13 @@
 					</tab>
 
 					<tab tabTitle="Answers"
-						enableEditor="false"
-						>
+						enableEditor="false">
 
 						<div id="avideoDiv">
 							<div id="aLabel" *ngIf="answerVideo != undefined">
 								Saved Video
 							</div>
-							<video id="avideo" class="video-js vjs-default-skin" controls
+							<video id="avideo" class="video-js vjs-default-skin vjs-hidden" controls
 								preload="auto" width="550" height="284">
 							</video>
 						</div>
@@ -67,8 +65,7 @@
 							<div id="unsavedLabel" *ngIf="unSavedVideo != undefined">
 								Not Saved Video
 							</div>
-
-							<video id="unsavedVideo" class="video-js vjs-default-skin" controls
+							<video id="unsavedVideo" class="video-js vjs-default-skin vjs-hidden" controls
 								preload="auto" width="550" height="284">
 							</video>
 						</div>
@@ -124,16 +121,21 @@
 						</modal>
 					</tab>
 				</tabs>	
+		</div>
 
 		<div *ngIf="userModel == undefined">
 			<h1> You are currently not logged in.</h1>
-			<h1> But you may still view public question videos.</h1>
-			<a href="https://secure.wsu.edu/login/fidlogin.aspx?dest=https://debianvm.eecs.wsu.edu">Click here to login.</a>
+			<a href="https://debianvm.eecs.wsu.edu/auth"> click here to clogin </a>
+			<!--button (click)="setUserModel()"> Click Here to login as normal user</button>
+			<button (click)="setAdminModel()"> Click Here to login as admin </button>
+
+			<!--a href="https://secure.wsu.edu/login/fidlogin.aspx?dest=https://debianvm.eecs.wsu.edu">Click here to login.</a-->
 		</div>
+		
 
 		<div *ngIf="userModel">
 			<h1> You are signed in as {{userModel.id}} </h1>
 			<a (click)=logout()>Click here to logout</a>			
 		</div>
-		</tab>
+	</tab>
 </tabs>

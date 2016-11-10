@@ -43,7 +43,7 @@ import {RouterModule} from '@angular/router'
   ],
   declarations: [
   	AppComponent,
-    HomeComponent,
+    HomeComponent,  
     FrontContentComponent,
     Tab, Tabs, Ready, TabContent,
     HiddenNavbarComponent,
