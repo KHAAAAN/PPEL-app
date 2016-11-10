@@ -117,7 +117,7 @@ export class TabContent implements OnInit {
 					}
 				}
 
-				if (res.length > 0)
+				if (res.length > 0 && this.userModel == undefined)
 				{
 					//we are already logged in
 					this.setUserModel();
@@ -134,6 +134,8 @@ export class TabContent implements OnInit {
 
 		this._userService.setUserModel(false);
 		console.log("User Model = ", this.userModel);
+
+		
 	}
 
 	setAdminModel(){
@@ -306,10 +308,10 @@ export class TabContent implements OnInit {
 		{
 			this.getContent();
 		}
-		else
+		/*else
 		{
 			this.getPublicVideos();
-		}
+		}*/
 
 		this.getPublicVideos();
 		// If no videos are returned from api, then we are not loged in.
