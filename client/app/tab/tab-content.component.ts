@@ -120,6 +120,7 @@ export class TabContent implements OnInit {
 				if (this.allQuestionVideos.length > 0 && this.userModel == undefined)
 				{
 					//we are already logged in
+					console.log("we are logged in! setting user model");
 					this.setUserModel();
 				}
 				
@@ -131,6 +132,8 @@ export class TabContent implements OnInit {
 	setUserModel() {
 
 		//Get is admin from api
+
+		console.log("in Set User Model");
 		
 
 		this._userService.setUserModel(false);
