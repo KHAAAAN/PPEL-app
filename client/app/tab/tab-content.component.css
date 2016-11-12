@@ -48,6 +48,31 @@
 	padding-left: 3em;
 }
 
+#loginHeading{
+	padding-bottom: 18px;
+    text-transform: none;
+    font-size: 24px;
+    letter-spacing: normal;
+    font-weight: 400;
+    color: #2a2a2a;
+}
+
+#loginDiv{
+
+}
+
+#loginBtn {
+	background-color: #961f34;
+    font-size: 200%;
+	color: #FFF;
+	border: 0;
+	font-weight: lighter;
+	padding: 2%;
+	padding-right: 4%;
+	padding-left: 4%;
+	margin-left: 75%;
+}
+
 #saveQuestion {
 	margin-top: 2%;
 	font-size: 150%;

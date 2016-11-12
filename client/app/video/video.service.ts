@@ -17,6 +17,8 @@ export class VideoService {
 	public unSavedRecording: any;
 	public canSave: boolean;
 
+	public adminRecording: any;
+
 	constructor(private http : Http, 
 		        private _userService: UserService,
 		        private sanitizer: DomSanitizer){
@@ -150,7 +152,7 @@ export class VideoService {
 	makeRecorder(){
 		var _this = this;
 
-		var player = new videojs("rvideo",
+		let player = new videojs("rvideo",
 		{
 			controls: true,
 			plugins: {
@@ -194,6 +196,138 @@ export class VideoService {
 			_this.SetUnsavedVideoSrc();
 
 		});
+	}
+
+	makeAdminRecorder(){
+		var _this = this;
+
+		var player = new videojs("adminVideo",
+		{
+			controls: true,
+			plugins: {
+				record: {
+					audio: true,
+					video: true,
+					maxLength: 120,
+					debug: true,
+					videoMimeType: "video/mp4"
+				}
+			},
+		});
+
+		//If we want to reset the recorder uncomment this line,
+		// I think saving the same recorder makes sense
+		// we would also need to set the unsaved video to hide. 
+		//player.recorder.reset();
+
+		// error handling
+		player.on('deviceError', function()
+		{
+			console.log('device error:', player.deviceErrorCode);
+			_this.canSave = false;
+		});
+		
+		 // user clicked the record button and started recording
+		player.on('startRecord', function()
+		{
+			console.log('started recording!');
+		});
+		
+		// user completed recording and stream is available
+		player.on('finishRecord', function()
+		{
+			// the blob object contains the recorded data that
+			// can be downloaded by the user, stored on server etc.
+			console.log('finished recording: ', player.recordedData);
+			_this.canSave = true;
+
+			_this.adminRecording = player;
+		});
+
+		player.show();
+	}
+
+	uploadEditToQuestion(questionID: string, title: string, text: string){
+		return new Promise((resolve, reject) => {
+            var formData: any = new FormData();
+            var xhr = new XMLHttpRequest();
+
+			formData.append("title", title);
+			formData.append("text", text);
+            
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        resolve(JSON.parse(xhr.response));
+                    } else {
+                        reject(xhr.response);
+                    }
+                }
+            }
+
+			var patchRequest = this._locationUrl + "/api/questions/" + questionID;
+			console.log("patch request = ", patchRequest);
+
+            xhr.open("PATCH", patchRequest);
+            xhr.send(formData);
+        });
+	}
+
+	uploadNewQuestion(title: string, text: string) {
+        return new Promise((resolve, reject) => {
+            var formData: any = new FormData();
+            var xhr = new XMLHttpRequest();
+
+			formData.append("title", title);
+			formData.append("text", text);
+
+			if (/chrome/i.test( navigator.userAgent ) === true){
+				formData.append("video", this.adminRecording.recordedData.video, this.adminRecording.recordedData.video.name);
+			} else if ( (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) === true){
+				formData.append("video", this.adminRecording.recordedData, this.adminRecording.recordedData.name);
+			} else {
+				formData.append("video", this.adminRecording.recordedData, this.adminRecording.recordedData.name);
+			}
+            
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        resolve(JSON.parse(xhr.response));
+                    } else {
+                        reject(xhr.response);
+                    }
+                }
+            }
+
+			var postRequest = this._locationUrl + "/api/questions";
+			console.log("post request = ", postRequest);
+
+            xhr.open("POST", postRequest, true);
+            xhr.send(formData);
+        });
+    }
+
+	deleteEditQuestion(questionID: string){
+		return new Promise((resolve, reject) => {
+            var formData: any = new FormData();
+            var xhr = new XMLHttpRequest();
+            
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    if (xhr.status == 200) {
+                        resolve(JSON.parse(xhr.response));
+                    } else {
+                        reject(xhr.response);
+                    }
+                }
+            }
+
+			var deleteRequest = this._locationUrl + "/api/questions/" + questionID;
+			console.log("delete request = ", deleteRequest);
+
+            xhr.open("DELETE", deleteRequest);
+            xhr.send(formData);
+        });
 	}
 
 	private handleError (error: Response) {
