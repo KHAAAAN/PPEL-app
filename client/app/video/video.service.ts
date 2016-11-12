@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http, Response, URLSearchParams} from '@angular/http';
+import {Http, Response, URLSearchParams, Headers} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {UserService} from '../user/user.service';
 import {User} from '../user/user';
@@ -248,12 +248,29 @@ export class VideoService {
 	}
 
 	uploadEditToQuestion(questionID: string, title: string, text: string){
-		return new Promise((resolve, reject) => {
+		var body = 'title=' + title + '&text=' + text;
+			var headers = new Headers();
+			headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+			return this.http
+				.post('this._locationUrl + "/api/questions/" + questionID',
+				body, {
+					headers: headers
+				})
+				.subscribe(data => {
+						console.log("edit completed");
+				}, error => {
+					console.log(error);
+          });
+
+		
+
+		/*return new Promise((resolve, reject) => {
 			let formData: FormData = new FormData(),
 				xhr: XMLHttpRequest = new XMLHttpRequest();
 
-			formData.append("title", title);
-			formData.append("text", text);
+			//formData.append("title", title);
+			//formData.append("text", text);
 
 			xhr.onreadystatechange = () => {
 				if (xhr.readyState === 4) {
@@ -268,9 +285,10 @@ export class VideoService {
 			var patchRequest = this._locationUrl + "/api/questions/" + questionID;
 			console.log("patch request = ", patchRequest);
 
+
             xhr.open("PATCH", patchRequest, true);
             xhr.send(formData);
-		});
+		});*/
 	}
 
 	uploadNewQuestion(title: string, text: string) {

@@ -366,13 +366,13 @@ export class TabContent implements OnInit {
 		 }
 		 else
 		 {
-			 this._videoService.uploadEditToQuestion(this.questionEdit, this.questionEditTitle, this.questionEditText).then((result) => {
+			 this._videoService.uploadEditToQuestion(this.questionEdit, this.questionEditTitle, this.questionEditText); /*.then((result) => {
 					console.log(result);
 					this.allQuestionVideos = [];
 					this.ngOnInit();
 				}, (error) => {
 					console.error(error);
-				});
+				});*/
 		 }       
     }
 
