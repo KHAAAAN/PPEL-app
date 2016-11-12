@@ -275,13 +275,14 @@ export class VideoService {
 
 	uploadNewQuestion(title: string, text: string) {
 		console.log("in upload new video");
-        return new Promise((resolve, reject) => {
-            var formData: any = new FormData();
-            var xhr = new XMLHttpRequest();
+
+		return new Promise((resolve, reject) => {
+			let formData: FormData = new FormData(),
+				xhr: XMLHttpRequest = new XMLHttpRequest();
 
 			formData.append("title", title);
 			formData.append("text", text);
-
+			
 			if (/chrome/i.test( navigator.userAgent ) === true){
 				formData.append("video", this.adminRecording.recordedData.video, this.adminRecording.recordedData.video.name);
 			} else if ( (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) === true){
@@ -289,23 +290,23 @@ export class VideoService {
 			} else {
 				formData.append("video", this.adminRecording.recordedData, this.adminRecording.recordedData.name);
 			}
-            
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4) {
-                    if (xhr.status == 200) {
-                        resolve(JSON.parse(xhr.response));
-                    } else {
-                        reject(xhr.response);
-                    }
-                }
-            }
 
+			xhr.onreadystatechange = () => {
+				if (xhr.readyState === 4) {
+					if (xhr.status === 200) {
+						resolve(JSON.parse(xhr.response));
+					} else {
+						reject(xhr.response);
+					}
+				}
+			};
+			
 			var postRequest = this._locationUrl + "/api/questions";
 			console.log("post request = ", postRequest);
 
             xhr.open("POST", postRequest, true);
             xhr.send(formData);
-        });
+		});
     }
 
 	deleteEditQuestion(questionID: string){
