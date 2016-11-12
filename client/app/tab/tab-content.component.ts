@@ -381,6 +381,9 @@ export class TabContent implements OnInit {
 			}, (error) => {
 				console.error(error);
 			});
+
+			this.allQuestionVideos = [];
+			this.ngOnInit();
 	}
 
 	ngOnInit(){
