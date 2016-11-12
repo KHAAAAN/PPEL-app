@@ -57,10 +57,6 @@
     color: #2a2a2a;
 }
 
-#loginDiv{
-
-}
-
 #loginBtn {
 	background-color: #961f34;
     font-size: 200%;
@@ -71,6 +67,20 @@
 	padding-right: 4%;
 	padding-left: 4%;
 	margin-left: 75%;
+}
+
+#saveNewEdit {
+	font-size: 200%;
+    background-color: #003100;
+    color: white;
+	margin-top: 3%;
+}
+
+#deleteEdit {
+	font-size: 200%;
+    background-color: #9c0202;
+    color: white;
+	margin-top: 3%;
 }
 
 #saveQuestion {
