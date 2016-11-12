@@ -274,6 +274,7 @@ export class VideoService {
 	}
 
 	uploadNewQuestion(title: string, text: string) {
+		console.log("in upload new video");
         return new Promise((resolve, reject) => {
             var formData: any = new FormData();
             var xhr = new XMLHttpRequest();
@@ -308,6 +309,7 @@ export class VideoService {
     }
 
 	deleteEditQuestion(questionID: string){
+		console.log("in delete edit video: ", questionID);
 		return new Promise((resolve, reject) => {
             var formData: any = new FormData();
             var xhr = new XMLHttpRequest();

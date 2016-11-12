@@ -62,6 +62,7 @@ export class TabContent implements OnInit {
 			   private sanitizer: DomSanitizer){
 
 		this.isSuperUser = false;
+		this.questionEdit = "createNew";
 
 		//when ready to set this.userModel, it will do so
 		this._userService.user$.subscribe(userModel => {
@@ -304,19 +305,22 @@ export class TabContent implements OnInit {
 
 	setQuestionToEdit(questionID: string){
 		this.questionEdit = questionID;
+		console.log("q to edit: ", this.questionEdit);
 	}
 
 	questionToEditTitle(title: string) {
 		this.questionEditTitle = title;
+		console.log("q to edit Title: ", this.questionEditTitle);
 	}
 
 	questionToEditText(text: string) {
 		this.questionEditTitle = text;
+		console.log("q to edit text: ", this.questionEditText);
 	}
 
 	checkIsLoggedIn(){
 
-		//this.setUserModel();
+		this.setUserModel();
 
 		this._videoService.getPublicVideos()
 			.subscribe((res:any)=>{
@@ -348,7 +352,7 @@ export class TabContent implements OnInit {
 	}
 
 	 uploadQuestion() {
-		 if (this.questionEdit == "Create new...") 
+		 if (this.questionEdit == "createNew") 
 		 {
 			this._videoService.uploadNewQuestion(this.questionEditTitle, this.questionEditText).then((result) => {
 					console.log(result);
