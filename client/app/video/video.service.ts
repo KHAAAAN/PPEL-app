@@ -249,28 +249,28 @@ export class VideoService {
 
 	uploadEditToQuestion(questionID: string, title: string, text: string){
 		return new Promise((resolve, reject) => {
-            var formData: any = new FormData();
-            var xhr = new XMLHttpRequest();
+			let formData: FormData = new FormData(),
+				xhr: XMLHttpRequest = new XMLHttpRequest();
 
 			formData.append("title", title);
 			formData.append("text", text);
-            
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4) {
-                    if (xhr.status == 200) {
-                        resolve(JSON.parse(xhr.response));
-                    } else {
-                        reject(xhr.response);
-                    }
-                }
-            }
 
+			xhr.onreadystatechange = () => {
+				if (xhr.readyState === 4) {
+					if (xhr.status === 200) {
+						resolve(JSON.parse(xhr.response));
+					} else {
+						reject(xhr.response);
+					}
+				}
+			};
+			
 			var patchRequest = this._locationUrl + "/api/questions/" + questionID;
 			console.log("patch request = ", patchRequest);
 
-            xhr.open("PATCH", patchRequest);
+            xhr.open("PATCH", patchRequest, true);
             xhr.send(formData);
-        });
+		});
 	}
 
 	uploadNewQuestion(title: string, text: string) {
@@ -311,26 +311,27 @@ export class VideoService {
 
 	deleteEditQuestion(questionID: string){
 		console.log("in delete edit video: ", questionID);
-		return new Promise((resolve, reject) => {
-            var formData: any = new FormData();
-            var xhr = new XMLHttpRequest();
-            
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4) {
-                    if (xhr.status == 200) {
-                        resolve(JSON.parse(xhr.response));
-                    } else {
-                        reject(xhr.response);
-                    }
-                }
-            }
 
+		return new Promise((resolve, reject) => {
+			let formData: FormData = new FormData(),
+				xhr: XMLHttpRequest = new XMLHttpRequest();
+
+			xhr.onreadystatechange = () => {
+				if (xhr.readyState === 4) {
+					if (xhr.status === 200) {
+						resolve(JSON.parse(xhr.response));
+					} else {
+						reject(xhr.response);
+					}
+				}
+			};
+			
 			var deleteRequest = this._locationUrl + "/api/questions/" + questionID;
 			console.log("delete request = ", deleteRequest);
-
-            xhr.open("DELETE", deleteRequest);
-            xhr.send(formData);
-        });
+			
+			xhr.open("DELETE", deleteRequest);
+			xhr.send();
+		});
 	}
 
 	private handleError (error: Response) {
