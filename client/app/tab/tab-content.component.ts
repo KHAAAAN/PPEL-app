@@ -366,13 +366,10 @@ export class TabContent implements OnInit {
 		 }
 		 else
 		 {
-			 this._videoService.uploadEditToQuestion(this.questionEdit, this.questionEditTitle, this.questionEditText); /*.then((result) => {
-					console.log(result);
-					this.allQuestionVideos = [];
-					this.ngOnInit();
-				}, (error) => {
-					console.error(error);
-				});*/
+			 this._videoService.uploadEditToQuestion(this.questionEdit, this.questionEditTitle, this.questionEditText); 
+			 this.allQuestionVideos = [];
+			 this.ngOnInit();
+				
 		 }       
     }
 
@@ -397,14 +394,6 @@ export class TabContent implements OnInit {
 		{
 			this.getPublicVideos();
 		}
-
-
-		//this.getPublicVideos();
-		// If no videos are returned from api, then we are not loged in.
-		// When logged in request from api is admin or not
-		// then set userModel based on is admin
-		// we do not need to send id with video request anymore
-
 	}
 
 }

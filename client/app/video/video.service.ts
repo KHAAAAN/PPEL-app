@@ -264,33 +264,6 @@ export class VideoService {
 				}, error => {
 					console.log(error);
           });
-
-		
-
-		/*return new Promise((resolve, reject) => {
-			let formData: FormData = new FormData(),
-				xhr: XMLHttpRequest = new XMLHttpRequest();
-
-			//formData.append("title", title);
-			//formData.append("text", text);
-
-			xhr.onreadystatechange = () => {
-				if (xhr.readyState === 4) {
-					if (xhr.status === 200) {
-						resolve(JSON.parse(xhr.response));
-					} else {
-						reject(xhr.response);
-					}
-				}
-			};
-			
-			var patchRequest = this._locationUrl + "/api/questions/" + questionID;
-			console.log("patch request = ", patchRequest);
-
-
-            xhr.open("PATCH", patchRequest, true);
-            xhr.send(formData);
-		});*/
 	}
 
 	uploadNewQuestion(title: string, text: string) {
