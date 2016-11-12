@@ -63,6 +63,8 @@ export class TabContent implements OnInit {
 
 		this.isSuperUser = false;
 		this.questionEdit = "createNew";
+		this.questionEditText= "";
+		this.questionEditTitle="";
 
 		//when ready to set this.userModel, it will do so
 		this._userService.user$.subscribe(userModel => {
@@ -314,13 +316,13 @@ export class TabContent implements OnInit {
 	}
 
 	questionToEditText(text: string) {
-		this.questionEditTitle = text;
+		this.questionEditText = text;
 		console.log("q to edit text: ", this.questionEditText);
 	}
 
 	checkIsLoggedIn(){
 
-		//this.setUserModel();
+		this.setUserModel();
 
 		this._videoService.getPublicVideos()
 			.subscribe((res:any)=>{

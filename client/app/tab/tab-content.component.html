@@ -130,12 +130,12 @@
 
 						<div>
 							Questin Title:
-							<input type="text" (change)="questionToEditTitle($event)" />
+							<input type="text" (change)="questionToEditTitle($event.target.value)" />
 						</div>
 						
 						<div>
 							Questin Text:
-							<input type="text" (change)="questionToEditText($event)" />
+							<input type="text" (change)="questionToEditText($event.target.value)" />
 						</div>
 						
 						<div id="adminVideoDiv">
