@@ -320,7 +320,7 @@ export class TabContent implements OnInit {
 
 	checkIsLoggedIn(){
 
-		this.setUserModel();
+		//this.setUserModel();
 
 		this._videoService.getPublicVideos()
 			.subscribe((res:any)=>{
