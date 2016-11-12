@@ -1,5 +1,3 @@
-
-
 <tabs id="main-tabs" (click)="stopAutoTrans()">
 
 	<tab tabTitle="CougLink" enableEditor="false">
@@ -120,22 +118,48 @@
 							</modal-content>
 						</modal>
 					</tab>
+
+					<tab *ngIf= "isSuperUser" tabTitle="Edit Questions" enableEditor="false">
+						
+
+						<select
+							(change)="setQuestionToEdit($event.target.value)">
+							<option *ngFor="let question of allQuestionVideos" [value]="question._id">{{question.title}}</option>
+							<option [value]="createNew">Create new...</option>
+						</select>
+
+						<div style="margin-top: 3%;">
+							Questin Title:
+							<input type="text" (change)="questionToEditTitle($event.target.value)" />
+						</div>
+						
+						<div style="margin-top: 3%;">
+							Questin Text:
+							<input type="text" (change)="questionToEditText($event.target.value)" />
+						</div>
+						
+						<div id="adminVideoDiv" style="margin-top: 3%;">
+							New Question Video (only if 'Creat new...' is selected):
+						
+							<video id="adminVideo" class="video-js vjs-default-skin" controls 
+								preload="auto" width="550" height="284">
+							</video>
+						</div>
+
+						<button id="saveNewEdit" type="button" (click)="uploadQuestion()">Upload</button>
+						<button id="deleteEdit" type="button" (click)="deleteQuestion()">Delete Selected Question</button>
+
+					</tab>
+
 				</tabs>	
 		</div>
 
 		<div *ngIf="userModel == undefined">
-			<h1> You are currently not logged in.</h1>
-			<a href="https://debianvm.eecs.wsu.edu/auth"> click here to clogin </a>
-			<!--button (click)="setUserModel()"> Click Here to login as normal user</button>
-			<button (click)="setAdminModel()"> Click Here to login as admin </button>
+			<h1 id="loginHeading"> You must log in to continue</h1>
 
-			<!--a href="https://secure.wsu.edu/login/fidlogin.aspx?dest=https://debianvm.eecs.wsu.edu">Click here to login.</a-->
-		</div>
-		
-
-		<div *ngIf="userModel">
-			<h1> You are signed in as {{userModel.id}} </h1>
-			<a (click)=logout()>Click here to logout</a>			
+			<input id="loginBtn" type="submit" value="Login" 
+   				onclick="window.location='https://debianvm.eecs.wsu.edu/auth';" /> 
+			
 		</div>
 	</tab>
 </tabs>

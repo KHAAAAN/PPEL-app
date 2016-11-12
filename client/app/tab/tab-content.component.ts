@@ -46,6 +46,11 @@ export class TabContent implements OnInit {
 	public selectedQuestion = <any>[];
 	public questionText: any;
 	public unSavedVideo: any;
+	public isSuperUser: boolean;
+	public questionEdit: string;
+	public questionEditTitle: string;
+	public questionEditText: string;
+
 
 	public userModel: User;
 
@@ -56,9 +61,23 @@ export class TabContent implements OnInit {
 			   private _userService: UserService,
 			   private sanitizer: DomSanitizer){
 
+		this.isSuperUser = false;
+		this.questionEdit = "createNew";
+		this.questionEditText= "";
+		this.questionEditTitle="";
+
 		//when ready to set this.userModel, it will do so
 		this._userService.user$.subscribe(userModel => {
 			this.userModel = userModel[0];
+
+			if (this.userModel != undefined)
+			{
+				if (this.userModel.permissions.superUser != null)
+				{
+					this.isSuperUser = this.userModel.permissions.superUser;
+				}
+			}
+
 			console.log(this.userModel);
 		} );
 
@@ -268,6 +287,14 @@ export class TabContent implements OnInit {
 		console.log("setting trnas to false");
 		myGlobals.autoTranitionVideo = false;
 		console.log("auto trns = ", myGlobals.autoTranitionVideo);
+
+		if (this.userModel != undefined)
+		{
+			if (this.userModel.permissions.superUser)
+			{
+				this._videoService.makeAdminRecorder();
+			}
+		}
 	}
 
 	private getBase(path: string){
@@ -278,7 +305,24 @@ export class TabContent implements OnInit {
 		return y;
 	}
 
+	setQuestionToEdit(questionID: string){
+		this.questionEdit = questionID;
+		console.log("q to edit: ", this.questionEdit);
+	}
+
+	questionToEditTitle(title: string) {
+		this.questionEditTitle = title;
+		console.log("q to edit Title: ", this.questionEditTitle);
+	}
+
+	questionToEditText(text: string) {
+		this.questionEditText = text;
+		console.log("q to edit text: ", this.questionEditText);
+	}
+
 	checkIsLoggedIn(){
+
+		//this.setUserModel();
 
 		this._videoService.getPublicVideos()
 			.subscribe((res:any)=>{
@@ -296,10 +340,50 @@ export class TabContent implements OnInit {
 	setUserModel() {
 
 		//Get is admin from api
-		this._userService.setUserModel(false);
+		// if admin
+		this._userService.setUserModel(true);
+		
+
+		//else
+		//this._userService.setUserModel(false);
+
+
 		console.log("User Model = ", this.userModel);
 
 		this.ngOnInit();		
+	}
+
+	 uploadQuestion() {
+		 if (this.questionEdit == "createNew") 
+		 {
+			this._videoService.uploadNewQuestion(this.questionEditTitle, this.questionEditText).then((result) => {
+					console.log(result);
+					this.allQuestionVideos = [];
+					this.ngOnInit();
+				}, (error) => {
+					console.error(error);
+				});
+		 }
+		 else
+		 {
+			 this._videoService.uploadEditToQuestion(this.questionEdit, this.questionEditTitle, this.questionEditText); 
+			 this.allQuestionVideos = [];
+			 this.ngOnInit();
+				
+		 }       
+    }
+
+	deleteQuestion() {
+		this._videoService.deleteEditQuestion(this.questionEdit).then((result) => {
+				console.log(result);
+				this.allQuestionVideos = [];
+				this.ngOnInit();
+			}, (error) => {
+				console.error(error);
+			});
+
+			this.allQuestionVideos = [];
+			this.ngOnInit();
 	}
 
 	ngOnInit(){
@@ -313,14 +397,6 @@ export class TabContent implements OnInit {
 		{
 			this.getPublicVideos();
 		}
-
-
-		//this.getPublicVideos();
-		// If no videos are returned from api, then we are not loged in.
-		// When logged in request from api is admin or not
-		// then set userModel based on is admin
-		// we do not need to send id with video request anymore
-
 	}
 
 }

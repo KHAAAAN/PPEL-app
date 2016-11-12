@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {Http, Response, URLSearchParams} from '@angular/http';
+import {Http, Response, URLSearchParams, Headers} from '@angular/http';
 import {Observable} from 'rxjs/Observable';
 import {UserService} from '../user/user.service';
 import {User} from '../user/user';
@@ -16,6 +16,8 @@ export class VideoService {
 
 	public unSavedRecording: any;
 	public canSave: boolean;
+
+	public adminRecording: any;
 
 	constructor(private http : Http, 
 		        private _userService: UserService,
@@ -150,7 +152,7 @@ export class VideoService {
 	makeRecorder(){
 		var _this = this;
 
-		var player = new videojs("rvideo",
+		let player = new videojs("rvideo",
 		{
 			controls: true,
 			plugins: {
@@ -193,6 +195,135 @@ export class VideoService {
 			_this.unSavedRecording = player;
 			_this.SetUnsavedVideoSrc();
 
+		});
+	}
+
+	makeAdminRecorder(){
+		var _this = this;
+
+		var player = new videojs("adminVideo",
+		{
+			controls: true,
+			plugins: {
+				record: {
+					audio: true,
+					video: true,
+					maxLength: 120,
+					debug: true,
+					videoMimeType: "video/mp4"
+				}
+			},
+		});
+
+		//If we want to reset the recorder uncomment this line,
+		// I think saving the same recorder makes sense
+		// we would also need to set the unsaved video to hide. 
+		//player.recorder.reset();
+
+		// error handling
+		player.on('deviceError', function()
+		{
+			console.log('device error:', player.deviceErrorCode);
+			_this.canSave = false;
+		});
+		
+		 // user clicked the record button and started recording
+		player.on('startRecord', function()
+		{
+			console.log('started recording!');
+		});
+		
+		// user completed recording and stream is available
+		player.on('finishRecord', function()
+		{
+			// the blob object contains the recorded data that
+			// can be downloaded by the user, stored on server etc.
+			console.log('finished recording: ', player.recordedData);
+			_this.canSave = true;
+
+			_this.adminRecording = player;
+		});
+
+		player.show();
+	}
+
+	uploadEditToQuestion(questionID: string, title: string, text: string){
+		console.log("in upload edit: ", questionID);
+
+		var body = 'title=' + title + '&text=' + text;
+			var headers = new Headers();
+			headers.append('Content-Type', 'application/x-www-form-urlencoded');
+
+			return this.http
+				.patch(this._locationUrl + "/api/questions/" + questionID,
+				body, {
+					headers: headers
+				})
+				.subscribe(data => {
+						console.log("edit completed");
+				}, error => {
+					console.log(error);
+          });
+	}
+
+	uploadNewQuestion(title: string, text: string) {
+		console.log("in upload new video");
+
+		return new Promise((resolve, reject) => {
+			let formData: FormData = new FormData(),
+				xhr: XMLHttpRequest = new XMLHttpRequest();
+
+			formData.append("title", title);
+			formData.append("text", text);
+			
+			if (/chrome/i.test( navigator.userAgent ) === true){
+				formData.append("video", this.adminRecording.recordedData.video, this.adminRecording.recordedData.video.name);
+			} else if ( (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) === true){
+				formData.append("video", this.adminRecording.recordedData, this.adminRecording.recordedData.name);
+			} else {
+				formData.append("video", this.adminRecording.recordedData, this.adminRecording.recordedData.name);
+			}
+
+			xhr.onreadystatechange = () => {
+				if (xhr.readyState === 4) {
+					if (xhr.status === 200) {
+						resolve(JSON.parse(xhr.response));
+					} else {
+						reject(xhr.response);
+					}
+				}
+			};
+			
+			var postRequest = this._locationUrl + "/api/questions";
+			console.log("post request = ", postRequest);
+
+            xhr.open("POST", postRequest, true);
+            xhr.send(formData);
+		});
+    }
+
+	deleteEditQuestion(questionID: string){
+		console.log("in delete edit video: ", questionID);
+
+		return new Promise((resolve, reject) => {
+			let formData: FormData = new FormData(),
+				xhr: XMLHttpRequest = new XMLHttpRequest();
+
+			xhr.onreadystatechange = () => {
+				if (xhr.readyState === 4) {
+					if (xhr.status === 200) {
+						resolve(JSON.parse(xhr.response));
+					} else {
+						reject(xhr.response);
+					}
+				}
+			};
+			
+			var deleteRequest = this._locationUrl + "/api/questions/" + questionID;
+			console.log("delete request = ", deleteRequest);
+			
+			xhr.open("DELETE", deleteRequest);
+			xhr.send();
 		});
 	}
 
