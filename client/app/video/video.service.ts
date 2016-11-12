@@ -249,13 +249,13 @@ export class VideoService {
 
 	uploadEditToQuestion(questionID: string, title: string, text: string){
 		console.log("in upload edit: ", questionID);
-		
+
 		var body = 'title=' + title + '&text=' + text;
 			var headers = new Headers();
 			headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
 			return this.http
-				.post(this._locationUrl + "/api/questions/" + questionID,
+				.patch(this._locationUrl + "/api/questions/" + questionID,
 				body, {
 					headers: headers
 				})
