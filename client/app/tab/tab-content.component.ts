@@ -358,6 +358,7 @@ export class TabContent implements OnInit {
 		 {
 			this._videoService.uploadNewQuestion(this.questionEditTitle, this.questionEditText).then((result) => {
 					console.log(result);
+					this.allQuestionVideos = [];
 					this.ngOnInit();
 				}, (error) => {
 					console.error(error);
@@ -367,6 +368,7 @@ export class TabContent implements OnInit {
 		 {
 			 this._videoService.uploadEditToQuestion(this.questionEdit, this.questionEditTitle, this.questionEditText).then((result) => {
 					console.log(result);
+					this.allQuestionVideos = [];
 					this.ngOnInit();
 				}, (error) => {
 					console.error(error);
@@ -377,6 +379,7 @@ export class TabContent implements OnInit {
 	deleteQuestion() {
 		this._videoService.deleteEditQuestion(this.questionEdit).then((result) => {
 				console.log(result);
+				this.allQuestionVideos = [];
 				this.ngOnInit();
 			}, (error) => {
 				console.error(error);
