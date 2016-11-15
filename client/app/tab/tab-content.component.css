@@ -69,6 +69,22 @@
 	margin-left: 75%;
 }
 
+#loginBtn:hover {
+	background-color: #c60c30;
+}
+
+#loginOutBtn{
+	background-color: #961f34;
+    font-size: 200%;
+	color: #FFF;
+	border: 0;
+	font-weight: lighter;
+	padding: 2%;
+	padding-right: 4%;
+	padding-left: 4%;
+	margin-left: 75%;
+}
+
 #saveNewEdit {
 	font-size: 200%;
     background-color: #003100;

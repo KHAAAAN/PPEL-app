@@ -161,5 +161,10 @@
    				onclick="window.location='https://debianvm.eecs.wsu.edu/auth';" /> 
 			
 		</div>
+
+		<div *ngIf="userModel">
+			<input id="loginOutBtn" type="submit" value="Log out" 
+   				onclick="window.location='https://debianvm.eecs.wsu.edu/Shibboleth.sso/Logout';" /> 		
+		</div>
 	</tab>
 </tabs>
