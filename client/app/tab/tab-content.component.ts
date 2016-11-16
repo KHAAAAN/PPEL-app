@@ -342,7 +342,7 @@ export class TabContent implements OnInit {
 		//Get is admin from api
 		// if admin
 		this._userService.checkIsAdmin()
-			.then((result:any) =>{
+			.subscribe((result:any) =>{
 					console.log("checking if admin, res = ", result)
 					console.log("result.admin = ", result.admin);
 					if (result.length > 0)
@@ -358,7 +358,8 @@ export class TabContent implements OnInit {
 					}
 					else
 					{
-						this._userService.setUserModel(false);
+						console.log("in the else to set to false");
+						//this._userService.setUserModel(false);
 					}
 				});
 		
