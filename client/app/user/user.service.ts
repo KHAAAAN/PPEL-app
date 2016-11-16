@@ -21,19 +21,8 @@ export class UserService {
 	public user$: Observable<Array<User>>;
 
 
-	public setUserModel(){
-		this.userModel = new User();
-
-		let isAdmin = false;
-		this.checkIsAdmin()
-				.subscribe((res:any)=>{
-						console.log("checking if admin, res = ", res.length)
-						if (res.length > 0)
-						{
-							isAdmin = res.admin;
-							console.log("is admin = ", isAdmin);
-						}
-					});
+	public setUserModel(isAdmin: boolean){
+		this.userModel = new User();				
 
 		this.userModel.permissions["normalUser"] = true;
 		if(isAdmin){
@@ -43,7 +32,7 @@ export class UserService {
 		this.loadUser();
 	}
 
-	private checkIsAdmin () {
+	checkIsAdmin () {
 		var urlGetRequest = "https://debianvm.eecs.wsu.edu/api/users/isAdmin";
 
 		return this.http.get(urlGetRequest)
