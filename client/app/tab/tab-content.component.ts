@@ -341,7 +341,18 @@ export class TabContent implements OnInit {
 
 		//Get is admin from api
 		// if admin
-		this._userService.setUserModel(true);
+		this._userService.checkIsAdmin()
+			.subscribe((result:any) =>{
+				
+					if (result.admin == true)
+					{
+						this._userService.setUserModel(true);
+					}
+					else
+					{
+						this._userService.setUserModel(false);
+					}
+				});
 		
 
 		//else

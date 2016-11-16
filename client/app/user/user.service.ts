@@ -1,4 +1,6 @@
 import {Injectable, Component} from '@angular/core';
+import {Http, Response, URLSearchParams, Headers} from '@angular/http';
+
 import {Observable} from 'rxjs/Observable';
 import {User} from './user';
 
@@ -20,7 +22,7 @@ export class UserService {
 
 
 	public setUserModel(isAdmin: boolean){
-		this.userModel = new User();
+		this.userModel = new User();				
 
 		this.userModel.permissions["normalUser"] = true;
 		if(isAdmin){
@@ -28,6 +30,43 @@ export class UserService {
 		}
 
 		this.loadUser();
+	}
+
+	checkIsAdmin () {
+		// return	new Promise((resolve, reject) => {
+		// 	let formData: FormData = new FormData(),
+		// 		xhr: XMLHttpRequest = new XMLHttpRequest();
+
+		// 	xhr.onreadystatechange = () => {
+		// 		if (xhr.readyState === 4) {
+		// 			if (xhr.status === 200) {
+		// 				resolve(JSON.parse(xhr.response));
+		// 			} else {
+		// 				reject(xhr.response);
+		// 			}
+		// 		}
+		// 	};
+			
+		// 	var urlGetRequest = "https://debianvm.eecs.wsu.edu/api/users/isAdmin";
+		// 	console.log("get request = ", urlGetRequest);
+			
+		// 	xhr.open("GET", urlGetRequest);
+		// 	xhr.send();
+		// });
+
+		var urlGetRequest = "https://debianvm.eecs.wsu.edu/api/users/isAdmin";
+		console.log("url request: ", urlGetRequest);
+
+		return this.http.get(urlGetRequest)
+			.map((res:any) => res.json())
+			.do((res:any) => console.log("(): success"))
+			.catch(this.handleError);
+	}
+
+	private handleError (error: Response) {
+		console.log("errors4days");
+		console.error(error);
+		return Observable.throw(error.json().error || 'Server error');
 	}
 
 	loadUser(){
@@ -54,7 +93,8 @@ export class UserService {
 		return this.userModel;
 	}
 
-	constructor(private _loginService: LoginService){
+	constructor(private _loginService: LoginService,
+				private http: Http){
 		this.user$ = new Observable((observer:any) => {
 			console.log(observer);
 			 this._userObserver = observer;
