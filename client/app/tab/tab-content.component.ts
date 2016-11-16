@@ -344,17 +344,23 @@ export class TabContent implements OnInit {
 		this._userService.checkIsAdmin()
 			.subscribe((result:any) =>{
 					console.log("checking if admin, res = ", result)
+					console.log("leng of response = ", result.length);
 					console.log("result.admin = ", result.admin);
+					if (result.admin == true)
+					{
+						console.log("setting admin to true")
+						this._userService.setUserModel(true);
+					}
+					else
+					{
+						this._userService.setUserModel(false);
+					}
+
+					
+
 					if (result.length > 0)
 					{
-						if (result.admin == true)
-						{
-							this._userService.setUserModel(true);
-						}
-						else
-						{
-							this._userService.setUserModel(false);
-						}
+						
 					}
 					else
 					{
