@@ -347,7 +347,7 @@ export class TabContent implements OnInit {
 					console.log("result.admin = ", result.admin);
 					if (result.length > 0)
 					{
-						if (result.admin == "true")
+						if (result.admin == true)
 						{
 							this._userService.setUserModel(true);
 						}
