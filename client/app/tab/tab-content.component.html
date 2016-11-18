@@ -137,14 +137,29 @@
 							Question Text:
 							<input type="text" (change)="questionToEditText($event.target.value)" />
 						</div>
-						
-						<div id="adminVideoDiv" style="margin-top: 3%;">
-							New Question Video (only if 'Create new...' is selected):
-						
-							<video id="adminVideo" class="video-js vjs-default-skin" controls 
-								preload="auto" width="550" height="284">
-							</video>
+
+						<div style="margin-top: 3%; border: .2em solid grey;">
+							Upload a video file (only if 'Create new...' is selected):
+							<div style="margin-top: 3%;">
+								<input type="file" accept="video/*" (change)="fileChangeEvent($event)" placeholder="Upload file..." />
+							</div>
+
+							<div style="margin-top: 3%; font-size: 2.5em;">
+								OR
+							</div>
+
+							
+							<div id="adminVideoDiv" style="margin-top: 3%;">
+								New Question Video:
+							
+								<video id="adminVideo" class="video-js vjs-default-skin" controls 
+									preload="auto" width="550" height="284">
+								</video>
+							</div>
+
 						</div>
+
+						<!--button type="button" (click)="uploadQuestion()">Upload</button-->
 
 						<button id="saveNewEdit" type="button" (click)="uploadQuestion()">Upload</button>
 						<button id="deleteEdit" type="button" (click)="deleteQuestion()">Delete Selected Question</button>

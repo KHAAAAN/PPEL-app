@@ -266,7 +266,7 @@ export class VideoService {
           });
 	}
 
-	uploadNewQuestion(title: string, text: string) {
+	uploadNewQuestion(title: string, text: string, file: File) {
 		console.log("in upload new video");
 
 		return new Promise((resolve, reject) => {
@@ -276,12 +276,21 @@ export class VideoService {
 			formData.append("title", title);
 			formData.append("text", text);
 			
-			if (/chrome/i.test( navigator.userAgent ) === true){
-				formData.append("video", this.adminRecording.recordedData.video, this.adminRecording.recordedData.video.name);
-			} else if ( (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) === true){
-				formData.append("video", this.adminRecording.recordedData, this.adminRecording.recordedData.name);
-			} else {
-				formData.append("video", this.adminRecording.recordedData, this.adminRecording.recordedData.name);
+			if (file == undefined)
+			{
+				// If the file is undefined then we need to try to uplad the video that was recorded
+				if (/chrome/i.test( navigator.userAgent ) === true){
+					formData.append("video", this.adminRecording.recordedData.video, this.adminRecording.recordedData.video.name);
+				} else if ( (navigator.userAgent.toLowerCase().indexOf('firefox') > -1) === true){
+					formData.append("video", this.adminRecording.recordedData, this.adminRecording.recordedData.name);
+				} else {
+					formData.append("video", this.adminRecording.recordedData, this.adminRecording.recordedData.name);
+				}
+			}
+			else
+			{
+				// Otherwise we want to upload the file in the choose file input
+				formData.append("video", file, file.name);
 			}
 
 			xhr.onreadystatechange = () => {

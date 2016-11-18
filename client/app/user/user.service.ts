@@ -33,27 +33,6 @@ export class UserService {
 	}
 
 	checkIsAdmin () {
-		// return	new Promise((resolve, reject) => {
-		// 	let formData: FormData = new FormData(),
-		// 		xhr: XMLHttpRequest = new XMLHttpRequest();
-
-		// 	xhr.onreadystatechange = () => {
-		// 		if (xhr.readyState === 4) {
-		// 			if (xhr.status === 200) {
-		// 				resolve(JSON.parse(xhr.response));
-		// 			} else {
-		// 				reject(xhr.response);
-		// 			}
-		// 		}
-		// 	};
-			
-		// 	var urlGetRequest = "https://debianvm.eecs.wsu.edu/api/users/isAdmin";
-		// 	console.log("get request = ", urlGetRequest);
-			
-		// 	xhr.open("GET", urlGetRequest);
-		// 	xhr.send();
-		// });
-
 		var urlGetRequest = "https://debianvm.eecs.wsu.edu/api/users/isAdmin";
 		console.log("url request: ", urlGetRequest);
 

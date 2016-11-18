@@ -50,7 +50,7 @@ export class TabContent implements OnInit {
 	public questionEdit: string;
 	public questionEditTitle: string;
 	public questionEditText: string;
-
+	public fileToUpload: File;
 
 	public userModel: User;
 
@@ -322,6 +322,7 @@ export class TabContent implements OnInit {
 
 	checkIsLoggedIn(){
 
+		//TODO: Comment this out
 		//this.setUserModel();
 
 		this._videoService.getPublicVideos()
@@ -338,6 +339,8 @@ export class TabContent implements OnInit {
 
 
 	setUserModel() {
+		//TODO: remove this
+		//this._userService.setUserModel(true);
 
 		//Get is admin from api
 		// if admin
@@ -353,10 +356,6 @@ export class TabContent implements OnInit {
 						this._userService.setUserModel(false);
 					}
 				});
-		
-
-		//else
-		//this._userService.setUserModel(false);
 
 
 		console.log("User Model = ", this.userModel);
@@ -367,7 +366,8 @@ export class TabContent implements OnInit {
 	 uploadQuestion() {
 		 if (this.questionEdit == "createNew") 
 		 {
-			this._videoService.uploadNewQuestion(this.questionEditTitle, this.questionEditText).then((result) => {
+			 console.log("This.File = ", this.fileToUpload);
+			 this._videoService.uploadNewQuestion(this.questionEditTitle, this.questionEditText, this.fileToUpload).then((result) => {
 					console.log(result);
 					this.allQuestionVideos = [];
 					this.ngOnInit();
@@ -396,6 +396,10 @@ export class TabContent implements OnInit {
 			this.allQuestionVideos = [];
 			this.ngOnInit();
 	}
+ 
+    fileChangeEvent(fileInput: any){
+        this.fileToUpload = <File> fileInput.target.files[0];
+    }
 
 	ngOnInit(){
 
