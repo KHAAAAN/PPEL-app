@@ -330,8 +330,6 @@ export class TabContent implements OnInit {
 
 	checkIsLoggedIn(){
 
-		//TODO: Comment this out
-		this.setUserModel();
 
 		this._videoService.getPublicVideos()
 			.subscribe((res:any)=>{
@@ -347,8 +345,6 @@ export class TabContent implements OnInit {
 
 
 	setUserModel() {
-		//TODO: remove this
-		this._userService.setUserModel(true);
 
 		//Get is admin from api
 		// if admin
