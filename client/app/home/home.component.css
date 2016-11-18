@@ -175,7 +175,8 @@ img {
 #welcomeText {
 	color: #888;
 	font-size: large;
-	padding-left: 3em;
+	padding-left: 1em;
+	padding-right: 1em;
 	border: 2px solid  #DCDCDC;
 	padding-top: .75em;
 	padding-bottom: .75em;
