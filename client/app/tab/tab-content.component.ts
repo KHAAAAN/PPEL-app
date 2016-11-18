@@ -257,6 +257,10 @@ export class TabContent implements OnInit {
 			unsavedVideo.hide();
 			this._videoService.unSavedRecording = undefined;
 			this.unSavedVideo = undefined;
+		}, (error) => {
+					this.IsUploading = false;
+					window.alert("Unable to save video: " + error);
+					console.error(error);
 		});
 		
 	}
@@ -327,7 +331,7 @@ export class TabContent implements OnInit {
 	checkIsLoggedIn(){
 
 		//TODO: Comment this out
-		//this.setUserModel();
+		this.setUserModel();
 
 		this._videoService.getPublicVideos()
 			.subscribe((res:any)=>{
@@ -344,7 +348,7 @@ export class TabContent implements OnInit {
 
 	setUserModel() {
 		//TODO: remove this
-		//this._userService.setUserModel(true);
+		this._userService.setUserModel(true);
 
 		//Get is admin from api
 		// if admin
@@ -378,6 +382,8 @@ export class TabContent implements OnInit {
 					this.IsUploading = false;
 					this.ngOnInit();
 				}, (error) => {
+					this.IsUploading = false;
+					window.alert("Unable to save video: " + error);
 					console.error(error);
 				});
 		 }
