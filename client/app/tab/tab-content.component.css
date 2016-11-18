@@ -108,6 +108,49 @@
 	font-size: 150%;
 }
 
+#uploadIndicator
+{ 
+	height: 100%; 
+	left: 0; 
+	position: fixed; 
+	top: 0; 
+	width: 100%; 
+	z-index: 500; 
+	color: white
+}
+
+#uploadIndicator .container
+{ 
+	height: 50px; 
+	left: 50%; 
+	margin-left: -25px;
+	position: absolute; 
+	top: 50%; 
+	margin-top: -25px;
+	z-index: 10; 
+	width: 50px; 
+}
+
+#uploadIndicator .container .text
+{ 
+	height: 100%; 
+	left: -50%; 
+	position: absolute; 
+	top: -50%; 
+	width: 100%; 
+}
+
+#uploadIndicator .bg
+{ 
+	background: rgba(0,0,0,0.5); 
+	height: 100%; 
+	left: 0; 
+	position: absolute; 
+	top: 0; 
+	width: 100%; 
+	z-index: 9; 
+}
+
 @media screen and (max-width: 990px){
 	#questionTextBox {
 		width: 100%;

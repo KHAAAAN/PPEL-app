@@ -50,7 +50,8 @@ export class TabContent implements OnInit {
 	public questionEdit: string;
 	public questionEditTitle: string;
 	public questionEditText: string;
-
+	public fileToUpload: File;
+	public IsUploading: boolean;
 
 	public userModel: User;
 
@@ -65,6 +66,7 @@ export class TabContent implements OnInit {
 		this.questionEdit = "createNew";
 		this.questionEditText= "";
 		this.questionEditTitle="";
+		this.IsUploading = false;
 
 		//when ready to set this.userModel, it will do so
 		this._userService.user$.subscribe(userModel => {
@@ -185,6 +187,7 @@ export class TabContent implements OnInit {
 
 			answer.subscribe((res:any)=>{
 				if (res != undefined){
+					this.IsUploading = false;
 					console.log("res = ", res);
 					//this.answervideoData.push(res);
 					this.answerVideo = res;
@@ -244,9 +247,10 @@ export class TabContent implements OnInit {
 			this._videoService.deleteAnswer(this.answerVideo._id);
 		}
 
+		this.IsUploading = true;
 		var savedVideo = this._videoService.saveRecording(this.selectedQuestion[0]._id);
 
-		// this .then will wait for the call to return before executing. 
+		// this .then will wait for the call to return before executing.
 		savedVideo.then(result => { 
 			this.setQuestionAndAnswer(this.selectedQuestion[0]._id);
 			let unsavedVideo = videojs("unsavedVideo");
@@ -322,6 +326,7 @@ export class TabContent implements OnInit {
 
 	checkIsLoggedIn(){
 
+		//TODO: Comment this out
 		//this.setUserModel();
 
 		this._videoService.getPublicVideos()
@@ -338,6 +343,8 @@ export class TabContent implements OnInit {
 
 
 	setUserModel() {
+		//TODO: remove this
+		//this._userService.setUserModel(true);
 
 		//Get is admin from api
 		// if admin
@@ -353,10 +360,6 @@ export class TabContent implements OnInit {
 						this._userService.setUserModel(false);
 					}
 				});
-		
-
-		//else
-		//this._userService.setUserModel(false);
 
 
 		console.log("User Model = ", this.userModel);
@@ -367,9 +370,12 @@ export class TabContent implements OnInit {
 	 uploadQuestion() {
 		 if (this.questionEdit == "createNew") 
 		 {
-			this._videoService.uploadNewQuestion(this.questionEditTitle, this.questionEditText).then((result) => {
+			 console.log("This.File = ", this.fileToUpload);
+			 this.IsUploading = true;
+			 this._videoService.uploadNewQuestion(this.questionEditTitle, this.questionEditText, this.fileToUpload).then((result) => {
 					console.log(result);
 					this.allQuestionVideos = [];
+					this.IsUploading = false;
 					this.ngOnInit();
 				}, (error) => {
 					console.error(error);
@@ -396,6 +402,10 @@ export class TabContent implements OnInit {
 			this.allQuestionVideos = [];
 			this.ngOnInit();
 	}
+ 
+    fileChangeEvent(fileInput: any){
+        this.fileToUpload = <File> fileInput.target.files[0];
+    }
 
 	ngOnInit(){
 

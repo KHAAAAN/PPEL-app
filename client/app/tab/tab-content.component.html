@@ -14,8 +14,24 @@
 	</tab>
 
 
+	
+
+
+
 	<tab tabTitle="Videos"
 		enableEditor="false"> 
+
+		<!--div id="uploadIndicator">
+			<i *ngIf="IsUploading" class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+		</div-->
+
+		<div id="uploadIndicator" *ngIf="IsUploading">
+			<div class="container"><div>
+				<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+			</div></div>
+			<div class="bg"></div>
+		</div>
+
 	
 		<div *ngIf="userModel">
 			<select
@@ -121,7 +137,6 @@
 
 					<tab *ngIf= "isSuperUser" tabTitle="Edit Questions" enableEditor="false">
 						
-
 						<select
 							(change)="setQuestionToEdit($event.target.value)">
 							<option *ngFor="let question of allQuestionVideos" [value]="question._id">{{question.title}}</option>
@@ -137,13 +152,26 @@
 							Question Text:
 							<input type="text" (change)="questionToEditText($event.target.value)" />
 						</div>
-						
-						<div id="adminVideoDiv" style="margin-top: 3%;">
-							New Question Video (only if 'Create new...' is selected):
-						
-							<video id="adminVideo" class="video-js vjs-default-skin" controls 
-								preload="auto" width="550" height="284">
-							</video>
+
+						<div style="margin-top: 3%; border: .2em solid grey;">
+							Upload a video file (only if 'Create new...' is selected):
+							<div style="margin-top: 3%;">
+								<input type="file" accept="video/*" (change)="fileChangeEvent($event)" placeholder="Upload file..." />
+							</div>
+
+							<div style="margin-top: 3%; font-size: 2.5em;">
+								OR
+							</div>
+
+							
+							<div id="adminVideoDiv" style="margin-top: 3%;">
+								New Question Video:
+							
+								<video id="adminVideo" class="video-js vjs-default-skin" controls 
+									preload="auto" width="550" height="284">
+								</video>
+							</div>
+
 						</div>
 
 						<button id="saveNewEdit" type="button" (click)="uploadQuestion()">Upload</button>
