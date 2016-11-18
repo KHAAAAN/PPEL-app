@@ -14,8 +14,24 @@
 	</tab>
 
 
+	
+
+
+
 	<tab tabTitle="Videos"
 		enableEditor="false"> 
+
+		<!--div id="uploadIndicator">
+			<i *ngIf="IsUploading" class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+		</div-->
+
+		<div id="uploadIndicator" *ngIf="IsUploading">
+			<div class="container"><div>
+				<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+			</div></div>
+			<div class="bg"></div>
+		</div>
+
 	
 		<div *ngIf="userModel">
 			<select
@@ -121,7 +137,6 @@
 
 					<tab *ngIf= "isSuperUser" tabTitle="Edit Questions" enableEditor="false">
 						
-
 						<select
 							(change)="setQuestionToEdit($event.target.value)">
 							<option *ngFor="let question of allQuestionVideos" [value]="question._id">{{question.title}}</option>
@@ -158,8 +173,6 @@
 							</div>
 
 						</div>
-
-						<!--button type="button" (click)="uploadQuestion()">Upload</button-->
 
 						<button id="saveNewEdit" type="button" (click)="uploadQuestion()">Upload</button>
 						<button id="deleteEdit" type="button" (click)="deleteQuestion()">Delete Selected Question</button>
