@@ -57,6 +57,23 @@
     color: #2a2a2a;
 }
 
+#AllVideosButton{
+	background-color: #961f34;
+    font-size: 200%;
+	color: #FFF;
+	border: 0;
+	font-weight: lighter;
+	padding: 2%;
+	padding-right: 4%;
+	padding-left: 4%;
+	margin-left: 63.5%;
+	margin-bottom: 10px;
+}
+
+#AllVideosButton:hover {
+	background-color: #c60c30;
+}
+
 #loginBtn {
 	background-color: #961f34;
     font-size: 200%;

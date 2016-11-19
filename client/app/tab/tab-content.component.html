@@ -176,6 +176,11 @@
 
 						<button id="saveNewEdit" type="button" (click)="uploadQuestion()">Upload</button>
 						<button id="deleteEdit" type="button" (click)="deleteQuestion()">Delete Selected Question</button>
+						
+						<div>
+							<input id="AllVideosButton" type="submit" value="All Responses" 
+								onclick="window.location='https://debianvm.eecs.wsu.edu/api/admin';" /> 		
+						</div>
 
 					</tab>
 
@@ -191,6 +196,9 @@
 		</div>
 
 		<div *ngIf="userModel">
+			<input *ngIf="isSuperUser" id="AllVideosButton" type="submit" value="All Responses" 
+				onclick="window.location='https://debianvm.eecs.wsu.edu/api/admin';" /> 
+
 			<input id="logOutBtn" type="submit" value="Log out" 
    				onclick="window.location='https://debianvm.eecs.wsu.edu/Shibboleth.sso/Logout';" /> 		
 		</div>
