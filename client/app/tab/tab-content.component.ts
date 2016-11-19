@@ -329,8 +329,6 @@ export class TabContent implements OnInit {
 	}
 
 	checkIsLoggedIn(){
-		this.setUserModel();
-
 		this._videoService.getPublicVideos()
 			.subscribe((res:any)=>{
 				console.log("checking if logged in, res.len = ", res.length)
@@ -345,9 +343,6 @@ export class TabContent implements OnInit {
 
 
 	setUserModel() {
-
-		this._userService.setUserModel(true);
-
 		//Get is admin from api
 		// if admin
 		this._userService.checkIsAdmin()
